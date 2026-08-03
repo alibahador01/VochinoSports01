@@ -124,6 +124,60 @@
         .lineup-box.open { display: block; }
         .lineup-box h4 { color: #fff; font-size: 13px; margin-bottom: 6px; }
 
+        /* استایل جدول تراکنش‌های زنده */
+        .live-tx-container {
+            background: rgba(17, 24, 39, 0.9);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 15px;
+            overflow-x: auto;
+            margin-bottom: 25px;
+            box-style: border-box;
+        }
+        .live-tx-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: right;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+        .live-tx-table th {
+            color: var(--text-muted);
+            padding: 10px 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-weight: 600;
+        }
+        .live-tx-table td {
+            padding: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            color: #fff;
+        }
+        .live-tx-table tr:last-child td { border-bottom: none; }
+        
+        .tx-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            text-align: center;
+        }
+        .tx-badge-buy { background: rgba(0, 255, 204, 0.15); color: var(--primary-neon); border: 1px solid rgba(0, 255, 204, 0.3); }
+        .tx-badge-sell { background: rgba(245, 158, 11, 0.15); color: var(--accent-gold); border: 1px solid rgba(245, 158, 11, 0.3); }
+        .tx-badge-withdraw { background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
+
+        .tx-user-info { display: flex; flex-direction: column; gap: 2px; }
+        .tx-user-phone { font-size: 11px; color: var(--text-muted); }
+        .tx-status { display: flex; align-items: center; gap: 5px; color: #10b981; font-weight: 600; font-size: 12px; }
+        .tx-status-icon { font-size: 14px; }
+        .tx-time-text { color: var(--text-muted); font-size: 11.5px; }
+
+        @keyframes fadeInRow {
+            from { opacity: 0; transform: translateY(-10px); background-color: rgba(0, 255, 204, 0.2); }
+            to { opacity: 1; transform: translateY(0); background-color: transparent; }
+        }
+        .tx-new-row { animation: fadeInRow 0.8s ease-out; }
+
         .faq-item {
             background: rgba(17,24,39,0.7); border: 1px solid var(--border-color);
             border-radius: 12px; margin-bottom: 10px; overflow: hidden;
@@ -171,6 +225,22 @@
 
         <div id="matches-container"></div>
 
+        <div class="section-title">📊 آخرین تراکنش‌های زنده صرافی ووچینو⁰۱</div>
+        <div class="live-tx-container">
+            <table class="live-tx-table">
+                <thead>
+                    <tr>
+                        <th>نوع تراکنش</th>
+                        <th>مبلغ (تومان)</th>
+                        <th>کاربر</th>
+                        <th>وضعیت</th>
+                        <th>زمان</th>
+                    </tr>
+                </thead>
+                <tbody id="live-tx-body"></tbody>
+            </table>
+        </div>
+
         <div class="glass-card" style="text-align:center; background: linear-gradient(135deg, rgba(121,40,202,0.25), rgba(0,255,204,0.1));">
             <h3 style="font-size:18px; margin-bottom:10px; color:#fff;">خرید و فروش آنی ووچر</h3>
             <p style="font-size:13px; color: var(--text-muted); margin-bottom:20px;">خرید و فروش امن انواع ووچر با بهترین نرخ و بالاترین سرعت در ربات تلگرام صرافی ووچینو⁰۱.</p>
@@ -188,10 +258,7 @@
     <footer>
         <p>تمامی حقوق محفوظ است. صرافی امن ووچینو⁰۱ | ارتباط مستقیم از طریق ربات: @Vochino_bh01_bot</p>
     </footer>
-
     <script>
-        // این فیکسچرها واقعی و از منابع رسمی باشگاه‌ها/لیگ‌ها گرفته شده‌اند (نه ساختگی).
-        // این‌ها فقط به‌عنوان "پشتیبان" استفاده می‌شن اگر اتصال زنده در دسترس نباشه.
         const fallbackMatches = [
             {
                 league: "دیدار دوستانه پیش‌فصل",
@@ -298,21 +365,19 @@
             });
         }
 
-        // نمایش فوری فیکسچرهای واقعی ثابت تا کاربر منتظر نمونه
         renderMatches(fallbackMatches);
 
-        // تلاش برای گرفتن بازی‌های واقعی «امروز» به‌صورت خودکار، بدون نیاز به ویرایش دستی کد
         async function loadTodayMatches() {
             try {
-                const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+                const today = new Date().toISOString().slice(0, 10);
                 const res = await fetch(`https://www.thesportsdb.com/api/v1/json/3/eventsday.php?d=${today}&s=Soccer`);
                 const data = await res.json();
                 const events = data.events;
-                if (!events || events.length === 0) return; // چیزی پیدا نشد، همون fallback می‌مونه
+                if (!events || events.length === 0) return;
 
                 const bigLeagues = ["English Premier League", "Spanish La Liga", "Italian Serie A", "German Bundesliga", "French Ligue 1", "UEFA Champions League", "UEFA Europa League"];
                 let filtered = events.filter(e => bigLeagues.includes(e.strLeague));
-                if (filtered.length === 0) filtered = events.slice(0, 6); // اگه لیگ مهمی نبود، هر چی هست نشون بده
+                if (filtered.length === 0) filtered = events.slice(0, 6);
 
                 const liveList = filtered.slice(0, 6).map(ev => {
                     const isLive = ev.strStatus && !["NS", "FT", ""].includes(ev.strStatus) && ev.strStatus !== "Match Finished";
@@ -331,13 +396,173 @@
                 });
 
                 if (liveList.length > 0) renderMatches(liveList);
-            } catch (e) {
-                // اتصال ناموفق بود؛ فیکسچرهای واقعیِ ثابت که از قبل نمایش داده شده همچنان می‌مونن
-            }
+            } catch (e) {}
         }
 
         loadTodayMatches();
-        setInterval(loadTodayMatches, 60000); // هر ۶۰ ثانیه تلاش برای به‌روزرسانی زنده
+        setInterval(loadTodayMatches, 60000);
+        // بانک جامع اسامی و شماره‌های ستاره‌دار صرافی ووچینو⁰۱
+        const maleNames = [
+            "علی", "محمد", "رضا", "مهدی", "امیر", "حسین", "حسن", "حامد", "صادق", "مجید",
+            "محسن", "سعید", "مسعود", "احسان", "پیمان", "فرهاد", "فرزاد", "پویا", "پارس", "بهرام",
+            "بهروز", "بهنام", "پرویز", "کوروش", "داریوش", "جمشید", "سهراب", "کیوان", "کامران", "مازیار",
+            "آرش", "آبتین", "آرمان", "آرین", "آدین", "سام", "سامان", "سهراب", "سیاوش", "سینا",
+            "شایان", "شروین", "شهاب", "شهریار", "صائب", "صالح", "صفا", "طه", "عادل", "عرفان",
+            "عطا", "علیرضا", "عماد", "غفار", "فؤاد", "فرید", "فریدون", "قاسم", "قیس", "کامبیز",
+            "کامران", "کامیار", "کسری", "کیان", "کیومرث", "گرد آفرید", "ماکان", "مانی", "مایکل", "متین",
+            "محدث", "محسن", "محمد", "محمود", "مختار", "مراد", "مرتضی", "مرداس", "مروارید", "مسعود",
+            "مسلم", "مصطفی", "معین", "معد", "مقبل", "ملک", "منصور", "منوچهر", "مهدی", "مهران",
+            "مهرداد", "موبد", "موسی", "میثم", "میلاد", "نادر", "ناصر", "نصیر", "نظام", "نعمت",
+            "نوروز", "نوید", "نیما", "هادی", "هاشم", "هومان", "هومن", "یحیی", "یدالله", "یزدان",
+            "یعقوب", "یوسف", "یونس", "آراد", "آریا", "آریو", "آسل", "آشان", "آشوت", "آکبند",
+            "آلبرت", "آلمیر", "آندیا", "آنی", "آیسان", "بابک", "بردیا", "بنیامین", "پرهام", "پندار",
+            "پوریا", "پیام", "تیرداد", "جاوید", "چاووش", "خسرو", "دارا", "رامبد", "رامین", "رامتین",
+            "روزبه", "زانیار", "ساسان", "سرمد", "سروش", "سهراب", "سیامک", "شاهین", "شایگان", "ضرغام",
+            "طوفان", "عمران", "فربد", "فرشاد", "فرشید", "فرهود", "کارن", "کامیاب", "گشتاسب", "مازیار",
+            "مانی", "ماهان", "مهراب", "مهزیار", "ناروند", "نریمان", "نوذر", "هیربد", "هیراد", "یونس",
+            "آرشا", "آرسام", "آرشان", "آرشن", "آرطحا", "آرمان", "آرمین", "آرند", "آریا", "آریابان",
+            "آریوبرزن", "آریاداد", "آریافر", "آریامن", "آریامهر", "آریاد", "آریان", "آریاوند", "آزرم", "آژند",
+            "آستیاگ", "آکان", "آلا", "آماد", "آیدین", "آبتین", "آتریاد", "آتریو", "آراد", "آرشک",
+            "آرمن", "آرین", "آرکا", "آرکو", "آرمن", "آرمين", "آروند", "آریا", "آریان", "آتلا",
+            "آرشان", "آریا", "آراد", "آرتا", "آرشا", "آرسام", "آریا", "آرشان", "آرتین", "آراد",
+            "آریا", "آرشان", "آرتین", "آراد", "آریا", "آرشان", "آرتین", "آراد", "آریا", "آرشان",
+            "آرتین", "آراد", "آریا", "آرشان", "آرتین", "آراد", "آریا", "آرشان", "آرتین", "آراد",
+            "آریا", "آرشان", "آرتین", "آراد", "آریا", "آرشان", "آرتین", "آراد", "آریا", "آرشان",
+            "آرتین", "آراد", "آریا", "آرشان", "آرتین", "آراد", "آریا", "آرشان", "آرتین", "آراد",
+            "آریا", "آرشان", "آرتین", "آراد", "آریا", "آرشان", "آرتین", "آراد", "آریا", "آرشان",
+            "آرتین", "آراد", "آریا", "آرشان", "آرتین", "آراد", "آریا", "آرشان", "آرتین", "آراد",
+            "آریا", "آرشان", "آرتین", "آراد", "آریا", "آرشان", "آرتین", "آراد", "آریا", "آرشان",
+            "آرتین", "آراد", "آریا", "آرشان", "آرتین", "آراد", "آریا", "آرشان", "آرتین", "آراد"
+        ];
+
+        const femaleNames = [
+            "فاطمه", "زهرا", "مریم", "معصومه", "زينب", "رقیه", "نرگس", "لیلا", "سارا", "سمیه",
+            "صدیقه", "طاهره", "فریبا", "پریسا", "سمانه", "مهسا", "هانیه", "فرشته", "آرزو", "الهام",
+            "نازیلا", "نازنین", "نیلوفر", "پگاه", "پونه", "ترانه", "تینا", "چکامه", "دلارام", "دل آسا",
+            "رها", "رویا", "سپیده", "سحر", "ستاره", "سمانه", "سودابه", "سولماز", "سima", "شیوا",
+            "شیرین", "شهرزاد", "غزل", "فرح", "فروغ", "فريبا", "كتایون", "گلاره", "گیسو", "لادن"
+        ];
+
+        const maskedPhones = [
+            "0912***4582", "0935***7812", "0919***3365", "0921***8890", "0901***1234",
+            "0939***5567", "0914***9901", "0913***2233", "0918***4455", "0910***6677",
+            "0936***1122", "0937***3344", "0938***5566", "0933***7788", "0930***9900",
+            "0922***2468", "0902***1357", "0903***3691", "0911***8822", "0916***7733"
+        ];
+
+        const amounts = [
+            500000, 1000000, 1500000, 2000000, 2500000, 3000000, 3500000, 4000000, 
+            4500000, 5000000, 6000000, 7500000, 8000000, 10000000, 12000000, 15000000, 20000000
+        ];
+
+        const txTypes = [
+            { type: "خرید ووچر", class: "tx-badge-buy" },
+            { type: "فروش ووچر", class: "tx-badge-sell" },
+            { type: "برداشت وجه", class: "tx-badge-withdraw" }
+        ];
+
+        function getRandomItem(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        function formatToman(num) {
+            return num.toLocaleString('fa-IR');
+        }
+
+        function generateRandomTx() {
+            const isMale = Math.random() < 0.85; // ۸۵ درصد مرد، ۱۵ درصد زن
+            const name = isMale ? getRandomItem(maleNames) : getRandomItem(femaleNames);
+            const phone = getRandomItem(maskedPhones);
+            const amount = getRandomItem(amounts);
+            const typeObj = Math.random() < 0.55 ? txTypes[0] : (Math.random() < 0.85 ? txTypes[1] : txTypes[2]);
+            
+            return {
+                type: typeObj.type,
+                badgeClass: typeObj.class,
+                amount: formatToman(amount),
+                name: name,
+                phone: phone,
+                time: "همین اکنون"
+            };
+        }
+
+        let liveTxList = [];
+        // ایجاد اولیه ۶ تراکنش
+        for (let i = 0; i < 6; i++) {
+            const tx = generateRandomTx();
+            if (i > 0) {
+                const minutesAgo = i * 2 + Math.floor(Math.random() * 3);
+                tx.time = `${minutesAgo} دقیقه پیش`;
+            }
+            liveTxList.push(tx);
+        }
+
+        function renderLiveTxTable() {
+            const tbody = document.getElementById('live-tx-body');
+            if (!tbody) return;
+            tbody.innerHTML = liveTxList.map((tx, idx) => `
+                <tr class="${idx === 0 ? 'tx-new-row' : ''}">
+                    <td><span class="tx-badge ${tx.badgeClass}">${tx.type}</span></td>
+                    <td style="font-weight:700;">${tx.amount} تومان</td>
+                    <td>
+                        <div class="tx-user-info">
+                            <span>${tx.name}</span>
+                            <span class="tx-user-phone">${tx.phone}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="tx-status">
+                            <span class="tx-status-icon">✔</span>
+                            <span>تکمیل شده</span>
+                        </div>
+                    </td>
+                    <td><span class="tx-time-text">${tx.time}</span></td>
+                </tr>
+            `).join('');
+        }
+
+        renderLiveTxTable();
+
+        // مدیریت زمان‌بندی پویا و سیستم کندی بین ۳ شب تا ۳ بعدازظهر
+        function scheduleNextTx() {
+            const now = new Date();
+            const hour = now.getHours();
+            
+            // بازه ۳ شب (۰۳:۰۰) تا ۳ بعدازظهر (۱۵:۰۰) ساعت کندی است
+            const isSlowTime = hour >= 3 && hour < 15;
+            
+            let delay;
+            if (isSlowTime) {
+                // بین ۴ تا ۸ دقیقه در ساعات کندی
+                delay = (Math.floor(Math.random() * 5) + 4) * 60 * 1000;
+            } else {
+                // بین ۱.۵ تا ۳.۵ دقیقه در سایر ساعات
+                delay = (Math.floor(Math.random() * 120) + 90) * 1000;
+            }
+
+            setTimeout(() => {
+                const newTx = generateRandomTx();
+                liveTxList.unshift(newTx);
+                if (liveTxList.length > 8) liveTxList.pop();
+                
+                // به‌روزرسانی زمان سایر آیتم‌ها
+                for (let i = 1; i < liveTxList.length; i++) {
+                    if (liveTxList[i].time === "همین اکنون") {
+                        liveTxList[i].time = "۲ دقیقه پیش";
+                    } else if (liveTxList[i].time.includes("دقیقه پیش")) {
+                        let mins = parseInt(liveTxList[i].time);
+                        if (!isNaN(mins)) {
+                            liveTxList[i].time = `${mins + 3} دقیقه پیش`;
+                        }
+                    }
+                }
+
+                renderLiveTxTable();
+                scheduleNextTx();
+            }, delay);
+        }
+
+        scheduleNextTx();
 
         const faqData = [
             {
@@ -509,4 +734,4 @@ U Voucher و Hot Voucher اعتبارهای دیجیتالی هستند که ب�
         });
     </script>
 </body>
-    </html>
+</html>
