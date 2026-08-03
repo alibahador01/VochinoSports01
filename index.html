@@ -344,9 +344,6 @@
             });
         });
 
-        // ==========================================
-        //  بانک اسامی دقیق (۴۰۰ اسم پسر + ۱۰۰ اسم دختر)
-        // ==========================================
         const boyNames = [
             "محمد", "علی", "رضا", "حسین", "مهدی", "امیر", "سجاد", "نیما", "سامان", "احسان", "عادل", "داود", "ماهان", "متین", 
             "شایان", "پویا", "سینا", "امید", "عرفان", "علیرضا", "کامران", "یاسین", "میلاد", "کیوان", "آرش", "شهاب", "پارسا", 
@@ -393,7 +390,6 @@
         let recentNamesHistory = [];
 
         function getUniqueName() {
-            // سهم کمتر برای اسم‌های دخترانه (حدود ۱۵ درصد) تا در لیست‌ها کم دیده شوند
             let combined = Math.random() < 0.15 ? girlNames : boyNames;
             let filteredNames = combined.filter(n => !recentNamesHistory.includes(n));
             if(filteredNames.length === 0) {
@@ -408,9 +404,6 @@
 
         const prefixes = ["91", "93", "90", "99", "35", "45", "14", "89", "84", "02", "12", "37", "19", "18", "15", "36", "38"];
 
-        // ==========================================
-        //  موتور مبالغ دقیق (خرد و کامل، کاملاً طبیعی)
-        // ==========================================
         function getCustomAmount(typeCategory) {
             if (typeCategory === 'hot') {
                 let hotList = [50000, 70000, 100000, 130000, 170000, 200000, 230000, 260000, 300000];
@@ -525,24 +518,18 @@
             });
         }, 60000);
 
-        // ==========================================
-        //  مدیریت سرعت بسیار آرام (شامل ساعات ۲:۳۰ شب تا ۱۵:۰۰ عصر با کندی زیاد)
-        // ==========================================
         function scheduleNextTransactionCycle() {
             let now = new Date();
             let currentHour = now.getHours();
             let currentMinute = now.getMinutes();
             let totalMinutes = currentHour * 60 + currentMinute;
 
-            // بازه ۲:۳۰ شب تا ۱۵:۰۰ عصر (بسیار آرام)
             let isNightOrMorningQuiet = (totalMinutes >= 150 && totalMinutes <= 900);
 
             let randomDelayMs;
             if (isNightOrMorningQuiet) {
-                // سرعت فوق‌العاده آرام در شب و روزِ خلوت
                 randomDelayMs = Math.floor(Math.random() * (2700000 - 900000 + 1)) + 900000;
             } else {
-                // سرعت معمولی اما کاملاً ملایم
                 randomDelayMs = Math.floor(Math.random() * (900000 - 300000 + 1)) + 300000;
             }
             
@@ -562,9 +549,6 @@
         initLiveTransactions();
         scheduleNextTransactionCycle();
 
-        // ==========================================
-        //  بخش سوالات متداول و قوانین صرافی
-        // ==========================================
         const faqData = [
             {
                 q: "📜 قوانین و مقررات صرافی ووچینو⁰۱",
