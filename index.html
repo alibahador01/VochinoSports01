@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صرافی ووچینو⁰¹ | خرید و فروش آنی ووچر</title>
+    <title>صرافی ووچینو⁰۱ | خرید و فروش آنی ووچر و مرجع فوتبال</title>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --bg-color: #0b0f19;
-            --card-bg: rgba(17, 24, 39, 0.7);
+            --card-bg: rgba(17, 24, 39, 0.75);
             --border-color: rgba(255, 255, 255, 0.1);
             --primary-neon: #00ffcc;
             --secondary-neon: #7928ca;
@@ -43,7 +43,7 @@
             color: #fff;
             padding: 10px 15px;
             text-align: center;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             position: relative;
             overflow: hidden;
@@ -77,8 +77,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 5%;
-            background: rgba(11, 15, 25, 0.8);
+            padding: 15px 5%;
+            background: rgba(11, 15, 25, 0.85);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-color);
             position: sticky;
@@ -93,14 +93,14 @@
         }
 
         .logo-icon {
-            width: 45px;
-            height: 45px;
+            width: 42px;
+            height: 42px;
             background: linear-gradient(135deg, var(--primary-neon), var(--secondary-neon));
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
+            font-size: 20px;
             color: #0b0f19;
             box-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
             animation: pulseNeon 3s infinite;
@@ -113,23 +113,22 @@
         }
 
         .logo-text h1 {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 900;
             background: linear-gradient(45deg, #fff, var(--primary-neon));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 0.5px;
         }
 
         .logo-text span {
-            font-size: 11px;
+            font-size: 10px;
             color: var(--text-muted);
         }
 
         .cta-btn {
             background: linear-gradient(135deg, #00ffcc, #00b4d8);
             color: #0b0f19;
-            padding: 10px 22px;
+            padding: 8px 18px;
             border-radius: 50px;
             font-weight: 700;
             text-decoration: none;
@@ -137,8 +136,8 @@
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 14px;
+            gap: 6px;
+            font-size: 13px;
         }
 
         .cta-btn:hover {
@@ -146,43 +145,212 @@
             box-shadow: 0 6px 20px rgba(0, 255, 204, 0.5);
         }
 
-        /* بخش اصلی هیرو */
-        .hero-section {
-            text-align: center;
-            padding: 40px 20px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero-section h2 {
-            font-size: 28px;
-            font-weight: 800;
-            margin-bottom: 15px;
-            color: #fff;
-        }
-
-        .hero-section p {
-            color: var(--text-muted);
-            font-size: 15px;
-            line-height: 1.8;
-            margin-bottom: 25px;
-        }
-
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 0 20px 50px 20px;
+            padding: 30px 15px;
+        }
+
+        /* عنوان بخش‌ها */
+        .section-title {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+            border-right: 4px solid var(--primary-neon);
+            padding-right: 10px;
+        }
+
+        /* بخش مسابقات و پخش زنده */
+        .sports-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        @media(min-width: 768px) {
+            .sports-grid {
+                grid-template-columns: 1.2fr 0.8fr;
+            }
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        /* پلیر پخش زنده */
+        .live-stream-box {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* نسبت 16:9 */
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            border: 1px solid rgba(0, 255, 204, 0.3);
+        }
+
+        .live-stream-box iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .match-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .team {
+            flex: 1;
+        }
+
+        .team img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            margin-bottom: 5px;
+        }
+
+        .team span {
+            font-size: 14px;
+            font-weight: 700;
+            display: block;
+        }
+
+        .match-vs {
+            font-weight: 900;
+            color: var(--primary-neon);
+            font-size: 16px;
+            padding: 0 10px;
+        }
+
+        /* درصد احتمال برد */
+        .prob-bar-container {
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 15px;
+        }
+
+        .prob-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .prob-bar {
+            height: 8px;
+            background: #374151;
+            border-radius: 4px;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .prob-home { background: var(--primary-neon); width: 45%; }
+        .prob-draw { background: var(--accent-gold); width: 25%; }
+        .prob-away { background: #ef4444; width: 30%; }
+
+        /* اعتمادگاه ووچینو */
+        .trust-table-wrapper {
+            overflow-x: auto;
+            margin-bottom: 40px;
+        }
+
+        table.trust-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        table.trust-table th, table.trust-table td {
+            padding: 12px 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        table.trust-table th {
+            background: rgba(121, 40, 202, 0.2);
+            color: var(--primary-neon);
+            font-weight: 700;
+        }
+
+        table.trust-table tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .badge-buy { background: rgba(0, 255, 204, 0.15); color: #00ffcc; padding: 3px 8px; border-radius: 6px; font-size: 11px; }
+        .badge-sell { background: rgba(245, 158, 11, 0.15); color: #f59e0b; padding: 3px 8px; border-radius: 6px; font-size: 11px; }
+        .badge-withdraw { background: rgba(59, 130, 246, 0.15); color: #60a5fa; padding: 3px 8px; border-radius: 6px; font-size: 11px; }
+
+        /* آکاردئون قوانین و آموزش‌ها */
+        .faq-section {
+            margin-bottom: 40px;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .faq-answer {
+            padding: 0 15px 15px 15px;
+            color: var(--text-muted);
+            font-size: 13px;
+            line-height: 1.7;
+            display: none;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 10px;
+        }
+
+        /* فوتر */
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: rgba(11, 15, 25, 0.9);
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 12px;
         }
     </style>
 </head>
 <body>
 
-    <!-- اسلایدر تبلیغاتی بالای سایت (هر ۵ ثانیه) -->
+    <!-- اسلایدر تبلیغاتی بالای سایت -->
     <div class="top-ticker">
-        <div class="ticker-item active"><i class="fa-solid fa-bolt"></i> خرید آنی یوووچر و هات ووچر در کمتر از ۵ دقیقه با بهترین نرخ بازار</div>
-        <div class="ticker-item"><i class="fa-solid fa-shield-halved"></i> صرافی ووچینو⁰۱؛ معتبرترین مرجع امن تبادل ووچرهای ارزی و دیجیتال</div>
-        <div class="ticker-item"><i class="fa-solid fa-gift"></i> از جشنواره‌ها و بونوس‌های دوره‌ای ویژه کاربران ربات باخبر شوید</div>
-        <div class="ticker-item"><i class="fa-solid fa-coins"></i> کارمزد کاملاً رقابتی و تسویه حساب آنی به صورت ۲۴ ساعته</div>
+        <div class="ticker-item active"><i class="fa-solid fa-bolt"></i> خرید آنی یوووچر و هات ووچر در کمتر از ۵ دقیقه از طریق ربات تلگرام</div>
+        <div class="ticker-item"><i class="fa-solid fa-shield-halved"></i> صرافی ووچینو⁰۱؛ امن‌ترین بستر تبادل ووچرهای ارزی و شارژ حساب</div>
+        <div class="ticker-item"><i class="fa-solid fa-gift"></i> از بونوس‌ها و تخفیف‌های دوره‌ای ربات ما مطلع شوید</div>
     </div>
 
     <!-- هدر سایت -->
@@ -193,34 +361,186 @@
             </div>
             <div class="logo-text">
                 <h1>ووچینو⁰۱</h1>
-                <span>صرافی امن ووچر و ارزهای دیجیتال</span>
+                <span>صرافی امن ووچر و سرویس ورزشی</span>
             </div>
         </div>
-        <a href="https://t.me/YOUR_BOT_USERNAME" target="_blank" class="cta-btn">
+        <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="cta-btn">
             <i class="fa-brands fa-telegram"></i> ورود به ربات خرید
         </a>
     </header>
 
-    <!-- بخش معرفی کوتاه -->
-    <div class="hero-section">
-        <h2>پلتفرم امن خرید و فروش انواع ووچر</h2>
-        <p>بدون معطلی، با بالاترین سرعت و بهترین نرخ، تراکنش‌های خود را در بستری کاملاً امن و مکانیزه انجام دهید. پشتبانی کامل از انواع ووچرهای معتبر جهانی.</p>
+    <div class="container">
+
+        <!-- بخش مسابقات و پخش زنده رایگان -->
+        <div class="section-title">
+            <i class="fa-solid fa-tv"></i> پخش زنده و مسابقات مهم امشب
+        </div>
+        
+        <div class="sports-grid">
+            <!-- کارت پخش زنده و آمار مسابقه -->
+            <div class="glass-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <span style="font-size: 12px; color: var(--primary-neon); background: rgba(0,255,204,0.1); padding: 3px 8px; border-radius: 4px;"><i class="fa-solid fa-circle" style="font-size: 8px;"></i> زنده / لیگ قهرمانان اروپا</span>
+                    <span style="font-size: 12px; color: var(--text-muted);">امشب ساعت ۲۲:۳۰</span>
+                </div>
+
+                <!-- پخش زنده رایگان (قابل تغییر با ایفرم دلخواه) -->
+                <div class="live-stream-box">
+                    <iframe src="https://www.youtube.com/embed/live_stream?channel=YOUR_CHANNEL_ID" allowfullscreen></iframe>
+                </div>
+
+                <div class="match-info">
+                    <div class="team">
+                        <img src="https://cdn-icons-png.flaticon.com/512/8603/8603033.png" alt="آرسنال">
+                        <span>آرسنال</span>
+                    </div>
+                    <div class="match-vs">VS</div>
+                    <div class="team">
+                        <img src="https://cdn-icons-png.flaticon.com/512/8603/8603033.png" alt="حریف">
+                        <span>رقیب اروپایی</span>
+                    </div>
+                </div>
+
+                <div class="prob-bar-container">
+                    <div class="prob-labels">
+                        <span>برد آرسنال (45%)</span>
+                        <span>مساوی (25%)</span>
+                        <span>برد مهمان (30%)</span>
+                    </div>
+                    <div class="prob-bar">
+                        <div class="prob-home"></div>
+                        <div class="prob-draw"></div>
+                        <div class="prob-away"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- پنل تبلیغاتی اختصاصی صرافی ووچینو -->
+            <div class="glass-card" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: linear-gradient(135deg, rgba(121,40,202,0.2), rgba(0,255,204,0.1));">
+                <div style="font-size: 40px; color: var(--primary-neon); margin-bottom: 15px;">
+                    <i class="fa-solid fa-rocket"></i>
+                </div>
+                <h3 style="font-size: 18px; margin-bottom: 10px; color: #fff;">شارژ آنی حساب‌های شرط‌بندی</h3>
+                <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.7;">
+                    به راحتی و در کمتر از ۵ دقیقه حساب خود را در سایت‌های معتبر با ووچر شارژ کنید. کارمزد رقابتی و تسویه حساب اتوماتیک از طریق ربات تلگرام.
+                </p>
+                <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="cta-btn" style="width: 100%; justify-content: center; padding: 12px;">
+                    <i class="fa-brands fa-telegram"></i> شروع خرید از ربات @Vochino_bh01_bot
+                </a>
+            </div>
+        </div>
+
+        <!-- اعتمادگاه ووچینو⁰۱ (جدول تراکنش‌های طبیعی و خرد) -->
+        <div class="section-title">
+            <i class="fa-solid fa-shield-check"></i> اعتمادگاه ووچینو⁰۱ (آخرین تراکنش‌های موفق)
+        </div>
+        
+        <div class="glass-card trust-table-wrapper">
+            <table class="trust-table">
+                <thead>
+                    <tr>
+                        <th>نوع تراکنش</th>
+                        <th>مبلغ (تومان)</th>
+                        <th>کاربر</th>
+                        <th>وضعیت</th>
+                        <th>زمان</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge-buy">خرید یوووچر</span></td>
+                        <td>۷۰۰,۰۰۰</td>
+                        <td>علی ***۰۲</td>
+                        <td><i class="fa-solid fa-check-circle" style="color: #00ffcc;"></i> تکمیل</td>
+                        <td>۲ دقیقه پیش</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge-buy">خرید هات ووچر</span></td>
+                        <td>۲۰۰,۰۰۰</td>
+                        <td>محمد ***۵۸</td>
+                        <td><i class="fa-solid fa-check-circle" style="color: #00ffcc;"></i> تکمیل</td>
+                        <td>۵ دقیقه پیش</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge-sell">فروش پرمیوم ووچر</span></td>
+                        <td>۱,۲۵۰,۰۰۰</td>
+                        <td>رضا ***۹۱</td>
+                        <td><i class="fa-solid fa-check-circle" style="color: #00ffcc;"></i> تسویه شد</td>
+                        <td>۹ دقیقه پیش</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge-withdraw">برداشت تتر / تومان</span></td>
+                        <td>۴۵۰,۰۰۰</td>
+                        <td>مهدی ***۳۳</td>
+                        <td><i class="fa-solid fa-check-circle" style="color: #00ffcc;"></i> واریز شد</td>
+                        <td>۱۳ دقیقه پیش</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge-sell">فروش پی اس ووچر</span></td>
+                        <td>۱۲۰,۰۰۰</td>
+                        <td>سارا ***۱۴</td>
+                        <td><i class="fa-solid fa-check-circle" style="color: #00ffcc;"></i> تسویه شد</td>
+                        <td>۱۵ دقیقه پیش</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- قوانین و آموزش‌ها (FAQ) -->
+        <div class="section-title">
+            <i class="fa-solid fa-book-open"></i> قوانین و آموزش‌های صرافی ووچینو⁰۱
+        </div>
+
+        <div class="faq-section">
+            <div class="faq-item">
+                <div class="faq-question">قوانین و نکات امنیتی واریز و برداشت <i class="fa-solid fa-chevron-down"></i></div>
+                <div class="faq-answer">
+                    • فقط از کارت بانکی متعلق به خودتان واریز انجام دهید.<br>
+                    • استفاده از کارت اشخاص دیگر ممکن است برای بررسی امنیتی باعث تأخیر در تأیید یا تسویه شود.<br>
+                    • احراز هویت پایه: نام، نام خانوادگی، شماره تلفن و شماره کارت.<br>
+                    • سفارش‌های خرید معمولاً در کمتر از ۵ دقیقه تأیید و ارسال می‌شوند.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">آموزش خرید و استفاده از انواع ووچر (یوووچر، هات ووچر و...) <i class="fa-solid fa-chevron-down"></i></div>
+                <div class="faq-answer">
+                    برای خرید کافی است وارد ربات تلگرامی ما به آیدی <b>@Vochino_bh01_bot</b> شوید، مقدار ووچر مد نظر را انتخاب کرده و پس از پرداخت از طریق کارت به کارت یا درگاه، کد ووچر خود را آنی تحویل بگیرید.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">هشدار مهم فیشینگ و امنیت حساب <i class="fa-solid fa-chevron-down"></i></div>
+                <div class="faq-answer">
+                    صرافی ووچینو⁰۱ تنها از طریق آدرس رسمی ربات به آیدی <b>@Vochino_bh01_bot</b> فعالیت می‌کند. مراقب سودجویان و صفحات فیشینگ مشابه باشید و اطلاعات حساب خود را در اختیار دیگران قرار ندهید.
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <div class="container" id="main-content-placeholder">
-        <!-- بخش‌های مسابقات و اعتمادگاه در بخش‌های بعدی تزریق می‌شوند -->
-    </div>
+    <!-- فوتر -->
+    <footer>
+        <p>تمامی حقوق محفوظ است. صرافی امن ووچینو⁰۱ | ارتباط پشتیبانی: @Vochino_bh01_bot</p>
+    </footer>
 
     <script>
         // اسکریپت اسلایدر ۵ ثانیه‌ای بالای صفحه
         let currentTicker = 0;
         const tickers = document.querySelectorAll('.ticker-item');
-        
         setInterval(() => {
             tickers[currentTicker].classList.remove('active');
             currentTicker = (currentTicker + 1) % tickers.length;
             tickers[currentTicker].classList.add('active');
         }, 5000);
+
+        // اسکریپت باز و بسته شدن سوالات متداول
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const answer = item.nextElementSibling;
+                answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+            });
+        });
     </script>
 </body>
 </html>
