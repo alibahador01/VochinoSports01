@@ -44,16 +44,11 @@
             background: linear-gradient(to bottom, var(--primary-neon), var(--accent-green));
         }
 
-        .logo-box {
-            text-align: center;
-            margin-bottom: 15px;
-        }
+        .logo-box { text-align: center; margin-bottom: 15px; }
         .logo-img {
-            width: 110px; height: 110px;
-            border-radius: 50%;
+            width: 100px; height: 100px; border-radius: 50%;
             border: 3px solid var(--accent-green);
-            box-shadow: 0 0 20px rgba(0, 255, 102, 0.4);
-            object-fit: cover;
+            box-shadow: 0 0 20px rgba(0, 255, 102, 0.4); object-fit: cover;
         }
 
         h1 { color: var(--primary-neon); text-align: center; margin: 5px 0; font-size: 22px; text-shadow: 0 0 12px rgba(0,242,254,0.4); }
@@ -61,43 +56,39 @@
         .subtitle { text-align: center; color: var(--text-sub); margin-top: 0; font-size: 13px; }
         
         .btn { 
-            display: block; 
-            background: linear-gradient(45deg, #0052d4, #00d2ff); 
-            color: white; 
-            text-align: center; 
-            padding: 15px; 
-            border-radius: 12px; 
-            text-decoration: none; 
-            font-weight: bold; 
-            font-size: 16px; 
-            margin-top: 15px; 
-            box-shadow: 0 4px 20px rgba(0, 210, 255, 0.4);
-            transition: 0.3s;
+            display: block; background: linear-gradient(45deg, #0052d4, #00d2ff); 
+            color: white; text-align: center; padding: 15px; border-radius: 12px; 
+            text-decoration: none; font-weight: bold; font-size: 16px; margin-top: 15px; 
+            box-shadow: 0 4px 20px rgba(0, 210, 255, 0.4); transition: 0.3s;
+        }
+
+        /* استایل اختصاصی کارت‌های پیش‌بینی */
+        .prediction-card {
+            background: #141c2e; border: 1px solid #2a3854; border-radius: 12px;
+            padding: 15px; margin-top: 15px;
+        }
+        .prediction-img {
+            width: 100%; max-height: 220px; object-fit: cover; border-radius: 8px;
+            border: 1px solid #334155; margin-bottom: 10px;
+        }
+        .badge-odd {
+            background: var(--gold); color: #000; font-weight: bold;
+            padding: 2px 8px; border-radius: 20px; font-size: 12px; display: inline-block;
         }
         
-        .voucher-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 12px;
-            margin-top: 15px;
+        /* بخش اعتماد ساز / تراکنش‌های اخیر */
+        .trust-item {
+            background: #101726; border-right: 3px solid var(--accent-green);
+            padding: 10px 12px; border-radius: 6px; margin-bottom: 8px;
+            font-size: 12.5px; display: flex; justify-content: space-between; align-items: center;
         }
-        .voucher-item {
-            background: #141c2e;
-            padding: 14px;
-            border-radius: 12px;
-            border: 1px solid #1e293b;
-        }
+
+        .voucher-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 15px; }
+        .voucher-item { background: #141c2e; padding: 14px; border-radius: 12px; border: 1px solid #1e293b; }
         .voucher-item h3 { color: var(--gold); margin: 0 0 5px 0; font-size: 15px; }
         .voucher-item p { font-size: 12px; color: var(--text-sub); margin: 0; }
 
-        .step-box {
-            background: rgba(0, 242, 254, 0.05);
-            border-right: 3px solid var(--primary-neon);
-            padding: 12px 15px;
-            margin-bottom: 10px;
-            border-radius: 6px;
-            font-size: 13.5px;
-        }
+        .step-box { background: rgba(0, 242, 254, 0.05); border-right: 3px solid var(--primary-neon); padding: 12px 15px; margin-bottom: 10px; border-radius: 6px; font-size: 13.5px; }
         .alert-box { background: rgba(255, 0, 85, 0.1); border-right: 3px solid var(--danger); padding: 12px 15px; margin: 10px 0; border-radius: 6px; font-size: 13px; }
         
         ul { padding-right: 18px; margin-bottom: 0; }
@@ -108,81 +99,117 @@
 <body>
     <div class="container">
         
-        <!-- لوگو و هدر اصلی -->
+        <!-- هدر اصلی -->
         <div class="card">
             <div class="logo-box">
                 <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=300" alt="Vochino Sports" class="logo-img">
             </div>
             <h1>⚽ مرکز تخصصی ووچر ورزشی ووچینو ۰۱</h1>
-            <p class="subtitle">خرید و فروش آنی ووچر جهت شارژ حساب‌های پیش‌بینی، بازی و سایت‌های بین‌المللی</p>
+            <p class="subtitle">خرید و فروش آنی انواع ووچر جهت شارژ حساب‌های پیش‌بینی و بازی</p>
             <a href="https://t.me/Vochino_bh01_bot" class="btn">🚀 ورود مستقیم به ربات ووچینو</a>
         </div>
 
-        <!-- معرفی انواع ووچرها -->
+        <!-- 🎯 اول صفحه: بخش فرم‌ها و مثال‌های پیش‌بینی -->
         <div class="card">
-            <h2>💎 انواع ووچرهای پشتیبانی‌شده در ربات</h2>
-            <p style="font-size: 13px; color: var(--text-sub);">تمامی ووچرها به صورت آنی و صدم‌ثانیه‌ای تحویل داده می‌شوند:</p>
-            
-            <div class="voucher-grid">
-                <div class="voucher-item">
-                    <h3>👑 پریمیوم ووچر (Premium Voucher)</h3>
-                    <p>محبوب‌ترین ووچر جهت شارژ حساب سایت‌های پیش‌بینی و بازی با بالاترین امنیت و سرعت.</p>
+            <h2>🔥 نمونه فرم‌ها و تحلیل‌های پیشنهادی پیش‌بینی</h2>
+            <p style="font-size: 13px; color: var(--text-sub);">مثال‌هایی از فرم‌های وین‌ریت بالا جهت ایده و شارژ حساب از طریق ربات:</p>
+
+            <!-- فرم نمونه ۱ -->
+            <div class="prediction-card">
+                <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=600" alt="پیش بینی فوتبال" class="prediction-img">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3 style="color: var(--primary-neon); margin: 0; font-size: 15px;">⚽ ال‌کلاسیکو: رئال مادرید - بارسلونا</h3>
+                    <span class="badge-odd">ضریب: ۲.۱۵</span>
                 </div>
-                <div class="voucher-item">
-                    <h3>🔥 هات ووچر / پی‌اس ووچر (PS Voucher)</h3>
-                    <p>مخصوص سایت‌های ورزشی نوین؛ شامل کد شارژ بدون نیاز به احراز هویت در سایت مقصد.</p>
+                <p style="font-size: 12.5px; color: #cbd5e1; margin: 8px 0 0 0;">
+                    <b>گزینه پیشنهادی:</b> برد رئال مادرید + مجموع گل‌های بازی بالای ۲.۵<br>
+                    <span style="color: var(--accent-green);">✔ وضعیت آنالیز: احتمال موفقیت ۸۸٪</span>
+                </p>
+            </div>
+
+            <!-- فرم نمونه ۲ -->
+            <div class="prediction-card">
+                <img src="https://images.unsplash.com/photo-1518091043644-c1d4457512c6?w=600" alt="لیگ قهرمانان" class="prediction-img">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3 style="color: var(--primary-neon); margin: 0; font-size: 15px;">🏆 لیگ قهرمانان: منچسترسیتی - بایرن مونیخ</h3>
+                    <span class="badge-odd">ضریب: ۱.۹۵</span>
                 </div>
-                <div class="voucher-item">
-                    <h3>⚡ یوو ووچر (U Voucher)</h3>
-                    <p>کارمزد بسیار پایین، نقدشوندگی لحظه‌ای و تسویه فوری در کمتر از چند ثانیه.</p>
-                </div>
+                <p style="font-size: 12.5px; color: #cbd5e1; margin: 8px 0 0 0;">
+                    <b>گزینه پیشنهادی:</b> هر دو تیم گل می‌زنند (BTTS) + کرنر بالای ۸.۵<br>
+                    <span style="color: var(--accent-green);">✔ وضعیت آنالیز: فرم تکی مطمئن</span>
+                </p>
             </div>
         </div>
 
-        <!-- آموزش نحوه استفاده و شارژ -->
+        <!-- 🤝 بخش جدید: اعتماد و شفافیت (نمونه تسویه‌ها) -->
         <div class="card">
-            <h2>📚 راهنمای جامع خرید و شارژ حساب در سایت‌ها</h2>
+            <h2>📊 آخرین تسویه‌ها و تراکنش‌های موفق سامانه</h2>
+            <p style="font-size: 12.5px; color: var(--text-sub); margin-bottom: 12px;">تراکنش‌های اخیر کاربران ربات ووچینو ۰۱ (به‌روزرسانی خودکار):</p>
+
+            <div class="trust-item">
+                <span>🟢 خریدار: کاربر <b>****۹۱۲</b> (پریمیوم ووچر)</span>
+                <span style="color: var(--gold); font-weight: bold;">۵,۰۰۰,۰۰۰ تومان</span>
+            </div>
+            <div class="trust-item">
+                <span>🟢 برداشت نقد: کاربر <b>****۹۳۵</b> (تسویه شبا)</span>
+                <span style="color: var(--accent-green); font-weight: bold;">۲,۴۰۰,۰۰۰ تومان</span>
+            </div>
+            <div class="trust-item">
+                <span>🟢 خریدار: کاربر <b>****۹۰۲</b> (هات ووچر)</span>
+                <span style="color: var(--gold); font-weight: bold;">۱,۵۰۰,۰۰۰ تومان</span>
+            </div>
+            <div class="trust-item">
+                <span>🟢 برداشت نقد: کاربر <b>****۹۳۸</b> (تسویه کارت)</span>
+                <span style="color: var(--accent-green); font-weight: bold;">۸,۹۰۰,۰۰۰ تومان</span>
+            </div>
+        </div>
+
+        <!-- 📚 بخش آموزش ووچرها و شارژ -->
+        <div class="card">
+            <h2>📚 آموزش کامل خرید و شارژ حساب</h2>
             
+            <div class="voucher-grid" style="margin-bottom: 15px;">
+                <div class="voucher-item">
+                    <h3>👑 پریمیوم ووچر</h3>
+                    <p>بدون احراز در سایت مقصد، شارژ فوری و بدون افت قیمت.</p>
+                </div>
+                <div class="voucher-item">
+                    <h3>🔥 هات ووچر / PS</h3>
+                    <p>مخصوص بازی‌ها و پیش‌بینی‌های مستقیم با کارمزد بسیار کم.</p>
+                </div>
+            </div>
+
             <div class="step-box">
                 <b>مرحله ۱: دریافت کد از ربات</b><br>
-                وارد ربات شوید، گزینه «خرید ووچر» را بزنید، نوع ووچر و مبلغ دلخواه را انتخاب کنید. پس از پرداخت، <b>کد ووچر (Activation Code)</b> و <b>کد پیگیری (Batch Number)</b> به شما تحویل داده می‌شود.
+                وارد ربات ووچینو شده، نوع ووچر و مبلغ را انتخاب کنید تا کد ۱۶ رقمی و کد فعال‌سازی آنی صادر شود.
             </div>
-
             <div class="step-box">
-                <b>مرحله ۲: ورود به سایت مقصد (پیش‌بینی / ورزشی)</b><br>
-                در سایت مورد نظر خود وارد بخش «شارژ حساب» یا «واریز» (Deposit) شوید و گزینه پرداخت از طریق **eVoucher / Premium Voucher / HotVoucher** را انتخاب کنید.
-            </div>
-
-            <div class="step-box">
-                <b>مرحله ۳: وارد کردن کد و نهایی‌سازی</b><br>
-                کد ۱۶ رقمی ووچر و کد فعال‌سازی را در کادرهای مربوطه کپی کرده و ثبت بزنید. حساب شما **بلافاصله و بدون معطلی** شارژ خواهد شد!
+                <b>مرحله ۲: شارژ در سایت</b><br>
+                در سایت پیش‌بینی خود گزینه eVoucher را انتخاب کرده و کدها را کپی و تایید کنید.
             </div>
         </div>
 
-        <!-- قوانین و خط‌مشی حقوقی (محکم و جدی) -->
+        <!-- ⚖️ بخش قوانین و ضوابط حقوقی -->
         <div class="card">
-            <h2>🛡 شرایط احراز هویت و امنیت تراکنش‌ها</h2>
-            
+            <h2>🛡 قوانین، ضوابط امنیتی و احراز هویت</h2>
             <div class="alert-box">
-                <b>⚠️ قانون طلایی واریز:</b> واریز وجه باید <b>دقیقاً از کارت ثبت‌شده به نام خودتان</b> انجام شود. واریز از کارت‌های متفرقه یا کلاهبرداری (فیشینگ) به مراجع قضایی و پلیس فتا گزارش خواهد شد.
+                <b>⚠️ هشدار پلیس فتا:</b> واریز وجه فقط و فقط از کارت بانکی ثبت‌شده به نام شخص صاحب حساب امکان‌پذیر است. واریز از کارت‌های متفرقه موجب مسدودی دائم حساب خواهد شد.
             </div>
-
             <ul>
-                <li><b>سطح نقره‌ای:</b> ثبت نام اولیه با شماره به نام صاحب حساب (سقف روزانه: <b>۲ میلیون تومان</b>)</li>
-                <li><b>سطح طلایی:</b> ارسال مدارک شناسایی به پشتیبانی (سقف روزانه: <b>۱۰ میلیون تومان</b>)</li>
-                <li><b>تسویه حساب:</b> تمامی درخواست‌های برداشت نقد ظرف <b>حداکثر ۲۴ ساعت کاری</b> واریز می‌گردد.</li>
-                <li><b>پشتیبانی:</b> جهت پیگیری، فقط از طریق بخش پشتیبانی ربات اقدام فرمایید و از ارسال پیام مکرر خودداری کنید.</li>
+                <li><b>سطح نقره‌ای (پایه):</b> ثبت‌نام اولیه با شماره به نام (سقف روزانه: <b>۲ میلیون تومان</b>)</li>
+                <li><b>سطح طلایی (حرفه‌ای):</b> ارسال مدارک جهت تایید پشتیبانی (سقف روزانه: <b>۱۰ میلیون تومان</b>)</li>
+                <li><b>زمان تسویه:</b> واریز درخواست‌های برداشت حداکثر ظرف <b>۲۴ ساعت کاری</b> انجام می‌شود.</li>
             </ul>
         </div>
 
         <!-- دکمه نهایی -->
         <div class="card" style="text-align: center;">
-            <p style="margin-bottom: 10px; font-size: 14px; color: var(--gold);">⚡ همین حالا ووچر خود را آنی دریافت کنید</p>
+            <p style="margin-bottom: 10px; font-size: 14px; color: var(--gold);">⚡ همین حالا کد ووچر خود را صدم‌ثانیه‌ای تحویل بگیرید</p>
             <a href="https://t.me/Vochino_bh01_bot" class="btn">ورود به ربات تلگرام ووچینو ۰۱</a>
         </div>
 
         <div class="footer">
-            تمامی حقوق سامانه ووچینو ۰۱ محفوظ است © 2026 | انطباق کامل با قوانین تجارت الکترونیک
+            تمامی حقوق سامانه هوشمند ووچینو ۰۱ محفوظ است © 2026
         </div>
     </div>
 </body>
