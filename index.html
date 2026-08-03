@@ -3,22 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vochino Sports | صرافی هوشمند و مرکز ورزشی ووچینو⁰¹</title>
-    
-    <!-- فونت وزیرمتن و آیکون‌ها -->
-    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    <title>صرافی ووچینو⁰¹ | خرید و فروش آنی ووچر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
         :root {
-            --bg-color: #0d0f17;
-            --card-bg: rgba(23, 27, 44, 0.65);
-            --card-border: rgba(255, 255, 255, 0.1);
-            --neon-blue: #00f0ff;
-            --neon-purple: #7000ff;
-            --neon-green: #00ff66;
-            --text-main: #ffffff;
-            --text-muted: #a0a5c0;
+            --bg-color: #0b0f19;
+            --card-bg: rgba(17, 24, 39, 0.7);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --primary-neon: #00ffcc;
+            --secondary-neon: #7928ca;
+            --accent-gold: #f59e0b;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
         }
 
         * {
@@ -26,19 +23,53 @@
             margin: 0;
             padding: 0;
             font-family: 'Vazirmatn', sans-serif;
-            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            line-height: 1.6;
+            min-height: 100vh;
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 15% 15%, rgba(112, 0, 255, 0.15) 0%, transparent 45%),
-                radial-gradient(circle at 85% 85%, rgba(0, 240, 255, 0.15) 0%, transparent 45%);
-            background-attachment: fixed;
-            padding-bottom: 70px; /* فضا برای دکمه شناور موبایل */
+                radial-gradient(circle at 10% 20%, rgba(121, 40, 202, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 255, 204, 0.1) 0%, transparent 40%);
+        }
+
+        /* اسلایدر بالای سایت */
+        .top-ticker {
+            background: linear-gradient(90deg, #7928ca, #4338ca, #00ffcc);
+            background-size: 200% 200%;
+            animation: gradientBG 10s ease infinite;
+            color: #fff;
+            padding: 10px 15px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .ticker-item {
+            display: none;
+            animation: fadeInOut 5s ease-in-out infinite;
+        }
+
+        .ticker-item.active {
+            display: block;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(10px); }
+            20% { opacity: 1; transform: translateY(0); }
+            80% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-10px); }
         }
 
         /* هدر و لوگوی نئونی */
@@ -46,543 +77,150 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 1.5rem;
-            background: rgba(13, 15, 23, 0.85);
+            padding: 20px 5%;
+            background: rgba(11, 15, 25, 0.8);
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--card-border);
+            border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
-        .logo-text {
-            font-size: 1.4rem;
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary-neon), var(--secondary-neon));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: #0b0f19;
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
+            animation: pulseNeon 3s infinite;
+        }
+
+        @keyframes pulseNeon {
+            0% { box-shadow: 0 0 15px rgba(0, 255, 204, 0.4); }
+            50% { box-shadow: 0 0 25px rgba(0, 255, 204, 0.8); }
+            100% { box-shadow: 0 0 15px rgba(0, 255, 204, 0.4); }
+        }
+
+        .logo-text h1 {
+            font-size: 20px;
             font-weight: 900;
-            letter-spacing: 1px;
-            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            background: linear-gradient(45deg, #fff, var(--primary-neon));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+            letter-spacing: 0.5px;
         }
 
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+        .logo-text span {
+            font-size: 11px;
+            color: var(--text-muted);
         }
 
-        .btn-telegram-header {
-            background: linear-gradient(45deg, #0088cc, var(--neon-blue));
-            color: #fff;
+        .cta-btn {
+            background: linear-gradient(135deg, #00ffcc, #00b4d8);
+            color: #0b0f19;
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-weight: 700;
             text-decoration: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            box-shadow: 0 0 10px rgba(0, 136, 204, 0.4);
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            box-shadow: 0 4px 15px rgba(0, 255, 204, 0.3);
             transition: all 0.3s ease;
-        }
-
-        .btn-telegram-header:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
-        }
-
-        .online-badge {
-            background: rgba(0, 255, 102, 0.1);
-            border: 1px solid var(--neon-green);
-            color: var(--neon-green);
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .pulse-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--neon-green);
-            border-radius: 50%;
-            box-shadow: 0 0 8px var(--neon-green);
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0.4; }
-            50% { opacity: 1; }
-            100% { opacity: 0.4; }
-        }
-
-        /* اسلایدر متحرک بالای سایت */
-        .announcement-slider {
-            background: rgba(112, 0, 255, 0.1);
-            border-top: 1px solid rgba(112, 0, 255, 0.2);
-            border-bottom: 1px solid rgba(112, 0, 255, 0.2);
-            padding: 12px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            height: 48px;
-        }
-
-        .slide-item {
-            position: absolute;
-            width: 100%;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s ease-in-out;
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
-
-        .slide-item.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* کانتینر اصلی */
-        .container {
-            max-width: 1200px;
-            margin: 1.5rem auto;
-            padding: 0 1.2rem;
-        }
-
-        /* بنر ویژه شروع معامله و ورود به ربات */
-        .hero-banner {
-            background: linear-gradient(135deg, rgba(112, 0, 255, 0.2), rgba(0, 240, 255, 0.2));
-            border: 1px solid var(--neon-blue);
-            border-radius: 16px;
-            padding: 1.8rem;
-            text-align: center;
-            margin-bottom: 2rem;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
-        }
-
-        .hero-banner h1 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: #fff;
-        }
-
-        .hero-banner p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-        }
-
-        .btn-main-bot {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(45deg, #0088cc, var(--neon-purple));
-            color: #fff;
-            text-decoration: none;
-            padding: 12px 28px;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            box-shadow: 0 0 20px rgba(112, 0, 255, 0.5);
-            transition: all 0.3s ease;
-        }
-
-        .btn-main-bot:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(0, 240, 255, 0.8);
-        }
-
-        /* کارت‌های شیشه‌ای */
-        .glass-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-        }
-
-        .section-title {
-            font-size: 1.3rem;
-            margin-bottom: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #fff;
-            border-right: 4px solid var(--neon-blue);
-            padding-right: 12px;
-        }
-
-        /* بخش مسابقات فوتبال و پخش زنده */
-        .match-container {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 1.5rem;
-        }
-
-        @media (max-width: 768px) {
-            .match-container {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .stream-box {
-            background: #000;
-            border-radius: 12px;
-            overflow: hidden;
-            aspect-ratio: 16/9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid var(--card-border);
-        }
-
-        .stream-placeholder {
-            text-align: center;
-            color: var(--text-muted);
-            padding: 10px;
-        }
-
-        .match-details {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .team-score {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 12px;
-            border-radius: 8px;
-        }
-
-        /* جدول اعتمادگاه ووچینو⁰¹ */
-        .trust-table-wrapper {
-            overflow-x: auto;
-        }
-
-        table.trust-table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: right;
-            font-size: 0.85rem;
-        }
-
-        table.trust-table th {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 10px;
-            color: var(--neon-blue);
-            border-bottom: 1px solid var(--card-border);
-        }
-
-        table.trust-table td {
-            padding: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-        }
-
-        .badge-buy {
-            background: rgba(0, 255, 102, 0.15);
-            color: var(--neon-green);
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-        }
-
-        .badge-sell {
-            background: rgba(255, 0, 102, 0.15);
-            color: #ff0066;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-        }
-
-        .badge-withdraw {
-            background: rgba(0, 240, 255, 0.15);
-            color: var(--neon-blue);
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-        }
-
-        /* آکاردئون آموزشی */
-        .accordion-item {
-            border: 1px solid var(--card-border);
-            border-radius: 8px;
-            margin-bottom: 10px;
-            overflow: hidden;
-        }
-
-        .accordion-header {
-            background: rgba(255, 255, 255, 0.02);
-            padding: 14px;
-            cursor: pointer;
-            font-weight: 600;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .accordion-content {
-            padding: 14px;
-            display: none;
-            background: rgba(0, 0, 0, 0.2);
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-top: 1px solid var(--card-border);
-        }
-
-        /* دکمه شناور پایین صفحه (مخصوص موبایل) */
-        .floating-bot-btn {
-            position: fixed;
-            bottom: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(45deg, #0088cc, var(--neon-green));
-            color: #fff;
-            text-decoration: none;
-            padding: 12px 24px;
-            border-radius: 25px;
-            font-weight: bold;
-            font-size: 0.95rem;
-            box-shadow: 0 0 20px rgba(0, 255, 102, 0.4);
-            z-index: 2000;
             display: flex;
             align-items: center;
             gap: 8px;
-            white-space: nowrap;
+            font-size: 14px;
         }
 
-        footer {
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 255, 204, 0.5);
+        }
+
+        /* بخش اصلی هیرو */
+        .hero-section {
             text-align: center;
-            padding: 1.5rem;
+            padding: 40px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-section h2 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .hero-section p {
             color: var(--text-muted);
-            font-size: 0.8rem;
-            border-top: 1px solid var(--card-border);
-            background: rgba(13, 15, 23, 0.95);
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 50px 20px;
         }
     </style>
 </head>
 <body>
 
+    <!-- اسلایدر تبلیغاتی بالای سایت (هر ۵ ثانیه) -->
+    <div class="top-ticker">
+        <div class="ticker-item active"><i class="fa-solid fa-bolt"></i> خرید آنی یوووچر و هات ووچر در کمتر از ۵ دقیقه با بهترین نرخ بازار</div>
+        <div class="ticker-item"><i class="fa-solid fa-shield-halved"></i> صرافی ووچینو⁰۱؛ معتبرترین مرجع امن تبادل ووچرهای ارزی و دیجیتال</div>
+        <div class="ticker-item"><i class="fa-solid fa-gift"></i> از جشنواره‌ها و بونوس‌های دوره‌ای ویژه کاربران ربات باخبر شوید</div>
+        <div class="ticker-item"><i class="fa-solid fa-coins"></i> کارمزد کاملاً رقابتی و تسویه حساب آنی به صورت ۲۴ ساعته</div>
+    </div>
+
     <!-- هدر سایت -->
     <header>
-        <div class="logo-text">VOCHINO SPORTS</div>
-        <div class="header-actions">
-            <div class="online-badge">
-                <div class="pulse-dot"></div>
-                <span>آنلاین: <strong id="onlineCount">87</strong></span>
+        <div class="logo-container">
+            <div class="logo-icon">
+                <i class="fa-solid fa-shield-cat"></i>
             </div>
-            <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn-telegram-header">
-                <i class="fa-brands fa-telegram"></i> ورود به ربات
-            </a>
+            <div class="logo-text">
+                <h1>ووچینو⁰۱</h1>
+                <span>صرافی امن ووچر و ارزهای دیجیتال</span>
+            </div>
         </div>
+        <a href="https://t.me/YOUR_BOT_USERNAME" target="_blank" class="cta-btn">
+            <i class="fa-brands fa-telegram"></i> ورود به ربات خرید
+        </a>
     </header>
 
-    <!-- اسلایدر متحرک پیام‌ها -->
-    <div class="announcement-slider">
-        <div class="slide-item active" style="color: var(--neon-green);">🟢 کارمزد رقابتی برای خرید انواع ووچر</div>
-        <div class="slide-item" style="color: var(--neon-blue);">🔵 خرید آنی یوووچر و هات ووچر در کمتر از ۵ دقیقه</div>
-        <div class="slide-item" style="color: var(--neon-purple);">🟣 از ووچینو⁰¹ خرید کن و از جشنواره‌ها و بونوس‌های دوره‌ای باخبر شو</div>
-        <div class="slide-item" style="color: #ff9900;">🟠 شارژ سریع حساب در DerbyBet ،TakBet و 1xBet با انواع ووچر</div>
-        <div class="slide-item" style="color: #ff0055;">🔴 پشتیبانی سریع و پاسخگویی در ساعات کاری</div>
+    <!-- بخش معرفی کوتاه -->
+    <div class="hero-section">
+        <h2>پلتفرم امن خرید و فروش انواع ووچر</h2>
+        <p>بدون معطلی، با بالاترین سرعت و بهترین نرخ، تراکنش‌های خود را در بستری کاملاً امن و مکانیزه انجام دهید. پشتبانی کامل از انواع ووچرهای معتبر جهانی.</p>
     </div>
 
-    <div class="container">
-
-        <!-- بنر اصلی ورود به ربات تلگرام -->
-        <div class="hero-banner">
-            <h1>صرافی خودکار و هوشمند ووچینو⁰¹</h1>
-            <p>خرید و فروش آنی انواع ووچر (UVoucher, HotVoucher) با بهترین نرخ و تسویه سریع</p>
-            <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn-main-bot">
-                <i class="fa-brands fa-telegram fa-lg"></i> شروع معامله در ربات تلگرام
-            </a>
-        </div>
-
-        <!-- بخش مسابقات و پخش زنده ورزشی -->
-        <div class="glass-card">
-            <h2 class="section-title"><i class="fa-solid fa-tv"></i> مرکز مسابقات و پخش زنده</h2>
-            <div class="match-container">
-                <div class="stream-box">
-                    <div class="stream-placeholder">
-                        <i class="fa-solid fa-play-circle fa-3x" style="color: var(--neon-blue); margin-bottom: 10px;"></i>
-                        <p>در حال حاضر پخش زنده مستقیمی فعال نیست.</p>
-                        <small>سیگنال مسابقات حساس لیگ‌های معتبر در این بخش قرار می‌گیرد.</small>
-                    </div>
-                </div>
-                <div class="match-details">
-                    <h3 style="font-size: 1.05rem; margin-bottom: 10px; color: var(--neon-blue);">دیدار برجسته امروز</h3>
-                    <div class="team-score">
-                        <span>بایرن مونیخ</span>
-                        <span style="color: var(--neon-green); font-weight: bold;">زنده</span>
-                        <span>دورتموند</span>
-                    </div>
-                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 10px;">
-                        <p><i class="fa-regular fa-clock"></i> زمان: ۲۲:۰۰</p>
-                        <p><i class="fa-solid fa-chart-pie"></i> احتمال برد: بایرن ۵۴٪ | مساوی ۲۲٪ | دورتموند ۲۴٪</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- بخش اعتمادگاه ووچینو⁰¹ -->
-        <div class="glass-card">
-            <h2 class="section-title"><i class="fa-solid fa-shield-halved"></i> اعتمادگاه ووچینو⁰¹ (آخرین تراکنش‌ها)</h2>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;">
-                گزارش زنده و واقعی از آخرین جابه‌جایی‌های تاییدشده در بستر ووچینو⁰¹
-            </p>
-            <div class="trust-table-wrapper">
-                <table class="trust-table">
-                    <thead>
-                        <tr>
-                            <th>زمان</th>
-                            <th>نوع تراکنش</th>
-                            <th>محصول / سرویس</th>
-                            <th>مبلغ (تومان)</th>
-                            <th>وضعیت</th>
-                        </tr>
-                    </thead>
-                    <tbody id="trustTableBody">
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- بخش راهنما و آموزش‌ها -->
-        <div class="glass-card">
-            <h2 class="section-title"><i class="fa-solid fa-graduation-cap"></i> مرکز آموزش و راهنمایی</h2>
-            
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <span>آموزش کامل خرید و ثبت U Voucher و Hot Voucher</span>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
-                <div class="accordion-content">
-                    یوووچر (UVoucher) و هات ووچر (Hot Voucher) ابزارهای شارژ فوری و امن هستند. کد خریدار شده را مستقیماً در کادر مربوطه در سایت مقصد یا ربات وارد کرده تا حساب شما بدون کارمزد اضافی شارژ شود.
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <span>راهنمای استفاده از Premium Voucher و PS Voucher</span>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
-                <div class="accordion-content">
-                    پریمیوم ووچر و پی‌اس ووچر گزینه‌های عالی برای پرداخت‌های بین‌المللی با ضریب امنیت بالا هستند. تسویه این ووچرها پس از تایید اعتبار کد، در کوتاه‌ترین زمان ممکن انجام می‌گیرد.
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <span>آموزش شارژ سایت‌های شرط‌بندی (1xBet, TakBet, DerbyBet)</span>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
-                <div class="accordion-content">
-                    برای شارژ حساب در سایت‌های طرف قرارداد، وارد بخش واریز سایت مقصد شده، گزینه ووچر را انتخاب کرده و کد دریافتی از ووچینو⁰¹ را وارد کنید. شارژ به‌صورت آنی اعمال خواهد شد.
-                </div>
-            </div>
-        </div>
-
-        <!-- بخش قوانین و امنیت -->
-        <div class="glass-card">
-            <h2 class="section-title"><i class="fa-solid fa-lock"></i> قوانین و هشدارهای امنیتی</h2>
-            <ul style="padding-right: 20px; color: var(--text-muted); font-size: 0.9rem;">
-                <li style="margin-bottom: 8px;">فقط از کارت بانکی متعلق به خودتان واریز انجام دهید.</li>
-                <li style="margin-bottom: 8px;">استفاده از کارت اشخاص دیگر به دلیل مسائل امنیتی باعث تأخیر در تسویه خواهد شد.</li>
-                <li style="margin-bottom: 8px;">احراز هویت پایه شامل نام، نام خانوادگی، شماره تلفن و شماره کارت است.</li>
-                <li style="margin-bottom: 8px;">احراز هویت طلایی جهت افزایش سقف خرید روزانه الزامی است.</li>
-                <li style="margin-bottom: 8px;">هرگونه تلاش برای فیشینگ یا استفاده از کارت‌های اجاره‌ای بلافاصله به مراجع ذی‌ربط گزارش می‌شود.</li>
-            </ul>
-        </div>
-
+    <div class="container" id="main-content-placeholder">
+        <!-- بخش‌های مسابقات و اعتمادگاه در بخش‌های بعدی تزریق می‌شوند -->
     </div>
 
-    <!-- دکمه شناور پایین صفحه در موبایل -->
-    <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="floating-bot-btn">
-        <i class="fa-brands fa-telegram fa-lg"></i> ورود سریع به ربات ووچینو⁰¹
-    </a>
-
-    <footer>
-        <p>تمامی حقوق برای بستر هوشمند Vochino Sports و ووچینو⁰¹ محفوظ است.</p>
-    </footer>
-
-    <!-- منطق جاوااسکریپت -->
     <script>
-        // اسلایدر متحرک
-        const slides = document.querySelectorAll('.slide-item');
-        let currentSlide = 0;
+        // اسکریپت اسلایدر ۵ ثانیه‌ای بالای صفحه
+        let currentTicker = 0;
+        const tickers = document.querySelectorAll('.ticker-item');
+        
         setInterval(() => {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].classList.add('active');
+            tickers[currentTicker].classList.remove('active');
+            currentTicker = (currentTicker + 1) % tickers.length;
+            tickers[currentTicker].classList.add('active');
         }, 5000);
-
-        // شمارنده کاربران آنلاین
-        setInterval(() => {
-            const count = Math.floor(Math.random() * (120 - 60 + 1)) + 60;
-            document.getElementById('onlineCount').innerText = count;
-        }, 8000);
-
-        // اعتمادگاه ووچینو⁰¹
-        const sampleData = [
-            { type: 'buy', label: 'خرید', item: 'U Voucher', amount: '۱۲۰,۰۰۰' },
-            { type: 'sell', label: 'فروش', item: 'Hot Voucher', amount: '۴۵۰,۰۰۰' },
-            { type: 'withdraw', label: 'تسویه', item: 'برداشت ریالی', amount: '۷۸۰,۰۰۰' },
-            { type: 'buy', label: 'خرید', item: 'Hot Voucher', amount: '۲۲۵,۰۰۰' },
-            { type: 'sell', label: 'فروش', item: 'PS Voucher', amount: '۱,۱۵۰,۰۰۰' },
-            { type: 'buy', label: 'خرید', item: 'U Voucher', amount: '۹۵,۰۰۰' },
-            { type: 'sell', label: 'فروش', item: 'Premium Voucher', amount: '۶۸۰,۰۰۰' }
-        ];
-
-        function generateTime() {
-            const now = new Date();
-            return now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
-        }
-
-        function renderTable() {
-            const tbody = document.getElementById('trustTableBody');
-            tbody.innerHTML = '';
-            
-            for (let i = 0; i < 5; i++) {
-                const item = sampleData[Math.floor(Math.random() * sampleData.length)];
-                let badgeClass = 'badge-buy';
-                if(item.type === 'sell') badgeClass = 'badge-sell';
-                if(item.type === 'withdraw') badgeClass = 'badge-withdraw';
-
-                const row = `
-                    <tr>
-                        <td>${generateTime()}</td>
-                        <td><span class="${badgeClass}">${item.label}</span></td>
-                        <td>${item.item}</td>
-                        <td>${item.amount}</td>
-                        <td style="color: var(--neon-green);"><i class="fa-solid fa-check-circle"></i> موفق</td>
-                    </tr>
-                `;
-                tbody.innerHTML += row;
-            }
-        }
-
-        renderTable();
-        setInterval(renderTable, 180000);
-
-        // اکاردئون
-        function toggleAccordion(header) {
-            const content = header.nextElementSibling;
-            const isVisible = content.style.display === 'block';
-            
-            document.querySelectorAll('.accordion-content').forEach(el => el.style.display = 'none');
-            
-            if (!isVisible) {
-                content.style.display = 'block';
-            }
-        }
     </script>
 </body>
 </html>
