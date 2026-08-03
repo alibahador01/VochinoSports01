@@ -350,7 +350,7 @@
         });
 
         // ==========================================
-        //  موتور هوشمند تراکنش های زنده اعتمادگاه
+        //  موتور هوشمند و کاملاً طبیعی تراکنش‌های زنده
         // ==========================================
         const bigNamesBank = [
             "علی", "محمد", "مهدی", "رضا", "حسین", "امیر", "سجاد", "نیما", "سامان", "احسان", "عادل", "داود", "ماهان", "متین", 
@@ -360,11 +360,11 @@
             "سعید", "مهسا", "غزل", "نیلوفر", "رادمهر", "آریا", "صبا", "الهام", "ساناز", "پیمان", "رامین", "سهراب", "طناز", 
             "شیرین", "کیارش", "مازیار", "مهران", "پوریا", "حامد", "نسترن", "سمیرا", "فرید", "بهنام", "نسیم", "میترا", "شادی",
             "ابوالفضل", "محمدمهدی", "دانیال", "آبتین", "کسری", "شروین", "مانی", "کیومرث", "اشکان", "مهراد", "فرزاد", "سیامک",
-            "امیرعلی", "امیررضا", "ایلیا", "سام", "کيان", "سورنا", "بردیا", "کارن", "آدرین", "هیربد", "شاهین", "داریوش",
+            "امیرعلی", "امیررضا", "ایلیا", "سام", "کیان", "سورنا", "بردیا", "کارن", "آدرین", "هیربد", "شاهین", "داریوش",
             "عاطفه", "حدیث", "سوگند", "ستایش", "ریحانه", "یکتا", "مهرنوش", "مژده", "درسا", "آتوسا", "بیتا", "پردیس", "دنیا",
-            "یلدا", "طلا", "رکسانا", "آنا", "جانان", "مونا", "لادن", "مرجان", "رزا", "مهناز", "شیوا", "پریناز", "آیدين",
-            "صادق", "میثم", "مصطفی", "مرتضی", "مصطفی", "مسعود", "یونس", "بهزاد", "شهرام", "شهروز", "سروش", "ارسلان", "پیمان",
-            "یاسمن", "مهدیس", "اسما", "کیانا", "حنانه", "کوثر", "محیا", "حلما", "رقیة", "هانیه", "فاطمه‌زهرا", "ثنا", "ستاره"
+            "یلدا", "طلا", "رکسانا", "آنا", "جانان", "مونا", "لادن", "مرجان", "رزا", "مهناز", "شیوا", "پریناز", "آیدین",
+            "صادق", "میثم", "مصطفی", "مرتضی", "مسعود", "یونس", "بهزاد", "شهرام", "شهروز", "سروش", "ارسلان", "یاسمن",
+            "مهدیس", "اسما", "کیانا", "حنانه", "کوثر", "محیا", "حلما", "رقیه", "هانیه", "فاطمه‌زهرا", "ثنا", "ستاره"
         ];
         
         const prefixes = ["91", "93", "90", "99", "35", "45", "14", "89", "84", "02", "12", "37", "19", "18", "15", "36", "38"];
@@ -382,9 +382,27 @@
             return chosen;
         }
 
-        function getSmartRandomAmount(min, max) {
-            let num = Math.floor(Math.random() * (max - min + 1)) + min;
-            return Math.floor(num / 10000) * 10000;
+        // تابع تولید مبالغ بسیار طبیعی و خرد (با رقم‌های ۱۰ هزار تومانی طبیعی)
+        function getRealisticAmount(typeCategory) {
+            if (typeCategory === 'hot') {
+                // هات ووچر دقیقاً بین ۵۰ هزار تا ۳۰۰ هزار تومان
+                let lowEnd = [50000, 70000, 120000, 150000, 180000, 220000, 250000, 270000, 300000];
+                return lowEnd[Math.floor(Math.random() * lowEnd.length)];
+            }
+
+            // برای یوووچر و بقیه (۸۵٪ مبالغ خرد زیر ۵۰۰ تومان، ۱۵٪ مبالغ بالاتر)
+            let isSmall = Math.random() < 0.85; 
+            if (isSmall) {
+                let realisticSmallAmounts = [
+                    200000, 230000, 270000, 310000, 340000, 370000, 420000, 460000, 490000, 520000
+                ];
+                return realisticSmallAmounts[Math.floor(Math.random() * realisticSmallAmounts.length)];
+            } else {
+                let realisticHigherAmounts = [
+                    680000, 850000, 1240000, 1600000, 1850000
+                ];
+                return realisticHigherAmounts[Math.floor(Math.random() * realisticHigherAmounts.length)];
+            }
         }
 
         function generateTransaction() {
@@ -393,22 +411,22 @@
 
             if (rand < 40) {
                 type = 'خرید<br>یوووچر'; category = 'buy'; statusText = 'تکمیل';
-                amount = getSmartRandomAmount(200000, 2000000);
+                amount = getRealisticAmount('general');
             } else if (rand < 60) {
                 type = 'خرید<br>هات ووچر'; category = 'buy'; statusText = 'تکمیل';
-                amount = getSmartRandomAmount(50000, 500000);
+                amount = getRealisticAmount('hot');
             } else if (rand < 75) {
                 type = 'فروش<br>یوووچر'; category = 'sell'; statusText = 'تسویه شد';
-                amount = getSmartRandomAmount(200000, 3500000);
+                amount = getRealisticAmount('general');
             } else if (rand < 85) {
                 type = 'فروش<br>پرمیوم ووچر'; category = 'sell'; statusText = 'تسویه شد';
-                amount = getSmartRandomAmount(200000, 2800000);
+                amount = getRealisticAmount('general');
             } else if (rand < 95) {
                 type = 'فروش<br>پی اس ووچر'; category = 'sell'; statusText = 'تسویه شد';
-                amount = getSmartRandomAmount(200000, 2500000);
+                amount = getRealisticAmount('general');
             } else {
                 type = 'برداشت از<br>کیف پول'; category = 'withdraw'; statusText = 'واریز شد';
-                amount = getSmartRandomAmount(100000, 1000000);
+                amount = getRealisticAmount('general');
             }
 
             let name = getUniqueName();
@@ -427,7 +445,8 @@
             let now = Date.now();
             for (let i = 0; i < 5; i++) {
                 let tx = generateTransaction();
-                let pastRandomMs = Math.floor(Math.random() * (7200000 - 180000 + 1)) + 180000; 
+                // زمان‌های گذشته کاملاً نامنظم بین ۴ دقیقه تا ۲.۵ ساعت
+                let pastRandomMs = Math.floor(Math.random() * (9000000 - 240000 + 1)) + 240000; 
                 tx.timestamp = now - pastRandomMs; 
                 liveTransactions.push(tx);
             }
@@ -482,8 +501,8 @@
         }, 60000);
 
         function scheduleNextTransactionCycle() {
-            // زمان‌بندی طبیعی و نامنظم (بین 3 دقیقه تا 38 دقیقه)
-            let randomDelayMs = Math.floor(Math.random() * (2280000 - 180000 + 1)) + 180000; 
+            // چرخش زمانی بی‌نظم بین ۵ دقیقه تا ۴۵ دقیقه
+            let randomDelayMs = Math.floor(Math.random() * (2700000 - 300000 + 1)) + 300000; 
             
             setTimeout(() => {
                 let newTx = generateTransaction();
