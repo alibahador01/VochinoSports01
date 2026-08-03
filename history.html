@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تراکنش های اخیر ووچینو</title>
+    <style>
+        @import url('https://v1.fontapi.ir/css/Vazir');
+        body {
+            background-color: #111827; 
+            color: #ffffff;
+            font-family: 'Vazir', sans-serif;
+            margin: 0;
+            padding: 10px;
+        }
+        .transaction-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+            font-size: 14px;
+        }
+        .transaction-table th {
+            color: #06b6d4; 
+            padding: 15px 5px;
+            border-bottom: 1px solid #1f2937;
+            font-weight: normal;
+        }
+        .transaction-table td {
+            padding: 15px 5px;
+            border-bottom: 1px solid #1f2937;
+            vertical-align: middle;
+        }
+        .badge {
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            display: inline-block;
+            min-width: 70px;
+            line-height: 1.5;
+        }
+        .badge-buy { background-color: #064e3b; color: #34d399; }
+        .badge-sell { background-color: #451a03; color: #fbbf24; }
+        .badge-withdraw { background-color: #1e3a8a; color: #60a5fa; }
+        
+        .status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        .status-icon {
+            background-color: #10b981;
+            color: #fff;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .user-phone {
+            font-size: 12px;
+            color: #9ca3af;
+        }
+        .time-text {
+            color: #d1d5db;
+            font-size: 13px;
+        }
+        
+        /* انیمیشن برای اضافه شدن بدون اینکه تابلو باشه */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .new-row {
+            animation: fadeIn 2s ease-out;
+        }
+    </style>
+</head>
+<body>
+
+    <table class="transaction-table">
+        <thead>
+            <tr>
+                <th>نوع تراکنش</th>
+                <th>مبلغ (تومان)</th>
+                <th>کاربر</th>
+                <th>وضعیت</th>
+                <th>زمان</th>
+            </tr>
+        </thead>
+        <tbody id="tx-body">
+            <!-- تراکنش ها اینجا لود میشن -->
+        </tbody>
+    </table>
+
+    <script>
+        // بانک اسامی که تکراری به نظر نیاد
+        const names = [
+            "علی", "محمد", "مهدی", "رضا", "حسین", "امیر", "سجاد", "نیما", "سامان", "احسان", 
+            "عادل", "داود", "ماهان", "متین", "زهرا", "فاطمه", "مریم", "سارا", "نیکا", "آیدا", 
+            "شایان", "پویا", "سینا", "امید", "عرفان", "شیما", "نگین", "علیرضا", "کامران", "یاسین",
+            "پریا", "میلاد", "کیوان", "رویا", "الناز", "آرش", "شهاب", "مبینا", "پارسا", "هستی"
+        ];
+        const prefixes = ["91", "93", "90", "99", "35", "45", "14", "89", "84", "02", "12", "37"];
+
+        function getRandomInt(min, max) {
+            let num = Math.floor(Math.random() * (max - min + 1)) + min;
+            return Math.floor(num / 10000) * 10000; // رند شده برای واقعی بودن
+        }
+
+        function generateTransactionData() {
+            let rand = Math.random() * 100;
+            let type, category, statusText, amount;
+
+            if (rand < 40) {
+                // خرید یوووچر 40% 
+                type = 'خرید<br>یوووچر'; category = 'buy'; statusText = 'تکمیل';
+                amount = getRandomInt(200000, 2000000);
+            } else if (rand < 60) {
+                // خرید هات ووچر 20%
+                type = 'خرید<br>هات ووچر'; category = 'buy'; statusText = 'تکمیل';
+                amount = getRandomInt(50000, 500000);
+            } else if (rand < 75) {
+                // فروش یوووچر 15%
+                type = 'فروش<br>یوووچر'; category = 'sell'; statusText = 'تسویه شد';
+                amount = getRandomInt(200000, 3500000);
+            } else if (rand < 85) {
+                // فروش پرمیوم ووچر 10%
+                type = 'فروش<br>پرمیوم ووچر'; category = 'sell'; statusText = 'تسویه شد';
+                amount = getRandomInt(200000, 2800000);
+            } else if (rand < 95) {
+                // فروش پی اس ووچر 10%
+                type = 'فروش<br>پی اس ووچر'; category = 'sell'; statusText = 'تسویه شد';
+                amount = getRandomInt(200000, 2500000);
+            } else {
+                // برداشت 5%
+                type = 'برداشت از<br>کیف پول'; category = 'withdraw'; statusText = 'واریز شد';
+                amount = getRandomInt(100000, 1000000);
+            }
+
+            let name = names[Math.floor(Math.random() * names.length)];
+            let phone = prefixes[Math.floor(Math.random() * prefixes.length)] + "***";
+
+            return {
+                type: type,
+                category: category,
+                statusText: statusText,
+                amount: amount.toLocaleString(),
+                name: name,
+                phone: phone,
+                timestamp: Date.now()
+            };
+        }
+
+        let transactions = [];
+
+        // ایجاد 5 تراکنش اولیه با زمان های بهم ریخته
+        function initInitialTransactions() {
+            let now = Date.now();
+            for (let i = 0; i < 5; i++) {
+                let tx = generateTransactionData();
+                let randomPastTime = Math.floor(Math.random() * (7200000 - 120000 + 1)) + 120000; 
+                tx.timestamp = now - randomPastTime; 
+                transactions.push(tx);
+            }
+            transactions.sort((a, b) => b.timestamp - a.timestamp);
+            renderTable();
+        }
+
+        function timeAgo(timestamp) {
+            let minutes = Math.floor((Date.now() - timestamp) / 60000);
+            if (minutes < 1) return "همین الان";
+            if (minutes < 60) return minutes + " دقیقه پیش";
+            let hours = Math.floor(minutes / 60);
+            let remainMinutes = minutes % 60;
+            if(remainMinutes > 0) return hours + " ساعت و " + remainMinutes + " دقیقه پیش";
+            return hours + " ساعت پیش";
+        }
+
+        function renderTable(isNew = false) {
+            const tbody = document.getElementById('tx-body');
+            tbody.innerHTML = '';
+            
+            transactions.forEach((tx, index) => {
+                let tr = document.createElement('tr');
+                if(isNew && index === 0) tr.classList.add('new-row');
+                
+                tr.innerHTML = `
+                    <td><div class="badge badge-${tx.category}">${tx.type}</div></td>
+                    <td>${tx.amount}</td>
+                    <td>
+                        <div class="user-info">
+                            <span>${tx.name}</span>
+                            <span class="user-phone">${tx.phone}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="status">
+                            <span class="status-icon">✓</span>
+                            <span>${tx.statusText}</span>
+                        </div>
+                    </td>
+                    <td class="time-text" data-timestamp="${tx.timestamp}">${timeAgo(tx.timestamp)}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        setInterval(() => {
+            document.querySelectorAll('.time-text').forEach(el => {
+                let ts = el.getAttribute('data-timestamp');
+                el.innerText = timeAgo(parseInt(ts));
+            });
+        }, 60000);
+
+        function scheduleNextTransaction() {
+            // آپدیت نامنظم بین 2 تا 35 دقیقه
+            let randomDelay = Math.floor(Math.random() * (2100000 - 120000 + 1)) + 120000; 
+            
+            setTimeout(() => {
+                let newTx = generateTransactionData();
+                transactions.unshift(newTx);
+                if(transactions.length > 5) {
+                    transactions.pop();
+                }
+                renderTable(true);
+                scheduleNextTransaction(); 
+            }, randomDelay);
+        }
+
+        initInitialTransactions();
+        scheduleNextTransaction();
+
+    </script>
+</body>
+</html>
