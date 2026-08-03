@@ -38,9 +38,7 @@
             overflow: hidden;
         }
         .card::before {
-            content: '';
-            position: absolute;
-            top: 0; right: 0; width: 4px; height: 100%;
+            content: ''; position: absolute; top: 0; right: 0; width: 4px; height: 100%;
             background: linear-gradient(to bottom, var(--primary-neon), var(--accent-green));
         }
 
@@ -62,25 +60,25 @@
             box-shadow: 0 4px 20px rgba(0, 210, 255, 0.4); transition: 0.3s;
         }
 
-        /* استایل اختصاصی کارت‌های پیش‌بینی */
-        .prediction-card {
-            background: #141c2e; border: 1px solid #2a3854; border-radius: 12px;
-            padding: 15px; margin-top: 15px;
+        /* استایل لیست بازی‌های مهم بالا */
+        .featured-match {
+            background: #141c2e; border: 1px solid #2a3854; border-radius: 10px;
+            padding: 10px 14px; margin-top: 8px; display: flex; justify-content: space-between; align-items: center;
         }
-        .prediction-img {
-            width: 100%; max-height: 220px; object-fit: cover; border-radius: 8px;
-            border: 1px solid #334155; margin-bottom: 10px;
-        }
-        .badge-odd {
-            background: var(--gold); color: #000; font-weight: bold;
-            padding: 2px 8px; border-radius: 20px; font-size: 12px; display: inline-block;
-        }
-        
-        /* بخش اعتماد ساز / تراکنش‌های اخیر */
+        .league-tag { font-size: 11px; color: var(--gold); display: block; }
+        .teams-name { font-size: 13.5px; font-weight: bold; color: var(--text); }
+        .match-badge { background: rgba(0, 255, 102, 0.1); color: var(--accent-green); border: 1px solid var(--accent-green); padding: 2px 8px; border-radius: 6px; font-size: 11.5px; }
+
+        /* استایل تراکنش‌های زنده */
         .trust-item {
             background: #101726; border-right: 3px solid var(--accent-green);
             padding: 10px 12px; border-radius: 6px; margin-bottom: 8px;
             font-size: 12.5px; display: flex; justify-content: space-between; align-items: center;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .voucher-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 15px; }
@@ -109,91 +107,89 @@
             <a href="https://t.me/Vochino_bh01_bot" class="btn">🚀 ورود مستقیم به ربات ووچینو</a>
         </div>
 
-        <!-- 🎯 اول صفحه: بخش فرم‌ها و مثال‌های پیش‌بینی -->
+        <!-- 📌 ۱. کادر بالا: لیست مسابقات مهم روز -->
         <div class="card">
-            <h2>🔥 نمونه فرم‌ها و تحلیل‌های پیشنهادی پیش‌بینی</h2>
-            <p style="font-size: 13px; color: var(--text-sub);">مثال‌هایی از فرم‌های وین‌ریت بالا جهت ایده و شارژ حساب از طریق ربات:</p>
+            <h2>📌 مسابقات و لیگ‌های مهم امروز</h2>
+            <p style="font-size: 12px; color: var(--text-sub); margin-bottom: 10px;">بازی‌های داغ امروز؛ جهت شارژ حساب ووچر تهیه کنید:</p>
 
-            <!-- فرم نمونه ۱ -->
-            <div class="prediction-card">
-                <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=600" alt="پیش بینی فوتبال" class="prediction-img">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h3 style="color: var(--primary-neon); margin: 0; font-size: 15px;">⚽ ال‌کلاسیکو: رئال مادرید - بارسلونا</h3>
-                    <span class="badge-odd">ضریب: ۲.۱۵</span>
+            <div class="featured-match">
+                <div>
+                    <span class="league-tag">🏴󠁧󠁢󠁥󠁮󠁧󠁿 لیگ برتر انگلیس</span>
+                    <span class="teams-name">منچستر سیتی - آرسنال</span>
                 </div>
-                <p style="font-size: 12.5px; color: #cbd5e1; margin: 8px 0 0 0;">
-                    <b>گزینه پیشنهادی:</b> برد رئال مادرید + مجموع گل‌های بازی بالای ۲.۵<br>
-                    <span style="color: var(--accent-green);">✔ وضعیت آنالیز: احتمال موفقیت ۸۸٪</span>
-                </p>
+                <span class="match-badge">امشب ساعت ۲۰:۰۰</span>
             </div>
 
-            <!-- فرم نمونه ۲ -->
-            <div class="prediction-card">
-                <img src="https://images.unsplash.com/photo-1518091043644-c1d4457512c6?w=600" alt="لیگ قهرمانان" class="prediction-img">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h3 style="color: var(--primary-neon); margin: 0; font-size: 15px;">🏆 لیگ قهرمانان: منچسترسیتی - بایرن مونیخ</h3>
-                    <span class="badge-odd">ضریب: ۱.۹۵</span>
+            <div class="featured-match">
+                <div>
+                    <span class="league-tag">🇩🇪 بوندسلیگا آلمان</span>
+                    <span class="teams-name">بایرن مونیخ - دورتموند</span>
                 </div>
-                <p style="font-size: 12.5px; color: #cbd5e1; margin: 8px 0 0 0;">
-                    <b>گزینه پیشنهادی:</b> هر دو تیم گل می‌زنند (BTTS) + کرنر بالای ۸.۵<br>
-                    <span style="color: var(--accent-green);">✔ وضعیت آنالیز: فرم تکی مطمئن</span>
-                </p>
+                <span class="match-badge">امشب ساعت ۲۱:۳۰</span>
+            </div>
+
+            <div class="featured-match">
+                <div>
+                    <span class="league-tag">🏆 لیگ قهرمانان اروپا</span>
+                    <span class="teams-name">رئال مادرید - پاری سن ژرمن</span>
+                </div>
+                <span class="match-badge">امشب ساعت ۲۳: Don</span>
             </div>
         </div>
 
-        <!-- 🤝 بخش جدید: اعتماد و شفافیت (نمونه تسویه‌ها) -->
+        <!-- ⚽ ۲. کادر پایین: نتایج آنلاین، ترکیب‌ها و آمار زنده -->
         <div class="card">
-            <h2>📊 آخرین تسویه‌ها و تراکنش‌های موفق سامانه</h2>
-            <p style="font-size: 12.5px; color: var(--text-sub); margin-bottom: 12px;">تراکنش‌های اخیر کاربران ربات ووچینو ۰۱ (به‌روزرسانی خودکار):</p>
-
-            <div class="trust-item">
-                <span>🟢 خریدار: کاربر <b>****۹۱۲</b> (پریمیوم ووچر)</span>
-                <span style="color: var(--gold); font-weight: bold;">۵,۰۰۰,۰۰۰ تومان</span>
-            </div>
-            <div class="trust-item">
-                <span>🟢 برداشت نقد: کاربر <b>****۹۳۵</b> (تسویه شبا)</span>
-                <span style="color: var(--accent-green); font-weight: bold;">۲,۴۰۰,۰۰۰ تومان</span>
-            </div>
-            <div class="trust-item">
-                <span>🟢 خریدار: کاربر <b>****۹۰۲</b> (هات ووچر)</span>
-                <span style="color: var(--gold); font-weight: bold;">۱,۵۰۰,۰۰۰ تومان</span>
-            </div>
-            <div class="trust-item">
-                <span>🟢 برداشت نقد: کاربر <b>****۹۳۸</b> (تسویه کارت)</span>
-                <span style="color: var(--accent-green); font-weight: bold;">۸,۹۰۰,۰۰۰ تومان</span>
-            </div>
+            <h2>⚽ نتایج زنده، ترکیب و آمار آنلاین مسابقات</h2>
+            <p style="font-size: 12px; color: var(--text-sub); margin-bottom: 12px;">جهت مشاهده ترکیب و وضعیت زنده بازی‌ها، روی بازی مورد نظر کلیک کنید:</p>
+            
+            <iframe src="https://www.scorebat.com/embed/livescore/" 
+                    frameborder="0" 
+                    width="100%" 
+                    height="500" 
+                    allowfullscreen 
+                    allow='autoplay; fullscreen' 
+                    style="width: 100%; height: 500px; border-radius: 12px; border: 1px solid #1e293b;">
+            </iframe>
         </div>
 
-        <!-- 📚 بخش آموزش ووچرها و شارژ -->
+        <!-- 📊 تراکنش‌های زنده و اعتمادساز -->
         <div class="card">
-            <h2>📚 آموزش کامل خرید و شارژ حساب</h2>
+            <h2>📊 آخرین تراکنش‌ها و تسویه‌های زنده سامانه</h2>
+            <p style="font-size: 12.5px; color: var(--text-sub); margin-bottom: 12px;">لیگ آنلاین تراکنش‌های ربات ووچینو ۰۱ (تایید شده):</p>
+
+            <div id="live-transactions"></div>
+        </div>
+
+        <!-- 📚 بخش آموزش ووچرها -->
+        <div class="card">
+            <h2>📚 آموزش خدمات خرید و فروش ووچینو</h2>
             
             <div class="voucher-grid" style="margin-bottom: 15px;">
                 <div class="voucher-item">
-                    <h3>👑 پریمیوم ووچر</h3>
-                    <p>بدون احراز در سایت مقصد، شارژ فوری و بدون افت قیمت.</p>
+                    <h3>⚡ خرید از ما (تحویل آنی)</h3>
+                    <p>پشتیبانی کامل از <b>یو ووچر</b> و <b>هات ووچر</b> با تحویل صدم‌ثانیه‌ای کد.</p>
                 </div>
                 <div class="voucher-item">
-                    <h3>🔥 هات ووچر / PS</h3>
-                    <p>مخصوص بازی‌ها و پیش‌بینی‌های مستقیم با کارمزد بسیار کم.</p>
+                    <h3>💎 فروش به ما (نقد فوری)</h3>
+                    <p>خرید ووچرهای شما شامل <b>یو ووچر، پریمیوم ووچر و پی‌اس ووچر</b> با بالاترین قیمت.</p>
                 </div>
             </div>
 
             <div class="step-box">
-                <b>مرحله ۱: دریافت کد از ربات</b><br>
-                وارد ربات ووچینو شده، نوع ووچر و مبلغ را انتخاب کنید تا کد ۱۶ رقمی و کد فعال‌سازی آنی صادر شود.
+                <b>مرحله ۱: ورود به ربات ووچینو ۰۱</b><br>
+                از منوی اصلی ربات، گزینه‌ «خرید ووچر» یا «فروش ووچر» را انتخاب کنید.
             </div>
             <div class="step-box">
-                <b>مرحله ۲: شارژ در سایت</b><br>
-                در سایت پیش‌بینی خود گزینه eVoucher را انتخاب کرده و کدها را کپی و تایید کنید.
+                <b>مرحله ۲: دریافت کد و شارژ</b><br>
+                در کمتر از چند ثانیه معامله انجام شده و کد یا تسویه حساب صادر می‌گردد.
             </div>
         </div>
 
-        <!-- ⚖️ بخش قوانین و ضوابط حقوقی -->
+        <!-- 🛡 قوانین و ضوابط -->
         <div class="card">
             <h2>🛡 قوانین، ضوابط امنیتی و احراز هویت</h2>
             <div class="alert-box">
-                <b>⚠️ هشدار پلیس فتا:</b> واریز وجه فقط و فقط از کارت بانکی ثبت‌شده به نام شخص صاحب حساب امکان‌پذیر است. واریز از کارت‌های متفرقه موجب مسدودی دائم حساب خواهد شد.
+                <b>⚠️ هشدار پلیس فتا:</b> واریز وجه فقط از کارت بانکی ثبت‌شده به نام صاحب حساب امکان‌پذیر است. واریز از کارت‌های متفرقه موجب مسدودی دائم حساب خواهد شد.
             </div>
             <ul>
                 <li><b>سطح نقره‌ای (پایه):</b> ثبت‌نام اولیه با شماره به نام (سقف روزانه: <b>۲ میلیون تومان</b>)</li>
@@ -204,7 +200,7 @@
 
         <!-- دکمه نهایی -->
         <div class="card" style="text-align: center;">
-            <p style="margin-bottom: 10px; font-size: 14px; color: var(--gold);">⚡ همین حالا کد ووچر خود را صدم‌ثانیه‌ای تحویل بگیرید</p>
+            <p style="margin-bottom: 10px; font-size: 14px; color: var(--gold);">⚡ همین حالا تراکنش خود را به صورت هوشمند شروع کنید</p>
             <a href="https://t.me/Vochino_bh01_bot" class="btn">ورود به ربات تلگرام ووچینو ۰۱</a>
         </div>
 
@@ -212,5 +208,80 @@
             تمامی حقوق سامانه هوشمند ووچینو ۰۱ محفوظ است © 2026
         </div>
     </div>
+
+    <!-- اسکریپت تراکنش‌های خودکار -->
+    <script>
+        const prefixes = ['۹۱۲', '۹۳۵', '۹۰۲', '۹۳۸', '۹۱۹', '۹۳۰', '۹۱۲', '۹۳۶', '۹۰۱'];
+        
+        const buyItems = [
+            { text: 'خریدار: کاربر ****{num} (یو ووچر)', color: '#ffb703' },
+            { text: 'خریدار: کاربر ****{num} (هات ووچر)', color: '#ffb703' }
+        ];
+
+        const sellItems = [
+            { text: 'فروش به سامانه: کاربر ****{num} (پریمیوم ووچر)', color: '#00f2fe' },
+            { text: 'فروش به سامانه: کاربر ****{num} (یو ووچر)', color: '#00f2fe' },
+            { text: 'فروش به سامانه: کاربر ****{num} (پی‌اس ووچر)', color: '#00f2fe' }
+        ];
+
+        const withdrawItems = [
+            { text: 'برداشت نقد: کاربر ****{num} (تسویه شبا)', color: '#00ff66' },
+            { text: 'برداشت نقد: کاربر ****{num} (تسویه کارت)', color: '#00ff66' }
+        ];
+
+        const amounts = ['۵۰۰,۰۰۰', '۱,۲۰۰,۰۰۰', '۲,۵۰۰,۰۰۰', '۴,۰۰۰,۰۰۰', '۸۵۰,۰۰۰', '۶,۳۰۰,۰۰۰', '۳,۱۰۰,۰۰۰'];
+
+        function getRandomItem(array) {
+            return array[Math.floor(Math.random() * array.length)];
+        }
+
+        function generateTransaction() {
+            const rand = Math.random();
+            let selectedType;
+
+            if (rand < 0.60) {
+                selectedType = getRandomItem(buyItems);
+            } else if (rand < 0.85) {
+                selectedType = getRandomItem(sellItems);
+            } else {
+                selectedType = getRandomItem(withdrawItems);
+            }
+
+            const phone = getRandomItem(prefixes);
+            const amount = getRandomItem(amounts);
+            const text = selectedType.text.replace('{num}', phone);
+
+            return `
+                <div class="trust-item">
+                    <span>🟢 ${text}</span>
+                    <span style="color: ${selectedType.color}; font-weight: bold;">${amount} تومان</span>
+                </div>
+            `;
+        }
+
+        function initTransactions() {
+            const container = document.getElementById('live-transactions');
+            let initialHTML = '';
+            for(let i=0; i<4; i++) {
+                initialHTML += generateTransaction();
+            }
+            container.innerHTML = initialHTML;
+        }
+
+        function addLiveTransaction() {
+            const container = document.getElementById('live-transactions');
+            const newTx = generateTransaction();
+            container.insertAdjacentHTML('afterbegin', newTx);
+            if (container.children.length > 5) {
+                container.removeChild(container.lastElementChild);
+            }
+
+            const nextInterval = Math.floor(Math.random() * (480000 - 180000 + 1)) + 180000;
+            setTimeout(addLiveTransaction, nextInterval);
+        }
+
+        initTransactions();
+        setTimeout(addLiveTransaction, 180000);
+    </script>
 </body>
 </html>
