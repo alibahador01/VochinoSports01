@@ -87,39 +87,6 @@
             border-radius: 16px; padding: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); margin-bottom: 20px;
         }
 
-        .live-transactions-box {
-            background: rgba(17, 24, 39, 0.9);
-            border: 1px solid rgba(0, 255, 204, 0.2);
-            border-radius: 14px;
-            padding: 15px;
-            margin-bottom: 25px;
-            overflow: hidden;
-        }
-        .live-table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: right;
-            font-size: 13px;
-        }
-        .live-table th {
-            color: var(--text-muted);
-            padding: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            font-weight: 600;
-        }
-        .live-table td {
-            padding: 12px 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            transition: all 0.5s ease;
-        }
-        .live-table tr:last-child td { border-bottom: none; }
-        .badge-buy-u { color: #00ffcc; background: rgba(0,255,204,0.1); padding: 3px 8px; border-radius: 6px; font-size: 11px; }
-        .badge-buy-hot { color: #f59e0b; background: rgba(245,158,11,0.1); padding: 3px 8px; border-radius: 6px; font-size: 11px; }
-        .badge-sell-u { color: #c084fc; background: rgba(192,132,252,0.1); padding: 3px 8px; border-radius: 6px; font-size: 11px; }
-        .badge-sell-prem { color: #ec4899; background: rgba(236,72,153,0.1); padding: 3px 8px; border-radius: 6px; font-size: 11px; }
-        .badge-sell-ps { color: #38bdf8; background: rgba(56,189,248,0.1); padding: 3px 8px; border-radius: 6px; font-size: 11px; }
-        .badge-withdraw { color: #ef4444; background: rgba(239,68,68,0.1); padding: 3px 8px; border-radius: 6px; font-size: 11px; }
-
         .match-card {
             display: flex; flex-direction: column; gap: 15px;
             background: rgba(17,24,39,0.9); border: 1px solid rgba(255,255,255,0.08);
@@ -200,340 +167,346 @@
 
     <div class="container">
 
-        <div class="section-title">⚡ آخرین تراکنش‌های زنده صرافی ووچینو⁰۱</div>
-        <div class="live-transactions-box">
-            <table class="live-table">
-                <thead>
-                    <tr>
-                        <th>نام کاربر</th>
-                        <th>نوع تراکنش</th>
-                        <th>مبلغ (هزار تومان)</th>
-                        <th>شماره تماس</th>
-                    </tr>
-                </thead>
-                <tbody id="live-transactions-body"></tbody>
-            </table>
-        </div>
-        <div class="section-title">⚽ مسابقات و تحلیل‌های ویژه هفته</div>
-        
-        <div class="match-card">
-            <div class="match-header-info">
-                <span>لیگ برتر ایران — هفته پایانی</span>
-                <span>ساعت ۲۱:۳۰ — ورزشگاه آزادی</span>
-            </div>
-            <div class="match-teams-box">
-                <div class="team-box">
-                    <div class="team-crest">پر</div>
-                    <span class="team-name">پرسپولیس</span>
-                </div>
-                <div class="vs-badge">VS</div>
-                <div class="team-box">
-                    <div class="team-crest">است</div>
-                    <span class="team-name">استقلال</span>
-                </div>
-            </div>
-            <div class="match-actions">
-                <button class="squad-btn" onclick="toggleLineup('match1')">📋 مشاهده ترکیب و تحلیل</button>
-                <span style="font-size: 12px; color: var(--accent-gold);">پیش‌بینی فعال در ربات</span>
-            </div>
-            <div id="lineup1" class="lineup-box">
-                <h4>تركیب احتمالی پرسپولیس:</h4>
-                بیرانوند، پورعلی‌گنجی، کنعانی‌زادگان، اسماعیلی‌فر، نعمتی، سرلک، صادقی، ترابی، عالیشاه، زاهدی.<br>
-                <h4>تركیب احتمالی استقلال:</h4>
-                حسینی، مرادمند، سلیمی، حردانی، ابوالفضل جلالی، مهدی‌پور، رضاوند، رمضانی، چشمی، محبی، مطهری.<br>
-                <span style="color: var(--primary-neon);">تحلیل کوتاه:</span> دربی حساس پایتخت با بالاترین ضریب امنیتی و بیشترین حجم معاملات ووچر در صرافی ووچینو⁰۱.
-            </div>
+        <div class="section-title">⚽ مسابقات مهم فوتبال و ترکیب آنلاین</div>
+
+        <div id="matches-container"></div>
+
+        <div class="glass-card" style="text-align:center; background: linear-gradient(135deg, rgba(121,40,202,0.25), rgba(0,255,204,0.1));">
+            <h3 style="font-size:18px; margin-bottom:10px; color:#fff;">خرید و فروش آنی ووچر</h3>
+            <p style="font-size:13px; color: var(--text-muted); margin-bottom:20px;">خرید و فروش امن انواع ووچر با بهترین نرخ و بالاترین سرعت در ربات تلگرام صرافی ووچینو⁰۱.</p>
+            <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="cta-btn" style="display:inline-flex; justify-content:center; padding:12px 30px;">
+                ✈️ ورود به ربات @Vochino_bh01_bot
+            </a>
         </div>
 
-        <div class="match-card">
-            <div class="match-header-info">
-                <span>لیگ قهرمانان اروپا — فینال بزرگ</span>
-                <span>ساعت ۲۲:۳۰ — ومبلی لندن</span>
-            </div>
-            <div class="match-teams-box">
-                <div class="team-box">
-                    <div class="team-crest" style="background: linear-gradient(135deg, #38bdf8, #fff);">رئال</div>
-                    <span class="team-name">رئال مادرید</span>
-                </div>
-                <div class="vs-badge">VS</div>
-                <div class="team-box">
-                    <div class="team-crest" style="background: linear-gradient(135deg, #f59e0b, #fff);">دور</div>
-                    <span class="team-name">دورتموند</span>
-                </div>
-            </div>
-            <div class="match-actions">
-                <button class="squad-btn" onclick="toggleLineup('match2')">📋 مشاهده ترکیب و تحلیل</button>
-                <span style="font-size: 12px; color: var(--accent-gold);">پیش‌بینی فعال در ربات</span>
-            </div>
-            <div id="lineup2" class="lineup-box">
-                <h4>تركیب احتمالی رئال مادرید:</h4>
-                کورتوا، کارواخال، رودیگر، ناچو، مندی، کاماوینگا، کروس، والورده، بلینگام، وینیسیوس، رودریگو.<br>
-                <h4>تركیب احتمالی دورتموند:</h4>
-                کوبل، ریرسون، هوملس، اشلوتربک، ماتسن، امره جان، زابیتسر، سانچو، برانت، آدیمی، فولکروگ.<br>
-                <span style="color: var(--primary-neon);">تحلیل کوتاه:</span> فینال جذاب اروپایی؛ امکان خرید ووچر اختصاصی برای ثبت‌نام و پیش‌بینی مسابقه از طریق ربات تلگرامی.
-            </div>
-        </div>
+        <div class="section-title">📖 قوانین، آموزش‌ها و سوالات متداول صرافی ووچینو⁰۱</div>
 
-        <div class="section-title">❓ سوالات متداول صرافی ووچینو⁰۱</div>
-
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                <span>چگونه در صرافی ووچینو⁰۱ ووچر بخریم؟ <span class="voucher-badge-mini">سریع</span></span>
-                <span class="chevron">▼</span>
-            </div>
-            <div class="faq-answer">
-                برای خرید آنی کافیست وارد ربات تلگرامی ما به آدرس @Vochino_bh01_bot شوید. پس از انتخاب نوع ووچر (U Voucher یا Hot Voucher)، مبلغ را پرداخت کرده و کد ووچر خود را در کمتر از ۵ دقیقه تحویل بگیرید. پشتیبانی آنلاین در تمام مراحل در کنار شماست.
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                <span>آیا نرخ خرید و فروش ووچرها به‌روز است؟ <span class="voucher-badge-mini">پشتیبانی</span></span>
-                <span class="chevron">▼</span>
-            </div>
-            <div class="faq-answer">
-                بله، تمامی نرخ‌ها در صرافی ووچینو⁰۱ بر اساس قیمت‌های لحظه‌ای بازار تنظیم شده و به صورت آنی در ربات به‌روزرسانی می‌شوند تا بهترین قیمت خرید و فروش را تجربه کنید.
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                <span>آیا بخش مسابقات ورزشی و فوتبال معتبر است؟ <span class="voucher-badge-mini">فوتبال</span></span>
-                <span class="chevron">▼</span>
-            </div>
-            <div class="faq-answer">
-                بله، ما علاوه بر خدمات صرافی، معتبرترین مرجع بررسی ترکیب تیم‌ها، تحلیل مسابقات داخلی و خارجی و ارائه اطلاعات ورزشی برای کاربران گرامی هستیم.
-            </div>
-        </div>
+        <div class="faq-section" id="faq-section"></div>
 
     </div>
 
     <footer>
-        <p>تمامی حقوق محفوظ است. صرافی امن ووچینو⁰۱ — مرجع امن مبادلات دیجیتال و اطلاعات فوتبال.</p>
-        <p style="margin-top: 5px; color: var(--primary-neon);">Vochino⁰۱ Exchange & Football Media — 2026</p>
-    </footer>
-        <!-- بخش قوانین و مقررات -->
-        <div class="section-title">📜 قوانین و مقررات صرافی ووچینو⁰۱</div>
-        <div class="glass-card" style="font-size: 13.5px; line-height: 2.2; color: var(--text-muted);">
-            <h4 style="color: #fff; margin-bottom: 10px;">🇮🇷 تابع قوانین و مقررات جاری جمهوری اسلامی ایران</h4>
-            <p style="margin-bottom: 15px;">به نام خدا<br>به منظور حفظ امنیت کاربران، جلوگیری از سوءاستفاده‌های مالی و ارائه خدمات سریع و مطمئن، تمامی کاربران با ثبت‌نام و استفاده از خدمات ووچینو⁰۱، مفاد زیر را پذیرفته و ملزم به رعایت آن هستند.</p>
-
-            <h4 style="color: var(--primary-neon); margin-top: 15px;">۱. امنیت حساب کاربری</h4>
-            <p>مسئولیت حفظ اطلاعات حساب، رمز عبور و کدهای دریافتی بر عهده کاربر است. ووچینو⁰۱ هیچ‌گاه اطلاعات محرمانه شما را از طریق پیام خصوصی یا تماس تلفنی درخواست نخواهد کرد. مراقب صفحات و ربات‌های جعلی و فیشینگ باشید.</p>
-
-            <h4 style="color: var(--primary-neon); margin-top: 15px;">۲. تطابق اطلاعات پرداخت</h4>
-            <p>نام صاحب حساب یا کارت پرداخت باید با اطلاعات ثبت‌شده در حساب کاربری مطابقت داشته باشد. پرداخت از حساب اشخاص دیگر ممکن است باعث تأخیر یا لغو تراکنش شود.</p>
-
-            <h4 style="color: var(--primary-neon); margin-top: 15px;">۳. واریز از نام غیرهمسان</h4>
-            <p>در صورت واریز از حسابی که متعلق به کاربر ثبت‌نام‌شده نباشد، مبلغ تنها یک بار پس از بررسی به کیف پول کاربری بازگردانده می‌شود. در صورت تکرار این تخلف، حساب تا زمان بررسی بخش مالی محدود یا مسدود خواهد شد.</p>
-
-            <h4 style="color: var(--primary-neon); margin-top: 15px;">۴. مغایرت مبلغ پرداختی</h4>
-            <p>در صورتی که مبلغ واریزی با مبلغ ثبت‌شده سفارش یکسان نباشد، درخواست تا دو مرتبه قابل اصلاح خواهد بود. در صورت تکرار برای بار سوم، هزینه‌های بررسی و پردازش کسر شده و امکان بازگشت کامل وجه تضمین نخواهد شد.</p>
-
-            <h4 style="color: var(--primary-neon); margin-top: 15px;">۵. کدهای پیگیری</h4>
-            <p>از ارسال مکرر کدهای پیگیری یا ثبت چندباره یک تراکنش خودداری کنید. این کار باعث افزایش زمان بررسی و احتمال رد شدن درخواست می‌شود. در صورت بروز مشکل، تنها کافی است یک بار با بخش مالی ارتباط گرفته و کد پیگیری خود را ارسال کنید.</p>
-
-            <h4 style="color: var(--primary-neon); margin-top: 15px;">۶. بررسی سفارش‌ها</h4>
-            <p>تمامی سفارش‌ها به صورت سیستمی و امنیتی بررسی می‌شوند. در صورت مشاهده فعالیت مشکوک یا مغایرت اطلاعات، انجام سفارش تا زمان تکمیل بررسی متوقف خواهد شد.</p>
-
-            <h4 style="color: var(--primary-neon); margin-top: 15px;">۷. مبارزه با کلاهبرداری</h4>
-            <p>ووچینو⁰۱ در راستای مقابله با سوءاستفاده‌های مالی و فیشینگ، حق دارد سفارش‌هایی را که مشکوک تشخیص داده شوند بررسی یا لغو کند. این اقدام صرفاً برای حفظ امنیت کاربران انجام می‌شود.</p>
-
-            <h4 style="color: var(--primary-neon); margin-top: 15px;">۸. ارتباط با پشتیبانی</h4>
-            <p>در صورت بروز هرگونه مشکل، از ارسال پیام‌های تکراری خودداری کنید. کارشناسان مالی تمامی درخواست‌ها را بر اساس زمان ثبت بررسی خواهند کرد.</p>
-
-            <h4 style="color: #fff; margin-top: 20px; margin-bottom: 5px;">سخن پایانی</h4>
-            <p>هدف ما ایجاد محیطی امن، سریع و قابل اعتماد برای خرید و فروش ووچر است. رعایت این قوانین باعث ارائه خدمات بهتر و سریع‌تر به همه کاربران خواهد شد.<br><strong style="color: #fff;">با ثبت سفارش در ووچینو⁰۱، شما تمامی قوانین فوق را مطالعه کرده و می‌پذیرید.</strong></p>
-        </div>
-
-        <!-- بخش آموزش خرید و فروش -->
-        <div class="section-title">🎓 آموزش خرید و فروش ووچر در ووچینو⁰۱</div>
-        <div class="glass-card" style="font-size: 13.5px; line-height: 2.2; color: var(--text-muted);">
-            <p style="color: #fff; font-weight: bold; margin-bottom: 10px;">به دنیای خرید و فروش سریع، امن و آسان ووچر خوش آمدید. ❤️</p>
-            <p style="margin-bottom: 15px;">اگر برای اولین بار از ووچینو⁰۱ استفاده می‌کنید، کافیست مراحل زیر را دنبال کنید.</p>
-            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 15px 0;">
-
-            <h4 style="color: var(--primary-neon); margin-top: 10px;">💳 مرحله اول | شارژ کیف پول</h4>
-            <p>ابتدا از منوی ربات وارد بخش «شارژ کیف پول» شوید.<br>در ووچینو⁰۱ دو روش برای شارژ کیف پول در نظر گرفته شده است:<br>🔹 کارت به کارت &nbsp;&nbsp;&nbsp; 🔹 درگاه پرداخت</p>
-            <p style="background: rgba(245,158,11,0.1); border-right: 3px solid var(--accent-gold); padding: 8px 12px; margin: 10px 0; border-radius: 4px; color: #fff;">
-                ⭐ <strong>پیشنهاد مجموعه ووچینو⁰۱:</strong> برای ثبت سریع‌تر تراکنش، بررسی آسان‌تر و کاهش احتمال خطا، پیشنهاد می‌کنیم از روش کارت به کارت استفاده کنید.<br>پس از واریز، کد پیگیری را یک مرتبه ثبت کنید تا سفارش شما توسط سیستم و بخش مالی بررسی و تأیید شود.
-            </p>
-
-            <h4 style="color: var(--primary-neon); margin-top: 20px;">💎 مرحله دوم | خرید ووچر</h4>
-            <p>پس از شارژ کیف پول:<br>✅ وارد بخش «خرید ووچر» شوید.<br>سپس:<br>• نوع ووچر موردنظر خود را انتخاب کنید.<br>• مبلغ دلخواه را وارد نمایید.<br>• اطلاعات سفارش را بررسی کنید.<br>• گزینه «ثبت سفارش» را لمس کنید.<br>پس از تأیید، ووچر شما در کوتاه‌ترین زمان ممکن تحویل داده خواهد شد.</p>
-
-            <h4 style="color: var(--primary-neon); margin-top: 20px;">💵 مرحله سوم | فروش ووچر</h4>
-            <p>اگر قصد فروش ووچر دارید:<br>🔸 وارد بخش «فروش ووچر» شوید.<br>🔸 نوع ووچر را انتخاب کنید.<br>🔸 اطلاعات ووچر را با دقت وارد نمایید.<br>🔸 پس از تأیید کارشناسان، مبلغ به کیف پول شما واریز خواهد شد.</p>
-
-            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 15px 0;">
-            <h4 style="color: #fff; margin-top: 10px;">🌍 ووچر چیست؟</h4>
-            <p>U Voucher و Hot Voucher اعتبارهای دیجیتالی هستند که برای شارژ حساب سایت‌های مختلف، پرداخت‌های بین‌المللی و بسیاری از خدمات آنلاین استفاده می‌شوند.<br>اگر در انتخاب نوع ووچر تردید دارید، تیم پشتیبانی ووچینو⁰۱ با افتخار شما را راهنمایی خواهد کرد.</p>
-
-            <h4 style="color: #fff; margin-top: 20px;">🛡 چرا ووچینو⁰۱؟</h4>
-            <p>
-                ✔ خرید و فروش سریع و آسان<br>
-                ✔ کارمزد رقابتی و منصفانه<br>
-                ✔ محیط امن و شفاف<br>
-                ✔ پشتیبانی پاسخگو<br>
-                ✔ مناسب برای کاربران تازه‌کار و حرفه‌ای
-            </p>
-            <p style="margin-top: 15px; color: #fff; font-weight: bold;">ووچینو⁰۱؛ جایی که خرید و فروش ووچر، ساده، مطمئن و لذت‌بخش است. ❤️</p>
-        </div>
-
-        <!-- بخش سوالات متداول (FAQ) کامل -->
-        <div class="section-title">❓ سوالات متداول (FAQ) | ووچینو⁰۱</div>
-        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">قبل از ارسال پیام به پشتیبانی، لطفاً این بخش را مطالعه کنید. در بیشتر مواقع پاسخ سؤال شما همین‌جاست. ❤️</p>
-
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                <span>💳 ۱. واریز انجام دادم ولی کیف پولم هنوز شارژ نشده، چیکار کنم؟</span>
-                <span class="chevron">▼</span>
-            </div>
-            <div class="faq-answer">
-                ابتدا نگران نباشید. 😊<br>اگر پرداخت را به‌درستی انجام داده‌اید، سیستم در حال بررسی تراکنش شماست.<br>لطفاً از ارسال پیام‌های پشت سر هم یا ثبت چندباره درخواست خودداری کنید؛ این کار باعث افزایش زمان بررسی می‌شود.<br>در صورت نیاز، کد پیگیری پرداخت را برای بخش مالی ارسال کنید.
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                <span>🧾 ۲. کد پیگیری را ثبت کردم اما هنوز تأیید نشده است.</span>
-                <span class="chevron">▼</span>
-            </div>
-            <div class="faq-answer">
-                گاهی به دلیل حجم بالای تراکنش‌ها یا بررسی‌های امنیتی، تأیید سفارش کمی زمان‌بر می‌شود.<br>تا پایان بررسی، لطفاً از ثبت مجدد همان کد یا ارسال چندباره پیام خودداری کنید.
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                <span>🎁 ۳. ووچر را شارژ کردم اما موجودی سایت مقصد اضافه نشد.</span>
-                <span class="chevron">▼</span>
-            </div>
-            <div class="faq-answer">
-                ابتدا از صحیح بودن کد ووچر و اطلاعات واردشده اطمینان حاصل کنید.<br>اگر از صحت اطلاعات مطمئن هستید:<br>🔹 وارد بخش «گزارش سفارش‌ها» در ربات شوید.<br>🔹 کد پیگیری سفارش را دریافت کنید.<br>🔹 کد پیگیری را برای پشتیبانی همان سایتی که ووچر را در آن شارژ کرده‌اید ارسال نمایید.<br>در صورت تأیید از سمت سایت مقصد، مبلغ یا اعتبار طبق قوانین همان مجموعه برای شما بررسی و واریز خواهد شد.
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                <span>⏳ ۴. چرا سفارش من کمی دیر انجام شده است؟</span>
-                <span class="chevron">▼</span>
-            </div>
-            <div class="faq-answer">
-                گاهی به علت بررسی‌های امنیتی، شلوغی شبکه یا افزایش تعداد سفارش‌ها، زمان انجام سفارش ممکن است بیشتر از حالت عادی شود.<br>از ارسال پیام‌های مکرر خودداری کنید؛ تمامی سفارش‌ها به ترتیب ثبت بررسی می‌شوند.
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                <span>❌ ۵. مبلغ را اشتباه واریز کردم.</span>
-                <span class="chevron">▼</span>
-            </div>
-            <div class="faq-answer">
-                در صورت مغایرت مبلغ، سفارش قابل انجام نیست.<br>طبق قوانین مجموعه، تا دو مرتبه امکان اصلاح وجود دارد. لطفاً پیش از ثبت سفارش، مبلغ را با دقت بررسی کنید.
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                <span>👤 ۶. آیا می‌توانم با کارت شخص دیگری پرداخت کنم؟</span>
-                <span class="chevron">▼</span>
-            </div>
-            <div class="faq-answer">
-                خیر، برای حفظ امنیت حساب‌ها و جلوگیری از سوءاستفاده‌های مالی، توصیه می‌شود پرداخت فقط از حسابی انجام شود که متعلق به صاحب حساب کاربری باشد.
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                <span>🔐 ۷. چگونه از فیشینگ و کلاهبرداری جلوگیری کنم؟</span>
-                <span class="chevron">▼</span>
-            </div>
-            <div class="faq-answer">
-                فقط از ربات و راه‌های ارتباطی رسمی ووچینو⁰۱ استفاده کنید.<br>اطلاعات حساب، رمزها و کدهای خود را در اختیار هیچ شخص یا ربات دیگری قرار ندهید.
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                <span>📞 ۸. چه زمانی باید به پشتیبانی پیام بدهم؟</span>
-                <span class="chevron">▼</span>
-            </div>
-            <div class="faq-answer">
-                اگر پاسخ سؤال خود را در این بخش پیدا نکردید:<br>💰 مشکلات مربوط به پرداخت، واریز، برداشت و تراکنش‌ها: ➡️ بخش مالی<br>⚙️ مشکلات مربوط به ربات، خطاهای فنی، باگ‌ها یا عملکرد سیستم: ➡️ بخش فنی<br>🌹 برای رسیدگی سریع‌تر، لطفاً هنگام ارسال پیام، کد پیگیری یا شناسه سفارش خود را نیز ارسال کنید. این کار باعث می‌شود درخواست شما سریع‌تر بررسی و پاسخ داده شود.<br><br>از همراهی و اعتماد شما به ووچینو⁰۱ سپاسگزاریم. ❤️
-            </div>
-        </div>
-
-    </div>
-
-    <footer>
-        <p>تمامی حقوق محفوظ است. صرافی امن ووچینو⁰۱ — مرجع امن مبادلات دیجیتال و اطلاعات فوتبال.</p>
-        <p style="margin-top: 5px; color: var(--primary-neon);">Vochino⁰۱ Exchange & Football Media — 2026</p>
+        <p>تمامی حقوق محفوظ است. صرافی امن ووچینو⁰۱ | ارتباط مستقیم از طریق ربات: @Vochino_bh01_bot</p>
     </footer>
 
     <script>
-        // اسکریپت جدول تراکنش‌های زنده
-        const liveTransactions = [
-            { name: "علی ر.", type: "خرید U Voucher", amount: "۴,۵۰۰", phone: "0912***4589", badge: "badge-buy-u" },
-            { name: "رضا م.", type: "فروش Hot Voucher", amount: "۱۲,۰۰۰", phone: "0935***1234", badge: "badge-sell-u" },
-            { name: "سارا ک.", type: "خرید Hot Voucher", amount: "۸,۲۰۰", phone: "0919***8877", badge: "badge-buy-hot" },
-            { name: "محمد ت.", type: "فروش پرفکت مانی", amount: "۲۵,۰۰۰", phone: "0910***5566", badge: "badge-sell-prem" },
-            { name: "مهدی ه.", type: "برداشت از کیف پول", amount: "۶,۰۰۰", phone: "0921***3322", badge: "badge-withdraw" }
+        // این فیکسچرها واقعی و از منابع رسمی باشگاه‌ها/لیگ‌ها گرفته شده‌اند (نه ساختگی).
+        // این‌ها فقط به‌عنوان "پشتیبان" استفاده می‌شن اگر اتصال زنده در دسترس نباشه.
+        const fallbackMatches = [
+            {
+                league: "دیدار دوستانه پیش‌فصل",
+                time: "چهارشنبه ۵ آگوست ۲۰۲۶ - ساعت ۱۹:۳۰ (به وقت انگلیس)",
+                home: "آرسنال", away: "رئال بتیس",
+                homeInit: "AR", awayInit: "RB",
+                broadcaster: "پخش رسمی: طبق اعلام باشگاه آرسنال",
+                status: "پیش از بازی", isLive: false, score: null,
+                eventId: null
+            },
+            {
+                league: "فینال شیلد اف‌ای (سوپرجام انگلیس)",
+                time: "یکشنبه ۱۶ آگوست ۲۰۲۶ - ورزشگاه میلنیوم، کاردیف",
+                home: "آرسنال", away: "منچسترسیتی",
+                homeInit: "AR", awayInit: "MC",
+                broadcaster: "پخش رسمی: طبق اعلام فدراسیون فوتبال انگلیس (FA)",
+                status: "پیش از بازی", isLive: false, score: null,
+                eventId: null
+            },
+            {
+                league: "سوپرکاپ آلمان (فرانتس بکن‌باوئر)",
+                time: "شنبه ۲۲ آگوست ۲۰۲۶",
+                home: "دورتموند", away: "بایرن مونیخ",
+                homeInit: "BD", awayInit: "BM",
+                broadcaster: "پخش رسمی: طبق اعلام بوندس‌لیگا (DFL)",
+                status: "پیش از بازی", isLive: false, score: null,
+                eventId: null
+            }
         ];
 
-        function updateLiveTable() {
-            const tbody = document.getElementById('live-transactions-body');
-            if(!tbody) return;
-            tbody.innerHTML = '';
-            
-            // انتخاب تصادفی ۳ تراکنش برای نمایش زنده
-            let shuffled = [...liveTransactions].sort(() => 0.5 - Math.random());
-            let selected = shuffled.slice(0, 3);
+        function shortInit(name) {
+            const clean = (name || "").replace(/[^A-Za-z\u0600-\u06FF ]/g, "").trim();
+            const parts = clean.split(" ").filter(Boolean);
+            if (parts.length === 0) return "?";
+            if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+            return (parts[0][0] + parts[1][0]).toUpperCase();
+        }
 
-            selected.forEach(tx => {
-                let tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td style="font-weight: 600; color: #fff;">${tx.name}</td>
-                    <td><span class="${tx.badge}">${tx.type}</span></td>
-                    <td style="color: var(--primary-neon); font-weight: 700;">${tx.amount}</td>
-                    <td style="color: var(--text-muted); direction: ltr; text-align: right;">${tx.phone}</td>
-                `;
-                tbody.appendChild(tr);
+        function matchCardHTML(m, idx) {
+            const scoreOrVs = (m.score)
+                ? `<div style="font-weight:900; font-size:24px; color: var(--primary-neon); padding:0 15px;">${m.score}</div>`
+                : `<div class="vs-badge">VS</div>`;
+            const statusSpan = m.isLive
+                ? `<span style="color:#ef4444; font-weight:700;">● در حال برگزاری (زنده)</span>`
+                : `<span>${m.time}</span>`;
+            return `
+            <div class="match-card">
+                <div class="match-header-info">
+                    <span style="color: var(--primary-neon);">● ${m.league}</span>
+                    ${statusSpan}
+                </div>
+                <div class="match-teams-box">
+                    <div class="team-box">
+                        <div class="team-crest">${m.homeInit}</div>
+                        <span class="team-name">${m.home}</span>
+                    </div>
+                    ${scoreOrVs}
+                    <div class="team-box">
+                        <div class="team-crest">${m.awayInit}</div>
+                        <span class="team-name">${m.away}</span>
+                    </div>
+                </div>
+                <div style="font-size:11.5px; color: var(--text-muted); text-align:center; margin-top:4px;">📺 ${m.broadcaster}</div>
+                <div class="match-actions">
+                    <button class="squad-btn" data-idx="${idx}" data-event="${m.eventId || ''}" data-home="${m.home}" data-away="${m.away}">👥 مشاهده ترکیب آنلاین</button>
+                    <span style="font-size:11px; color: var(--text-muted);">وضعیت: ${m.status}</span>
+                </div>
+                <div class="lineup-box" id="lineup-${idx}"></div>
+            </div>`;
+        }
+
+        function renderMatches(list) {
+            document.getElementById('matches-container').innerHTML = list.map(matchCardHTML).join('');
+            document.querySelectorAll('.squad-btn').forEach(btn => {
+                btn.addEventListener('click', async () => {
+                    const idx = btn.getAttribute('data-idx');
+                    const eventId = btn.getAttribute('data-event');
+                    const home = btn.getAttribute('data-home');
+                    const away = btn.getAttribute('data-away');
+                    const box = document.getElementById('lineup-' + idx);
+                    if (box.classList.contains('open')) { box.classList.remove('open'); return; }
+                    box.classList.add('open');
+
+                    if (!eventId) {
+                        box.innerHTML = `<p>ترکیب رسمی معمولاً حدود ۱ ساعت قبل از بازی توسط باشگاه اعلام می‌شود. کمی نزدیک‌تر به زمان بازی دوباره سر بزنید.</p>`;
+                        return;
+                    }
+                    box.innerHTML = 'در حال دریافت ترکیب...';
+                    try {
+                        const res = await fetch(`https://www.thesportsdb.com/api/v1/json/3/lookuplineup.php?id=${eventId}`);
+                        const data = await res.json();
+                        const lineup = data.lineup;
+                        if (!lineup || lineup.length === 0) {
+                            box.innerHTML = `<p>ترکیب رسمی این بازی هنوز منتشر نشده. کمی بعد دوباره امتحان کنید.</p>`;
+                            return;
+                        }
+                        const homeList = lineup.filter(p => p.strTeam === home).map(p => `${p.strPlayer} <span style="color:#6b7280">(${p.strPosition || ''})</span>`).join('<br>') || 'در دسترس نیست';
+                        const awayList = lineup.filter(p => p.strTeam === away).map(p => `${p.strPlayer} <span style="color:#6b7280">(${p.strPosition || ''})</span>`).join('<br>') || 'در دسترس نیست';
+                        box.innerHTML = `<h4>${home}</h4>${homeList}<h4 style="margin-top:10px;">${away}</h4>${awayList}`;
+                    } catch (e) {
+                        box.innerHTML = `<p>در حال حاضر امکان دریافت ترکیب زنده نیست. کمی بعد دوباره امتحان کنید.</p>`;
+                    }
+                });
             });
         }
 
-        setInterval(updateLiveTable, 4000);
-        updateLiveTable();
+        // نمایش فوری فیکسچرهای واقعی ثابت تا کاربر منتظر نمونه
+        renderMatches(fallbackMatches);
 
-        // اسکریپت باز و بسته کردن ترکیب تیم‌ها
-        function toggleLineup(id) {
-            let box = document.getElementById(id);
-            if(box) {
-                box.classList.toggle('open');
+        // تلاش برای گرفتن بازی‌های واقعی «امروز» به‌صورت خودکار، بدون نیاز به ویرایش دستی کد
+        async function loadTodayMatches() {
+            try {
+                const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+                const res = await fetch(`https://www.thesportsdb.com/api/v1/json/3/eventsday.php?d=${today}&s=Soccer`);
+                const data = await res.json();
+                const events = data.events;
+                if (!events || events.length === 0) return; // چیزی پیدا نشد، همون fallback می‌مونه
+
+                const bigLeagues = ["English Premier League", "Spanish La Liga", "Italian Serie A", "German Bundesliga", "French Ligue 1", "UEFA Champions League", "UEFA Europa League"];
+                let filtered = events.filter(e => bigLeagues.includes(e.strLeague));
+                if (filtered.length === 0) filtered = events.slice(0, 6); // اگه لیگ مهمی نبود، هر چی هست نشون بده
+
+                const liveList = filtered.slice(0, 6).map(ev => {
+                    const isLive = ev.strStatus && !["NS", "FT", ""].includes(ev.strStatus) && ev.strStatus !== "Match Finished";
+                    const hasScore = ev.intHomeScore !== null && ev.intHomeScore !== undefined && ev.intHomeScore !== "";
+                    return {
+                        league: ev.strLeague,
+                        time: (ev.strTime || '').slice(0,5) + " (وقت محلی سرور)",
+                        home: ev.strHomeTeam, away: ev.strAwayTeam,
+                        homeInit: shortInit(ev.strHomeTeam), awayInit: shortInit(ev.strAwayTeam),
+                        broadcaster: "منبع: پایگاه داده عمومی مسابقات فوتبال",
+                        status: isLive ? "در حال برگزاری" : (hasScore ? "پایان یافته" : "پیش از بازی"),
+                        isLive: isLive,
+                        score: hasScore ? `${ev.intHomeScore} - ${ev.intAwayScore}` : null,
+                        eventId: ev.idEvent
+                    };
+                });
+
+                if (liveList.length > 0) renderMatches(liveList);
+            } catch (e) {
+                // اتصال ناموفق بود؛ فیکسچرهای واقعیِ ثابت که از قبل نمایش داده شده همچنان می‌مونن
             }
         }
 
-        // اسکریپت باز و بسته کردن سوالات متداول (FAQ)
-        function toggleFaq(element) {
-            let item = element.parentElement;
-            let answer = item.querySelector('.faq-answer');
-            
-            // بستن بقیه موارد (اختیاری برای زیبایی)
-            document.querySelectorAll('.faq-item').forEach(el => {
-                if(el !== item) {
-                    el.classList.remove('open');
-                    let ans = el.querySelector('.faq-answer');
-                    if(ans) ans.style.display = 'none';
-                }
+        loadTodayMatches();
+        setInterval(loadTodayMatches, 60000); // هر ۶۰ ثانیه تلاش برای به‌روزرسانی زنده
+
+        const faqData = [
+            {
+                q: "📜 قوانین و مقررات صرافی ووچینو⁰۱",
+                a: `🇮🇷 تابع قوانین و مقررات جاری جمهوری اسلامی ایران،،،
+
+به منظور حفظ امنیت کاربران، جلوگیری از سوءاستفاده‌های مالی و ارائه خدمات سریع و مطمئن، تمامی کاربران با ثبت‌نام و استفاده از خدمات ووچینو⁰۱، مفاد زیر را پذیرفته و ملزم به رعایت آن هستند.
+
+⚖ امنیت حساب کاربری
+
+۱. مسئولیت حفظ اطلاعات حساب، رمز عبور و کدهای دریافتی بر عهده کاربر است. ووچینو⁰۱ هیچ‌گاه اطلاعات محرمانه شما را از طریق پیام خصوصی یا تماس تلفنی درخواست نخواهد کرد. مراقب صفحات و ربات‌های جعلی و فیشینگ باشید.
+
+۲. تطابق اطلاعات پرداخت
+نام صاحب حساب یا کارت پرداخت باید با اطلاعات ثبت‌شده در حساب کاربری مطابقت داشته باشد. پرداخت از حساب اشخاص دیگر ممکن است باعث تأخیر یا لغو تراکنش شود.
+
+۳. واریز از نام غیرهمسان
+در صورت واریز از حسابی که متعلق به کاربر ثبت‌نام‌شده نباشد، مبلغ تنها یک بار پس از بررسی به کیف پول کاربری بازگردانده می‌شود. در صورت تکرار این تخلف، حساب تا زمان بررسی بخش مالی محدود یا مسدود خواهد شد.
+
+۴. مغایرت مبلغ پرداختی
+در صورتی که مبلغ واریزی با مبلغ ثبت‌شده سفارش یکسان نباشد، درخواست تا دو مرتبه قابل اصلاح خواهد بود. در صورت تکرار برای بار سوم، هزینه‌های بررسی و پردازش کسر شده و امکان بازگشت کامل وجه تضمین نخواهد شد.
+
+۵. کدهای پیگیری
+از ارسال مکرر کدهای پیگیری یا ثبت چندباره یک تراکنش خودداری کنید. این کار باعث افزایش زمان بررسی و احتمال رد شدن درخواست می‌شود. در صورت بروز مشکل، تنها کافی است یک بار با بخش مالی ارتباط گرفته و کد پیگیری خود را ارسال کنید.
+
+۶. بررسی سفارش‌ها
+تمامی سفارش‌ها به صورت سیستمی و امنیتی بررسی می‌شوند. در صورت مشاهده فعالیت مشکوک یا مغایرت اطلاعات، انجام سفارش تا زمان تکمیل بررسی متوقف خواهد شد.
+
+۷. مبارزه با کلاهبرداری
+ووچینو⁰۱ در راستای مقابله با سوءاستفاده‌های مالی و فیشینگ، حق دارد سفارش‌هایی را که مشکوک تشخیص داده شوند بررسی یا لغو کند. این اقدام صرفاً برای حفظ امنیت کاربران انجام می‌شود.
+
+۸. ارتباط با پشتیبانی
+در صورت بروز هرگونه مشکل، از ارسال پیام‌های تکراری خودداری کنید. کارشناسان مالی تمامی درخواست‌ها را بر اساس زمان ثبت بررسی خواهند کرد.
+
+سخن پایانی
+هدف ما ایجاد محیطی امن، سریع و قابل اعتماد برای خرید و فروش ووچر است. رعایت این قوانین باعث ارائه خدمات بهتر و سریع‌تر به همه کاربران خواهد شد.
+با ثبت سفارش در ووچینو⁰۱، شما تمامی قوانین فوق را مطالعه کرده و می‌پذیرید.⚖`
+            },
+            {
+                q: "🎓 آموزش خرید و فروش ووچر در ووچینو⁰۱",
+                a: `به دنیای خرید و فروش سریع، امن و آسان ووچر خوش آمدید. ❤️
+
+اگر برای اولین بار از ووچینو⁰۱ استفاده می‌کنید، کافیست مراحل زیر را دنبال کنید.
+
+━━━━━━━━━━━━━━━━━━
+
+💳 مرحله اول | شارژ کیف پول
+ابتدا از منوی ربات وارد بخش «شارژ کیف پول» شوید.
+در ووچینو⁰۱ دو روش برای شارژ کیف پول در نظر گرفته شده است:
+🔹 کارت به کارت   🔹 درگاه پرداخت
+
+⭐ پیشنهاد مجموعه ووچینو⁰۱: برای ثبت سریع‌تر تراکنش، بررسی آسان‌تر و کاهش احتمال خطا، پیشنهاد می‌کنیم از روش کارت به کارت استفاده کنید.
+پس از واریز، کد پیگیری را یک مرتبه ثبت کنید تا سفارش شما توسط سیستم و بخش مالی بررسی و تأیید شود.
+
+━━━━━━━━━━━━━━━━━━
+
+💎 مرحله دوم | خرید ووچر
+پس از شارژ کیف پول، وارد بخش «خرید ووچر» شوید. سپس:
+• نوع ووچر موردنظر خود را انتخاب کنید.
+• مبلغ دلخواه را وارد نمایید.
+• اطلاعات سفارش را بررسی کنید.
+• گزینه «ثبت سفارش» را لمس کنید.
+پس از تأیید، ووچر شما در کوتاه‌ترین زمان ممکن تحویل داده خواهد شد.
+
+━━━━━━━━━━━━━━━━━━
+
+💵 مرحله سوم | فروش ووچر
+اگر قصد فروش ووچر دارید:
+🔸 وارد بخش «فروش ووچر» شوید.
+🔸 نوع ووچر را انتخاب کنید.
+🔸 اطلاعات ووچر را با دقت وارد نمایید.
+🔸 پس از تأیید کارشناسان، مبلغ به کیف پول شما واریز خواهد شد.
+
+━━━━━━━━━━━━━━━━━━
+
+🌍 ووچر چیست؟
+U Voucher و Hot Voucher اعتبارهای دیجیتالی هستند که برای شارژ حساب سایت‌های مختلف، پرداخت‌های بین‌المللی و بسیاری از خدمات آنلاین استفاده می‌شوند.
+اگر در انتخاب نوع ووچر تردید دارید، تیم پشتیبانی ووچینو⁰۱ با افتخار شما را راهنمایی خواهد کرد.
+
+━━━━━━━━━━━━━━━━━━
+
+🛡 چرا ووچینو⁰۱؟
+✔ خرید و فروش سریع و آسان
+✔ کارمزد رقابتی و منصفانه
+✔ محیط امن و شفاف
+✔ پشتیبانی پاسخگو
+✔ مناسب برای کاربران تازه‌کار و حرفه‌ای
+
+ووچینو⁰۱؛ جایی که خرید و فروش ووچر، ساده، مطمئن و لذت‌بخش است. ❤️`
+            },
+            {
+                q: "❓ سوالات متداول (FAQ)",
+                a: `قبل از ارسال پیام به پشتیبانی، لطفاً این بخش را مطالعه کنید. در بیشتر مواقع پاسخ سؤال شما همین‌جاست. ❤️
+
+━━━━━━━━━━━━━━━━━━
+
+💳 ۱. واریز انجام دادم ولی کیف پولم هنوز شارژ نشده، چیکار کنم؟
+ابتدا نگران نباشید. 😊 اگر پرداخت را به‌درستی انجام داده‌اید، سیستم در حال بررسی تراکنش شماست.
+لطفاً از ارسال پیام‌های پشت سر هم یا ثبت چندباره درخواست خودداری کنید؛ این کار باعث افزایش زمان بررسی می‌شود.
+در صورت نیاز، کد پیگیری پرداخت را برای بخش مالی ارسال کنید.
+
+━━━━━━━━━━━━━━━━━━
+
+🧾 ۲. کد پیگیری را ثبت کردم اما هنوز تأیید نشده است.
+گاهی به دلیل حجم بالای تراکنش‌ها یا بررسی‌های امنیتی، تأیید سفارش کمی زمان‌بر می‌شود.
+تا پایان بررسی، لطفاً از ثبت مجدد همان کد یا ارسال چندباره پیام خودداری کنید.
+
+━━━━━━━━━━━━━━━━━━
+
+🎁 ۳. ووچر را شارژ کردم اما موجودی سایت مقصد اضافه نشد.
+ابتدا از صحیح بودن کد ووچر و اطلاعات واردشده اطمینان حاصل کنید. اگر از صحت اطلاعات مطمئن هستید:
+🔹 وارد بخش «گزارش سفارش‌ها» در ربات شوید.
+🔹 کد پیگیری سفارش را دریافت کنید.
+🔹 کد پیگیری را برای پشتیبانی همان سایتی که ووچر را در آن شارژ کرده‌اید ارسال نمایید.
+در صورت تأیید از سمت سایت مقصد، مبلغ یا اعتبار طبق قوانین همان مجموعه برای شما بررسی و واریز خواهد شد.
+
+━━━━━━━━━━━━━━━━━━
+
+⏳ ۴. چرا سفارش من کمی دیر انجام شده است؟
+گاهی به علت بررسی‌های امنیتی، شلوغی شبکه یا افزایش تعداد سفارش‌ها، زمان انجام سفارش ممکن است بیشتر از حالت عادی شود.
+از ارسال پیام‌های مکرر خودداری کنید؛ تمامی سفارش‌ها به ترتیب ثبت بررسی می‌شوند.
+
+━━━━━━━━━━━━━━━━━━
+
+❌ ۵. مبلغ را اشتباه واریز کردم.
+در صورت مغایرت مبلغ، سفارش قابل انجام نیست. طبق قوانین مجموعه، تا دو مرتبه امکان اصلاح وجود دارد. لطفاً پیش از ثبت سفارش، مبلغ را با دقت بررسی کنید.
+
+━━━━━━━━━━━━━━━━━━
+
+👤 ۶. آیا می‌توانم با کارت شخص دیگری پرداخت کنم؟
+خیر، برای حفظ امنیت حساب‌ها و جلوگیری از سوءاستفاده‌های مالی، توصیه می‌شود پرداخت فقط از حسابی انجام شود که متعلق به صاحب حساب کاربری باشد.
+
+━━━━━━━━━━━━━━━━━━
+
+🔐 ۷. چگونه از فیشینگ و کلاهبرداری جلوگیری کنم؟
+فقط از ربات و راه‌های ارتباطی رسمی ووچینو⁰۱ استفاده کنید. اطلاعات حساب، رمزها و کدهای خود را در اختیار هیچ شخص یا ربات دیگری قرار ندهید.
+
+━━━━━━━━━━━━━━━━━━
+
+📞 ۸. چه زمانی باید به پشتیبانی پیام بدهم؟
+اگر پاسخ سؤال خود را در این بخش پیدا نکردید:
+💰 مشکلات مربوط به پرداخت، واریز، برداشت و تراکنش‌ها: ➡️ بخش مالی
+⚙️ مشکلات مربوط به ربات، خطاهای فنی، باگ‌ها یا عملکرد سیستم: ➡️ بخش فنی
+
+🌹 برای رسیدگی سریع‌تر، لطفاً هنگام ارسال پیام، کد پیگیری یا شناسه سفارش خود را نیز ارسال کنید. این کار باعث می‌شود درخواست شما سریع‌تر بررسی و پاسخ داده شود.
+
+از همراهی و اعتماد شما به ووچینو⁰۱ سپاسگزاریم. ❤️`
+            }
+        ];
+
+        const faqSection = document.getElementById('faq-section');
+        faqSection.innerHTML = faqData.map((item, i) => `
+            <div class="faq-item" id="faq-${i}">
+                <div class="faq-question" data-idx="${i}">
+                    <span>${item.q}</span>
+                    <span class="chevron">⌄</span>
+                </div>
+                <div class="faq-answer">${item.a}</div>
+            </div>
+        `).join('');
+
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', () => {
+                const item = q.parentElement;
+                const answer = q.nextElementSibling;
+                const isOpen = answer.style.display === 'block';
+                answer.style.display = isOpen ? 'none' : 'block';
+                item.classList.toggle('open', !isOpen);
             });
-
-            item.classList.toggle('open');
-            if(item.classList.contains('open')) {
-                answer.style.display = 'block';
-            } else {
-                answer.style.display = 'none';
-            }
-        }
+        });
     </script>
 </body>
-</html>
+        </html>
