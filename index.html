@@ -128,6 +128,53 @@
         .lineup-box.open { display: block; }
         .lineup-box h4 { color: #fff; font-size: 13px; margin-bottom: 6px; }
 
+        /* استایل اختصاصی جدول اعتمادگاه زنده */
+        .live-tx-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+            font-size: 13.5px;
+        }
+        .live-tx-table th {
+            color: var(--primary-neon);
+            padding: 12px 4px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-weight: 600;
+        }
+        .live-tx-table td {
+            padding: 12px 4px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            vertical-align: middle;
+        }
+        .tx-badge {
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            display: inline-block;
+            font-weight: bold;
+            line-height: 1.4;
+        }
+        .tx-badge-buy { background-color: rgba(6, 78, 59, 0.8); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.3); }
+        .tx-badge-sell { background-color: rgba(69, 26, 3, 0.8); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); }
+        .tx-badge-withdraw { background-color: rgba(30, 58, 138, 0.8); color: #60a5fa; border: 1px solid rgba(96, 165, 250, 0.3); }
+        
+        .tx-status {
+            display: flex; align-items: center; justify-content: center; gap: 4px; font-size: 12px;
+        }
+        .tx-status-icon {
+            background-color: #10b981; color: #fff; border-radius: 50%;
+            width: 15px; height: 15px; display: flex; align-items: center; justify-content: center; font-size: 9px;
+        }
+        .tx-user-info { display: flex; flex-direction: column; align-items: center; }
+        .tx-user-phone { font-size: 11px; color: var(--text-muted); }
+        .tx-time-text { color: #d1d5db; font-size: 12px; }
+        
+        @keyframes txFadeIn {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .tx-new-row { animation: txFadeIn 1.2s ease-out; }
+
         .faq-item {
             background: rgba(17,24,39,0.7); border: 1px solid var(--border-color);
             border-radius: 12px; margin-bottom: 10px; overflow: hidden;
@@ -174,6 +221,25 @@
         <div class="section-title">⚽ مسابقات مهم فوتبال و ترکیب آنلاین</div>
 
         <div id="matches-container"></div>
+
+        <!-- جدول زنده اعتمادگاه اختصاصی ووچینو01 -->
+        <div class="section-title">📊 آخرین تراکنش‌ها و تسویه‌های زنده سامانه</div>
+        <div class="glass-card" style="padding: 10px 5px; overflow-x: auto;">
+            <table class="live-tx-table">
+                <thead>
+                    <tr>
+                        <th>نوع تراکنش</th>
+                        <th>مبلغ (تومان)</th>
+                        <th>کاربر</th>
+                        <th>وضعیت</th>
+                        <th>زمان</th>
+                    </tr>
+                </thead>
+                <tbody id="live-tx-body">
+                    <!-- داده های زنده توسط جاوااسکریپت اینجا درج میشوند -->
+                </tbody>
+            </table>
+        </div>
 
         <div class="glass-card" style="text-align:center; background: linear-gradient(135deg, rgba(121,40,202,0.25), rgba(0,255,204,0.1));">
             <h3 style="font-size:18px; margin-bottom:10px; color:#fff;">خرید و فروش آنی ووچر</h3>
@@ -283,6 +349,159 @@
             });
         });
 
+        // ==========================================
+        //  موتور هوشمند تراکنش های زنده اعتمادگاه
+        // ==========================================
+        const bigNamesBank = [
+            "علی", "محمد", "مهدی", "رضا", "حسین", "امیر", "سجاد", "نیما", "سامان", "احسان", "عادل", "داود", "ماهان", "متین", 
+            "زهرا", "فاطمه", "مریم", "سارا", "نیکا", "آیدا", "شایان", "پویا", "سینا", "امید", "عرفان", "شیما", "نگین", "علیرضا", 
+            "کامران", "یاسین", "پریا", "میلاد", "کیوان", "رویا", "الناز", "آرش", "شهاب", "مبینا", "پارسا", "هستی", "امیرحسین", 
+            "محمدامین", "سحر", "ترانه", "باران", "آرمین", "پدرام", "حمید", "فرهاد", "بهار", "سپیده", "مینا", "شقایق", "مجید", 
+            "سعید", "مهسا", "غزل", "نیلوفر", "رادمهر", "آریا", "صبا", "الهام", "ساناز", "پیمان", "رامین", "سهراب", "طناز", 
+            "شیرین", "کیارش", "مازیار", "مهران", "پوریا", "حامد", "نسترن", "سمیرا", "فرید", "بهنام", "نسیم", "میترا", "شادی",
+            "ابوالفضل", "محمدمهدی", "دانیال", "آبتین", "کسری", "شروین", "مانی", "کیومرث", "اشکان", "مهراد", "فرزاد", "سیامک",
+            "امیرعلی", "امیررضا", "ایلیا", "سام", "کيان", "سورنا", "بردیا", "کارن", "آدرین", "هیربد", "شاهین", "داریوش",
+            "عاطفه", "حدیث", "سوگند", "ستایش", "ریحانه", "یکتا", "مهرنوش", "مژده", "درسا", "آتوسا", "بیتا", "پردیس", "دنیا",
+            "یلدا", "طلا", "رکسانا", "آنا", "جانان", "مونا", "لادن", "مرجان", "رزا", "مهناز", "شیوا", "پریناز", "آیدين",
+            "صادق", "میثم", "مصطفی", "مرتضی", "مصطفی", "مسعود", "یونس", "بهزاد", "شهرام", "شهروز", "سروش", "ارسلان", "پیمان",
+            "یاسمن", "مهدیس", "اسما", "کیانا", "حنانه", "کوثر", "محیا", "حلما", "رقیة", "هانیه", "فاطمه‌زهرا", "ثنا", "ستاره"
+        ];
+        
+        const prefixes = ["91", "93", "90", "99", "35", "45", "14", "89", "84", "02", "12", "37", "19", "18", "15", "36", "38"];
+        let recentNamesHistory = [];
+
+        function getUniqueName() {
+            let filteredNames = bigNamesBank.filter(n => !recentNamesHistory.includes(n));
+            if(filteredNames.length === 0) {
+                recentNamesHistory = [];
+                filteredNames = bigNamesBank;
+            }
+            let chosen = filteredNames[Math.floor(Math.random() * filteredNames.length)];
+            recentNamesHistory.push(chosen);
+            if(recentNamesHistory.length > 25) recentNamesHistory.shift();
+            return chosen;
+        }
+
+        function getSmartRandomAmount(min, max) {
+            let num = Math.floor(Math.random() * (max - min + 1)) + min;
+            return Math.floor(num / 10000) * 10000;
+        }
+
+        function generateTransaction() {
+            let rand = Math.random() * 100;
+            let type, category, statusText, amount;
+
+            if (rand < 40) {
+                type = 'خرید<br>یوووچر'; category = 'buy'; statusText = 'تکمیل';
+                amount = getSmartRandomAmount(200000, 2000000);
+            } else if (rand < 60) {
+                type = 'خرید<br>هات ووچر'; category = 'buy'; statusText = 'تکمیل';
+                amount = getSmartRandomAmount(50000, 500000);
+            } else if (rand < 75) {
+                type = 'فروش<br>یوووچر'; category = 'sell'; statusText = 'تسویه شد';
+                amount = getSmartRandomAmount(200000, 3500000);
+            } else if (rand < 85) {
+                type = 'فروش<br>پرمیوم ووچر'; category = 'sell'; statusText = 'تسویه شد';
+                amount = getSmartRandomAmount(200000, 2800000);
+            } else if (rand < 95) {
+                type = 'فروش<br>پی اس ووچر'; category = 'sell'; statusText = 'تسویه شد';
+                amount = getSmartRandomAmount(200000, 2500000);
+            } else {
+                type = 'برداشت از<br>کیف پول'; category = 'withdraw'; statusText = 'واریز شد';
+                amount = getSmartRandomAmount(100000, 1000000);
+            }
+
+            let name = getUniqueName();
+            let phone = prefixes[Math.floor(Math.random() * prefixes.length)] + "***";
+
+            return {
+                type: type, category: category, statusText: statusText,
+                amount: amount.toLocaleString(), name: name, phone: phone,
+                timestamp: Date.now()
+            };
+        }
+
+        let liveTransactions = [];
+
+        function initLiveTransactions() {
+            let now = Date.now();
+            for (let i = 0; i < 5; i++) {
+                let tx = generateTransaction();
+                let pastRandomMs = Math.floor(Math.random() * (7200000 - 180000 + 1)) + 180000; 
+                tx.timestamp = now - pastRandomMs; 
+                liveTransactions.push(tx);
+            }
+            liveTransactions.sort((a, b) => b.timestamp - a.timestamp);
+            renderLiveTable();
+        }
+
+        function calculateTimeText(timestamp) {
+            let minutes = Math.floor((Date.now() - timestamp) / 60000);
+            if (minutes < 1) return "همین الان";
+            if (minutes < 60) return minutes + " دقیقه پیش";
+            let hours = Math.floor(minutes / 60);
+            let remainMinutes = minutes % 60;
+            if(remainMinutes > 0) return hours + " ساعت و " + remainMinutes + " دقیقه پیش";
+            return hours + " ساعت پیش";
+        }
+
+        function renderLiveTable(isNewAdded = false) {
+            const tbody = document.getElementById('live-tx-body');
+            tbody.innerHTML = '';
+            
+            liveTransactions.forEach((tx, index) => {
+                let tr = document.createElement('tr');
+                if(isNewAdded && index === 0) tr.classList.add('tx-new-row');
+                
+                tr.innerHTML = `
+                    <td><div class="tx-badge tx-badge-${tx.category}">${tx.type}</div></td>
+                    <td style="font-weight:bold;">${tx.amount}</td>
+                    <td>
+                        <div class="tx-user-info">
+                            <span style="font-weight:600; font-size:13px;">${tx.name}</span>
+                            <span class="tx-user-phone">${tx.phone}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="tx-status">
+                            <span class="tx-status-icon">✓</span>
+                            <span>${tx.statusText}</span>
+                        </div>
+                    </td>
+                    <td class="tx-time-text" data-timestamp="${tx.timestamp}">${calculateTimeText(tx.timestamp)}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        setInterval(() => {
+            document.querySelectorAll('.tx-time-text').forEach(el => {
+                let ts = el.getAttribute('data-timestamp');
+                el.innerText = calculateTimeText(parseInt(ts));
+            });
+        }, 60000);
+
+        function scheduleNextTransactionCycle() {
+            // زمان‌بندی طبیعی و نامنظم (بین 3 دقیقه تا 38 دقیقه)
+            let randomDelayMs = Math.floor(Math.random() * (2280000 - 180000 + 1)) + 180000; 
+            
+            setTimeout(() => {
+                let newTx = generateTransaction();
+                liveTransactions.unshift(newTx);
+                if(liveTransactions.length > 5) {
+                    liveTransactions.pop();
+                }
+                renderLiveTable(true);
+                scheduleNextTransactionCycle(); 
+            }, randomDelayMs);
+        }
+
+        initLiveTransactions();
+        scheduleNextTransactionCycle();
+
+        // ==========================================
+        //  سوالات متداول
+        // ==========================================
         const faqData = [
             {
                 q: "📜 قوانین و مقررات صرافی ووچینو⁰۱",
@@ -453,4 +672,4 @@ U Voucher و Hot Voucher اعتبارهای دیجیتالی هستند که ب�
         });
     </script>
 </body>
-    </html>
+</html>
