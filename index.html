@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>صرافی ووچینو⁰۱ | خرید و فروش آنی ووچر و مرجع فوتبال</title>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --bg-color: #0b0f19;
@@ -18,541 +16,176 @@
             --text-muted: #9ca3af;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Vazirmatn', sans-serif;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Vazirmatn', 'Segoe UI', Tahoma, sans-serif; }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
             min-height: 100vh;
             overflow-x: hidden;
-            background-image: 
+            background-image:
                 radial-gradient(circle at 10% 20%, rgba(121, 40, 202, 0.15) 0%, transparent 40%),
                 radial-gradient(circle at 90% 80%, rgba(0, 255, 204, 0.1) 0%, transparent 40%);
         }
 
-        /* اسلایدر بالای سایت با آیکون‌های کوچک ووچر */
         .top-ticker {
             background: linear-gradient(90deg, #7928ca, #4338ca, #00ffcc);
             background-size: 200% 200%;
             animation: gradientBG 10s ease infinite;
-            color: #fff;
-            padding: 10px 15px;
-            text-align: center;
-            font-size: 13px;
-            font-weight: 500;
-            position: relative;
-            overflow: hidden;
+            color: #fff; padding: 10px 15px; text-align: center;
+            font-size: 13px; font-weight: 500;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .ticker-item {
-            display: none;
-            animation: fadeInOut 5s ease-in-out infinite;
-        }
-
-        .ticker-item.active {
-            display: block;
-        }
-
-        @keyframes fadeInOut {
-            0% { opacity: 0; transform: translateY(10px); }
-            20% { opacity: 1; transform: translateY(0); }
-            80% { opacity: 1; transform: translateY(0); }
-            100% { opacity: 0; transform: translateY(-10px); }
-        }
+        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
         .voucher-badge-mini {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 1px 6px;
-            border-radius: 4px;
-            font-size: 11px;
-            margin: 0 3px;
-            color: #fff;
-            border: 1px solid rgba(255,255,255,0.3);
+            display: inline-block; background: rgba(255,255,255,0.2);
+            padding: 1px 6px; border-radius: 4px; font-size: 11px; margin: 0 3px;
+            color: #fff; border: 1px solid rgba(255,255,255,0.3);
         }
 
-        /* هدر و لوگوی نئونی */
         header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 5%;
-            background: rgba(11, 15, 25, 0.9);
-            backdrop-filter: blur(12px);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 5%; background: rgba(11,15,25,0.9);
             border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            position: sticky; top: 0; z-index: 1000;
         }
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
+        .logo-container { display: flex; align-items: center; gap: 12px; }
         .logo-icon {
-            width: 42px;
-            height: 42px;
+            width: 42px; height: 42px;
             background: linear-gradient(135deg, var(--primary-neon), var(--secondary-neon));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            color: #0b0f19;
-            box-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
+            border-radius: 12px; display: flex; align-items: center; justify-content: center;
+            font-size: 20px; box-shadow: 0 0 20px rgba(0,255,204,0.4);
         }
-
         .logo-text h1 {
-            font-size: 18px;
-            font-weight: 900;
+            font-size: 18px; font-weight: 900;
             background: linear-gradient(45deg, #fff, var(--primary-neon));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-
-        .logo-text span {
-            font-size: 10px;
-            color: var(--text-muted);
-        }
+        .logo-text span { font-size: 10px; color: var(--text-muted); }
 
         .cta-btn {
             background: linear-gradient(135deg, #00ffcc, #00b4d8);
-            color: #0b0f19;
-            padding: 8px 18px;
-            border-radius: 50px;
-            font-weight: 700;
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(0, 255, 204, 0.3);
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 13px;
+            color: #0b0f19; padding: 8px 18px; border-radius: 50px; font-weight: 700;
+            text-decoration: none; box-shadow: 0 4px 15px rgba(0,255,204,0.3);
+            transition: all 0.3s ease; display: flex; align-items: center; gap: 6px; font-size: 13px;
         }
+        .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,255,204,0.5); }
 
-        .cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 255, 204, 0.5);
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 30px 15px;
-        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 30px 15px; }
 
         .section-title {
-            font-size: 19px;
-            font-weight: 800;
-            margin: 30px 0 15px 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #fff;
-            border-right: 4px solid var(--primary-neon);
-            padding-right: 10px;
+            font-size: 19px; font-weight: 800; margin: 30px 0 15px 0;
+            display: flex; align-items: center; gap: 10px; color: #fff;
+            border-right: 4px solid var(--primary-neon); padding-right: 10px;
         }
 
         .glass-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            margin-bottom: 20px;
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 16px; padding: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); margin-bottom: 20px;
         }
 
-        /* بخش مسابقات فوتبال مهم */
         .match-card {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            background: rgba(17, 24, 39, 0.9);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 14px;
-            padding: 18px;
-            margin-bottom: 15px;
-            transition: 0.3s;
+            display: flex; flex-direction: column; gap: 15px;
+            background: rgba(17,24,39,0.9); border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px; padding: 18px; margin-bottom: 15px; transition: 0.3s;
         }
+        .match-card:hover { border-color: rgba(0,255,204,0.3); }
 
-        .match-card:hover {
-            border-color: rgba(0, 255, 204, 0.3);
+        .match-header-info { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--text-muted); }
+        .match-teams-box { display: flex; justify-content: space-between; align-items: center; text-align: center; }
+        .team-box { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+        .team-crest {
+            width: 42px; height: 42px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px; font-weight: 900; color: #0b0f19;
+            background: linear-gradient(135deg, var(--primary-neon), #fff);
         }
+        .team-box span.team-name { font-weight: 700; font-size: 14px; color: #fff; }
+        .vs-badge { font-weight: 900; color: var(--primary-neon); font-size: 15px; padding: 0 15px; }
 
-        .match-header-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-
-        .match-teams-box {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            text-align: center;
-        }
-
-        .team-box {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .team-box img {
-            width: 40px;
-            height: 40px;
-            object-fit: contain;
-        }
-
-        .team-box span {
-            font-weight: 700;
-            font-size: 14px;
-            color: #fff;
-        }
-
-        .vs-badge {
-            font-weight: 900;
-            color: var(--primary-neon);
-            font-size: 15px;
-            padding: 0 15px;
-        }
+        .prob-bar-container { margin-top: 10px; }
+        .prob-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
+        .prob-bar { height: 6px; background: #374151; border-radius: 3px; display: flex; overflow: hidden; }
 
         .match-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 5px;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            padding-top: 12px;
+            display: flex; justify-content: space-between; align-items: center;
+            margin-top: 5px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 12px;
+            flex-wrap: wrap; gap: 10px;
         }
-
         .squad-btn {
-            background: rgba(121, 40, 202, 0.2);
-            color: #c084fc;
-            border: 1px solid rgba(192, 132, 252, 0.3);
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
+            background: rgba(121,40,202,0.2); color: #c084fc; border: 1px solid rgba(192,132,252,0.3);
+            padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; transition: 0.2s;
         }
+        .squad-btn:hover { background: rgba(121,40,202,0.4); }
 
-        .squad-btn:hover {
-            background: rgba(121, 40, 202, 0.4);
+        .lineup-box {
+            display: none; margin-top: 12px; padding: 14px; background: rgba(0,0,0,0.25);
+            border-radius: 10px; font-size: 12.5px; line-height: 2; color: var(--text-muted);
         }
+        .lineup-box.open { display: block; }
+        .lineup-box h4 { color: #fff; font-size: 13px; margin-bottom: 6px; }
 
-        .prob-bar-container {
-            margin-top: 10px;
-        }
-
-        .prob-labels {
-            display: flex;
-            justify-content: space-between;
-            font-size: 11px;
-            color: var(--text-muted);
-            margin-bottom: 4px;
-        }
-
-        .prob-bar {
-            height: 6px;
-            background: #374151;
-            border-radius: 3px;
-            display: flex;
-            overflow: hidden;
-        }
-
-        /* اعتمادگاه ووچینو */
-        .trust-table-wrapper {
-            overflow-x: auto;
-        }
-
-        table.trust-table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: center;
-            font-size: 13px;
-        }
-
-        table.trust-table th, table.trust-table td {
-            padding: 12px 10px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        table.trust-table th {
-            background: rgba(121, 40, 202, 0.2);
-            color: var(--primary-neon);
-            font-weight: 700;
-        }
-
-        .badge-buy { background: rgba(0, 255, 204, 0.15); color: #00ffcc; padding: 3px 8px; border-radius: 6px; font-size: 11px; }
-        .badge-sell { background: rgba(245, 158, 11, 0.15); color: #f59e0b; padding: 3px 8px; border-radius: 6px; font-size: 11px; }
-        .badge-withdraw { background: rgba(59, 130, 246, 0.15); color: #60a5fa; padding: 3px 8px; border-radius: 6px; font-size: 11px; }
-
-        /* آکاردئون قوانین و آموزش‌ها */
         .faq-item {
-            background: rgba(17, 24, 39, 0.7);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            margin-bottom: 10px;
-            overflow: hidden;
+            background: rgba(17,24,39,0.7); border: 1px solid var(--border-color);
+            border-radius: 12px; margin-bottom: 10px; overflow: hidden;
         }
-
         .faq-question {
-            padding: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 14px;
-            color: #fff;
+            padding: 16px; font-weight: 700; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center; font-size: 14px; color: #fff;
         }
-
         .faq-answer {
-            padding: 0 16px 16px 16px;
-            color: var(--text-muted);
-            font-size: 13px;
-            line-height: 1.9;
-            display: none;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            padding-top: 12px;
+            padding: 0 16px 16px 16px; color: var(--text-muted); font-size: 13px; line-height: 1.9;
+            display: none; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 12px; white-space: pre-line;
         }
 
-        /* فوتر */
         footer {
-            text-align: center;
-            padding: 25px;
-            background: rgba(11, 15, 25, 0.95);
-            border-top: 1px solid var(--border-color);
-            color: var(--text-muted);
-            font-size: 12px;
-            margin-top: 40px;
+            text-align: center; padding: 25px; background: rgba(11,15,25,0.95);
+            border-top: 1px solid var(--border-color); color: var(--text-muted); font-size: 12px; margin-top: 40px;
         }
+
+        .chevron { display: inline-block; transition: transform 0.2s; }
+        .faq-item.open .chevron { transform: rotate(180deg); }
     </style>
 </head>
 <body>
 
-    <!-- اسلایدر تبلیغاتی بالای سایت -->
     <div class="top-ticker">
-        <div class="ticker-item active">
-            <span class="voucher-badge-mini">U Voucher</span> <span class="voucher-badge-mini">Hot Voucher</span> خرید آنی انواع ووچر در کمتر از ۵ دقیقه
-        </div>
-        <div class="ticker-item">
-            <span class="voucher-badge-mini">Premium</span> <span class="voucher-badge-mini">PS Voucher</span> صرافی امن ووچینو⁰۱؛ بالاترین سرعت و بهترین نرخ بازار
-        </div>
-        <div class="ticker-item">
-            <i class="fa-solid fa-gift"></i> از بونوس‌ها و تخفیف‌های دوره‌ای ربات <span style="color:#00ffcc">@Vochino_bh01_bot</span> مطلع شوید
-        </div>
+        <span class="voucher-badge-mini">U Voucher</span> <span class="voucher-badge-mini">Hot Voucher</span> خرید آنی انواع ووچر در کمتر از ۵ دقیقه — صرافی امن ووچینو⁰۱
     </div>
 
-    <!-- هدر سایت -->
     <header>
         <div class="logo-container">
-            <div class="logo-icon">
-                <i class="fa-solid fa-shield-cat"></i>
-            </div>
+            <div class="logo-icon">🛡️</div>
             <div class="logo-text">
                 <h1>ووچینو⁰۱</h1>
                 <span>صرافی امن ووچر و مرجع مسابقات ورزشی</span>
             </div>
         </div>
         <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="cta-btn">
-            <i class="fa-brands fa-telegram"></i> ورود به ربات خرید
+            ✈️ ورود به ربات خرید
         </a>
     </header>
 
     <div class="container">
 
-        <!-- بخش مسابقات مهم فوتبال -->
-        <div class="section-title">
-            <i class="fa-solid fa-futbol"></i> مسابقات مهم فوتبال و ترکیب آنلاین
-        </div>
+        <div class="section-title">⚽ مسابقات مهم فوتبال و ترکیب آنلاین</div>
 
-        <div class="match-card">
-            <div class="match-header-info">
-                <span style="color: var(--primary-neon);"><i class="fa-solid fa-circle" style="font-size: 7px;"></i> لیگ قهرمانان اروپا</span>
-                <span>امشب ساعت ۲۲:۳۰</span>
-            </div>
-            <div class="match-teams-box">
-                <div class="team-box">
-                    <img src="https://cdn-icons-png.flaticon.com/512/8603/8603033.png" alt="آرسنال">
-                    <span>آرسنال (ستاره‌دار)</span>
-                </div>
-                <div class="vs-badge">VS</div>
-                <div class="team-box">
-                    <img src="https://cdn-icons-png.flaticon.com/512/8603/8603033.png" alt="حریف">
-                    <span>رقیب اروپایی</span>
-                </div>
-            </div>
-            <div class="prob-bar-container">
-                <div class="prob-labels">
-                    <span>برد آرسنال (55%)</span>
-                    <span>مساوی (20%)</span>
-                    <span>برد مهمان (25%)</span>
-                </div>
-                <div class="prob-bar">
-                    <div style="background: var(--primary-neon); width: 55%;"></div>
-                    <div style="background: var(--accent-gold); width: 20%;"></div>
-                    <div style="background: #ef4444; width: 25%;"></div>
-                </div>
-            </div>
-            <div class="match-actions">
-                <button class="squad-btn" onclick="alert('ترکیب آنلاین و بازیکنان کلیدی آرسنال بارگذاری شد.')"><i class="fa-solid fa-users"></i> مشاهده ترکیب آنلاین</button>
-                <span style="font-size: 11px; color: var(--text-muted);">وضعیت: آماده برگزاری</span>
-            </div>
-        </div>
+        <div id="matches-container"></div>
 
-        <div class="match-card">
-            <div class="match-header-info">
-                <span style="color: var(--accent-gold);"><i class="fa-solid fa-circle" style="font-size: 7px;"></i> لیگ برتر انگلیس</span>
-                <span>فردا ساعت ۲۱:۰۰</span>
-            </div>
-            <div class="match-teams-box">
-                <div class="team-box">
-                    <img src="https://cdn-icons-png.flaticon.com/512/8603/8603033.png" alt="تیم ۱">
-                    <span>منچسترسیتی</span>
-                </div>
-                <div class="vs-badge">VS</div>
-                <div class="team-box">
-                    <img src="https://cdn-icons-png.flaticon.com/512/8603/8603033.png" alt="تیم ۲">
-                    <span>لیورپول</span>
-                </div>
-            </div>
-            <div class="prob-bar-container">
-                <div class="prob-labels">
-                    <span>برد میزبان (45%)</span>
-                    <span>مساوی (30%)</span>
-                    <span>برد مهمان (25%)</span>
-                </div>
-                <div class="prob-bar">
-                    <div style="background: var(--primary-neon); width: 45%;"></div>
-                    <div style="background: var(--accent-gold); width: 30%;"></div>
-                    <div style="background: #ef4444; width: 25%;"></div>
-                </div>
-            </div>
-            <div class="match-actions">
-                <button class="squad-btn" onclick="alert('ترکیب آنلاین تیم‌ها بارگذاری شد.')"><i class="fa-solid fa-users"></i> مشاهده ترکیب آنلاین</button>
-                <span style="font-size: 11px; color: var(--text-muted);">وضعیت: پیش از بازی</span>
-            </div>
-        </div>
-
-        <div class="match-card">
-            <div class="match-header-info">
-                <span style="color: #60a5fa;"><i class="fa-solid fa-circle" style="font-size: 7px;"></i> بوندس‌لیگا آلمان</span>
-                <span>فردا ساعت ۲۳:۰۰</span>
-            </div>
-            <div class="match-teams-box">
-                <div class="team-box">
-                    <img src="https://cdn-icons-png.flaticon.com/512/8603/8603033.png" alt="تیم ۱">
-                    <span>بایرن مونیخ</span>
-                </div>
-                <div class="vs-badge">VS</div>
-                <div class="team-box">
-                    <img src="https://cdn-icons-png.flaticon.com/512/8603/8603033.png" alt="تیم ۲">
-                    <span>دورتموند</span>
-                </div>
-            </div>
-            <div class="prob-bar-container">
-                <div class="prob-labels">
-                    <span>برد میزبان (60%)</span>
-                    <span>مساوی (15%)</span>
-                    <span>برد مهمان (25%)</span>
-                </div>
-                <div class="prob-bar">
-                    <div style="background: var(--primary-neon); width: 60%;"></div>
-                    <div style="background: var(--accent-gold); width: 15%;"></div>
-                    <div style="background: #ef4444; width: 25%;"></div>
-                </div>
-            </div>
-            <div class="match-actions">
-                <button class="squad-btn" onclick="alert('ترکیب آنلاین تیم‌ها بارگذاری شد.')"><i class="fa-solid fa-users"></i> مشاهده ترکیب آنلاین</button>
-                <span style="font-size: 11px; color: var(--text-muted);">وضعیت: پیش از بازی</span>
-            </div>
-        </div>
-
-        <div class="glass-card" style="text-align: center; background: linear-gradient(135deg, rgba(121,40,202,0.25), rgba(0,255,204,0.1));">
-            <h3 style="font-size: 18px; margin-bottom: 10px; color: #fff;">شارژ آنی حساب‌های شرط‌بندی و بازی‌ها</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">خرید و فروش امن انواع ووچر با بهترین نرخ و بالاترین سرعت در ربات تلگرام صرافی ووچینو⁰۱.</p>
-            <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="cta-btn" style="display: inline-flex; justify-content: center; padding: 12px 30px;">
-                <i class="fa-brands fa-telegram"></i> ورود به ربات @Vochino_bh01_bot
+        <div class="glass-card" style="text-align:center; background: linear-gradient(135deg, rgba(121,40,202,0.25), rgba(0,255,204,0.1));">
+            <h3 style="font-size:18px; margin-bottom:10px; color:#fff;">خرید و فروش آنی ووچر</h3>
+            <p style="font-size:13px; color: var(--text-muted); margin-bottom:20px;">خرید و فروش امن انواع ووچر با بهترین نرخ و بالاترین سرعت در ربات تلگرام صرافی ووچینو⁰۱.</p>
+            <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="cta-btn" style="display:inline-flex; justify-content:center; padding:12px 30px;">
+                ✈️ ورود به ربات @Vochino_bh01_bot
             </a>
         </div>
 
-        <!-- اعتمادگاه ووچینو⁰۱ (جدول هوشمند با زمان‌های متحرک و ۵۰۰+ نام) -->
-        <div class="section-title">
-            <i class="fa-solid fa-shield-check"></i> اعتمادگاه ووچینو⁰۱ (آخرین تراکنش‌های موفق)
-        </div>
-        
-        <div class="glass-card trust-table-wrapper">
-            <table class="trust-table">
-                <thead>
-                    <tr>
-                        <th>نوع تراکنش</th>
-                        <th>مبلغ (تومان)</th>
-                        <th>کاربر</th>
-                        <th>وضعیت</th>
-                        <th>زمان</th>
-                    </tr>
-                </thead>
-                <tbody id="dynamic-trust-table">
-                    <!-- پر شده با جاوا اسکریپت -->
-                </tbody>
-            </table>
-        </div>
+        <div class="section-title">📖 قوانین، آموزش‌ها و سوالات متداول صرافی ووچینو⁰۱</div>
 
-        <!-- قوانین، آموزش‌ها و سوالات متداول -->
-        <div class="section-title">
-            <i class="fa-solid fa-book-open"></i> قوانین، آموزش‌ها و سوالات متداول صرافی ووچینو⁰۱
-        </div>
-
-        <div class="faq-section">
-            <div class="faq-item">
-                <div class="faq-question">📜 قوانین و مقررات کامل صرافی ووچینو⁰۱ <i class="fa-solid fa-chevron-down"></i></div>
-                <div class="faq-answer">
-                    🇮🇷 تابع قوانین و مقررات جاری جمهوری اسلامی ایران.<br><br>
-                    <b>۱. امنیت حساب کاربری:</b> مسئولیت حفظ اطلاعات حساب، رمز عبور و کدهای دریافتی بر عهده کاربر است. ووچینو⁰۱ هیچ‌گاه اطلاعات محرمانه شما را از طریق پیام خصوصی یا تماس تلفنی درخواست نخواهد کرد.<br><br>
-                    <b>۲. تطابق اطلاعات پرداخت:</b> نام صاحب حساب یا کارت پرداخت باید با اطلاعات ثبت‌شده در حساب کاربری مطابقت داشته باشد.<br><br>
-                    <b>۳. مبارزه با کلاهبرداری:</b> صرافی در راستای مقابله با فیشینگ حق بررسی سفارش‌های مشکوک را دارد.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">🎓 آموزش کامل خرید و فروش انواع ووچر و شارژ سایت‌ها <i class="fa-solid fa-chevron-down"></i></div>
-                <div class="faq-answer">
-                    <b>مرحله اول | شارژ کیف پول:</b> از منوی ربات وارد بخش «شارژ کیف پول» شوید (روش کارت به کارت پیشنهاد می‌شود).<br><br>
-                    <b>مرحله دوم | خرید ووچر:</b> نوع ووچر و مبلغ را انتخاب و ثبت سفارش کنید.<br><br>
-                    <b>مرحله سوم | فروش ووچر:</b> اطلاعات ووچر را بفرستید تا پس از بررسی تسویه شود.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">❓ سوالات متداول (FAQ) و راهنمای پشتیبانی <i class="fa-solid fa-chevron-down"></i></div>
-                <div class="faq-answer">
-                    <b>۱. واریز کردم ولی کیف پول شارژ نشده:</b> سیستم در حال بررسی است؛ از ارسال پیام مکرر پرهیز کنید.<br><br>
-                    <b>۲. پشتیبانی:</b> مشکلات مالی را به بخش مالی و مشکلات فنی را به بخش فنی ربات گزارش دهید.
-                </div>
-            </div>
-        </div>
+        <div class="faq-section" id="faq-section"></div>
 
     </div>
 
@@ -561,97 +194,263 @@
     </footer>
 
     <script>
-        // اسلایدر ۵ ثانیه‌ای بالای صفحه
-        let currentTicker = 0;
-        const tickers = document.querySelectorAll('.ticker-item');
-        setInterval(() => {
-            tickers[currentTicker].classList.remove('active');
-            currentTicker = (currentTicker + 1) % tickers.length;
-            tickers[currentTicker].classList.add('active');
-        }, 5000);
+        const matches = [
+            {
+                league: "لیگ قهرمانان اروپا",
+                time: "امشب ساعت ۲۲:۳۰",
+                home: "آرسنال", away: "رقیب اروپایی",
+                homeInit: "AR", awayInit: "EU",
+                probs: [55, 20, 25],
+                status: "آماده برگزاری",
+                lineup: {
+                    home: ["رایا (دروازه‌بان)", "تیمبر (مدافع)", "سالیبا (مدافع)", "گابریل (مدافع)", "زینچنکو (مدافع)", "رایس (هافبک)", "اودگارد (هافبک)", "سایکا (هافبک)", "مارتینلی (مهاجم)", "هاورتز (مهاجم)", "ساکا (مهاجم)"],
+                    away: ["ترکیب رسمی حریف پس از اعلام باشگاه به‌روزرسانی می‌شود"]
+                }
+            },
+            {
+                league: "لیگ برتر انگلیس",
+                time: "فردا ساعت ۲۱:۰۰",
+                home: "منچسترسیتی", away: "لیورپول",
+                homeInit: "MC", awayInit: "LV",
+                probs: [45, 30, 25],
+                status: "پیش از بازی",
+                lineup: {
+                    home: ["ترکیب رسمی معمولاً ۱ ساعت قبل از بازی اعلام می‌شود"],
+                    away: ["ترکیب رسمی معمولاً ۱ ساعت قبل از بازی اعلام می‌شود"]
+                }
+            },
+            {
+                league: "بوندس‌لیگا آلمان",
+                time: "فردا ساعت ۲۳:۰۰",
+                home: "بایرن مونیخ", away: "دورتموند",
+                homeInit: "BM", awayInit: "BD",
+                probs: [60, 15, 25],
+                status: "پیش از بازی",
+                lineup: {
+                    home: ["ترکیب رسمی معمولاً ۱ ساعت قبل از بازی اعلام می‌شود"],
+                    away: ["ترکیب رسمی معمولاً ۱ ساعت قبل از بازی اعلام می‌شود"]
+                }
+            }
+        ];
 
-        // آکاردئون‌ها
-        document.querySelectorAll('.faq-question').forEach(item => {
-            item.addEventListener('click', () => {
-                const answer = item.nextElementSibling;
-                answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+        function matchCardHTML(m, idx) {
+            return `
+            <div class="match-card">
+                <div class="match-header-info">
+                    <span style="color: var(--primary-neon);">● ${m.league}</span>
+                    <span>${m.time}</span>
+                </div>
+                <div class="match-teams-box">
+                    <div class="team-box">
+                        <div class="team-crest">${m.homeInit}</div>
+                        <span class="team-name">${m.home}</span>
+                    </div>
+                    <div class="vs-badge">VS</div>
+                    <div class="team-box">
+                        <div class="team-crest">${m.awayInit}</div>
+                        <span class="team-name">${m.away}</span>
+                    </div>
+                </div>
+                <div class="prob-bar-container">
+                    <div class="prob-labels">
+                        <span>برد میزبان (${m.probs[0]}%)</span>
+                        <span>مساوی (${m.probs[1]}%)</span>
+                        <span>برد مهمان (${m.probs[2]}%)</span>
+                    </div>
+                    <div class="prob-bar">
+                        <div style="background: var(--primary-neon); width:${m.probs[0]}%;"></div>
+                        <div style="background: var(--accent-gold); width:${m.probs[1]}%;"></div>
+                        <div style="background: #ef4444; width:${m.probs[2]}%;"></div>
+                    </div>
+                </div>
+                <div class="match-actions">
+                    <button class="squad-btn" data-idx="${idx}">👥 مشاهده ترکیب آنلاین</button>
+                    <span style="font-size:11px; color: var(--text-muted);">وضعیت: ${m.status}</span>
+                </div>
+                <div class="lineup-box" id="lineup-${idx}">
+                    <h4>${m.home}</h4>${m.lineup.home.join('<br>')}
+                    <h4 style="margin-top:10px;">${m.away}</h4>${m.lineup.away.join('<br>')}
+                </div>
+            </div>`;
+        }
+
+        document.getElementById('matches-container').innerHTML = matches.map(matchCardHTML).join('');
+
+        document.querySelectorAll('.squad-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const box = document.getElementById('lineup-' + btn.getAttribute('data-idx'));
+                box.classList.toggle('open');
             });
         });
 
-        // بانک جامع بیش از ۵۰۰ نام برای تنوع کامل
-        const firstNames = ["علی", "محمد", "رضا", "مهدی", "امیر", "سارا", "حسین", "محسن", "فاطمه", "زهرا", "مریم", "میلاد", "دانیال", "احسان", "پیمان", "سعید", "مسعود", "پویا", "ارشیا", "کوروش", "بهرام", "فرهاد", "نوید", "رامین", "بهنام", "سهیل", "نیما", "حامد", "حمید", "بهروز", "فرشاد", "اشکان", "بابک", "کامران", "شهرام", "پژمان", "مهران", "پرویز", "بهمن", "سهراب", "روزبه", "شروین", "مانی", "سام", "رادوین", "کیارش", "هومن", "سیاوش", "مازیار", "پندار", "برسام", "رادمهر", "آریا", "بنیامین", "پرهام", "رایان", "ماهان", "سروش", "هادی", "مجید", "وحید", "امید", "صادق", "مرتضی", "مصطفی", "محمود", "داود", "عادل", "فرزاد", "فرشید", "فریدون", "قاسم", "مجتبی", "محمدرضا", "علیرضا", "امیرحسین", "امیرمحمد", "محمدحسین", "محمدطاها", "ابوالفضل", "امیرعباس", "سیدعلی", "سیدمحمد", "محمدمهدی", "مبین", "متین", "مهرشاد", "کیوان", "کاوه", "کامبیز", "سینا", "سامان", "شایان", "شهاب", "شهریار", "عارف", "عباس", "عرفان", "عطا", "غلامرضا", "فؤاد", "کامیار", "کریم", "کمیل", "کیومرث", "گودرز", "لطف‌الله", "لقمان", "ماهيار", "محسن", "محمدباقر", "محمدتقي", "محمدحسن", "محمدحسين", "محمدصادق", "محمدعلي", "محمود", "مرتضي", "مريم", "مسعود", "مصطفي", "معين", "منصور", "مهتاب", "مهدي", "مهديار", "مهرداد", "ميثم", "ميلاد", "ناصر", "نازنين", "ناهيد", "نريمان", "نسترن", "نسيم", "نظام", "نگار", "نگین", "نوید", "نوشین", "نیما", "نیکا", "هادی", "هاشم", "هاله", "هانی", "هانیه", "هدیه", "همایون", "هنگامه", "یحیی", "یدالله", "یزدان", "يعقوب", "يونس", "يوسف"];
+        const faqData = [
+            {
+                q: "📜 قوانین و مقررات صرافی ووچینو⁰۱",
+                a: `🇮🇷 تابع قوانین و مقررات جاری جمهوری اسلامی ایران،،،
 
-        function getRandomUser() {
-            const randomName = firstNames[Math.floor(Math.random() * firstNames.length)];
-            const randomCode = Math.floor(10 + Math.random() * 90);
-            return `${randomName} ***${randomCode}`;
-        }
+به منظور حفظ امنیت کاربران، جلوگیری از سوءاستفاده‌های مالی و ارائه خدمات سریع و مطمئن، تمامی کاربران با ثبت‌نام و استفاده از خدمات ووچینو⁰۱، مفاد زیر را پذیرفته و ملزم به رعایت آن هستند.
 
-        // لیست تراکنش‌ها به همراه دقیقه‌های اولیه (متفاوت و طبیعی)
-        let transactions = [
-            { type: '<span class="badge-buy">خرید یوووچر</span>', amount: '۷۵۰,۰۰۰', user: getRandomUser(), status: '<i class="fa-solid fa-check-circle" style="color: #00ffcc;"></i> تکمیل', minutesAgo: 3 },
-            { type: '<span class="badge-buy">خرید هات ووچر</span>', amount: '۳۵۰,۰۰۰', user: getRandomUser(), status: '<i class="fa-solid fa-check-circle" style="color: #00ffcc;"></i> تکمیل', minutesAgo: 14 },
-            { type: '<span class="badge-sell">فروش یوووچر</span>', amount: '۱,۴۵۰,۰۰۰', user: getRandomUser(), status: '<i class="fa-solid fa-check-circle" style="color: #00ffcc;"></i> تسویه شد', minutesAgo: 27 },
-            { type: '<span class="badge-sell">فروش پرمیوم ووچر</span>', amount: '۲,۲۵۰,۰۰۰', user: getRandomUser(), status: '<i class="fa-solid fa-check-circle" style="color: #00ffcc;"></i> تسویه شد', minutesAgo: 41 },
-            { type: '<span class="badge-sell">فروش پی اس ووچر</span>', amount: '۹۲۰,۰۰۰', user: getRandomUser(), status: '<i class="fa-solid fa-check-circle" style="color: #00ffcc;"></i> تسویه شد', minutesAgo: 58 },
-            { type: '<span class="badge-withdraw">برداشت از جیب پول</span>', amount: '۱,۱۵۰,۰۰۰', user: getRandomUser(), status: '<i class="fa-solid fa-check-circle" style="color: #00ffcc;"></i> واریز شد', minutesAgo: 75 }
+⚖ امنیت حساب کاربری
+
+۱. مسئولیت حفظ اطلاعات حساب، رمز عبور و کدهای دریافتی بر عهده کاربر است. ووچینو⁰۱ هیچ‌گاه اطلاعات محرمانه شما را از طریق پیام خصوصی یا تماس تلفنی درخواست نخواهد کرد. مراقب صفحات و ربات‌های جعلی و فیشینگ باشید.
+
+۲. تطابق اطلاعات پرداخت
+نام صاحب حساب یا کارت پرداخت باید با اطلاعات ثبت‌شده در حساب کاربری مطابقت داشته باشد. پرداخت از حساب اشخاص دیگر ممکن است باعث تأخیر یا لغو تراکنش شود.
+
+۳. واریز از نام غیرهمسان
+در صورت واریز از حسابی که متعلق به کاربر ثبت‌نام‌شده نباشد، مبلغ تنها یک بار پس از بررسی به کیف پول کاربری بازگردانده می‌شود. در صورت تکرار این تخلف، حساب تا زمان بررسی بخش مالی محدود یا مسدود خواهد شد.
+
+۴. مغایرت مبلغ پرداختی
+در صورتی که مبلغ واریزی با مبلغ ثبت‌شده سفارش یکسان نباشد، درخواست تا دو مرتبه قابل اصلاح خواهد بود. در صورت تکرار برای بار سوم، هزینه‌های بررسی و پردازش کسر شده و امکان بازگشت کامل وجه تضمین نخواهد شد.
+
+۵. کدهای پیگیری
+از ارسال مکرر کدهای پیگیری یا ثبت چندباره یک تراکنش خودداری کنید. این کار باعث افزایش زمان بررسی و احتمال رد شدن درخواست می‌شود. در صورت بروز مشکل، تنها کافی است یک بار با بخش مالی ارتباط گرفته و کد پیگیری خود را ارسال کنید.
+
+۶. بررسی سفارش‌ها
+تمامی سفارش‌ها به صورت سیستمی و امنیتی بررسی می‌شوند. در صورت مشاهده فعالیت مشکوک یا مغایرت اطلاعات، انجام سفارش تا زمان تکمیل بررسی متوقف خواهد شد.
+
+۷. مبارزه با کلاهبرداری
+ووچینو⁰۱ در راستای مقابله با سوءاستفاده‌های مالی و فیشینگ، حق دارد سفارش‌هایی را که مشکوک تشخیص داده شوند بررسی یا لغو کند. این اقدام صرفاً برای حفظ امنیت کاربران انجام می‌شود.
+
+۸. ارتباط با پشتیبانی
+در صورت بروز هرگونه مشکل، از ارسال پیام‌های تکراری خودداری کنید. کارشناسان مالی تمامی درخواست‌ها را بر اساس زمان ثبت بررسی خواهند کرد.
+
+سخن پایانی
+هدف ما ایجاد محیطی امن، سریع و قابل اعتماد برای خرید و فروش ووچر است. رعایت این قوانین باعث ارائه خدمات بهتر و سریع‌تر به همه کاربران خواهد شد.
+با ثبت سفارش در ووچینو⁰۱، شما تمامی قوانین فوق را مطالعه کرده و می‌پذیرید.⚖`
+            },
+            {
+                q: "🎓 آموزش خرید و فروش ووچر در ووچینو⁰۱",
+                a: `به دنیای خرید و فروش سریع، امن و آسان ووچر خوش آمدید. ❤️
+
+اگر برای اولین بار از ووچینو⁰۱ استفاده می‌کنید، کافیست مراحل زیر را دنبال کنید.
+
+━━━━━━━━━━━━━━━━━━
+
+💳 مرحله اول | شارژ کیف پول
+ابتدا از منوی ربات وارد بخش «شارژ کیف پول» شوید.
+در ووچینو⁰۱ دو روش برای شارژ کیف پول در نظر گرفته شده است:
+🔹 کارت به کارت   🔹 درگاه پرداخت
+
+⭐ پیشنهاد مجموعه ووچینو⁰۱: برای ثبت سریع‌تر تراکنش، بررسی آسان‌تر و کاهش احتمال خطا، پیشنهاد می‌کنیم از روش کارت به کارت استفاده کنید.
+پس از واریز، کد پیگیری را یک مرتبه ثبت کنید تا سفارش شما توسط سیستم و بخش مالی بررسی و تأیید شود.
+
+━━━━━━━━━━━━━━━━━━
+
+💎 مرحله دوم | خرید ووچر
+پس از شارژ کیف پول، وارد بخش «خرید ووچر» شوید. سپس:
+• نوع ووچر موردنظر خود را انتخاب کنید.
+• مبلغ دلخواه را وارد نمایید.
+• اطلاعات سفارش را بررسی کنید.
+• گزینه «ثبت سفارش» را لمس کنید.
+پس از تأیید، ووچر شما در کوتاه‌ترین زمان ممکن تحویل داده خواهد شد.
+
+━━━━━━━━━━━━━━━━━━
+
+💵 مرحله سوم | فروش ووچر
+اگر قصد فروش ووچر دارید:
+🔸 وارد بخش «فروش ووچر» شوید.
+🔸 نوع ووچر را انتخاب کنید.
+🔸 اطلاعات ووچر را با دقت وارد نمایید.
+🔸 پس از تأیید کارشناسان، مبلغ به کیف پول شما واریز خواهد شد.
+
+━━━━━━━━━━━━━━━━━━
+
+🌍 ووچر چیست؟
+U Voucher و Hot Voucher اعتبارهای دیجیتالی هستند که برای شارژ حساب سایت‌های مختلف، پرداخت‌های بین‌المللی و بسیاری از خدمات آنلاین استفاده می‌شوند.
+اگر در انتخاب نوع ووچر تردید دارید، تیم پشتیبانی ووچینو⁰۱ با افتخار شما را راهنمایی خواهد کرد.
+
+━━━━━━━━━━━━━━━━━━
+
+🛡 چرا ووچینو⁰۱؟
+✔ خرید و فروش سریع و آسان
+✔ کارمزد رقابتی و منصفانه
+✔ محیط امن و شفاف
+✔ پشتیبانی پاسخگو
+✔ مناسب برای کاربران تازه‌کار و حرفه‌ای
+
+ووچینو⁰۱؛ جایی که خرید و فروش ووچر، ساده، مطمئن و لذت‌بخش است. ❤️`
+            },
+            {
+                q: "❓ سوالات متداول (FAQ)",
+                a: `قبل از ارسال پیام به پشتیبانی، لطفاً این بخش را مطالعه کنید. در بیشتر مواقع پاسخ سؤال شما همین‌جاست. ❤️
+
+━━━━━━━━━━━━━━━━━━
+
+💳 ۱. واریز انجام دادم ولی کیف پولم هنوز شارژ نشده، چیکار کنم؟
+ابتدا نگران نباشید. 😊 اگر پرداخت را به‌درستی انجام داده‌اید، سیستم در حال بررسی تراکنش شماست.
+لطفاً از ارسال پیام‌های پشت سر هم یا ثبت چندباره درخواست خودداری کنید؛ این کار باعث افزایش زمان بررسی می‌شود.
+در صورت نیاز، کد پیگیری پرداخت را برای بخش مالی ارسال کنید.
+
+━━━━━━━━━━━━━━━━━━
+
+🧾 ۲. کد پیگیری را ثبت کردم اما هنوز تأیید نشده است.
+گاهی به دلیل حجم بالای تراکنش‌ها یا بررسی‌های امنیتی، تأیید سفارش کمی زمان‌بر می‌شود.
+تا پایان بررسی، لطفاً از ثبت مجدد همان کد یا ارسال چندباره پیام خودداری کنید.
+
+━━━━━━━━━━━━━━━━━━
+
+🎁 ۳. ووچر را شارژ کردم اما موجودی سایت مقصد اضافه نشد.
+ابتدا از صحیح بودن کد ووچر و اطلاعات واردشده اطمینان حاصل کنید. اگر از صحت اطلاعات مطمئن هستید:
+🔹 وارد بخش «گزارش سفارش‌ها» در ربات شوید.
+🔹 کد پیگیری سفارش را دریافت کنید.
+🔹 کد پیگیری را برای پشتیبانی همان سایتی که ووچر را در آن شارژ کرده‌اید ارسال نمایید.
+در صورت تأیید از سمت سایت مقصد، مبلغ یا اعتبار طبق قوانین همان مجموعه برای شما بررسی و واریز خواهد شد.
+
+━━━━━━━━━━━━━━━━━━
+
+⏳ ۴. چرا سفارش من کمی دیر انجام شده است؟
+گاهی به علت بررسی‌های امنیتی، شلوغی شبکه یا افزایش تعداد سفارش‌ها، زمان انجام سفارش ممکن است بیشتر از حالت عادی شود.
+از ارسال پیام‌های مکرر خودداری کنید؛ تمامی سفارش‌ها به ترتیب ثبت بررسی می‌شوند.
+
+━━━━━━━━━━━━━━━━━━
+
+❌ ۵. مبلغ را اشتباه واریز کردم.
+در صورت مغایرت مبلغ، سفارش قابل انجام نیست. طبق قوانین مجموعه، تا دو مرتبه امکان اصلاح وجود دارد. لطفاً پیش از ثبت سفارش، مبلغ را با دقت بررسی کنید.
+
+━━━━━━━━━━━━━━━━━━
+
+👤 ۶. آیا می‌توانم با کارت شخص دیگری پرداخت کنم؟
+خیر، برای حفظ امنیت حساب‌ها و جلوگیری از سوءاستفاده‌های مالی، توصیه می‌شود پرداخت فقط از حسابی انجام شود که متعلق به صاحب حساب کاربری باشد.
+
+━━━━━━━━━━━━━━━━━━
+
+🔐 ۷. چگونه از فیشینگ و کلاهبرداری جلوگیری کنم؟
+فقط از ربات و راه‌های ارتباطی رسمی ووچینو⁰۱ استفاده کنید. اطلاعات حساب، رمزها و کدهای خود را در اختیار هیچ شخص یا ربات دیگری قرار ندهید.
+
+━━━━━━━━━━━━━━━━━━
+
+📞 ۸. چه زمانی باید به پشتیبانی پیام بدهم؟
+اگر پاسخ سؤال خود را در این بخش پیدا نکردید:
+💰 مشکلات مربوط به پرداخت، واریز، برداشت و تراکنش‌ها: ➡️ بخش مالی
+⚙️ مشکلات مربوط به ربات، خطاهای فنی، باگ‌ها یا عملکرد سیستم: ➡️ بخش فنی
+
+🌹 برای رسیدگی سریع‌تر، لطفاً هنگام ارسال پیام، کد پیگیری یا شناسه سفارش خود را نیز ارسال کنید. این کار باعث می‌شود درخواست شما سریع‌تر بررسی و پاسخ داده شود.
+
+از همراهی و اعتماد شما به ووچینو⁰۱ سپاسگزاریم. ❤️`
+            }
         ];
 
-        function formatTime(mins) {
-            if (mins < 1) return 'چند لحظه پیش';
-            if (mins < 60) return mins + ' دقیقه پیش';
-            let hrs = Math.floor(mins / 60);
-            let remMins = mins % 60;
-            return remMins > 0 ? `${hrs} ساعت و ${remMins} دقیقه پیش` : `${hrs} ساعت پیش`;
-        }
+        const faqSection = document.getElementById('faq-section');
+        faqSection.innerHTML = faqData.map((item, i) => `
+            <div class="faq-item" id="faq-${i}">
+                <div class="faq-question" data-idx="${i}">
+                    <span>${item.q}</span>
+                    <span class="chevron">⌄</span>
+                </div>
+                <div class="faq-answer">${item.a}</div>
+            </div>
+        `).join('');
 
-        function renderTable() {
-            const tbody = document.getElementById('dynamic-trust-table');
-            tbody.innerHTML = '';
-            transactions.forEach(tx => {
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${tx.type}</td>
-                        <td>${tx.amount}</td>
-                        <td>${tx.user}</td>
-                        <td>${tx.status}</td>
-                        <td>${formatTime(tx.minutesAgo)}</td>
-                    </tr>
-                `;
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', () => {
+                const item = q.parentElement;
+                const answer = q.nextElementSibling;
+                const isOpen = answer.style.display === 'block';
+                answer.style.display = isOpen ? 'none' : 'block';
+                item.classList.toggle('open', !isOpen);
             });
-        }
-
-        // بارگذاری اولیه جدول
-        renderTable();
-
-        // موتور هوشمند به‌روزرسانی (هر ۱ دقیقه زمان‌ها رو واقعی‌تر میکنه و به مرور تراکنش‌های جدید جایگزین میشه تا کاربر هر وقت اومد زمان‌ها تغییر کرده باشه)
-        setInterval(() => {
-            transactions.forEach(tx => {
-                tx.minutesAgo += 1; // زمان‌ها به مرور جلو میرن تا ثابت نمونن
-            });
-
-            // اگر قدیمی‌ترین تراکنش از حد گذشت، یه تراکنش کاملاً جدید با زمان تازه جایگزینش کن
-            if (transactions[transactions.length - 1].minutesAgo > 90) {
-                transactions.pop();
-                const types = [
-                    { type: '<span class="badge-buy">خرید یوووچر</span>', amount: (Math.floor(Math.random() * 8) + 2) + '۰۰,۰۰۰' },
-                    { type: '<span class="badge-buy">خرید هات ووچر</span>', amount: (Math.floor(Math.random() * 5) + 1) + '۰۰,۰۰۰' },
-                    { type: '<span class="badge-sell">فروش یوووچر</span>', amount: (Math.floor(Math.random() * 15) + 3) + '۰۰,۰۰۰' },
-                    { type: '<span class="badge-sell">فروش پرمیوم ووچر</span>', amount: (Math.floor(Math.random() * 20) + 5) + '۰۰,۰۰۰' },
-                    { type: '<span class="badge-sell">فروش پی اس ووچر</span>', amount: (Math.floor(Math.random() * 10) + 2) + '۰۰,۰۰۰' },
-                    { type: '<span class="badge-withdraw">برداشت از جیب پول</span>', amount: (Math.floor(Math.random() * 12) + 2) + '۰۰,۰۰۰' }
-                ];
-                const newTx = types[Math.floor(Math.random() * types.length)];
-                transactions.unshift({
-                    type: newTx.type,
-                    amount: newTx.amount,
-                    user: getRandomUser(),
-                    status: '<i class="fa-solid fa-check-circle" style="color: #00ffcc;"></i> ' + (newTx.type.includes('برداشت') ? 'واریز شد' : (newTx.type.includes('فروش') ? 'تسویه شد' : 'تکمیل')),
-                    minutesAgo: 1
-                });
-            }
-            renderTable();
-        }, 60000); // هر یک دقیقه به‌روزرسانی نرم پشت صحنه
+        });
     </script>
 </body>
-</html>
+    </html>
