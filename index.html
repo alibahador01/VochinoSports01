@@ -128,6 +128,38 @@
         .lineup-box.open { display: block; }
         .lineup-box h4 { color: #fff; font-size: 13px; margin-bottom: 6px; }
 
+        .live-tx-table {
+            width: 100%; border-collapse: collapse; text-align: center; font-size: 13.5px;
+        }
+        .live-tx-table th {
+            color: var(--primary-neon); padding: 12px 4px;
+            border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 600;
+        }
+        .live-tx-table td {
+            padding: 12px 4px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: middle;
+        }
+        .tx-badge {
+            padding: 4px 8px; border-radius: 6px; font-size: 11px; display: inline-block; font-weight: bold; line-height: 1.4;
+        }
+        .tx-badge-buy { background-color: rgba(6, 78, 59, 0.8); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.3); }
+        .tx-badge-sell { background-color: rgba(69, 26, 3, 0.8); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); }
+        .tx-badge-withdraw { background-color: rgba(30, 58, 138, 0.8); color: #60a5fa; border: 1px solid rgba(96, 165, 250, 0.3); }
+        
+        .tx-status { display: flex; align-items: center; justify-content: center; gap: 4px; font-size: 12px; }
+        .tx-status-icon {
+            background-color: #10b981; color: #fff; border-radius: 50%;
+            width: 15px; height: 15px; display: flex; align-items: center; justify-content: center; font-size: 9px;
+        }
+        .tx-user-info { display: flex; flex-direction: column; align-items: center; }
+        .tx-user-phone { font-size: 11px; color: var(--text-muted); }
+        .tx-time-text { color: #d1d5db; font-size: 12px; }
+        
+        @keyframes txFadeIn {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .tx-new-row { animation: txFadeIn 1.2s ease-out; }
+
         .faq-item {
             background: rgba(17,24,39,0.7); border: 1px solid var(--border-color);
             border-radius: 12px; margin-bottom: 10px; overflow: hidden;
@@ -148,56 +180,6 @@
 
         .chevron { display: inline-block; transition: transform 0.2s; }
         .faq-item.open .chevron { transform: rotate(180deg); }
-
-        /* live transaction table */
-        .tx-table-wrap {
-            max-height: 420px;
-            overflow-y: auto;
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-        .tx-table-wrap::-webkit-scrollbar { width: 5px; }
-        .tx-table-wrap::-webkit-scrollbar-track { background: #1a1f2e; border-radius: 8px; }
-        .tx-table-wrap::-webkit-scrollbar-thumb { background: var(--primary-neon); border-radius: 8px; }
-
-        .tx-table {
-            width: 100%; border-collapse: collapse; font-size: 13px;
-        }
-        .tx-table th {
-            position: sticky; top: 0; background: rgba(11,15,25,0.98);
-            padding: 12px 8px; text-align: center; color: var(--text-muted);
-            font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.08);
-            letter-spacing: 0.3px;
-        }
-        .tx-table td {
-            padding: 10px 8px; text-align: center;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
-            color: var(--text-main);
-        }
-        .tx-table tr:last-child td { border-bottom: none; }
-
-        .tx-type-badge {
-            display: inline-block; padding: 2px 10px; border-radius: 20px;
-            font-size: 11px; font-weight: 700;
-            background: rgba(0,255,204,0.15); color: var(--primary-neon);
-            border: 1px solid rgba(0,255,204,0.2);
-        }
-        .tx-type-badge.buy-u { background: rgba(0,255,204,0.2); color: #00ffcc; }
-        .tx-type-badge.buy-hot { background: rgba(245,158,11,0.2); color: #fbbf24; border-color: rgba(245,158,11,0.3); }
-        .tx-type-badge.sell-u { background: rgba(121,40,202,0.25); color: #c084fc; border-color: rgba(192,132,252,0.3); }
-        .tx-type-badge.sell-premium { background: rgba(236,72,153,0.2); color: #f472b6; border-color: rgba(236,72,153,0.3); }
-        .tx-type-badge.sell-ps { background: rgba(59,130,246,0.2); color: #60a5fa; border-color: rgba(59,130,246,0.3); }
-        .tx-type-badge.withdraw { background: rgba(239,68,68,0.2); color: #f87171; border-color: rgba(239,68,68,0.3); }
-        .tx-amount { font-weight: 700; font-size: 14px; }
-        .tx-name { font-weight: 500; color: #e5e7eb; }
-        .tx-phone { color: var(--text-muted); font-size: 12px; direction: ltr; display: inline-block; }
-        .tx-time { font-size: 11px; color: var(--text-muted); }
-
-        @media(max-width:600px){
-            .tx-table th, .tx-table td { font-size: 11px; padding: 6px 4px; }
-            .tx-type-badge { font-size: 9px; padding: 1px 6px; }
-            .tx-phone { font-size: 10px; }
-        }
     </style>
 </head>
 <body>
@@ -220,31 +202,24 @@
     </header>
 
     <div class="container">
-
-        <!-- بخش تراکنش‌های زنده (Live Transactions) -->
-        <div class="section-title">📊 تراکنش‌های زنده صرافی</div>
-        <div class="glass-card" style="padding: 16px;">
-            <div class="tx-table-wrap" id="txTableWrap">
-                <table class="tx-table" id="txTable">
-                    <thead>
-                        <tr>
-                            <th>نوع</th>
-                            <th>نام</th>
-                            <th>شماره</th>
-                            <th>مبلغ (تومان)</th>
-                            <th>زمان</th>
-                        </tr>
-                    </thead>
-                    <tbody id="txBody">
-                        <!-- rows generated by js -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
         <div class="section-title">⚽ مسابقات مهم فوتبال و ترکیب آنلاین</div>
-
         <div id="matches-container"></div>
+
+        <div class="section-title">📊 آخرین تراکنش‌ها و تسویه‌های زنده سامانه</div>
+        <div class="glass-card" style="padding: 10px 5px; overflow-x: auto;">
+            <table class="live-tx-table">
+                <thead>
+                    <tr>
+                        <th>نوع تراکنش</th>
+                        <th>مبلغ (تومان)</th>
+                        <th>کاربر</th>
+                        <th>وضعیت</th>
+                        <th>زمان</th>
+                    </tr>
+                </thead>
+                <tbody id="live-tx-body"></tbody>
+            </table>
+        </div>
 
         <div class="glass-card" style="text-align:center; background: linear-gradient(135deg, rgba(121,40,202,0.25), rgba(0,255,204,0.1));">
             <h3 style="font-size:18px; margin-bottom:10px; color:#fff;">خرید و فروش آنی ووچر</h3>
@@ -255,214 +230,13 @@
         </div>
 
         <div class="section-title">📖 قوانین، آموزش‌ها و سوالات متداول صرافی ووچینو⁰۱</div>
-
         <div class="faq-section" id="faq-section"></div>
-
     </div>
 
     <footer>
         <p>تمامی حقوق محفوظ است. صرافی امن ووچینو⁰۱ | ارتباط مستقیم از طریق ربات: @Vochino_bh01_bot</p>
     </footer>
-
     <script>
-        // ============================================================
-        //  بخش موتور تراکنش‌های زنده (Live Transactions)
-        // ============================================================
-
-        // ---------- دیتا ----------
-        const amountPools = {
-            buyU: [360,200,250,800,1000,1300,230,190,258,400,430,650,500,680,700,640,780,340,280,300,587,458,239,1200,1700,550,450,350,290,320,330,434,683,490,850,570,630,730,820,810,710,579,247,1500,757,470,220,240,1400,2000,760,580,100,210],
-            buyHot: [60,70,100,150,120,50,130,180,200,135,65,80,140,160,210,250,320,220,90,110,260,55,170,230,280,300],
-            sellU: [200,250,300,350,400,450,500,600,700,800,550,230,240,480,430,560,730,540,760,900,640,579,960,370,210,1000,440,555,335,460,1400],
-            sellPremium: [200,250,300,350,400,450,500,600,700,800,550,230,240,480,430,560,730,540,760,900,640,579,960,370,210,1000,440,555,335,460,1400],
-            sellPs: [200,250,300,350,400,450,500,600,700,800,550,230,240,480,430,560,730,540,760,900,640,579,960,370,210,1000,440,555,335,460,1400],
-            withdraw: [100,150,300,120,110,600,500,440,700,1000,350,140,320,540,155,170,190,180,200,800,670,560,130,160,250,870,290,450,580,380,650,570,680,107,36,430,750,139,740,220,470]
-        };
-
-        // اسم‌ها: ۴۰۰ پسرانه + ۵۰ دخترانه
-        const maleNames = [
-            "محمد", "علی", "حسین", "رضا", "مهدی", "احمد", "حسن", "امیر", "سعید", "محمدرضا",
-            "جواد", "محسن", "عباس", "کریم", "حامد", "وحید", "حسام", "آرمین", "سامان", "پویا",
-            "فرهاد", "بابک", "آرمان", "شایان", "میلاد", "کیان", "رامین", "نیما", "دانیال", "یاشار",
-            "اردلان", "بهنام", "خشایار", "فرید", "کاوه", "نوید", "آرش", "بهمن", "پارسا", "تیمور",
-            "ثمین", "جاوید", "چنگیز", "حبیب", "خسرو", "داریوش", "ذبیح", "رامتین", "زانیار", "سروش",
-            "شهرام", "صدرا", "طاها", "ظهیر", "عادل", "غلام", "فرشاد", "قباد", "لطفی", "مازیار",
-            "ناصر", "هرمز", "ایمان", "یونس", "بهزاد", "پژمان", "تقی", "جمشید", "چمران", "حیدر",
-            "خلیل", "راهب", "رستم", "سهراب", "شهاب", "صفا", "ضیاء", "طه", "ظاهر", "فخرالدین",
-            "قاسم", "لطیف", "محمدحسین", "نعیم", "هادی", "یعقوب", "ابوالفضل", "برزو", "پیمان", "تورج",
-            "جلال", "حمید", "خسرو", "رحیم", "زرین", "سام", "شاپور", "صالح", "طاهر", "ظفر",
-            "عرفان", "غیاث", "فریدون", "قادر", "کمال", "مهرداد", "نادر", "هرمز", "ایرج", "یاسر",
-            "امید", "بهرام", "پویان", "توفیق", "جریر", "حسنعلی", "خیرالله", "داوود", "راشد", "زاهد",
-            "سلیمان", "شریف", "صلاح", "طیب", "ظریف", "عطا", "غفور", "فراز", "قربان", "کیومرث",
-            "منوچهر", "نوذر", "همایون", "وهاب", "یزدان", "آباسین", "ارشام", "باسط", "پرفرد", "تراب",
-            "جابر", "حجت", "خادم", "رافعی", "زکریا", "سجاد", "شروین", "صهیب", "ضیاءالدین", "طهمورث",
-            "عزت", "غریب", "فرهاد", "قهرمان", "کاووس", "مهرزاد", "نعمان", "هامون", "یوسف", "ایلیا",
-            "بهروز", "پاشا", "تیرداد", "جمشید", "چاوش", "حافظ", "خرم", "رامبد", "زادمهر", "سهراب",
-            "شروین", "صفی", "ضیغمی", "ظفر", "عبدالله", "غرور", "فرشید", "قباد", "کیخسرو", "ماهان",
-            "ناصر", "هرمز", "ایمان", "یونس", "بهزاد", "پژمان", "تقی", "جمشید", "چمران", "حیدر",
-            "خلیل", "راهب", "رستم", "سهراب", "شهاب", "صفا", "ضیاء", "طه", "ظاهر", "فخرالدین",
-            "قاسم", "لطیف", "محمدحسین", "نعیم", "هادی", "یعقوب", "ابوالفضل", "برزو", "پیمان", "تورج",
-            "جلال", "حمید", "خسرو", "رحیم", "زرین", "سام", "شاپور", "صالح", "طاهر", "ظفر",
-            "عرفان", "غیاث", "فریدون", "قادر", "کمال", "مهرداد", "نادر", "هرمز", "ایرج", "یاسر",
-            "امید", "بهرام", "پویان", "توفیق", "جریر", "حسنعلی", "خیرالله", "داوود", "راشد", "زاهد",
-            "سلیمان", "شریف", "صلاح", "طیب", "ظریف", "عطا", "غفور", "فراز", "قربان", "کیومرث",
-            "منوچهر", "نوذر", "همایون", "وهاب", "یزدان", "آباسین", "ارشام", "باسط", "پرفرد", "تراب",
-            "جابر", "حجت", "خادم", "رافعی", "زکریا", "سجاد", "شروین", "صهیب", "ضیاءالدین", "طهمورث",
-            "عزت", "غریب", "فرهاد", "قهرمان", "کاووس", "مهرزاد", "نعمان", "هامون", "یوسف", "ایلیا",
-            "بهروز", "پاشا", "تیرداد", "جمشید", "چاوش", "حافظ", "خرم", "رامبد", "زادمهر", "سهراب",
-            "شروین", "صفی", "ضیغمی", "ظفر", "عبدالله", "غرور", "فرشید", "قباد", "کیخسرو", "ماهان",
-            "ناصر", "هرمز", "ایمان", "یونس", "بهزاد", "پژمان", "تقی", "جمشید", "چمران", "حیدر",
-            "خلیل", "راهب", "رستم", "سهراب", "شهاب", "صفا", "ضیاء", "طه", "ظاهر", "فخرالدین",
-            "قاسم", "لطیف", "محمدحسین", "نعیم", "هادی", "یعقوب", "ابوالفضل", "برزو", "پیمان", "تورج",
-            "جلال", "حمید", "خسرو", "رحیم", "زرین", "سام", "شاپور", "صالح", "طاهر", "ظفر",
-            "عرفان", "غیاث", "فریدون", "قادر", "کمال", "مهرداد", "نادر", "هرمز", "ایرج", "یاسر",
-            "امید", "بهرام", "پویان", "توفیق", "جریر", "حسنعلی", "خیرالله", "داوود", "راشد", "زاهد",
-            "سلیمان", "شریف", "صلاح", "طیب", "ظریف", "عطا", "غفور", "فراز", "قربان", "کیومرث",
-            "منوچهر", "نوذر", "همایون", "وهاب", "یزدان", "آباسین", "ارشام", "باسط", "پرفرد", "تراب",
-            "جابر", "حجت", "خادم", "رافعی", "زکریا", "سجاد", "شروین", "صهیب", "ضیاءالدین", "طهمورث",
-            "عزت", "غریب", "فرهاد", "قهرمان", "کاووس", "مهرزاد", "نعمان", "هامون", "یوسف", "ایلیا",
-            "بهروز", "پاشا", "تیرداد", "جمشید", "چاوش", "حافظ", "خرم", "رامبد", "زادمهر", "سهراب"
-        ];
-
-        const femaleNames = [
-            "فاطمه", "زهرا", "نازنین", "سارا", "نرگس", "مریم", "زینب", "فروغ", "شیرین", "مهسا",
-            "هانیه", "آتنا", "باران", "پریسا", "تارا", "ژاله", "رها", "سپیده", "شیدا", "غزاله",
-            "فرشته", "کتایون", "گلناز", "مونا", "نیلوفر", "ویدا", "هما", "یسنا", "آیدا", "بیتا",
-            "پرنیان", "ترانه", "جوانه", "حنانه", "خاطره", "دلارام", "ذکیه", "راحله", "زری", "ساحل",
-            "شبنم", "صفورا", "طاهره", "ظریفه", "عسل", "غزل", "فریبا", "قمر", "کیمیا", "مهرناز"
-        ];
-
-        const allNames = [...maleNames, ...femaleNames];
-        // 450 نام -> شاخص 0 تا 449
-
-        // پیش‌شماره‌های متنوع
-        const phonePrefixes = ["0914", "0902", "0912", "0930", "0933", "0935", "0936", "0937", "0938", "0939", "0920", "0921", "0922", "0910", "0911", "0913", "0915", "0916", "0917", "0918", "0919"];
-
-        // تابع تولید شماره ستاره‌دار
-        function genPhone() {
-            const prefix = phonePrefixes[Math.floor(Math.random() * phonePrefixes.length)];
-            const last = String(Math.floor(100 + Math.random() * 900)); // 3 رقم
-            return prefix + "***" + last;
-        }
-
-        // تابع انتخاب تصادفی از آرایه
-        function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
-
-        // تابع تولید یک تراکنش تصادفی
-        function generateTransaction() {
-            // 1. تعیین نوع بر اساس درصدها
-            const r = Math.random() * 100;
-            let typeKey, typeLabel, amountArr;
-            if (r < 30) { // خرید یو ووچر ۳۰٪
-                typeKey = 'buy-u';
-                typeLabel = 'خرید یو ووچر';
-                amountArr = amountPools.buyU;
-            } else if (r < 50) { // خرید هات ووچر ۲۰٪
-                typeKey = 'buy-hot';
-                typeLabel = 'خرید هات ووچر';
-                amountArr = amountPools.buyHot;
-            } else if (r < 65) { // فروش یو ووچر ۱۵٪
-                typeKey = 'sell-u';
-                typeLabel = 'فروش یو ووچر';
-                amountArr = amountPools.sellU;
-            } else if (r < 75) { // فروش پرمیوم ۱۰٪
-                typeKey = 'sell-premium';
-                typeLabel = 'فروش پرمیوم';
-                amountArr = amountPools.sellPremium;
-            } else if (r < 85) { // فروش پی اس ۱۰٪
-                typeKey = 'sell-ps';
-                typeLabel = 'فروش پی اس';
-                amountArr = amountPools.sellPs;
-            } else { // برداشت ۱۵٪
-                typeKey = 'withdraw';
-                typeLabel = 'برداشت';
-                amountArr = amountPools.withdraw;
-            }
-
-            const amount = pick(amountArr);
-            const nameIdx = Math.floor(Math.random() * allNames.length);
-            const name = allNames[nameIdx];
-            const phone = genPhone();
-            const now = new Date();
-            const timeStr = now.getHours().toString().padStart(2,'0') + ':' + 
-                            now.getMinutes().toString().padStart(2,'0') + ':' + 
-                            now.getSeconds().toString().padStart(2,'0');
-
-            return { typeKey, typeLabel, amount, name, phone, time: timeStr };
-        }
-
-        // متغیرهای وضعیت
-        let txHistory = [];
-        const MAX_ROWS = 30;
-
-        // تابع افزودن تراکنش جدید به جدول
-        function addTransaction() {
-            const tx = generateTransaction();
-            txHistory.unshift(tx);
-            if (txHistory.length > MAX_ROWS) txHistory.pop();
-            renderTable();
-        }
-
-        // رندر جدول
-        function renderTable() {
-            const tbody = document.getElementById('txBody');
-            tbody.innerHTML = '';
-            txHistory.forEach(tx => {
-                const tr = document.createElement('tr');
-                const badgeClass = 'tx-type-badge ' + 
-                    (tx.typeKey === 'buy-u' ? 'buy-u' :
-                     tx.typeKey === 'buy-hot' ? 'buy-hot' :
-                     tx.typeKey === 'sell-u' ? 'sell-u' :
-                     tx.typeKey === 'sell-premium' ? 'sell-premium' :
-                     tx.typeKey === 'sell-ps' ? 'sell-ps' : 'withdraw');
-                tr.innerHTML = `
-                    <td><span class="${badgeClass}">${tx.typeLabel}</span></td>
-                    <td class="tx-name">${tx.name}</td>
-                    <td><span class="tx-phone">${tx.phone}</span></td>
-                    <td class="tx-amount">${tx.amount.toLocaleString()}</td>
-                    <td class="tx-time">${tx.time}</td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        // ========== سیستم زمان‌بندی چرخش ==========
-        let intervalId = null;
-        let baseSpeed = 2800; // میلی‌ثانیه (ملایم)
-
-        function getSpeed() {
-            const now = new Date();
-            const h = now.getHours();
-            // از ساعت ۳ شب تا ۱۵ عصر: سرعت بسیار کم (تاخیر زیاد)
-            if (h >= 3 && h < 15) {
-                return 8000; // خیلی آرام
-            }
-            return baseSpeed;
-        }
-
-        function scheduleNext() {
-            if (intervalId) clearTimeout(intervalId);
-            const delay = getSpeed();
-            intervalId = setTimeout(() => {
-                addTransaction();
-                scheduleNext();
-            }, delay);
-        }
-
-        // شروع اولیه با چند تراکنش
-        function initTransactions() {
-            // ۱۰ تراکنش اولیه
-            for (let i=0; i<10; i++) {
-                const tx = generateTransaction();
-                txHistory.push(tx);
-            }
-            renderTable();
-            scheduleNext();
-        }
-
-        // ============================================================
-        //  بخش فوتبال (دست نخورده)
-        // ============================================================
         const matches = [
             {
                 league: "لیگ قهرمانان اروپا",
@@ -472,4 +246,287 @@
                 probs: [55, 20, 25],
                 status: "آماده برگزاری",
                 lineup: {
-                    home: ["رایا (دروازه‌بان)", "تیمبر (مدافع)", "سالیبا (مدافع)", "گابریل (مدافع)", "زینچنکو (مدافع)", "رایس (هافبک)", "اودگارد (هافبک)", "سایکا (هافبک)", "مارتینلی (مهاجم)", "ها
+                    home: ["رایا (دروازه‌بان)", "تیمبر (مدافع)", "سالیبا (مدافع)", "گابریل (مدافع)", "زینچنکو (مدافع)", "رایس (هافبک)", "اودگارد (هافبک)", "سایکا (هافبک)", "مارتینلی (مهاجم)", "هاورتز (مهاجم)", "ساکا (مهاجم)"],
+                    away: ["ترکیب رسمی حریف پس از اعلام باشگاه به‌روزرسانی می‌شود"]
+                }
+            },
+            {
+                league: "لیگ برتر انگلیس",
+                time: "فردا ساعت ۲۱:۰۰",
+                home: "منچسترسیتی", away: "لیورپول",
+                homeInit: "MC", awayInit: "LV",
+                probs: [45, 30, 25],
+                status: "پیش از بازی",
+                lineup: {
+                    home: ["ترکیب رسمی معمولاً ۱ ساعت قبل از بازی اعلام می‌شود"],
+                    away: ["ترکیب رسمی معمولاً ۱ ساعت قبل از بازی اعلام می‌شود"]
+                }
+            },
+            {
+                league: "بوندس‌لیگا آلمان",
+                time: "فردا ساعت ۲۳:۰۰",
+                home: "بایرن مونیخ", away: "دورتموند",
+                homeInit: "BM", awayInit: "BD",
+                probs: [60, 15, 25],
+                status: "پیش از بازی",
+                lineup: {
+                    home: ["ترکیب رسمی معمولاً ۱ ساعت قبل از بازی اعلام می‌شود"],
+                    away: ["ترکیب رسمی معمولاً ۱ ساعت قبل از بازی اعلام می‌شود"]
+                }
+            }
+        ];
+
+        function matchCardHTML(m, idx) {
+            return `
+            <div class="match-card">
+                <div class="match-header-info">
+                    <span style="color: var(--primary-neon);">● ${m.league}</span>
+                    <span>${m.time}</span>
+                </div>
+                <div class="match-teams-box">
+                    <div class="team-box">
+                        <div class="team-crest">${m.homeInit}</div>
+                        <span class="team-name">${m.home}</span>
+                    </div>
+                    <div class="vs-badge">VS</div>
+                    <div class="team-box">
+                        <div class="team-crest">${m.awayInit}</div>
+                        <span class="team-name">${m.away}</span>
+                    </div>
+                </div>
+                <div class="prob-bar-container">
+                    <div class="prob-labels">
+                        <span>برد میزبان (${m.probs[0]}%)</span>
+                        <span>مساوی (${m.probs[1]}%)</span>
+                        <span>برد مهمان (${m.probs[2]}%)</span>
+                    </div>
+                    <div class="prob-bar">
+                        <div style="background: var(--primary-neon); width:${m.probs[0]}%;"></div>
+                        <div style="background: var(--accent-gold); width:${m.probs[1]}%;"></div>
+                        <div style="background: #ef4444; width:${m.probs[2]}%;"></div>
+                    </div>
+                </div>
+                <div class="match-actions">
+                    <button class="squad-btn" data-idx="${idx}">👥 مشاهده ترکیب آنلاین</button>
+                    <span style="font-size:11px; color: var(--text-muted);">وضعیت: ${m.status}</span>
+                </div>
+                <div class="lineup-box" id="lineup-${idx}">
+                    <h4>${m.home}</h4>${m.lineup.home.join('<br>')}
+                    <h4 style="margin-top:10px;">${m.away}</h4>${m.lineup.away.join('<br>')}
+                </div>
+            </div>`;
+        }
+
+        document.getElementById('matches-container').innerHTML = matches.map(matchCardHTML).join('');
+
+        document.querySelectorAll('.squad-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const box = document.getElementById('lineup-' + btn.getAttribute('data-idx'));
+                box.classList.toggle('open');
+            });
+        });
+
+        const boyNames = [
+            "محمد", "علی", "رضا", "حسین", "مهدی", "امیر", "سجاد", "نیما", "سامان", "احسان", "عادل", "داود", "ماهان", "متین", 
+            "شایان", "پویا", "سینا", "امید", "عرفان", "علیرضا", "کامران", "یاسین", "میلاد", "کیوان", "آرش", "شهاب", "پارسا", 
+            "امیرحسین", "محمدامین", "آرمین", "پدرام", "حمید", "فرهاد", "مجید", "سعید", "رادمهر", "آریا", "پیمان", "رامین", 
+            "سهراب", "کیارش", "مازیار", "مهران", "پوریا", "حامد", "ابوالفضل", "محمدمهدی", "دانیال", "آبتین", "کسری", "شروین", 
+            "مانی", "کیومرث", "اشکان", "مهراد", "فرزاد", "سیامک", "امیرعلی", "امیررضا", "ایلیا", "سام", "کیان", "سورنا", 
+            "بردیا", "کارن", "آدرین", "هیربد", "شاهین", "داریوش", "آیدین", "صادق", "میثم", "مصطفی", "مرتضی", "مسعود", "یونس", 
+            "بهزاد", "شهرام", "شهروز", "سروش", "ارسلان", "بهنام", "هوتن", "باربد", "ساسان", "پندار", "فریدون", "سیاوش", 
+            "هومن", "بهروز", "فرشید", "بابک", "پژمان", "کوروش", "فرید", "نوید", "مهرداد", "بهرام", "بیژن", "روزبه", "خسرو", 
+            "کیانوش", "شنتیا", "رایان", "ماکان", "بنیامین", "آدریان", "سامیار", "پارسیا", "رادوین", "آراد", "برسام", "همایون",
+            "رادمان", "آرين", "فرزين", "آرمان", "پرهام", "مهیار", "هادی", "جواد", "محسن", "بهداد", "کورش", "ارشیا",
+            "بهراد", "آرشا", "رادین", "تنیار", "رامتین", "زانیار", "باربد", "هیراد", "آرشام", "هومن", "آرتا", "سامی",
+            "کیان", "مانی", "شنتیا", "رادمان", "آرتین", "رایا", "کارن", "برسام", "باراد", "آراد", "آدریان", "پندار",
+            "بنیامین", "سامان", "سهراب", "دانیال", "پویا", "شایان", "ماهان", "متین", "امیر", "مهدی", "حسین", "رضا", "علی",
+            "محمد", "سجاد", "نیما", "احسان", "عادل", "داود", "عرفان", "علیرضا", "کامران", "یاسین", "میلاد", "کیوان", "آرش",
+            "شهاب", "پارسا", "امیرحسین", "محمدامین", "آرمین", "پدرام", "حمید", "فرهاد", "مجید", "سعید", "رادمهر", "آریا",
+            "پیمان", "رامین", "سهراب", "کیارش", "مازیار", "مهران", "پوریا", "حامد", "ابوالفضل", "محمدمهدی", "دانیال", "آبتین",
+            "کسری", "شروین", "مانی", "کیومرث", "اشکان", "مهراد", "فرزاد", "سیامک", "امیرعلی", "امیررضا", "ایلیا", "سام",
+            "کیان", "سورنا", "بردیا", "کارن", "آدرین", "هیربد", "شاهین", "داریوش", "آیدین", "صادق", "میثم", "مصطفی", "مرتضی",
+            "مسعود", "یونس", "بهزاد", "شهرام", "شهروز", "سروش", "ارسلان", "بهنام", "هوتن", "باربد", "ساسان", "پندار",
+            "فریدون", "سیاوش", "هومن", "بهروز", "فرشید", "بابک", "پژمان", "کوروش", "فرید", "نوید", "مهرداد", "بهرام", "بیژن",
+            "روزبه", "خسرو", "کیانوش", "شنتیا", "رایان", "ماکان", "بنیامین", "آدریان", "سامیار", "پارسیا", "رادوین", "آراد",
+            "برسام", "همایون", "رادمان", "آرين", "فرزين", "آرمان", "پرهام", "مهیار", "هادی", "جواد", "محسن", "بهداد", "کورش",
+            "ارشیا", "بهراد", "آرشا", "رادین", "رامتین", "زانیار", "هیراد", "آرشام", "آرتا", "سامی", "کیان", "مانی", "شنتیا",
+            "رادمان", "آرتین", "رایا", "کارن", "برسام", "باراد", "آراد", "آدریان", "پندار", "بنیامین", "سامان", "سهراب",
+            "دانیال", "پویا", "شایان", "ماهان", "متین", "امیر", "مهدی", "حسین", "رضا", "علی", "محمد", "سجاد", "نیما", "احسان",
+            "عادل", "داود", "عرفان", "علیرضا", "کامران", "یاسین", "میلاد", "کیوان", "آرش", "شهاب", "پارسا", "امیرحسین",
+            "محمدامین", "آرمین", "پدرام", "حمید", "فرهاد", "مجید", "سعید", "رادمهر", "آریا", "پیمان", "رامین", "سهراب",
+            "کیارش", "مازیار", "مهران", "پوریا", "حامد", "ابوالفضل", "محمدمهدی", "دانیال", "آبتین", "کسری", "شروین", "مانی",
+            "کیومرث", "اشکان", "مهراد", "فرزاد", "سیامک", "امیرعلی", "امیررضا", "ایلیا", "سام", "کیان", "سورنا", "بردیا",
+            "کارن", "آدرین", "هیربد", "شاهین", "داریوش", "آیدین", "صادق", "میثم", "مصطفی", "مرتضی", "مسعود", "یونس", "بهزاد",
+            "شهرام", "شهروز", "سروش", "ارسلان", "بهنام", "هوتن", "باربد", "ساسان", "پندار", "فریدون", "سیاوش", "هومن", "بهروز",
+            "فرشید", "بابک", "پژمان", "کوروش", "فرید", "نوید", "مهرداد", "بهرام", "بیژن", "روزبه", "خسرو", "کیانوش", "شنتیا",
+            "رایان", "ماکان", "بنیامین", "آدریان", "سامیار", "پارسیا", "رادوین", "آراد", "برسام", "همایون", "رادمان", "آرين",
+            "فرزين", "آرمان", "پرهام", "مهیار", "هادی", "جواد", "محسن", "بهداد", "کورش", "ارشیا", "بهراد", "آرشا", "رادین"
+        ];
+
+        const girlNames = [
+            "زهرا", "فاطمه", "مریم", "سارا", "نیکا", "آیدا", "شیما", "نگین", "پریا", "رویا", "الناز", "مبینا", "هستی", 
+            "سحر", "ترانه", "باران", "بهار", "سپیده", "مینا", "شقایق", "مهسا", "غزل", "نیلوفر", "صبا", "الهام", "ساناز", 
+            "طناز", "شیرین", "نسترن", "سمیرا", "نسیم", "میترا", "شادی", "عاطفه", "حدیث", "سوگند", "ستایش", "ریحانه", 
+            "یکتا", "مهرنوش", "مژده", "درسا", "آتوسا", "بیتا", "پردیس", "دنیا", "یلدا", "طلا", "رکسانا", "آنا"
+        ];
+
+        let recentNamesHistory = [];
+        function getUniqueName() {
+            let combined = Math.random() < 0.12 ? girlNames : boyNames;
+            let filtered = combined.filter(n => !recentNamesHistory.includes(n));
+            if(filtered.length === 0) { recentNamesHistory = []; filtered = combined; }
+            let chosen = filtered[Math.floor(Math.random() * filtered.length)];
+            recentNamesHistory.push(chosen);
+            if(recentNamesHistory.length > 40) recentNamesHistory.shift();
+            return chosen;
+        }
+
+        const phonePrefixes = ["0912", "0914", "0902", "0939", "0919", "0935", "0921", "0930", "0938", "0901"];
+        function getRandomPhone() {
+            let pref = phonePrefixes[Math.floor(Math.random() * phonePrefixes.length)];
+            return pref + "***";
+        }
+
+        const amountsBuyUVoucher = [360, 200, 250, 800, 1000, 1300, 230, 190, 258, 400, 430, 650, 500, 430, 680, 700, 600, 640, 780, 340, 280, 300, 587, 458, 239, 1200, 1700, 550, 450, 350, 290, 320, 330, 434, 683, 490, 850, 570, 630, 730, 820, 810, 710, 579, 247, 1500, 757, 470, 220, 240, 1400, 2000, 760, 580, 100, 210];
+        const amountsHotVoucher = [60, 70, 100, 150, 120, 50, 130, 180, 200, 135, 65, 80, 140, 160, 210, 250, 320, 220, 90, 110, 260, 55, 170, 230, 280, 300];
+        const amountsSellVouchers = [200, 250, 300, 350, 400, 450, 500, 600, 700, 800, 550, 230, 240, 480, 430, 560, 730, 540, 760, 900, 640, 579, 963, 370, 210, 1000, 440, 555, 335, 460, 1400];
+        const amountsWithdraw = [100, 150, 300, 120, 110, 600, 500, 440, 700, 1000, 350, 140, 320, 540, 155, 170, 190, 180, 200, 800, 670, 560, 130, 160, 250, 870, 290, 450, 580, 380, 650, 570, 680, 107, 36, 430, 750, 139, 740, 220, 470];
+
+        function getRandomAmount(arr) {
+            let val = arr[Math.floor(Math.random() * arr.length)];
+            return (val * 1000).toLocaleString();
+        }
+
+        function generateTransaction() {
+            let rand = Math.random() * 100;
+            let type, category, statusText, amount;
+
+            if (rand < 30) {
+                type = 'خرید<br>یووچر'; category = 'buy'; statusText = 'تکمیل';
+                amount = getRandomAmount(amountsBuyUVoucher);
+            } else if (rand < 50) {
+                type = 'خرید<br>هات ووچر'; category = 'buy'; statusText = 'تکمیل';
+                amount = getRandomAmount(amountsHotVoucher);
+            } else if (rand < 65) {
+                type = 'فروش<br>یووچر'; category = 'sell'; statusText = 'تسویه شد';
+                amount = getRandomAmount(amountsBuyUVoucher);
+            } else if (rand < 75) {
+                type = 'فروش<br>پرمیوم ووچر'; category = 'sell'; statusText = 'تسویه شد';
+                amount = getRandomAmount(amountsSellVouchers);
+            } else if (rand < 85) {
+                type = 'فروش<br>پی اس ووچر'; category = 'sell'; statusText = 'تسویه شد';
+                amount = getRandomAmount(amountsSellVouchers);
+            } else {
+                type = 'برداشت از<br>کیف پول'; category = 'withdraw'; statusText = 'واریز شد';
+                amount = getRandomAmount(amountsWithdraw);
+            }
+
+            return {
+                type: type, category: category, statusText: statusText,
+                amount: amount, name: getUniqueName(), phone: getRandomPhone(),
+                timestamp: Date.now()
+            };
+        }
+
+        let liveTransactions = [];
+        function initLiveTransactions() {
+            let now = Date.now();
+            for (let i = 0; i < 5; i++) {
+                let tx = generateTransaction();
+                tx.timestamp = now - (Math.random() * 600000 + 60000);
+                liveTransactions.push(tx);
+            }
+            liveTransactions.sort((a, b) => b.timestamp - a.timestamp);
+            renderLiveTable();
+        }
+
+        function calculateTimeText(timestamp) {
+            let minutes = Math.floor((Date.now() - timestamp) / 60000);
+            if (minutes < 1) return "همین الان";
+            if (minutes < 60) return minutes + " دقیقه پیش";
+            let hours = Math.floor(minutes / 60);
+            return hours + " ساعت پیش";
+        }
+
+        function renderLiveTable(isNew = false) {
+            const tbody = document.getElementById('live-tx-body');
+            tbody.innerHTML = '';
+            liveTransactions.forEach((tx, index) => {
+                let tr = document.createElement('tr');
+                if(isNew && index === 0) tr.classList.add('tx-new-row');
+                tr.innerHTML = `
+                    <td><div class="tx-badge tx-badge-${tx.category}">${tx.type}</div></td>
+                    <td style="font-weight:bold;">${tx.amount}</td>
+                    <td>
+                        <div class="tx-user-info">
+                            <span style="font-weight:600; font-size:13px;">${tx.name}</span>
+                            <span class="tx-user-phone">${tx.phone}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="tx-status">
+                            <span class="tx-status-icon">✓</span>
+                            <span>${tx.statusText}</span>
+                        </div>
+                    </td>
+                    <td class="tx-time-text" data-timestamp="${tx.timestamp}">${calculateTimeText(tx.timestamp)}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function scheduleNext() {
+            let hour = new Date().getHours();
+            let isNightQuiet = (hour >= 3 && hour < 15); 
+            let delay = isNightQuiet ? (Math.random() * 20000 + 15000) : (Math.random() * 7000 + 4000);
+
+            setTimeout(() => {
+                let newTx = generateTransaction();
+                liveTransactions.unshift(newTx);
+                if(liveTransactions.length > 5) liveTransactions.pop();
+                renderLiveTable(true);
+                scheduleNext();
+            }, delay);
+        }
+
+        initLiveTransactions();
+        scheduleNext();
+
+        const faqData = [
+            {
+                q: "📜 قوانین و مقررات صرافی ووچینو⁰۱",
+                a: `🇮🇷 تابع قوانین و مقررات جاری جمهوری اسلامی ایران\nبه نام خدا\n\nبه منظور حفظ امنیت کاربران، جلوگیری از سوءاستفاده‌های مالی و ارائه خدمات سریع و مطمئن، تمامی کاربران با ثبت‌نام و استفاده از خدمات ووچینو⁰۱، مفاد زیر را پذیرفته و ملزم به رعایت آن هستند.\n\n۱. امنیت حساب کاربری\nمسئولیت حفظ اطلاعات حساب، رمز عبور و کدهای دریافتی بر عهده کاربر است. ووچینو⁰۱ هیچ‌گاه اطلاعات محرمانه شما را از طریق پیام خصوصی یا تماس تلفنی درخواست نخواهد کرد. مراقب صفحات و ربات‌های جعلی و فیشینگ باشید.\n\n۲. تطابق اطلاعات پرداخت\nنام صاحب حساب یا کارت پرداخت باید با اطلاعات ثبت‌شده در حساب کاربری مطابقت داشته باشد. پرداخت از حساب اشخاص دیگر ممکن است باعث تأخیر یا لغو تراکنش شود.\n\n۳. واریز از نام غیرهمسان\nدر صورت واریز از حسابی که متعلق به کاربر ثبت‌نام‌شده نباشد، مبلغ تنها یک بار پس از بررسی به کیف پول کاربری بازگردانده می‌شود. در صورت تکرار این تخلف، حساب تا زمان بررسی بخش مالی محدود یا مسدود خواهد شد.\n\n۴. مغایرت مبلغ پرداختی\nدر صورتی که مبلغ واریزی با مبلغ ثبت‌شده سفارش یکسان نباشد، درخواست تا دو مرتبه قابل اصلاح خواهد بود. در صورت تکرار برای بار سوم، هزینه‌های بررسی و پردازش کسر شده و امکان بازگشت کامل وجه تضمین نخواهد شد.\n\n۵. کدهای پیگیری\nاز ارسال مکرر کدهای پیگیری یا ثبت چندباره یک تراکنش خودداری کنید. این کار باعث افزایش زمان بررسی و احتمال رد شدن درخواست می‌شود. در صورت بروز مشکل، تنها کافی است یک بار با بخش مالی ارتباط گرفته و کد پیگیری خود را ارسال کنید.\n\n۶. بررسی سفارش‌ها\nتمامی سفارش‌ها به صورت سیستمی و امنیتی بررسی می‌شوند. در صورت مشاهده فعالیت مشکوک یا مغایرت اطلاعات، انجام سفارش تا زمان تکمیل بررسی متوقف خواهد شد.\n\n۷. مبارزه با کلاهبرداری\nووچینو⁰۱ در راستای مقابله با سوءاستفاده‌های مالی و فیشینگ، حق دارد سفارش‌هایی را که مشکوک تشخیص داده شوند بررسی یا لغو کند. این اقدام صرفاً برای حفظ امنیت کاربران انجام می‌شود.\n\n۸. ارتباط با پشتیبانی\nدر صورت بروز هرگونه مشکل، از ارسال پیام‌های تکراری خودداری کنید. کارشناسان مالی تمامی درخواست‌ها را بر اساس زمان ثبت بررسی خواهند کرد.\n\nسخن پایانی\nهدف ما ایجاد محیطی امن، سریع و قابل اعتماد برای خرید و فروش ووچر است. رعایت این قوانین باعث ارائه خدمات بهتر و سریع‌تر به همه کاربران خواهد شد.\nبا ثبت سفارش در ووچینو⁰۱، شما تمامی قوانین فوق را مطالعه کرده و می‌پذیرید.`
+            },
+            {
+                q: "🎓 آموزش خرید و فروش ووچر در ووچینو⁰۱",
+                a: `به دنیای خرید و فروش سریع، امن و آسان ووچر خوش آمدید. ❤️\n\nاگر برای اولین بار از ووچینو⁰۱ استفاده می‌کنید، کافیست مراحل زیر را دنبال کنید.\n\n💳 مرحله اول | شارژ کیف پول\nابتدا از منوی ربات وارد بخش «شارژ کیف پول» شوید. در ووچینو⁰۱ دو روش برای شارژ کیف پول در نظر گرفته شده است: کارت به کارت / درگاه پرداخت.\n⭐ پیشنهاد مجموعه ووچینو⁰۱: برای ثبت سریع‌تر تراکنش، بررسی آسان‌تر و کاهش احتمال خطا، پیشنهاد می‌کنیم از روش کارت به کارت استفاده کنید.\n\n💎 مرحله دوم | خرید ووچر\nپس از شارژ کیف پول، وارد بخش «خرید ووچر» شوید. نوع ووچر را انتخاب کنید، مبلغ دلخواه را وارد نمایید و دکمه ثبت سفارش را لمس کنید.\n\n💵 مرحله سوم | فروش ووچر\nوارد بخش «فروش ووچر» شوید، نوع ووچر را انتخاب کرده و اطلاعات را با دقت وارد نمایید تا پس از تأیید، مبلغ به کیف پول شما واریز شود.\n\n🌍 ووچر چیست؟\nU Voucher و Hot Voucher اعتبارهای دیجیتالی هستند که برای شارژ حساب سایت‌های مختلف و پرداخت‌های بین‌المللی استفاده می‌شوند.`
+            },
+            {
+                q: "❓ سوالات متداول (FAQ) | ووچینو⁰۱",
+                a: `💳 ۱. واریز انجام دادم ولی کیف پولم هنوز شارژ نشده، چیکار کنم؟\nاگر پرداخت را به‌درستی انجام داده‌اید، سیستم در حال بررسی است. از ارسال پیام‌های پشت سر هم خودداری کنید.\n\n🧾 ۲. کد پیگیری را ثبت کردم اما هنوز تأیید نشده است.\nگاهی به دلیل حجم بالای تراکنش‌ها تأیید کمی زمان‌بر است. لطفاً صبور باشید.\n\n🎁 ۳. ووچر را شارژ کردم اما موجودی سایت مقصد اضافه نشده است.\nاز صحیح بودن کد اطمینان حاصل کنید. در صورت نیاز، کد پیگیری را برای پشتیبانی سایت مقصد ارسال نمایید.\n\n⏳ ۴. چرا سفارش من کمی دیر انجام شده است؟\nبه علت بررسی‌های امنیتی یا شلوغی شبکه ممکن است زمان ببرد. تمامی سفارش‌ها به ترتیب بررسی می‌شوند.\n\n❌ ۵. مبلغ را اشتباه واریز کردم.\nدر صورت مغایرت مبلغ، سفارش قابل انجام نیست و طبق قوانین تا دو مرتبه امکان اصلاح وجود دارد.\n\n👤 ۶. آیا می‌توانم با کارت شخص دیگری پرداخت کنم؟\nخیر، برای حفظ امنیت و جلوگیری از سوءاستفاده، پرداخت باید فقط از حساب صاحب کاربری انجام شود.\n\n🔐 ۷. چگونه از فیشینگ و کلاهبرداری جلوگیری کنم؟\nفقط از ربات و راه‌های ارتباطی رسمی ووچینو⁰۱ استفاده کنید و اطلاعات خود را به کسی ندهید.\n\n📞 ۸. چه زمانی باید به پشتیبانی پیام بدهم؟\nبرای مشکلات مالی به بخش مالی و برای خطاهای فنی به بخش فنی پیام دهید و حتماً کد پیگیری را ارسال کنید.`
+            }
+        ];
+
+        const faqSection = document.getElementById('faq-section');
+        faqSection.innerHTML = faqData.map((item, i) => `
+            <div class="faq-item" id="faq-${i}">
+                <div class="faq-question" data-idx="${i}">
+                    <span>${item.q}</span>
+                    <span class="chevron">⌄</span>
+                </div>
+                <div class="faq-answer">${item.a}</div>
+            </div>
+        `).join('');
+
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', () => {
+                const item = q.parentElement;
+                const answer = q.nextElementSibling;
+                const isOpen = answer.style.display === 'block';
+                answer.style.display = isOpen ? 'none' : 'block';
+                item.classList.toggle('open', !isOpen);
+            });
+        });
+    </script>
+</body>
+</html>
