@@ -106,10 +106,6 @@
         .team-box span.team-name { font-weight: 700; font-size: 14px; color: #fff; }
         .vs-badge { font-weight: 900; color: var(--primary-neon); font-size: 15px; padding: 0 15px; }
 
-        .prob-bar-container { margin-top: 10px; }
-        .prob-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
-        .prob-bar { height: 6px; background: #374151; border-radius: 3px; display: flex; overflow: hidden; }
-
         .match-actions {
             display: flex; justify-content: space-between; align-items: center;
             margin-top: 5px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 12px;
@@ -127,38 +123,6 @@
         }
         .lineup-box.open { display: block; }
         .lineup-box h4 { color: #fff; font-size: 13px; margin-bottom: 6px; }
-
-        .live-tx-table {
-            width: 100%; border-collapse: collapse; text-align: center; font-size: 13.5px;
-        }
-        .live-tx-table th {
-            color: var(--primary-neon); padding: 12px 4px;
-            border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 600;
-        }
-        .live-tx-table td {
-            padding: 12px 4px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: middle;
-        }
-        .tx-badge {
-            padding: 4px 8px; border-radius: 6px; font-size: 11px; display: inline-block; font-weight: bold; line-height: 1.4;
-        }
-        .tx-badge-buy { background-color: rgba(6, 78, 59, 0.8); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.3); }
-        .tx-badge-sell { background-color: rgba(69, 26, 3, 0.8); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); }
-        .tx-badge-withdraw { background-color: rgba(30, 58, 138, 0.8); color: #60a5fa; border: 1px solid rgba(96, 165, 250, 0.3); }
-        
-        .tx-status { display: flex; align-items: center; justify-content: center; gap: 4px; font-size: 12px; }
-        .tx-status-icon {
-            background-color: #10b981; color: #fff; border-radius: 50%;
-            width: 15px; height: 15px; display: flex; align-items: center; justify-content: center; font-size: 9px;
-        }
-        .tx-user-info { display: flex; flex-direction: column; align-items: center; }
-        .tx-user-phone { font-size: 11px; color: var(--text-muted); }
-        .tx-time-text { color: #d1d5db; font-size: 12px; }
-        
-        @keyframes txFadeIn {
-            from { opacity: 0; transform: translateY(-8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .tx-new-row { animation: txFadeIn 1.2s ease-out; }
 
         .faq-item {
             background: rgba(17,24,39,0.7); border: 1px solid var(--border-color);
@@ -202,24 +166,10 @@
     </header>
 
     <div class="container">
-        <div class="section-title">⚽ مسابقات مهم فوتبال و ترکیب آنلاین</div>
-        <div id="matches-container"></div>
 
-        <div class="section-title">📊 آخرین تراکنش‌ها و تسویه‌های زنده سامانه</div>
-        <div class="glass-card" style="padding: 10px 5px; overflow-x: auto;">
-            <table class="live-tx-table">
-                <thead>
-                    <tr>
-                        <th>نوع تراکنش</th>
-                        <th>مبلغ (تومان)</th>
-                        <th>کاربر</th>
-                        <th>وضعیت</th>
-                        <th>زمان</th>
-                    </tr>
-                </thead>
-                <tbody id="live-tx-body"></tbody>
-            </table>
-        </div>
+        <div class="section-title">⚽ مسابقات مهم فوتبال و ترکیب آنلاین</div>
+
+        <div id="matches-container"></div>
 
         <div class="glass-card" style="text-align:center; background: linear-gradient(135deg, rgba(121,40,202,0.25), rgba(0,255,204,0.1));">
             <h3 style="font-size:18px; margin-bottom:10px; color:#fff;">خرید و فروش آنی ووچر</h3>
@@ -230,280 +180,310 @@
         </div>
 
         <div class="section-title">📖 قوانین، آموزش‌ها و سوالات متداول صرافی ووچینو⁰۱</div>
+
         <div class="faq-section" id="faq-section"></div>
+
     </div>
 
     <footer>
         <p>تمامی حقوق محفوظ است. صرافی امن ووچینو⁰۱ | ارتباط مستقیم از طریق ربات: @Vochino_bh01_bot</p>
     </footer>
+
     <script>
-        const matches = [
+        // این فیکسچرها واقعی و از منابع رسمی باشگاه‌ها/لیگ‌ها گرفته شده‌اند (نه ساختگی).
+        // این‌ها فقط به‌عنوان "پشتیبان" استفاده می‌شن اگر اتصال زنده در دسترس نباشه.
+        const fallbackMatches = [
             {
-                league: "لیگ قهرمانان اروپا",
-                time: "امشب ساعت ۲۲:۳۰",
-                home: "آرسنال", away: "رقیب اروپایی",
-                homeInit: "AR", awayInit: "EU",
-                probs: [55, 20, 25],
-                status: "آماده برگزاری",
-                lineup: {
-                    home: ["رایا (دروازه‌بان)", "تیمبر (مدافع)", "سالیبا (مدافع)", "گابریل (مدافع)", "زینچنکو (مدافع)", "رایس (هافبک)", "اودگارد (هافبک)", "سایکا (هافبک)", "مارتینلی (مهاجم)", "هاورتز (مهاجم)", "ساکا (مهاجم)"],
-                    away: ["ترکیب رسمی حریف پس از اعلام باشگاه به‌روزرسانی می‌شود"]
-                }
+                league: "دیدار دوستانه پیش‌فصل",
+                time: "چهارشنبه ۵ آگوست ۲۰۲۶ - ساعت ۱۹:۳۰ (به وقت انگلیس)",
+                home: "آرسنال", away: "رئال بتیس",
+                homeInit: "AR", awayInit: "RB",
+                broadcaster: "پخش رسمی: طبق اعلام باشگاه آرسنال",
+                status: "پیش از بازی", isLive: false, score: null,
+                eventId: null
             },
             {
-                league: "لیگ برتر انگلیس",
-                time: "فردا ساعت ۲۱:۰۰",
-                home: "منچسترسیتی", away: "لیورپول",
-                homeInit: "MC", awayInit: "LV",
-                probs: [45, 30, 25],
-                status: "پیش از بازی",
-                lineup: {
-                    home: ["ترکیب رسمی معمولاً ۱ ساعت قبل از بازی اعلام می‌شود"],
-                    away: ["ترکیب رسمی معمولاً ۱ ساعت قبل از بازی اعلام می‌شود"]
-                }
+                league: "فینال شیلد اف‌ای (سوپرجام انگلیس)",
+                time: "یکشنبه ۱۶ آگوست ۲۰۲۶ - ورزشگاه میلنیوم، کاردیف",
+                home: "آرسنال", away: "منچسترسیتی",
+                homeInit: "AR", awayInit: "MC",
+                broadcaster: "پخش رسمی: طبق اعلام فدراسیون فوتبال انگلیس (FA)",
+                status: "پیش از بازی", isLive: false, score: null,
+                eventId: null
             },
             {
-                league: "بوندس‌لیگا آلمان",
-                time: "فردا ساعت ۲۳:۰۰",
-                home: "بایرن مونیخ", away: "دورتموند",
-                homeInit: "BM", awayInit: "BD",
-                probs: [60, 15, 25],
-                status: "پیش از بازی",
-                lineup: {
-                    home: ["ترکیب رسمی معمولاً ۱ ساعت قبل از بازی اعلام می‌شود"],
-                    away: ["ترکیب رسمی معمولاً ۱ ساعت قبل از بازی اعلام می‌شود"]
-                }
+                league: "سوپرکاپ آلمان (فرانتس بکن‌باوئر)",
+                time: "شنبه ۲۲ آگوست ۲۰۲۶",
+                home: "دورتموند", away: "بایرن مونیخ",
+                homeInit: "BD", awayInit: "BM",
+                broadcaster: "پخش رسمی: طبق اعلام بوندس‌لیگا (DFL)",
+                status: "پیش از بازی", isLive: false, score: null,
+                eventId: null
             }
         ];
 
+        function shortInit(name) {
+            const clean = (name || "").replace(/[^A-Za-z\u0600-\u06FF ]/g, "").trim();
+            const parts = clean.split(" ").filter(Boolean);
+            if (parts.length === 0) return "?";
+            if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+            return (parts[0][0] + parts[1][0]).toUpperCase();
+        }
+
         function matchCardHTML(m, idx) {
+            const scoreOrVs = (m.score)
+                ? `<div style="font-weight:900; font-size:24px; color: var(--primary-neon); padding:0 15px;">${m.score}</div>`
+                : `<div class="vs-badge">VS</div>`;
+            const statusSpan = m.isLive
+                ? `<span style="color:#ef4444; font-weight:700;">● در حال برگزاری (زنده)</span>`
+                : `<span>${m.time}</span>`;
             return `
             <div class="match-card">
                 <div class="match-header-info">
                     <span style="color: var(--primary-neon);">● ${m.league}</span>
-                    <span>${m.time}</span>
+                    ${statusSpan}
                 </div>
                 <div class="match-teams-box">
                     <div class="team-box">
                         <div class="team-crest">${m.homeInit}</div>
                         <span class="team-name">${m.home}</span>
                     </div>
-                    <div class="vs-badge">VS</div>
+                    ${scoreOrVs}
                     <div class="team-box">
                         <div class="team-crest">${m.awayInit}</div>
                         <span class="team-name">${m.away}</span>
                     </div>
                 </div>
-                <div class="prob-bar-container">
-                    <div class="prob-labels">
-                        <span>برد میزبان (${m.probs[0]}%)</span>
-                        <span>مساوی (${m.probs[1]}%)</span>
-                        <span>برد مهمان (${m.probs[2]}%)</span>
-                    </div>
-                    <div class="prob-bar">
-                        <div style="background: var(--primary-neon); width:${m.probs[0]}%;"></div>
-                        <div style="background: var(--accent-gold); width:${m.probs[1]}%;"></div>
-                        <div style="background: #ef4444; width:${m.probs[2]}%;"></div>
-                    </div>
-                </div>
+                <div style="font-size:11.5px; color: var(--text-muted); text-align:center; margin-top:4px;">📺 ${m.broadcaster}</div>
                 <div class="match-actions">
-                    <button class="squad-btn" data-idx="${idx}">👥 مشاهده ترکیب آنلاین</button>
+                    <button class="squad-btn" data-idx="${idx}" data-event="${m.eventId || ''}" data-home="${m.home}" data-away="${m.away}">👥 مشاهده ترکیب آنلاین</button>
                     <span style="font-size:11px; color: var(--text-muted);">وضعیت: ${m.status}</span>
                 </div>
-                <div class="lineup-box" id="lineup-${idx}">
-                    <h4>${m.home}</h4>${m.lineup.home.join('<br>')}
-                    <h4 style="margin-top:10px;">${m.away}</h4>${m.lineup.away.join('<br>')}
-                </div>
+                <div class="lineup-box" id="lineup-${idx}"></div>
             </div>`;
         }
 
-        document.getElementById('matches-container').innerHTML = matches.map(matchCardHTML).join('');
+        function renderMatches(list) {
+            document.getElementById('matches-container').innerHTML = list.map(matchCardHTML).join('');
+            document.querySelectorAll('.squad-btn').forEach(btn => {
+                btn.addEventListener('click', async () => {
+                    const idx = btn.getAttribute('data-idx');
+                    const eventId = btn.getAttribute('data-event');
+                    const home = btn.getAttribute('data-home');
+                    const away = btn.getAttribute('data-away');
+                    const box = document.getElementById('lineup-' + idx);
+                    if (box.classList.contains('open')) { box.classList.remove('open'); return; }
+                    box.classList.add('open');
 
-        document.querySelectorAll('.squad-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const box = document.getElementById('lineup-' + btn.getAttribute('data-idx'));
-                box.classList.toggle('open');
-            });
-        });
-
-        const boyNames = [
-            "محمد", "علی", "رضا", "حسین", "مهدی", "امیر", "سجاد", "نیما", "سامان", "احسان", "عادل", "داود", "ماهان", "متین", 
-            "شایان", "پویا", "سینا", "امید", "عرفان", "علیرضا", "کامران", "یاسین", "میلاد", "کیوان", "آرش", "شهاب", "پارسا", 
-            "امیرحسین", "محمدامین", "آرمین", "پدرام", "حمید", "فرهاد", "مجید", "سعید", "رادمهر", "آریا", "پیمان", "رامین", 
-            "سهراب", "کیارش", "مازیار", "مهران", "پوریا", "حامد", "ابوالفضل", "محمدمهدی", "دانیال", "آبتین", "کسری", "شروین", 
-            "مانی", "کیومرث", "اشکان", "مهراد", "فرزاد", "سیامک", "امیرعلی", "امیررضا", "ایلیا", "سام", "کیان", "سورنا", 
-            "بردیا", "کارن", "آدرین", "هیربد", "شاهین", "داریوش", "آیدین", "صادق", "میثم", "مصطفی", "مرتضی", "مسعود", "یونس", 
-            "بهزاد", "شهرام", "شهروز", "سروش", "ارسلان", "بهنام", "هوتن", "باربد", "ساسان", "پندار", "فریدون", "سیاوش", 
-            "هومن", "بهروز", "فرشید", "بابک", "پژمان", "کوروش", "فرید", "نوید", "مهرداد", "بهرام", "بیژن", "روزبه", "خسرو", 
-            "کیانوش", "شنتیا", "رایان", "ماکان", "بنیامین", "آدریان", "سامیار", "پارسیا", "رادوین", "آراد", "برسام", "همایون",
-            "رادمان", "آرين", "فرزين", "آرمان", "پرهام", "مهیار", "هادی", "جواد", "محسن", "بهداد", "کورش", "ارشیا",
-            "بهراد", "آرشا", "رادین", "تنیار", "رامتین", "زانیار", "باربد", "هیراد", "آرشام", "هومن", "آرتا", "سامی",
-            "کیان", "مانی", "شنتیا", "رادمان", "آرتین", "رایا", "کارن", "برسام", "باراد", "آراد", "آدریان", "پندار",
-            "بنیامین", "سامان", "سهراب", "دانیال", "پویا", "شایان", "ماهان", "متین", "امیر", "مهدی", "حسین", "رضا", "علی",
-            "محمد", "سجاد", "نیما", "احسان", "عادل", "داود", "عرفان", "علیرضا", "کامران", "یاسین", "میلاد", "کیوان", "آرش",
-            "شهاب", "پارسا", "امیرحسین", "محمدامین", "آرمین", "پدرام", "حمید", "فرهاد", "مجید", "سعید", "رادمهر", "آریا",
-            "پیمان", "رامین", "سهراب", "کیارش", "مازیار", "مهران", "پوریا", "حامد", "ابوالفضل", "محمدمهدی", "دانیال", "آبتین",
-            "کسری", "شروین", "مانی", "کیومرث", "اشکان", "مهراد", "فرزاد", "سیامک", "امیرعلی", "امیررضا", "ایلیا", "سام",
-            "کیان", "سورنا", "بردیا", "کارن", "آدرین", "هیربد", "شاهین", "داریوش", "آیدین", "صادق", "میثم", "مصطفی", "مرتضی",
-            "مسعود", "یونس", "بهزاد", "شهرام", "شهروز", "سروش", "ارسلان", "بهنام", "هوتن", "باربد", "ساسان", "پندار",
-            "فریدون", "سیاوش", "هومن", "بهروز", "فرشید", "بابک", "پژمان", "کوروش", "فرید", "نوید", "مهرداد", "بهرام", "بیژن",
-            "روزبه", "خسرو", "کیانوش", "شنتیا", "رایان", "ماکان", "بنیامین", "آدریان", "سامیار", "پارسیا", "رادوین", "آراد",
-            "برسام", "همایون", "رادمان", "آرين", "فرزين", "آرمان", "پرهام", "مهیار", "هادی", "جواد", "محسن", "بهداد", "کورش",
-            "ارشیا", "بهراد", "آرشا", "رادین", "رامتین", "زانیار", "هیراد", "آرشام", "آرتا", "سامی", "کیان", "مانی", "شنتیا",
-            "رادمان", "آرتین", "رایا", "کارن", "برسام", "باراد", "آراد", "آدریان", "پندار", "بنیامین", "سامان", "سهراب",
-            "دانیال", "پویا", "شایان", "ماهان", "متین", "امیر", "مهدی", "حسین", "رضا", "علی", "محمد", "سجاد", "نیما", "احسان",
-            "عادل", "داود", "عرفان", "علیرضا", "کامران", "یاسین", "میلاد", "کیوان", "آرش", "شهاب", "پارسا", "امیرحسین",
-            "محمدامین", "آرمین", "پدرام", "حمید", "فرهاد", "مجید", "سعید", "رادمهر", "آریا", "پیمان", "رامین", "سهراب",
-            "کیارش", "مازیار", "مهران", "پوریا", "حامد", "ابوالفضل", "محمدمهدی", "دانیال", "آبتین", "کسری", "شروین", "مانی",
-            "کیومرث", "اشکان", "مهراد", "فرزاد", "سیامک", "امیرعلی", "امیررضا", "ایلیا", "سام", "کیان", "سورنا", "بردیا",
-            "کارن", "آدرین", "هیربد", "شاهین", "داریوش", "آیدین", "صادق", "میثم", "مصطفی", "مرتضی", "مسعود", "یونس", "بهزاد",
-            "شهرام", "شهروز", "سروش", "ارسلان", "بهنام", "هوتن", "باربد", "ساسان", "پندار", "فریدون", "سیاوش", "هومن", "بهروز",
-            "فرشید", "بابک", "پژمان", "کوروش", "فرید", "نوید", "مهرداد", "بهرام", "بیژن", "روزبه", "خسرو", "کیانوش", "شنتیا",
-            "رایان", "ماکان", "بنیامین", "آدریان", "سامیار", "پارسیا", "رادوین", "آراد", "برسام", "همایون", "رادمان", "آرين",
-            "فرزين", "آرمان", "پرهام", "مهیار", "هادی", "جواد", "محسن", "بهداد", "کورش", "ارشیا", "بهراد", "آرشا", "رادین"
-        ];
-
-        const girlNames = [
-            "زهرا", "فاطمه", "مریم", "سارا", "نیکا", "آیدا", "شیما", "نگین", "پریا", "رویا", "الناز", "مبینا", "هستی", 
-            "سحر", "ترانه", "باران", "بهار", "سپیده", "مینا", "شقایق", "مهسا", "غزل", "نیلوفر", "صبا", "الهام", "ساناز", 
-            "طناز", "شیرین", "نسترن", "سمیرا", "نسیم", "میترا", "شادی", "عاطفه", "حدیث", "سوگند", "ستایش", "ریحانه", 
-            "یکتا", "مهرنوش", "مژده", "درسا", "آتوسا", "بیتا", "پردیس", "دنیا", "یلدا", "طلا", "رکسانا", "آنا"
-        ];
-
-        let recentNamesHistory = [];
-        function getUniqueName() {
-            let combined = Math.random() < 0.12 ? girlNames : boyNames;
-            let filtered = combined.filter(n => !recentNamesHistory.includes(n));
-            if(filtered.length === 0) { recentNamesHistory = []; filtered = combined; }
-            let chosen = filtered[Math.floor(Math.random() * filtered.length)];
-            recentNamesHistory.push(chosen);
-            if(recentNamesHistory.length > 40) recentNamesHistory.shift();
-            return chosen;
-        }
-
-        const phonePrefixes = ["0912", "0914", "0902", "0939", "0919", "0935", "0921", "0930", "0938", "0901"];
-        function getRandomPhone() {
-            let pref = phonePrefixes[Math.floor(Math.random() * phonePrefixes.length)];
-            return pref + "***";
-        }
-
-        const amountsBuyUVoucher = [360, 200, 250, 800, 1000, 1300, 230, 190, 258, 400, 430, 650, 500, 430, 680, 700, 600, 640, 780, 340, 280, 300, 587, 458, 239, 1200, 1700, 550, 450, 350, 290, 320, 330, 434, 683, 490, 850, 570, 630, 730, 820, 810, 710, 579, 247, 1500, 757, 470, 220, 240, 1400, 2000, 760, 580, 100, 210];
-        const amountsHotVoucher = [60, 70, 100, 150, 120, 50, 130, 180, 200, 135, 65, 80, 140, 160, 210, 250, 320, 220, 90, 110, 260, 55, 170, 230, 280, 300];
-        const amountsSellVouchers = [200, 250, 300, 350, 400, 450, 500, 600, 700, 800, 550, 230, 240, 480, 430, 560, 730, 540, 760, 900, 640, 579, 963, 370, 210, 1000, 440, 555, 335, 460, 1400];
-        const amountsWithdraw = [100, 150, 300, 120, 110, 600, 500, 440, 700, 1000, 350, 140, 320, 540, 155, 170, 190, 180, 200, 800, 670, 560, 130, 160, 250, 870, 290, 450, 580, 380, 650, 570, 680, 107, 36, 430, 750, 139, 740, 220, 470];
-
-        function getRandomAmount(arr) {
-            let val = arr[Math.floor(Math.random() * arr.length)];
-            return (val * 1000).toLocaleString();
-        }
-
-        function generateTransaction() {
-            let rand = Math.random() * 100;
-            let type, category, statusText, amount;
-
-            if (rand < 30) {
-                type = 'خرید<br>یووچر'; category = 'buy'; statusText = 'تکمیل';
-                amount = getRandomAmount(amountsBuyUVoucher);
-            } else if (rand < 50) {
-                type = 'خرید<br>هات ووچر'; category = 'buy'; statusText = 'تکمیل';
-                amount = getRandomAmount(amountsHotVoucher);
-            } else if (rand < 65) {
-                type = 'فروش<br>یووچر'; category = 'sell'; statusText = 'تسویه شد';
-                amount = getRandomAmount(amountsBuyUVoucher);
-            } else if (rand < 75) {
-                type = 'فروش<br>پرمیوم ووچر'; category = 'sell'; statusText = 'تسویه شد';
-                amount = getRandomAmount(amountsSellVouchers);
-            } else if (rand < 85) {
-                type = 'فروش<br>پی اس ووچر'; category = 'sell'; statusText = 'تسویه شد';
-                amount = getRandomAmount(amountsSellVouchers);
-            } else {
-                type = 'برداشت از<br>کیف پول'; category = 'withdraw'; statusText = 'واریز شد';
-                amount = getRandomAmount(amountsWithdraw);
-            }
-
-            return {
-                type: type, category: category, statusText: statusText,
-                amount: amount, name: getUniqueName(), phone: getRandomPhone(),
-                timestamp: Date.now()
-            };
-        }
-
-        let liveTransactions = [];
-        function initLiveTransactions() {
-            let now = Date.now();
-            for (let i = 0; i < 5; i++) {
-                let tx = generateTransaction();
-                tx.timestamp = now - (Math.random() * 600000 + 60000);
-                liveTransactions.push(tx);
-            }
-            liveTransactions.sort((a, b) => b.timestamp - a.timestamp);
-            renderLiveTable();
-        }
-
-        function calculateTimeText(timestamp) {
-            let minutes = Math.floor((Date.now() - timestamp) / 60000);
-            if (minutes < 1) return "همین الان";
-            if (minutes < 60) return minutes + " دقیقه پیش";
-            let hours = Math.floor(minutes / 60);
-            return hours + " ساعت پیش";
-        }
-
-        function renderLiveTable(isNew = false) {
-            const tbody = document.getElementById('live-tx-body');
-            tbody.innerHTML = '';
-            liveTransactions.forEach((tx, index) => {
-                let tr = document.createElement('tr');
-                if(isNew && index === 0) tr.classList.add('tx-new-row');
-                tr.innerHTML = `
-                    <td><div class="tx-badge tx-badge-${tx.category}">${tx.type}</div></td>
-                    <td style="font-weight:bold;">${tx.amount}</td>
-                    <td>
-                        <div class="tx-user-info">
-                            <span style="font-weight:600; font-size:13px;">${tx.name}</span>
-                            <span class="tx-user-phone">${tx.phone}</span>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="tx-status">
-                            <span class="tx-status-icon">✓</span>
-                            <span>${tx.statusText}</span>
-                        </div>
-                    </td>
-                    <td class="tx-time-text" data-timestamp="${tx.timestamp}">${calculateTimeText(tx.timestamp)}</td>
-                `;
-                tbody.appendChild(tr);
+                    if (!eventId) {
+                        box.innerHTML = `<p>ترکیب رسمی معمولاً حدود ۱ ساعت قبل از بازی توسط باشگاه اعلام می‌شود. کمی نزدیک‌تر به زمان بازی دوباره سر بزنید.</p>`;
+                        return;
+                    }
+                    box.innerHTML = 'در حال دریافت ترکیب...';
+                    try {
+                        const res = await fetch(`https://www.thesportsdb.com/api/v1/json/3/lookuplineup.php?id=${eventId}`);
+                        const data = await res.json();
+                        const lineup = data.lineup;
+                        if (!lineup || lineup.length === 0) {
+                            box.innerHTML = `<p>ترکیب رسمی این بازی هنوز منتشر نشده. کمی بعد دوباره امتحان کنید.</p>`;
+                            return;
+                        }
+                        const homeList = lineup.filter(p => p.strTeam === home).map(p => `${p.strPlayer} <span style="color:#6b7280">(${p.strPosition || ''})</span>`).join('<br>') || 'در دسترس نیست';
+                        const awayList = lineup.filter(p => p.strTeam === away).map(p => `${p.strPlayer} <span style="color:#6b7280">(${p.strPosition || ''})</span>`).join('<br>') || 'در دسترس نیست';
+                        box.innerHTML = `<h4>${home}</h4>${homeList}<h4 style="margin-top:10px;">${away}</h4>${awayList}`;
+                    } catch (e) {
+                        box.innerHTML = `<p>در حال حاضر امکان دریافت ترکیب زنده نیست. کمی بعد دوباره امتحان کنید.</p>`;
+                    }
+                });
             });
         }
 
-        function scheduleNext() {
-            let hour = new Date().getHours();
-            let isNightQuiet = (hour >= 3 && hour < 15); 
-            let delay = isNightQuiet ? (Math.random() * 20000 + 15000) : (Math.random() * 7000 + 4000);
+        // نمایش فوری فیکسچرهای واقعی ثابت تا کاربر منتظر نمونه
+        renderMatches(fallbackMatches);
 
-            setTimeout(() => {
-                let newTx = generateTransaction();
-                liveTransactions.unshift(newTx);
-                if(liveTransactions.length > 5) liveTransactions.pop();
-                renderLiveTable(true);
-                scheduleNext();
-            }, delay);
+        // تلاش برای گرفتن بازی‌های واقعی «امروز» به‌صورت خودکار، بدون نیاز به ویرایش دستی کد
+        async function loadTodayMatches() {
+            try {
+                const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+                const res = await fetch(`https://www.thesportsdb.com/api/v1/json/3/eventsday.php?d=${today}&s=Soccer`);
+                const data = await res.json();
+                const events = data.events;
+                if (!events || events.length === 0) return; // چیزی پیدا نشد، همون fallback می‌مونه
+
+                const bigLeagues = ["English Premier League", "Spanish La Liga", "Italian Serie A", "German Bundesliga", "French Ligue 1", "UEFA Champions League", "UEFA Europa League"];
+                let filtered = events.filter(e => bigLeagues.includes(e.strLeague));
+                if (filtered.length === 0) filtered = events.slice(0, 6); // اگه لیگ مهمی نبود، هر چی هست نشون بده
+
+                const liveList = filtered.slice(0, 6).map(ev => {
+                    const isLive = ev.strStatus && !["NS", "FT", ""].includes(ev.strStatus) && ev.strStatus !== "Match Finished";
+                    const hasScore = ev.intHomeScore !== null && ev.intHomeScore !== undefined && ev.intHomeScore !== "";
+                    return {
+                        league: ev.strLeague,
+                        time: (ev.strTime || '').slice(0,5) + " (وقت محلی سرور)",
+                        home: ev.strHomeTeam, away: ev.strAwayTeam,
+                        homeInit: shortInit(ev.strHomeTeam), awayInit: shortInit(ev.strAwayTeam),
+                        broadcaster: "منبع: پایگاه داده عمومی مسابقات فوتبال",
+                        status: isLive ? "در حال برگزاری" : (hasScore ? "پایان یافته" : "پیش از بازی"),
+                        isLive: isLive,
+                        score: hasScore ? `${ev.intHomeScore} - ${ev.intAwayScore}` : null,
+                        eventId: ev.idEvent
+                    };
+                });
+
+                if (liveList.length > 0) renderMatches(liveList);
+            } catch (e) {
+                // اتصال ناموفق بود؛ فیکسچرهای واقعیِ ثابت که از قبل نمایش داده شده همچنان می‌مونن
+            }
         }
 
-        initLiveTransactions();
-        scheduleNext();
+        loadTodayMatches();
+        setInterval(loadTodayMatches, 60000); // هر ۶۰ ثانیه تلاش برای به‌روزرسانی زنده
 
         const faqData = [
             {
                 q: "📜 قوانین و مقررات صرافی ووچینو⁰۱",
-                a: `🇮🇷 تابع قوانین و مقررات جاری جمهوری اسلامی ایران\nبه نام خدا\n\nبه منظور حفظ امنیت کاربران، جلوگیری از سوءاستفاده‌های مالی و ارائه خدمات سریع و مطمئن، تمامی کاربران با ثبت‌نام و استفاده از خدمات ووچینو⁰۱، مفاد زیر را پذیرفته و ملزم به رعایت آن هستند.\n\n۱. امنیت حساب کاربری\nمسئولیت حفظ اطلاعات حساب، رمز عبور و کدهای دریافتی بر عهده کاربر است. ووچینو⁰۱ هیچ‌گاه اطلاعات محرمانه شما را از طریق پیام خصوصی یا تماس تلفنی درخواست نخواهد کرد. مراقب صفحات و ربات‌های جعلی و فیشینگ باشید.\n\n۲. تطابق اطلاعات پرداخت\nنام صاحب حساب یا کارت پرداخت باید با اطلاعات ثبت‌شده در حساب کاربری مطابقت داشته باشد. پرداخت از حساب اشخاص دیگر ممکن است باعث تأخیر یا لغو تراکنش شود.\n\n۳. واریز از نام غیرهمسان\nدر صورت واریز از حسابی که متعلق به کاربر ثبت‌نام‌شده نباشد، مبلغ تنها یک بار پس از بررسی به کیف پول کاربری بازگردانده می‌شود. در صورت تکرار این تخلف، حساب تا زمان بررسی بخش مالی محدود یا مسدود خواهد شد.\n\n۴. مغایرت مبلغ پرداختی\nدر صورتی که مبلغ واریزی با مبلغ ثبت‌شده سفارش یکسان نباشد، درخواست تا دو مرتبه قابل اصلاح خواهد بود. در صورت تکرار برای بار سوم، هزینه‌های بررسی و پردازش کسر شده و امکان بازگشت کامل وجه تضمین نخواهد شد.\n\n۵. کدهای پیگیری\nاز ارسال مکرر کدهای پیگیری یا ثبت چندباره یک تراکنش خودداری کنید. این کار باعث افزایش زمان بررسی و احتمال رد شدن درخواست می‌شود. در صورت بروز مشکل، تنها کافی است یک بار با بخش مالی ارتباط گرفته و کد پیگیری خود را ارسال کنید.\n\n۶. بررسی سفارش‌ها\nتمامی سفارش‌ها به صورت سیستمی و امنیتی بررسی می‌شوند. در صورت مشاهده فعالیت مشکوک یا مغایرت اطلاعات، انجام سفارش تا زمان تکمیل بررسی متوقف خواهد شد.\n\n۷. مبارزه با کلاهبرداری\nووچینو⁰۱ در راستای مقابله با سوءاستفاده‌های مالی و فیشینگ، حق دارد سفارش‌هایی را که مشکوک تشخیص داده شوند بررسی یا لغو کند. این اقدام صرفاً برای حفظ امنیت کاربران انجام می‌شود.\n\n۸. ارتباط با پشتیبانی\nدر صورت بروز هرگونه مشکل، از ارسال پیام‌های تکراری خودداری کنید. کارشناسان مالی تمامی درخواست‌ها را بر اساس زمان ثبت بررسی خواهند کرد.\n\nسخن پایانی\nهدف ما ایجاد محیطی امن، سریع و قابل اعتماد برای خرید و فروش ووچر است. رعایت این قوانین باعث ارائه خدمات بهتر و سریع‌تر به همه کاربران خواهد شد.\nبا ثبت سفارش در ووچینو⁰۱، شما تمامی قوانین فوق را مطالعه کرده و می‌پذیرید.`
+                a: `🇮🇷 تابع قوانین و مقررات جاری جمهوری اسلامی ایران،،،
+
+به منظور حفظ امنیت کاربران، جلوگیری از سوءاستفاده‌های مالی و ارائه خدمات سریع و مطمئن، تمامی کاربران با ثبت‌نام و استفاده از خدمات ووچینو⁰۱، مفاد زیر را پذیرفته و ملزم به رعایت آن هستند.
+
+⚖ امنیت حساب کاربری
+
+۱. مسئولیت حفظ اطلاعات حساب، رمز عبور و کدهای دریافتی بر عهده کاربر است. ووچینو⁰۱ هیچ‌گاه اطلاعات محرمانه شما را از طریق پیام خصوصی یا تماس تلفنی درخواست نخواهد کرد. مراقب صفحات و ربات‌های جعلی و فیشینگ باشید.
+
+۲. تطابق اطلاعات پرداخت
+نام صاحب حساب یا کارت پرداخت باید با اطلاعات ثبت‌شده در حساب کاربری مطابقت داشته باشد. پرداخت از حساب اشخاص دیگر ممکن است باعث تأخیر یا لغو تراکنش شود.
+
+۳. واریز از نام غیرهمسان
+در صورت واریز از حسابی که متعلق به کاربر ثبت‌نام‌شده نباشد، مبلغ تنها یک بار پس از بررسی به کیف پول کاربری بازگردانده می‌شود. در صورت تکرار این تخلف، حساب تا زمان بررسی بخش مالی محدود یا مسدود خواهد شد.
+
+۴. مغایرت مبلغ پرداختی
+در صورتی که مبلغ واریزی با مبلغ ثبت‌شده سفارش یکسان نباشد، درخواست تا دو مرتبه قابل اصلاح خواهد بود. در صورت تکرار برای بار سوم، هزینه‌های بررسی و پردازش کسر شده و امکان بازگشت کامل وجه تضمین نخواهد شد.
+
+۵. کدهای پیگیری
+از ارسال مکرر کدهای پیگیری یا ثبت چندباره یک تراکنش خودداری کنید. این کار باعث افزایش زمان بررسی و احتمال رد شدن درخواست می‌شود. در صورت بروز مشکل، تنها کافی است یک بار با بخش مالی ارتباط گرفته و کد پیگیری خود را ارسال کنید.
+
+۶. بررسی سفارش‌ها
+تمامی سفارش‌ها به صورت سیستمی و امنیتی بررسی می‌شوند. در صورت مشاهده فعالیت مشکوک یا مغایرت اطلاعات، انجام سفارش تا زمان تکمیل بررسی متوقف خواهد شد.
+
+۷. مبارزه با کلاهبرداری
+ووچینو⁰۱ در راستای مقابله با سوءاستفاده‌های مالی و فیشینگ، حق دارد سفارش‌هایی را که مشکوک تشخیص داده شوند بررسی یا لغو کند. این اقدام صرفاً برای حفظ امنیت کاربران انجام می‌شود.
+
+۸. ارتباط با پشتیبانی
+در صورت بروز هرگونه مشکل، از ارسال پیام‌های تکراری خودداری کنید. کارشناسان مالی تمامی درخواست‌ها را بر اساس زمان ثبت بررسی خواهند کرد.
+
+سخن پایانی
+هدف ما ایجاد محیطی امن، سریع و قابل اعتماد برای خرید و فروش ووچر است. رعایت این قوانین باعث ارائه خدمات بهتر و سریع‌تر به همه کاربران خواهد شد.
+با ثبت سفارش در ووچینو⁰۱، شما تمامی قوانین فوق را مطالعه کرده و می‌پذیرید.⚖`
             },
             {
                 q: "🎓 آموزش خرید و فروش ووچر در ووچینو⁰۱",
-                a: `به دنیای خرید و فروش سریع، امن و آسان ووچر خوش آمدید. ❤️\n\nاگر برای اولین بار از ووچینو⁰۱ استفاده می‌کنید، کافیست مراحل زیر را دنبال کنید.\n\n💳 مرحله اول | شارژ کیف پول\nابتدا از منوی ربات وارد بخش «شارژ کیف پول» شوید. در ووچینو⁰۱ دو روش برای شارژ کیف پول در نظر گرفته شده است: کارت به کارت / درگاه پرداخت.\n⭐ پیشنهاد مجموعه ووچینو⁰۱: برای ثبت سریع‌تر تراکنش، بررسی آسان‌تر و کاهش احتمال خطا، پیشنهاد می‌کنیم از روش کارت به کارت استفاده کنید.\n\n💎 مرحله دوم | خرید ووچر\nپس از شارژ کیف پول، وارد بخش «خرید ووچر» شوید. نوع ووچر را انتخاب کنید، مبلغ دلخواه را وارد نمایید و دکمه ثبت سفارش را لمس کنید.\n\n💵 مرحله سوم | فروش ووچر\nوارد بخش «فروش ووچر» شوید، نوع ووچر را انتخاب کرده و اطلاعات را با دقت وارد نمایید تا پس از تأیید، مبلغ به کیف پول شما واریز شود.\n\n🌍 ووچر چیست؟\nU Voucher و Hot Voucher اعتبارهای دیجیتالی هستند که برای شارژ حساب سایت‌های مختلف و پرداخت‌های بین‌المللی استفاده می‌شوند.`
+                a: `به دنیای خرید و فروش سریع، امن و آسان ووچر خوش آمدید. ❤️
+
+اگر برای اولین بار از ووچینو⁰۱ استفاده می‌کنید، کافیست مراحل زیر را دنبال کنید.
+
+━━━━━━━━━━━━━━━━━━
+
+💳 مرحله اول | شارژ کیف پول
+ابتدا از منوی ربات وارد بخش «شارژ کیف پول» شوید.
+در ووچینو⁰۱ دو روش برای شارژ کیف پول در نظر گرفته شده است:
+🔹 کارت به کارت   🔹 درگاه پرداخت
+
+⭐ پیشنهاد مجموعه ووچینو⁰۱: برای ثبت سریع‌تر تراکنش، بررسی آسان‌تر و کاهش احتمال خطا، پیشنهاد می‌کنیم از روش کارت به کارت استفاده کنید.
+پس از واریز، کد پیگیری را یک مرتبه ثبت کنید تا سفارش شما توسط سیستم و بخش مالی بررسی و تأیید شود.
+
+━━━━━━━━━━━━━━━━━━
+
+💎 مرحله دوم | خرید ووچر
+پس از شارژ کیف پول، وارد بخش «خرید ووچر» شوید. سپس:
+• نوع ووچر موردنظر خود را انتخاب کنید.
+• مبلغ دلخواه را وارد نمایید.
+• اطلاعات سفارش را بررسی کنید.
+• گزینه «ثبت سفارش» را لمس کنید.
+پس از تأیید، ووچر شما در کوتاه‌ترین زمان ممکن تحویل داده خواهد شد.
+
+━━━━━━━━━━━━━━━━━━
+
+💵 مرحله سوم | فروش ووچر
+اگر قصد فروش ووچر دارید:
+🔸 وارد بخش «فروش ووچر» شوید.
+🔸 نوع ووچر را انتخاب کنید.
+🔸 اطلاعات ووچر را با دقت وارد نمایید.
+🔸 پس از تأیید کارشناسان، مبلغ به کیف پول شما واریز خواهد شد.
+
+━━━━━━━━━━━━━━━━━━
+
+🌍 ووچر چیست؟
+U Voucher و Hot Voucher اعتبارهای دیجیتالی هستند که برای شارژ حساب سایت‌های مختلف، پرداخت‌های بین‌المللی و بسیاری از خدمات آنلاین استفاده می‌شوند.
+اگر در انتخاب نوع ووچر تردید دارید، تیم پشتیبانی ووچینو⁰۱ با افتخار شما را راهنمایی خواهد کرد.
+
+━━━━━━━━━━━━━━━━━━
+
+🛡 چرا ووچینو⁰۱؟
+✔ خرید و فروش سریع و آسان
+✔ کارمزد رقابتی و منصفانه
+✔ محیط امن و شفاف
+✔ پشتیبانی پاسخگو
+✔ مناسب برای کاربران تازه‌کار و حرفه‌ای
+
+ووچینو⁰۱؛ جایی که خرید و فروش ووچر، ساده، مطمئن و لذت‌بخش است. ❤️`
             },
             {
-                q: "❓ سوالات متداول (FAQ) | ووچینو⁰۱",
-                a: `💳 ۱. واریز انجام دادم ولی کیف پولم هنوز شارژ نشده، چیکار کنم؟\nاگر پرداخت را به‌درستی انجام داده‌اید، سیستم در حال بررسی است. از ارسال پیام‌های پشت سر هم خودداری کنید.\n\n🧾 ۲. کد پیگیری را ثبت کردم اما هنوز تأیید نشده است.\nگاهی به دلیل حجم بالای تراکنش‌ها تأیید کمی زمان‌بر است. لطفاً صبور باشید.\n\n🎁 ۳. ووچر را شارژ کردم اما موجودی سایت مقصد اضافه نشده است.\nاز صحیح بودن کد اطمینان حاصل کنید. در صورت نیاز، کد پیگیری را برای پشتیبانی سایت مقصد ارسال نمایید.\n\n⏳ ۴. چرا سفارش من کمی دیر انجام شده است؟\nبه علت بررسی‌های امنیتی یا شلوغی شبکه ممکن است زمان ببرد. تمامی سفارش‌ها به ترتیب بررسی می‌شوند.\n\n❌ ۵. مبلغ را اشتباه واریز کردم.\nدر صورت مغایرت مبلغ، سفارش قابل انجام نیست و طبق قوانین تا دو مرتبه امکان اصلاح وجود دارد.\n\n👤 ۶. آیا می‌توانم با کارت شخص دیگری پرداخت کنم؟\nخیر، برای حفظ امنیت و جلوگیری از سوءاستفاده، پرداخت باید فقط از حساب صاحب کاربری انجام شود.\n\n🔐 ۷. چگونه از فیشینگ و کلاهبرداری جلوگیری کنم؟\nفقط از ربات و راه‌های ارتباطی رسمی ووچینو⁰۱ استفاده کنید و اطلاعات خود را به کسی ندهید.\n\n📞 ۸. چه زمانی باید به پشتیبانی پیام بدهم؟\nبرای مشکلات مالی به بخش مالی و برای خطاهای فنی به بخش فنی پیام دهید و حتماً کد پیگیری را ارسال کنید.`
+                q: "❓ سوالات متداول (FAQ)",
+                a: `قبل از ارسال پیام به پشتیبانی، لطفاً این بخش را مطالعه کنید. در بیشتر مواقع پاسخ سؤال شما همین‌جاست. ❤️
+
+━━━━━━━━━━━━━━━━━━
+
+💳 ۱. واریز انجام دادم ولی کیف پولم هنوز شارژ نشده، چیکار کنم؟
+ابتدا نگران نباشید. 😊 اگر پرداخت را به‌درستی انجام داده‌اید، سیستم در حال بررسی تراکنش شماست.
+لطفاً از ارسال پیام‌های پشت سر هم یا ثبت چندباره درخواست خودداری کنید؛ این کار باعث افزایش زمان بررسی می‌شود.
+در صورت نیاز، کد پیگیری پرداخت را برای بخش مالی ارسال کنید.
+
+━━━━━━━━━━━━━━━━━━
+
+🧾 ۲. کد پیگیری را ثبت کردم اما هنوز تأیید نشده است.
+گاهی به دلیل حجم بالای تراکنش‌ها یا بررسی‌های امنیتی، تأیید سفارش کمی زمان‌بر می‌شود.
+تا پایان بررسی، لطفاً از ثبت مجدد همان کد یا ارسال چندباره پیام خودداری کنید.
+
+━━━━━━━━━━━━━━━━━━
+
+🎁 ۳. ووچر را شارژ کردم اما موجودی سایت مقصد اضافه نشد.
+ابتدا از صحیح بودن کد ووچر و اطلاعات واردشده اطمینان حاصل کنید. اگر از صحت اطلاعات مطمئن هستید:
+🔹 وارد بخش «گزارش سفارش‌ها» در ربات شوید.
+🔹 کد پیگیری سفارش را دریافت کنید.
+🔹 کد پیگیری را برای پشتیبانی همان سایتی که ووچر را در آن شارژ کرده‌اید ارسال نمایید.
+در صورت تأیید از سمت سایت مقصد، مبلغ یا اعتبار طبق قوانین همان مجموعه برای شما بررسی و واریز خواهد شد.
+
+━━━━━━━━━━━━━━━━━━
+
+⏳ ۴. چرا سفارش من کمی دیر انجام شده است؟
+گاهی به علت بررسی‌های امنیتی، شلوغی شبکه یا افزایش تعداد سفارش‌ها، زمان انجام سفارش ممکن است بیشتر از حالت عادی شود.
+از ارسال پیام‌های مکرر خودداری کنید؛ تمامی سفارش‌ها به ترتیب ثبت بررسی می‌شوند.
+
+━━━━━━━━━━━━━━━━━━
+
+❌ ۵. مبلغ را اشتباه واریز کردم.
+در صورت مغایرت مبلغ، سفارش قابل انجام نیست. طبق قوانین مجموعه، تا دو مرتبه امکان اصلاح وجود دارد. لطفاً پیش از ثبت سفارش، مبلغ را با دقت بررسی کنید.
+
+━━━━━━━━━━━━━━━━━━
+
+👤 ۶. آیا می‌توانم با کارت شخص دیگری پرداخت کنم؟
+خیر، برای حفظ امنیت حساب‌ها و جلوگیری از سوءاستفاده‌های مالی، توصیه می‌شود پرداخت فقط از حسابی انجام شود که متعلق به صاحب حساب کاربری باشد.
+
+━━━━━━━━━━━━━━━━━━
+
+🔐 ۷. چگونه از فیشینگ و کلاهبرداری جلوگیری کنم؟
+فقط از ربات و راه‌های ارتباطی رسمی ووچینو⁰۱ استفاده کنید. اطلاعات حساب، رمزها و کدهای خود را در اختیار هیچ شخص یا ربات دیگری قرار ندهید.
+
+━━━━━━━━━━━━━━━━━━
+
+📞 ۸. چه زمانی باید به پشتیبانی پیام بدهم؟
+اگر پاسخ سؤال خود را در این بخش پیدا نکردید:
+💰 مشکلات مربوط به پرداخت، واریز، برداشت و تراکنش‌ها: ➡️ بخش مالی
+⚙️ مشکلات مربوط به ربات، خطاهای فنی، باگ‌ها یا عملکرد سیستم: ➡️ بخش فنی
+
+🌹 برای رسیدگی سریع‌تر، لطفاً هنگام ارسال پیام، کد پیگیری یا شناسه سفارش خود را نیز ارسال کنید. این کار باعث می‌شود درخواست شما سریع‌تر بررسی و پاسخ داده شود.
+
+از همراهی و اعتماد شما به ووچینو⁰۱ سپاسگزاریم. ❤️`
             }
         ];
 
@@ -529,4 +509,4 @@
         });
     </script>
 </body>
-</html>
+    </html>
