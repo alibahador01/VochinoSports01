@@ -2,1459 +2,1534 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Vochino Sports - ووچینو اسپورتس | خرید ووچر، شارژ حساب، فوتبال زنده و مسابقات">
-    <meta name="keywords" content="ووچر, ووچینو, فوتبال زنده, شارژ, دربی بت, تک بت, 1xbet, Vochino">
-    <meta name="theme-color" content="#0a0e27">
-    <meta name="author" content="Vochino Sports">
-    
-    <title>Vochino Sports | ووچینو اسپورتس</title>
-    
-    <!-- Persian Font -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Vochino⁰¹ | صرافی ووچینو - خرید و فروش ووچر</title>
+    <meta name="description" content="صرافی ووچینو | خرید و فروش انواع ووچر با بهترین نرخ - یوووچر، هات ووچر، پرمیوم ووچر، PS Voucher">
+    <meta name="theme-color" content="#0a0a1a">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- AOS Animation Library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <!-- Swiper Slider -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
-    
-    <!-- Custom Styles -->
-    <link rel="stylesheet" href="style.css">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="favicon.png">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <style>
+/* ============================================
+   VOCHINO⁰¹ - COMPLETE STYLES
+   Dark + Glassmorphism + Neon + Responsive
+   ============================================ */
+:root {
+    --bg-primary: #0a0a1a;
+    --bg-secondary: #12122a;
+    --bg-card: rgba(20, 20, 50, 0.7);
+    --glass: rgba(255,255,255,0.05);
+    --glass-border: rgba(255,255,255,0.1);
+    --neon-blue: #00d4ff;
+    --neon-purple: #a855f7;
+    --neon-pink: #ec4899;
+    --neon-green: #22c55e;
+    --neon-gold: #fbbf24;
+    --neon-red: #ef4444;
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --radius: 16px;
+    --shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Vazirmatn', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: 
+        radial-gradient(ellipse at 20% 50%, rgba(168,85,247,0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(0,212,255,0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 80%, rgba(236,72,153,0.1) 0%, transparent 50%);
+    z-index: 0;
+    pointer-events: none;
+}
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-secondary); }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--neon-blue), var(--neon-purple)); border-radius: 4px; }
+
+/* Preloader */
+#preloader {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--bg-primary);
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    z-index: 99999;
+    transition: opacity 0.5s, visibility 0.5s;
+}
+#preloader.hide { opacity: 0; visibility: hidden; }
+.loader-logo {
+    font-size: 3rem; font-weight: 900;
+    background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    animation: pulse3d 1.5s ease-in-out infinite;
+    text-shadow: 0 0 30px rgba(0,212,255,0.5);
+}
+.loader-bar { width: 200px; height: 4px; background: var(--glass); border-radius: 2px; margin-top: 20px; overflow: hidden; }
+.loader-fill { height: 100%; background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple)); animation: loadBar 1.5s ease-in-out infinite; border-radius: 2px; }
+@keyframes loadBar { 0%{transform:translateX(-100%)} 100%{transform:translateX(100%)} }
+@keyframes pulse3d { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
+
+/* Header */
+.header {
+    position: fixed; top: 0; left: 0; width: 100%;
+    background: rgba(10,10,26,0.9);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+    z-index: 1000;
+    padding: 10px 20px;
+}
+.header-inner {
+    max-width: 1400px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 10px;
+}
+.logo-wrap { display: flex; align-items: center; gap: 10px; }
+.logo-3d {
+    font-size: 1.6rem; font-weight: 900;
+    background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(0,212,255,0.3);
+    animation: logoGlow 3s ease-in-out infinite;
+}
+@keyframes logoGlow { 0%,100%{filter:brightness(1)} 50%{filter:brightness(1.3)} }
+.logo-sub { font-size: 0.7rem; color: var(--neon-gold); letter-spacing: 2px; }
+.header-info { display: flex; align-items: center; gap: 15px; }
+.clock-box {
+    display: flex; align-items: center; gap: 5px;
+    background: var(--glass); border: 1px solid var(--glass-border);
+    padding: 5px 12px; border-radius: 8px; font-size: 0.85rem;
+}
+.clock-box i { color: var(--neon-blue); }
+.header-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+.btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 16px; border-radius: 10px;
+    font-family: inherit; font-size: 0.85rem; font-weight: 600;
+    cursor: pointer; border: none; text-decoration: none;
+    transition: all 0.3s ease; position: relative; overflow: hidden;
+}
+.btn::after {
+    content: ''; position: absolute; top: 50%; left: 50%;
+    width: 0; height: 0; background: rgba(255,255,255,0.2);
+    border-radius: 50%; transform: translate(-50%,-50%);
+    transition: width 0.4s, height 0.4s;
+}
+.btn:active::after { width: 200px; height: 200px; }
+.btn-telegram { background: linear-gradient(135deg, #0088cc, #00aaff); color: #fff; box-shadow: 0 4px 15px rgba(0,136,204,0.4); }
+.btn-telegram:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(0,136,204,0.6); }
+.btn-glass { background: var(--glass); border: 1px solid var(--glass-border); color: var(--text-primary); }
+.btn-glass:hover { background: rgba(168,85,247,0.2); border-color: var(--neon-purple); }
+.btn-gold { background: linear-gradient(135deg, var(--neon-gold), #f59e0b); color: #000; font-weight: 700; }
+.btn-green { background: linear-gradient(135deg, var(--neon-green), #16a34a); color: #fff; }
+
+/* Hero Slider */
+.hero { margin-top: 80px; padding: 20px; }
+.swiper { border-radius: var(--radius); overflow: hidden; }
+.swiper-slide {
+    min-height: 420px;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, var(--bg-secondary), rgba(20,20,50,0.9));
+    position: relative; overflow: hidden; padding: 40px 20px;
+}
+.swiper-slide::before {
+    content: ''; position: absolute; top: -50%; right: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(0,212,255,0.1) 0%, transparent 60%);
+    animation: rotate 20s linear infinite;
+}
+@keyframes rotate { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
+.hero-content { text-align: center; z-index: 2; max-width: 700px; }
+.hero-icon { font-size: 3.5rem; margin-bottom: 15px; filter: drop-shadow(0 0 20px currentColor); }
+.hero-title {
+    font-size: clamp(1.5rem, 4vw, 2.5rem); font-weight: 900;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.hero-sub { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 20px; }
+.hero-badges { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 25px; }
+.badge {
+    padding: 6px 14px; border-radius: 20px; font-size: 0.8rem;
+    background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3);
+    color: var(--neon-green);
+}
+.swiper-pagination-bullet { background: var(--text-secondary); }
+.swiper-pagination-bullet-active { background: var(--neon-blue); width: 25px; border-radius: 5px; }
+.swiper-button-next, .swiper-button-prev { color: var(--neon-blue); }
+.swiper-button-next::after, .swiper-button-prev::after { font-size: 1.2rem; }
+
+/* Sections */
+.section { padding: 50px 20px; position: relative; z-index: 1; }
+.section-header { text-align: center; margin-bottom: 30px; }
+.section-title {
+    font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 900;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+.section-title i { color: var(--neon-blue); filter: drop-shadow(0 0 10px rgba(0,212,255,0.5)); }
+.section-sub { color: var(--text-secondary); margin-top: 8px; }
+.container { max-width: 1400px; margin: 0 auto; }
+
+/* Quick Actions */
+.quick-actions {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px; max-width: 800px; margin: 0 auto 40px;
+}
+.quick-btn {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    padding: 20px 15px; background: var(--glass);
+    border: 1px solid var(--glass-border); border-radius: var(--radius);
+    cursor: pointer; transition: all 0.3s; text-align: center;
+}
+.quick-btn:hover { transform: translateY(-5px); border-color: var(--neon-blue); box-shadow: 0 10px 30px rgba(0,212,255,0.2); }
+.quick-btn i { font-size: 1.8rem; }
+.quick-btn span { font-size: 0.85rem; font-weight: 600; }
+
+/* Live Badge */
+.live-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(239,68,68,0.2); border: 1px solid var(--neon-red);
+    color: var(--neon-red); padding: 4px 12px; border-radius: 6px;
+    font-size: 0.8rem; font-weight: 700;
+    animation: livePulse 2s infinite;
+}
+.live-dot { width: 8px; height: 8px; background: var(--neon-red); border-radius: 50%; animation: blink 1s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+@keyframes livePulse { 0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,0.4)} 50%{box-shadow:0 0 0 8px rgba(239,68,68,0)} }
+
+/* Match Cards */
+.matches-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 15px; }
+.match-card {
+    background: var(--glass); backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border); border-radius: var(--radius);
+    padding: 15px; transition: all 0.3s; cursor: pointer; position: relative; overflow: hidden;
+}
+.match-card::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+    background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+    transform: scaleX(0); transition: transform 0.3s; transform-origin: left;
+}
+.match-card:hover::before { transform: scaleX(1); }
+.match-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,212,255,0.15); border-color: rgba(0,212,255,0.3); }
+.match-card.live-card { border-color: rgba(239,68,68,0.4); }
+.match-card.live-card::before { background: linear-gradient(90deg, var(--neon-red), var(--neon-pink)); }
+.match-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--glass-border); }
+.match-league { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--text-secondary); }
+.match-league img { width: 20px; height: 20px; object-fit: contain; }
+.match-status { font-size: 0.75rem; padding: 3px 8px; border-radius: 5px; font-weight: 700; }
+.match-status.live { background: rgba(239,68,68,0.2); color: var(--neon-red); animation: blink 1.5s infinite; }
+.match-status.ft { background: rgba(34,197,94,0.15); color: var(--neon-green); }
+.match-status.ns { background: rgba(251,191,36,0.15); color: var(--neon-gold); }
+.match-body { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; }
+.team { text-align: center; }
+.team img { width: 45px; height: 45px; object-fit: contain; margin-bottom: 5px; transition: transform 0.3s; }
+.match-card:hover .team img { transform: scale(1.1); }
+.team-name { font-size: 0.8rem; font-weight: 600; line-height: 1.3; }
+.score-box { text-align: center; }
+.score { font-size: 1.8rem; font-weight: 900; display: flex; gap: 5px; justify-content: center; }
+.score span { min-width: 25px; }
+.match-time { font-size: 0.75rem; color: var(--text-secondary); margin-top: 3px; }
+.match-stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--glass-border); }
+.stat-item { text-align: center; }
+.stat-label { font-size: 0.7rem; color: var(--text-secondary); }
+.stat-value { font-size: 0.9rem; font-weight: 700; }
+.match-promo { margin-top: 10px; text-align: center; }
+.match-promo a { font-size: 0.75rem; color: var(--neon-blue); text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 4px; }
+.match-promo a:hover { text-decoration: underline; }
+
+/* League Selector */
+.league-tabs { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 20px; }
+.league-tab {
+    padding: 8px 14px; border-radius: 10px; font-size: 0.8rem; font-weight: 600;
+    background: var(--glass); border: 1px solid var(--glass-border);
+    color: var(--text-secondary); cursor: pointer; transition: all 0.3s;
+    display: flex; align-items: center; gap: 5px;
+}
+.league-tab:hover, .league-tab.active { background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple)); color: #fff; border-color: transparent; box-shadow: 0 4px 15px rgba(0,212,255,0.3); }
+
+/* Standings Table */
+.table-wrap { overflow-x: auto; background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--radius); }
+.standings-table { width: 100%; border-collapse: collapse; min-width: 600px; }
+.standings-table th {
+    padding: 12px 10px; text-align: center; font-size: 0.8rem;
+    background: rgba(0,212,255,0.1); color: var(--neon-blue);
+    border-bottom: 2px solid var(--glass-border); font-weight: 700;
+}
+.standings-table td { padding: 10px; text-align: center; font-size: 0.85rem; border-bottom: 1px solid var(--glass-border); }
+.standings-table tr:hover { background: rgba(0,212,255,0.05); }
+.standings-table .team-cell { display: flex; align-items: center; gap: 8px; justify-content: flex-start; }
+.standings-table .team-cell img { width: 22px; height: 22px; object-fit: contain; }
+.pos-cl { border-right: 3px solid var(--neon-green); }
+.pos-el { border-right: 3px solid var(--neon-blue); }
+.pos-rel { border-right: 3px solid var(--neon-red); }
+
+/* Trust Section */
+.trust-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px; }
+.trust-card {
+    background: var(--glass); border: 1px solid var(--glass-border);
+    border-radius: var(--radius); padding: 25px 15px; text-align: center;
+    transition: all 0.3s;
+}
+.trust-card:hover { transform: translateY(-5px); border-color: var(--neon-blue); }
+.trust-card i { font-size: 2rem; margin-bottom: 10px; color: var(--neon-blue); }
+.trust-card .num { font-size: 2rem; font-weight: 900; background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.trust-card .label { color: var(--text-secondary); font-size: 0.85rem; margin-top: 5px; }
+
+/* Voucher Ads */
+.voucher-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+.voucher-card {
+    background: var(--glass); border: 1px solid var(--glass-border);
+    border-radius: var(--radius); padding: 25px; text-align: center;
+    transition: all 0.3s; position: relative; overflow: hidden;
+}
+.voucher-card::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+    background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
+}
+.voucher-card:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 15px 40px rgba(168,85,247,0.2); }
+.voucher-card i { font-size: 2.5rem; margin-bottom: 10px; }
+.voucher-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+.voucher-card p { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 15px; }
+
+/* Bonus Section */
+.bonus-banner {
+    background: linear-gradient(135deg, rgba(251,191,36,0.1), rgba(245,158,11,0.1));
+    border: 1px solid rgba(251,191,36,0.3); border-radius: var(--radius);
+    padding: 25px; text-align: center; margin: 30px 0;
+}
+.bonus-banner h3 { color: var(--neon-gold); font-size: 1.3rem; margin-bottom: 10px; }
+.bonus-banner p { color: var(--text-secondary); }
+
+/* Modals */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+    z-index: 10000; display: none; justify-content: center; align-items: center;
+    padding: 20px; opacity: 0; transition: opacity 0.3s;
+}
+.modal-overlay.active { display: flex; opacity: 1; }
+.modal-box {
+    background: var(--bg-secondary); border: 1px solid var(--glass-border);
+    border-radius: var(--radius); max-width: 800px; width: 100%;
+    max-height: 85vh; overflow-y: auto; padding: 30px; position: relative;
+    animation: modalIn 0.3s ease;
+}
+@keyframes modalIn { from{transform:scale(0.9);opacity:0} to{transform:scale(1);opacity:1} }
+.modal-close {
+    position: absolute; top: 15px; left: 15px;
+    width: 35px; height: 35px; border-radius: 50%;
+    background: rgba(239,68,68,0.2); border: 1px solid var(--neon-red);
+    color: var(--neon-red); cursor: pointer; font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s;
+}
+.modal-close:hover { background: var(--neon-red); color: #fff; transform: rotate(90deg); }
+.modal-title { font-size: 1.5rem; font-weight: 900; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+.modal-title i { color: var(--neon-blue); }
+.modal-content h3 { color: var(--neon-blue); margin: 15px 0 8px; font-size: 1.1rem; }
+.modal-content p, .modal-content li { color: var(--text-secondary); line-height: 1.8; margin-bottom: 8px; }
+.modal-content ul, .modal-content ol { padding-right: 20px; margin-bottom: 15px; }
+.modal-content li { margin-bottom: 6px; }
+.modal-content li::marker { color: var(--neon-blue); }
+
+/* FAQ Accordion */
+.faq-item { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
+.faq-q {
+    width: 100%; padding: 15px; background: none; border: none;
+    color: var(--text-primary); font-family: inherit; font-size: 0.95rem;
+    font-weight: 600; cursor: pointer; text-align: right;
+    display: flex; justify-content: space-between; align-items: center;
+    transition: all 0.3s;
+}
+.faq-q:hover { background: rgba(0,212,255,0.05); }
+.faq-q i { transition: transform 0.3s; color: var(--neon-blue); }
+.faq-item.active .faq-q i { transform: rotate(180deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+.faq-item.active .faq-a { max-height: 500px; }
+.faq-a-inner { padding: 0 15px 15px; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.8; }
+
+/* Footer */
+.footer {
+    background: var(--bg-secondary); border-top: 1px solid var(--glass-border);
+    padding: 40px 20px 20px; margin-top: 50px; position: relative; z-index: 1;
+}
+.footer-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 30px; }
+.footer-col h3 { font-size: 1.1rem; margin-bottom: 15px; color: var(--neon-blue); }
+.footer-col p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.8; }
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 8px; }
+.footer-links a { color: var(--text-secondary); text-decoration: none; transition: color 0.3s; font-size: 0.9rem; display: flex; align-items: center; gap: 5px; }
+.footer-links a:hover { color: var(--neon-blue); }
+.footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid var(--glass-border); color: var(--text-secondary); font-size: 0.85rem; }
+.footer-bottom .dev { margin-top: 5px; font-size: 0.75rem; color: var(--neon-purple); }
+
+/* Floating Button */
+.float-btn {
+    position: fixed; bottom: 25px; left: 25px; z-index: 999;
+    width: 55px; height: 55px; border-radius: 50%;
+    background: linear-gradient(135deg, #0088cc, #00aaff);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 5px 25px rgba(0,136,204,0.5);
+    animation: floatPulse 2s infinite; text-decoration: none; color: #fff; font-size: 1.5rem;
+}
+@keyframes floatPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }
+
+/* Loading */
+.loading { text-align: center; padding: 40px; color: var(--text-secondary); }
+.spinner { width: 40px; height: 40px; border: 3px solid var(--glass-border); border-top-color: var(--neon-blue); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 15px; }
+@keyframes spin { to{transform:rotate(360deg)} }
+
+/* Responsive */
+@media(max-width:768px) {
+    .header-inner { justify-content: center; }
+    .header-info { display: none; }
+    .hero { margin-top: 70px; }
+    .swiper-slide { min-height: 350px; }
+    .matches-grid { grid-template-columns: 1fr; }
+    .quick-actions { grid-template-columns: repeat(3, 1fr); }
+    .modal-box { padding: 20px; }
+    .section { padding: 30px 15px; }
+}
+@media(max-width:480px) {
+    .header-btns .btn span { display: none; }
+    .hero-badges { flex-direction: column; align-items: center; }
+    .quick-actions { grid-template-columns: repeat(2, 1fr); }
+    .league-tabs { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 10px; }
+    .league-tab { white-space: nowrap; }
+}
+    </style>
 </head>
 <body>
 
-    <!-- Preloader -->
-    <div id="preloader">
-        <div class="loader-container">
-            <div class="loader-logo">
-                <span class="logo-text-3d">V</span>
-                <span class="logo-text-3d">o</span>
-                <span class="logo-text-3d">c</span>
-                <span class="logo-text-3d">h</span>
-                <span class="logo-text-3d">i</span>
-                <span class="logo-text-3d">n</span>
-                <span class="logo-text-3d">o</span>
+<!-- Preloader -->
+<div id="preloader">
+    <div class="loader-logo">Vochino⁰¹</div>
+    <div class="loader-bar"><div class="loader-fill"></div></div>
+    <p style="margin-top:15px;color:var(--text-secondary);font-size:0.9rem;">صرافی ووچینو در حال بارگذاری...</p>
+</div>
+
+<!-- Header -->
+<header class="header">
+    <div class="header-inner">
+        <div class="logo-wrap">
+            <div>
+                <div class="logo-3d">Vochino⁰¹</div>
+                <div class="logo-sub">SPORTS & EXCHANGE</div>
             </div>
-            <div class="loader-bar">
-                <div class="loader-progress"></div>
-            </div>
-            <p class="loader-text">در حال بارگذاری...</p>
+        </div>
+        <div class="header-info">
+            <div class="clock-box"><i class="fas fa-clock"></i><span id="clock">--:--:--</span></div>
+            <div class="clock-box"><i class="fas fa-calendar"></i><span id="date">---</span></div>
+        </div>
+        <div class="header-btns">
+            <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-telegram">
+                <i class="fab fa-telegram-plane"></i><span>ورود به ربات</span>
+            </a>
+            <button class="btn btn-glass" onclick="openModal('rulesModal')"><i class="fas fa-gavel"></i><span>قوانین</span></button>
+            <button class="btn btn-glass" onclick="openModal('trainingModal')"><i class="fas fa-graduation-cap"></i><span>آموزش</span></button>
+            <button class="btn btn-glass" onclick="openModal('faqModal')"><i class="fas fa-question-circle"></i><span>سوالات</span></button>
         </div>
     </div>
+</header>
 
-    <!-- Glassmorphism Background -->
-    <div class="bg-animation">
-        <div class="bg-circle circle-1"></div>
-        <div class="bg-circle circle-2"></div>
-        <div class="bg-circle circle-3"></div>
-        <div class="bg-circle circle-4"></div>
-    </div>
-
-    <!-- Header / Navigation -->
-    <header class="main-header" id="header">
-        <div class="header-container">
-            <!-- Logo -->
-            <div class="logo" data-aos="fade-left">
-                <div class="logo-3d">
-                    <div class="logo-front">Vochino</div>
-                    <div class="logo-shadow">Sports</div>
+<!-- Hero Slider -->
+<section class="hero">
+    <div class="swiper heroSwiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <div class="hero-content">
+                    <div class="hero-icon" style="color:var(--neon-blue)"><i class="fas fa-ticket-alt"></i></div>
+                    <h1 class="hero-title">خرید انواع ووچر با کارمزد رقابتی</h1>
+                    <p class="hero-sub">یوووچر | هات ووچر | پرمیوم ووچر | PS Voucher | پرفکت مانی</p>
+                    <div class="hero-badges">
+                        <span class="badge"><i class="fas fa-check"></i> تحویل آنی</span>
+                        <span class="badge"><i class="fas fa-check"></i> کارمزد کم</span>
+                        <span class="badge"><i class="fas fa-check"></i> پشتیبانی ۲۴/۷</span>
+                    </div>
+                    <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-telegram" style="font-size:1rem;padding:12px 30px;">
+                        <i class="fab fa-telegram-plane"></i> خرید از ربات ووچینو⁰¹
+                    </a>
                 </div>
             </div>
-
-            <!-- Clock & Date -->
-            <div class="header-info" data-aos="fade-down">
-                <div class="clock-container">
-                    <i class="fas fa-clock neon-icon"></i>
-                    <span id="clock" class="clock-text">--:--:--</span>
-                </div>
-                <div class="date-container">
-                    <i class="fas fa-calendar-alt neon-icon"></i>
-                    <span id="date" class="date-text">---/--/--</span>
+            <div class="swiper-slide">
+                <div class="hero-content">
+                    <div class="hero-icon" style="color:var(--neon-green)"><i class="fas fa-shipping-fast"></i></div>
+                    <h1 class="hero-title">تحویل سریع سفارش‌ها</h1>
+                    <p class="hero-sub">سفارش شما در کمترین زمان ممکن پردازش و تحویل داده می‌شود</p>
+                    <div class="hero-badges">
+                        <span class="badge"><i class="fas fa-bolt"></i> پردازش خودکار</span>
+                        <span class="badge"><i class="fas fa-shield-alt"></i> امن و مطمئن</span>
+                    </div>
+                    <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-telegram" style="font-size:1rem;padding:12px 30px;">
+                        <i class="fab fa-telegram-plane"></i> سفارش دهید
+                    </a>
                 </div>
             </div>
-
-            <!-- Navigation Menu -->
-            <nav class="main-nav" id="mainNav">
-                <ul class="nav-list">
-                    <li><a href="#home" class="nav-link active"><i class="fas fa-home"></i> خانه</a></li>
-                    <li><a href="#live-matches" class="nav-link"><i class="fas fa-futbol"></i> زنده</a></li>
-                    <li><a href="#today-matches" class="nav-link"><i class="fas fa-calendar-day"></i> امروز</a></li>
-                    <li><a href="#tomorrow-matches" class="nav-link"><i class="fas fa-calendar-plus"></i> فردا</a></li>
-                    <li><a href="#leagues" class="nav-link"><i class="fas fa-trophy"></i> لیگ‌ها</a></li>
-                    <li><a href="#news" class="nav-link"><i class="fas fa-newspaper"></i> اخبار</a></li>
-                    <li><a href="#trust" class="nav-link"><i class="fas fa-shield-alt"></i> اعتمادگاه</a></li>
-                    <li><a href="#rules" class="nav-link"><i class="fas fa-gavel"></i> قوانین</a></li>
-                    <li><a href="#training" class="nav-link"><i class="fas fa-graduation-cap"></i> آموزش</a></li>
-                    <li><a href="#faq" class="nav-link"><i class="fas fa-question-circle"></i> سوالات</a></li>
-                </ul>
-            </nav>
-
-            <!-- Header Buttons -->
-            <div class="header-buttons" data-aos="fade-right">
-                <a href="https://t.me/VochinoBot" target="_blank" class="btn btn-telegram">
-                    <i class="fab fa-telegram-plane"></i>
-                    <span>ربات تلگرام</span>
-                </a>
-                <button class="btn btn-rules" onclick="scrollToSection('rules')">
-                    <i class="fas fa-gavel"></i>
-                    <span>قوانین</span>
-                </button>
-                <button class="btn btn-training" onclick="scrollToSection('training')">
-                    <i class="fas fa-graduation-cap"></i>
-                    <span>آموزش</span>
-                </button>
+            <div class="swiper-slide">
+                <div class="hero-content">
+                    <div class="hero-icon" style="color:var(--neon-gold)"><i class="fas fa-gift"></i></div>
+                    <h1 class="hero-title">🎁 بونوس ویژه خرید بالای ۵۰۰</h1>
+                    <p class="hero-sub">با خرید بالای ۵۰۰ دلار از ربات ووچینو⁰¹، بونوس ویژه دریافت کنید!</p>
+                    <div class="hero-badges">
+                        <span class="badge" style="border-color:var(--neon-gold);color:var(--neon-gold);background:rgba(251,191,36,0.15);"><i class="fas fa-star"></i> بونوس ویژه</span>
+                        <span class="badge"><i class="fas fa-crown"></i> کاربران VIP</span>
+                    </div>
+                    <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-gold" style="font-size:1rem;padding:12px 30px;">
+                        <i class="fas fa-gift"></i> دریافت بونوس
+                    </a>
+                </div>
             </div>
-
-            <!-- Mobile Menu Toggle -->
-            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="منوی موبایل">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+            <div class="swiper-slide">
+                <div class="hero-content">
+                    <div class="hero-icon" style="color:var(--neon-purple)"><i class="fas fa-headset"></i></div>
+                    <h1 class="hero-title">پشتیبانی سریع و حرفه‌ای</h1>
+                    <p class="hero-sub">تیم پشتیبانی ووچینو⁰¹ همیشه آماده پاسخگویی به شماست</p>
+                    <div class="hero-badges">
+                        <span class="badge"><i class="fas fa-clock"></i> ۲۴ ساعته</span>
+                        <span class="badge"><i class="fas fa-user-shield"></i> متخصص</span>
+                    </div>
+                    <a href="https://t.me/ali_bh0101" target="_blank" class="btn btn-telegram" style="font-size:1rem;padding:12px 30px;">
+                        <i class="fab fa-telegram-plane"></i> ارتباط با پشتیبانی
+                    </a>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="hero-content">
+                    <div class="hero-icon" style="color:var(--neon-pink)"><i class="fas fa-fire"></i></div>
+                    <h1 class="hero-title">جشنواره‌های ووچینو⁰¹</h1>
+                    <p class="hero-sub">تخفیف‌های ویژه، جوایز هیجان‌انگیز و پیشنهادهای محدود</p>
+                    <div class="hero-badges">
+                        <span class="badge" style="border-color:var(--neon-pink);color:var(--neon-pink);background:rgba(236,72,153,0.15);"><i class="fas fa-percent"></i> تخفیف ویژه</span>
+                        <span class="badge"><i class="fas fa-trophy"></i> جوایز</span>
+                    </div>
+                    <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-telegram" style="font-size:1rem;padding:12px 30px;">
+                        <i class="fab fa-telegram-plane"></i> شرکت در جشنواره
+                    </a>
+                </div>
+            </div>
         </div>
-    </header>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+</section>
 
-    <!-- Hero Section - Promotional Slider -->
-    <section class="hero-section" id="home">
-        <div class="swiper hero-swiper" data-aos="fade-up">
-            <div class="swiper-wrapper">
-                <!-- Slide 1: Vouchers -->
-                <div class="swiper-slide hero-slide">
-                    <div class="hero-content">
-                        <div class="hero-icon">
-                            <i class="fas fa-ticket-alt neon-glow"></i>
-                        </div>
-                        <h1 class="hero-title neon-text">خرید انواع ووچر</h1>
-                        <p class="hero-subtitle">با کارمزد رقابتی و تحویل فوری</p>
-                        <div class="hero-features">
-                            <span class="feature-badge"><i class="fas fa-check"></i> تحویل سریع</span>
-                            <span class="feature-badge"><i class="fas fa-check"></i> کارمزد کم</span>
-                            <span class="feature-badge"><i class="fas fa-check"></i> پشتیبانی ۲۴/۷</span>
-                        </div>
-                        <a href="https://t.me/VochinoBot" target="_blank" class="btn btn-hero">
-                            <i class="fab fa-telegram-plane"></i>
-                            خرید از ربات
-                        </a>
-                    </div>
-                    <div class="hero-bg-overlay"></div>
-                </div>
+<!-- Quick Actions -->
+<section class="section" style="padding-top:20px;padding-bottom:20px;">
+    <div class="quick-actions">
+        <div class="quick-btn" onclick="openModal('rulesModal')">
+            <i class="fas fa-gavel" style="color:var(--neon-purple)"></i>
+            <span>قوانین</span>
+        </div>
+        <div class="quick-btn" onclick="openModal('trainingModal')">
+            <i class="fas fa-graduation-cap" style="color:var(--neon-blue)"></i>
+            <span>آموزش</span>
+        </div>
+        <div class="quick-btn" onclick="openModal('faqModal')">
+            <i class="fas fa-question-circle" style="color:var(--neon-gold)"></i>
+            <span>سوالات متداول</span>
+        </div>
+        <div class="quick-btn" onclick="window.open('https://t.me/Vochino_bh01_bot','_blank')">
+            <i class="fab fa-telegram-plane" style="color:#0088cc"></i>
+            <span>ربات تلگرام</span>
+        </div>
+        <div class="quick-btn" onclick="window.open('https://t.me/ali_bh0101','_blank')">
+            <i class="fas fa-headset" style="color:var(--neon-green)"></i>
+            <span>پشتیبانی</span>
+        </div>
+    </div>
+</section>
 
-                <!-- Slide 2: Fast Delivery -->
-                <div class="swiper-slide hero-slide">
-                    <div class="hero-content">
-                        <div class="hero-icon">
-                            <i class="fas fa-shipping-fast neon-glow"></i>
-                        </div>
-                        <h1 class="hero-title neon-text">تحویل سریع سفارش‌ها</h1>
-                        <p class="hero-subtitle">کمتر از ۵ دقیقه برای همه سفارش‌ها</p>
-                        <div class="hero-features">
-                            <span class="feature-badge"><i class="fas fa-bolt"></i> خودکار</span>
-                            <span class="feature-badge"><i class="fas fa-lock"></i> امن</span>
-                            <span class="feature-badge"><i class="fas fa-headset"></i> پشتیبانی</span>
-                        </div>
-                        <a href="https://t.me/VochinoBot" target="_blank" class="btn btn-hero">
-                            <i class="fab fa-telegram-plane"></i>
-                            سفارش دهید
-                        </a>
-                    </div>
-                </div>
+<!-- Live Matches -->
+<section class="section" id="liveSection">
+    <div class="container">
+        <div class="section-header">
+            <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:8px;">
+                <span class="live-badge"><span class="live-dot"></span> LIVE</span>
+                <h2 class="section-title"><i class="fas fa-futbol"></i> مسابقات زنده</h2>
+            </div>
+            <p class="section-sub">نتایج زنده، گل‌ها، کارت‌ها و تعویض‌ها</p>
+        </div>
+        <div class="matches-grid" id="liveMatches">
+            <div class="loading"><div class="spinner"></div>در حال دریافت مسابقات زنده...</div>
+        </div>
+    </div>
+</section>
 
-                <!-- Slide 3: Fast Support -->
-                <div class="swiper-slide hero-slide">
-                    <div class="hero-content">
-                        <div class="hero-icon">
-                            <i class="fas fa-headset neon-glow"></i>
-                        </div>
-                        <h1 class="hero-title neon-text">پشتیبانی سریع</h1>
-                        <p class="hero-subtitle">تیم پشتیبانی ما ۲۴ ساعته آماده پاسخگویی است</p>
-                        <div class="hero-features">
-                            <span class="feature-badge"><i class="fas fa-clock"></i> ۲۴/۷</span>
-                            <span class="feature-badge"><i class="fas fa-user-shield"></i> حرفه‌ای</span>
-                            <span class="feature-badge"><i class="fas fa-comments"></i> آنلاین</span>
-                        </div>
-                        <a href="https://t.me/VochinoSupport" target="_blank" class="btn btn-hero">
-                            <i class="fab fa-telegram-plane"></i>
-                            تماس با پشتیبانی
-                        </a>
-                    </div>
-                </div>
+<!-- Today Matches -->
+<section class="section" id="todaySection">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title"><i class="fas fa-calendar-day"></i> مسابقات امروز</h2>
+            <p class="section-sub">برنامه کامل بازی‌های امروز</p>
+        </div>
+        <div class="matches-grid" id="todayMatches">
+            <div class="loading"><div class="spinner"></div>در حال دریافت مسابقات امروز...</div>
+        </div>
+    </div>
+</section>
 
-                <!-- Slide 4: Festival -->
-                <div class="swiper-slide hero-slide">
-                    <div class="hero-content">
-                        <div class="hero-icon">
-                            <i class="fas fa-gift neon-glow"></i>
-                        </div>
-                        <h1 class="hero-title neon-text">جشنواره‌های ووچینو</h1>
-                        <p class="hero-subtitle">تخفیف‌های ویژه و جوایز هیجان‌انگیز</p>
-                        <div class="hero-features">
-                            <span class="feature-badge"><i class="fas fa-percent"></i> تخفیف</span>
-                            <span class="feature-badge"><i class="fas fa-trophy"></i> جوایز</span>
-                            <span class="feature-badge"><i class="fas fa-star"></i> ویژه</span>
-                        </div>
-                        <a href="https://t.me/VochinoFestival" target="_blank" class="btn btn-hero">
-                            <i class="fas fa-gift"></i>
-                            شرکت در جشنواره
-                        </a>
-                    </div>
-                </div>
+<!-- Tomorrow Matches -->
+<section class="section" id="tomorrowSection">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title"><i class="fas fa-calendar-plus"></i> مسابقات فردا</h2>
+            <p class="section-sub">برنامه بازی‌های فردا</p>
+        </div>
+        <div class="matches-grid" id="tomorrowMatches">
+            <div class="loading"><div class="spinner"></div>در حال دریافت مسابقات فردا...</div>
+        </div>
+    </div>
+</section>
 
-                <!-- Slide 5: DerbyBet -->
-                <div class="swiper-slide hero-slide">
-                    <div class="hero-content">
-                        <div class="hero-icon">
-                            <i class="fas fa-futbol neon-glow"></i>
-                        </div>
-                        <h1 class="hero-title neon-text">شارژ DerbyBet</h1>
-                        <p class="hero-subtitle">شارژ حساب دربی بت با بهترین نرخ</p>
-                        <div class="hero-features">
-                            <span class="feature-badge"><i class="fas fa-bolt"></i> فوری</span>
-                            <span class="feature-badge"><i class="fas fa-tag"></i> نرخ مناسب</span>
-                            <span class="feature-badge"><i class="fas fa-shield-alt"></i> امن</span>
-                        </div>
-                        <a href="https://t.me/VochinoBot" target="_blank" class="btn btn-hero">
-                            <i class="fab fa-telegram-plane"></i>
-                            شارژ کنید
-                        </a>
-                    </div>
-                </div>
+<!-- League Standings -->
+<section class="section" id="standingsSection">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title"><i class="fas fa-trophy"></i> جدول لیگ‌ها</h2>
+            <p class="section-sub">جداول رده‌بندی لیگ‌های معتبر</p>
+        </div>
+        <div class="league-tabs" id="leagueTabs"></div>
+        <div class="table-wrap">
+            <table class="standings-table">
+                <thead>
+                    <tr>
+                        <th>#</th><th style="text-align:right">تیم</th><th>بازی</th><th>برد</th><th>مساوی</th><th>باخت</th><th>گل زده</th><th>گل خورده</th><th>تفاضل</th><th>امتیاز</th>
+                    </tr>
+                </thead>
+                <tbody id="standingsBody">
+                    <tr><td colspan="10"><div class="loading"><div class="spinner"></div>در حال دریافت جدول...</div></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
 
-                <!-- Slide 6: TakBet -->
-                <div class="swiper-slide hero-slide">
-                    <div class="hero-content">
-                        <div class="hero-icon">
-                            <i class="fas fa-dice neon-glow"></i>
-                        </div>
-                        <h1 class="hero-title neon-text">شارژ TakBet</h1>
-                        <p class="hero-subtitle">شارژ سریع و امن حساب تک بت</p>
-                        <div class="hero-features">
-                            <span class="feature-badge"><i class="fas fa-bolt"></i> سریع</span>
-                            <span class="feature-badge"><i class="fas fa-lock"></i> امن</span>
-                            <span class="feature-badge"><i class="fas fa-headset"></i> پشتیبانی</span>
-                        </div>
-                        <a href="https://t.me/VochinoBot" target="_blank" class="btn btn-hero">
-                            <i class="fab fa-telegram-plane"></i>
-                            شارژ کنید
-                        </a>
-                    </div>
-                </div>
+<!-- Voucher Ads -->
+<section class="section" id="voucherSection">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title"><i class="fas fa-ticket-alt"></i> خدمات ووچینو⁰¹</h2>
+            <p class="section-sub">انواع ووچر و خدمات مالی با بهترین نرخ</p>
+        </div>
+        <div class="voucher-grid">
+            <div class="voucher-card">
+                <i class="fas fa-ticket-alt" style="color:var(--neon-blue)"></i>
+                <h3>یوووچر</h3>
+                <p>خرید و فروش یوووچر با بهترین نرخ بازار</p>
+                <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-telegram" style="width:100%;justify-content:center;"><i class="fab fa-telegram-plane"></i> خرید</a>
+            </div>
+            <div class="voucher-card">
+                <i class="fas fa-fire" style="color:var(--neon-red)"></i>
+                <h3>هات ووچر</h3>
+                <p>هات ووچر با تحویل آنی و نرخ رقابتی</p>
+                <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-telegram" style="width:100%;justify-content:center;"><i class="fab fa-telegram-plane"></i> خرید</a>
+            </div>
+            <div class="voucher-card">
+                <i class="fas fa-crown" style="color:var(--neon-gold)"></i>
+                <h3>پرمیوم ووچر</h3>
+                <p>پرمیوم ووچر برای کاربران حرفه‌ای</p>
+                <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-telegram" style="width:100%;justify-content:center;"><i class="fab fa-telegram-plane"></i> خرید</a>
+            </div>
+            <div class="voucher-card">
+                <i class="fab fa-playstation" style="color:#0070d1"></i>
+                <h3>PS Voucher</h3>
+                <p>ووچر پلی‌استیشن برای خرید بازی و اشتراک</p>
+                <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-telegram" style="width:100%;justify-content:center;"><i class="fab fa-telegram-plane"></i> خرید</a>
+            </div>
+            <div class="voucher-card">
+                <i class="fas fa-wallet" style="color:var(--neon-green)"></i>
+                <h3>پرفکت مانی</h3>
+                <p>شارژ و برداشت پرفکت مانی با نرخ عالی</p>
+                <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-telegram" style="width:100%;justify-content:center;"><i class="fab fa-telegram-plane"></i> خرید</a>
+            </div>
+            <div class="voucher-card">
+                <i class="fas fa-gamepad" style="color:var(--neon-pink)"></i>
+                <h3>بونوس بازی</h3>
+                <p>بونوس ویژه خرید بالای ۵۰۰ دلار</p>
+                <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-gold" style="width:100%;justify-content:center;"><i class="fas fa-gift"></i> دریافت بونوس</a>
+            </div>
+        </div>
+        <div class="bonus-banner">
+            <h3><i class="fas fa-gift"></i> بونوس ویژه ووچینو⁰¹</h3>
+            <p>با خرید بالای ۵۰۰ دلار از ربات تلگرام، بونوس ویژه دریافت کنید! 🎁</p>
+            <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-gold" style="margin-top:15px;"><i class="fab fa-telegram-plane"></i> دریافت بونوس</a>
+        </div>
+    </div>
+</section>
 
-                <!-- Slide 7: 1xBet -->
-                <div class="swiper-slide hero-slide">
-                    <div class="hero-content">
-                        <div class="hero-icon">
-                            <i class="fas fa-trophy neon-glow"></i>
-                        </div>
-                        <h1 class="hero-title neon-text">شارژ 1xBet</h1>
-                        <p class="hero-subtitle">شارژ حساب وان ایکس بت با نرخ رقابتی</p>
-                        <div class="hero-features">
-                            <span class="feature-badge"><i class="fas fa-bolt"></i> آنی</span>
-                            <span class="feature-badge"><i class="fas fa-tag"></i> قیمت مناسب</span>
-                            <span class="feature-badge"><i class="fas fa-check-circle"></i> تضمینی</span>
-                        </div>
-                        <a href="https://t.me/VochinoBot" target="_blank" class="btn btn-hero">
-                            <i class="fab fa-telegram-plane"></i>
-                            شارژ کنید
-                        </a>
-                    </div>
-                </div>
+<!-- Trust Section -->
+<section class="section" id="trustSection">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title"><i class="fas fa-shield-alt"></i> چرا ووچینو⁰¹؟</h2>
+            <p class="section-sub">اعتماد هزاران کاربر به صرافی ووچینو</p>
+        </div>
+        <div class="trust-grid">
+            <div class="trust-card">
+                <i class="fas fa-users"></i>
+                <div class="num" data-count="5000">۰</div>
+                <div class="label">کاربر فعال</div>
+            </div>
+            <div class="trust-card">
+                <i class="fas fa-shopping-cart"></i>
+                <div class="num" data-count="25000">۰</div>
+                <div class="label">سفارش موفق</div>
+            </div>
+            <div class="trust-card">
+                <i class="fas fa-star"></i>
+                <div class="num">۴.۹</div>
+                <div class="label">رضایت کاربران</div>
+            </div>
+            <div class="trust-card">
+                <i class="fas fa-headset"></i>
+                <div class="num">۲۴/۷</div>
+                <div class="label">پشتیبانی</div>
+            </div>
+        </div>
+        <div class="bonus-banner" style="border-color:rgba(0,212,255,0.3);background:linear-gradient(135deg,rgba(0,212,255,0.05),rgba(168,85,247,0.05));">
+            <h3 style="color:var(--neon-blue)"><i class="fas fa-shield-alt"></i> امنیت و اعتماد</h3>
+            <p>صرافی ووچینو⁰¹ با رعایت تمامی قوانین و مقررات جمهوری اسلامی ایران، محیطی امن و مطمئن برای خرید و فروش ووچر فراهم کرده است. تمامی تراکنش‌ها با نظارت کامل و بررسی‌های امنیتی انجام می‌شود.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h3><i class="fas fa-landmark"></i> صرافی ووچینو⁰¹</h3>
+            <p>صرافی ووچینو⁰¹، ارائه‌دهنده خدمات حرفه‌ای خرید و فروش ووچر با بهترین نرخ و سریع‌ترین تحویل. ما با رعایت قوانین جمهوری اسلامی ایران، محیطی امن برای تراکنش‌های شما فراهم کرده‌ایم.</p>
+        </div>
+        <div class="footer-col">
+            <h3><i class="fas fa-link"></i> دسترسی سریع</h3>
+            <ul class="footer-links">
+                <li><a href="https://t.me/Vochino_bh01_bot" target="_blank"><i class="fab fa-telegram-plane"></i> ربات تلگرام</a></li>
+                <li><a href="https://t.me/ali_bh0101" target="_blank"><i class="fas fa-headset"></i> پشتیبانی</a></li>
+                <li><a href="#" onclick="openModal('rulesModal');return false;"><i class="fas fa-gavel"></i> قوانین و مقررات</a></li>
+                <li><a href="#" onclick="openModal('trainingModal');return false;"><i class="fas fa-graduation-cap"></i> آموزش</a></li>
+                <li><a href="#" onclick="openModal('faqModal');return false;"><i class="fas fa-question-circle"></i> سوالات متداول</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h3><i class="fas fa-ticket-alt"></i> خدمات ما</h3>
+            <ul class="footer-links">
+                <li><a href="https://t.me/Vochino_bh01_bot" target="_blank"><i class="fas fa-check"></i> یوووچر</a></li>
+                <li><a href="https://t.me/Vochino_bh01_bot" target="_blank"><i class="fas fa-fire"></i> هات ووچر</a></li>
+                <li><a href="https://t.me/Vochino_bh01_bot" target="_blank"><i class="fas fa-crown"></i> پرمیوم ووچر</a></li>
+                <li><a href="https://t.me/Vochino_bh01_bot" target="_blank"><i class="fab fa-playstation"></i> PS Voucher</a></li>
+                <li><a href="https://t.me/Vochino_bh01_bot" target="_blank"><i class="fas fa-wallet"></i> پرفکت مانی</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h3><i class="fas fa-futbol"></i> پوشش لیگ‌ها</h3>
+            <ul class="footer-links">
+                <li><a href="#standingsSection"><i class="fas fa-trophy"></i> لیگ برتر انگلیس</a></li>
+                <li><a href="#standingsSection"><i class="fas fa-trophy"></i> لالیگا اسپانیا</a></li>
+                <li><a href="#standingsSection"><i class="fas fa-trophy"></i> بوندسلیگا آلمان</a></li>
+                <li><a href="#standingsSection"><i class="fas fa-trophy"></i> سری آ ایتالیا</a></li>
+                <li><a href="#standingsSection"><i class="fas fa-trophy"></i> لیگ قهرمانان اروپا</a></li>
+                <li><a href="#standingsSection"><i class="fas fa-trophy"></i> لیگ ایران</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© ۱۴۰۵ صرافی ووچینو⁰¹ | تمامی حقوق محفوظ است</p>
+        <p class="dev">طراحی و توسعه با ❤️ | پشتیبانی: <a href="https://t.me/ali_bh0101" target="_blank" style="color:var(--neon-blue);text-decoration:none;">@ali_bh0101</a></p>
+    </div>
+</footer>
+
+<!-- Floating Telegram Button -->
+<a href="https://t.me/Vochino_bh01_bot" target="_blank" class="float-btn">
+    <i class="fab fa-telegram-plane"></i>
+</a>
+
+<!-- Rules Modal -->
+<div class="modal-overlay" id="rulesModal">
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal('rulesModal')"><i class="fas fa-times"></i></button>
+        <h2 class="modal-title"><i class="fas fa-gavel"></i> قوانین و مقررات صرافی ووچینو⁰¹</h2>
+        <div class="modal-content">
+            <p style="text-align:center;color:var(--neon-gold);font-weight:700;">🇮🇷 تابع قوانین و مقررات جاری جمهوری اسلامی ایران</p>
+            <p style="text-align:center;color:var(--text-secondary);margin-bottom:20px;">به نام خدا</p>
+            <p>به منظور حفظ امنیت کاربران، جلوگیری از سوءاستفاده‌های مالی و ارائه خدمات سریع و مطمئن، تمامی کاربران با ثبت‌نام و استفاده از خدمات ووچینو⁰¹، مفاد زیر را پذیرفته و ملزم به رعایت آن هستند.</p>
+            
+            <h3>۱. امنیت حساب کاربری</h3>
+            <p>مسئولیت حفظ اطلاعات حساب، رمز عبور و کدهای دریافتی بر عهده کاربر است. ووچینو⁰¹ هیچ‌گاه اطلاعات محرمانه شما را از طریق پیام خصوصی یا تماس تلفنی درخواست نخواهد کرد. مراقب صفحات و ربات‌های جعلی و فیشینگ باشید.</p>
+            
+            <h3>۲. تطابق اطلاعات پرداخت</h3>
+            <p>نام صاحب حساب یا کارت پرداخت باید با اطلاعات ثبت‌شده در حساب کاربری مطابقت داشته باشد. پرداخت از حساب اشخاص دیگر ممکن است باعث تأخیر یا لغو تراکنش شود.</p>
+            
+            <h3>۳. واریز از نام غیرهمسان</h3>
+            <p>در صورت واریز از حسابی که متعلق به کاربر ثبت‌نام‌شده نباشد، مبلغ تنها یک بار پس از بررسی به کیف پول کاربری بازگردانده می‌شود. در صورت تکرار این تخلف، حساب تا زمان بررسی بخش مالی محدود یا مسدود خواهد شد.</p>
+            
+            <h3>۴. مغایرت مبلغ پرداختی</h3>
+            <p>در صورتی که مبلغ واریزی با مبلغ ثبت‌شده سفارش یکسان نباشد، درخواست تا دو مرتبه قابل اصلاح خواهد بود. در صورت تکرار برای بار سوم، هزینه‌های بررسی و پردازش کسر شده و امکان بازگشت کامل وجه تضمین نخواهد شد.</p>
+            
+            <h3>۵. کدهای پیگیری</h3>
+            <p>از ارسال مکرر کدهای پیگیری یا ثبت چندباره یک تراکنش خودداری کنید. این کار باعث افزایش زمان بررسی و احتمال رد شدن درخواست می‌شود. در صورت بروز مشکل، تنها کافی است یک بار با بخش مالی ارتباط گرفته و کد پیگیری خود را ارسال کنید.</p>
+            
+            <h3>۶. بررسی سفارش‌ها</h3>
+            <p>تمامی سفارش‌ها به صورت سیستمی و امنیتی بررسی می‌شوند. در صورت مشاهده فعالیت مشکوک یا مغایرت اطلاعات، انجام سفارش تا زمان تکمیل بررسی متوقف خواهد شد.</p>
+            
+            <h3>۷. مبارزه با کلاهبرداری</h3>
+            <p>ووچینو⁰¹ در راستای مقابله با سوءاستفاده‌های مالی و فیشینگ، حق دارد سفارش‌هایی را که مشکوک تشخیص داده شوند بررسی یا لغو کند. این اقدام صرفاً برای حفظ امنیت کاربران انجام می‌شود.</p>
+            
+            <h3>۸. ارتباط با پشتیبانی</h3>
+            <p>در صورت بروز هرگونه مشکل، از ارسال پیام‌های تکراری خودداری کنید. کارشناسان مالی تمامی درخواست‌ها را بر اساس زمان ثبت بررسی خواهند کرد.</p>
+            
+            <div class="bonus-banner" style="margin-top:20px;">
+                <h3 style="color:var(--neon-green)"><i class="fas fa-check-circle"></i> سخن پایانی</h3>
+                <p>هدف ما ایجاد محیطی امن، سریع و قابل اعتماد برای خرید و فروش ووچر است. رعایت این قوانین باعث ارائه خدمات بهتر و سریع‌تر به همه کاربران خواهد شد.</p>
+                <p style="margin-top:10px;font-weight:700;color:var(--text-primary);">با ثبت سفارش در ووچینو⁰¹، شما تمامی قوانین فوق را مطالعه کرده و می‌پذیرید.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Training Modal -->
+<div class="modal-overlay" id="trainingModal">
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal('trainingModal')"><i class="fas fa-times"></i></button>
+        <h2 class="modal-title"><i class="fas fa-graduation-cap"></i> آموزش خرید و فروش ووچر در ووچینو⁰¹</h2>
+        <div class="modal-content">
+            <p style="color:var(--neon-green);font-weight:700;">به دنیای خرید و فروش سریع، امن و آسان ووچر خوش آمدید. ❤️</p>
+            <p>اگر برای اولین بار از ووچینو⁰¹ استفاده می‌کنید، کافیست مراحل زیر را دنبال کنید.</p>
+            
+            <h3>💳 مرحله اول | شارژ کیف پول</h3>
+            <p>ابتدا از منوی ربات وارد بخش «شارژ کیف پول» شوید.</p>
+            <p>در ووچینو⁰¹ دو روش برای شارژ کیف پول در نظر گرفته شده است:</p>
+            <ul>
+                <li>🔹 کارت به کارت</li>
+                <li>🔹 درگاه پرداخت</li>
+            </ul>
+            <p style="color:var(--neon-gold);">⭐ پیشنهاد مجموعه ووچینو⁰¹: برای ثبت سریع‌تر تراکنش، بررسی آسان‌تر و کاهش احتمال خطا، پیشنهاد می‌کنیم از روش کارت به کارت استفاده کنید.</p>
+            <p>پس از واریز، کد پیگیری را یک مرتبه ثبت کنید تا سفارش شما توسط سیستم و بخش مالی بررسی و تأیید شود.</p>
+            
+            <h3>💎 مرحله دوم | خرید ووچر</h3>
+            <p>پس از شارژ کیف پول:</p>
+            <ol>
+                <li>وارد بخش «خرید ووچر» شوید</li>
+                <li>نوع ووچر موردنظر خود را انتخاب کنید</li>
+                <li>مبلغ دلخواه را وارد نمایید</li>
+                <li>اطلاعات سفارش را بررسی کنید</li>
+                <li>گزینه «ثبت سفارش» را لمس کنید</li>
+            </ol>
+            <p>پس از تأیید، ووچر شما در کوتاه‌ترین زمان ممکن تحویل داده خواهد شد.</p>
+            
+            <h3>💵 مرحله سوم | فروش ووچر</h3>
+            <p>اگر قصد فروش ووچر دارید:</p>
+            <ol>
+                <li>وارد بخش «فروش ووچر» شوید</li>
+                <li>نوع ووچر را انتخاب کنید</li>
+                <li>اطلاعات ووچر را با دقت وارد نمایید</li>
+                <li>پس از تأیید کارشناسان، مبلغ به کیف پول شما واریز خواهد شد</li>
+            </ol>
+            
+            <h3>🌍 ووچر چیست؟</h3>
+            <p>U Voucher و Hot Voucher اعتبارهای دیجیتالی هستند که برای شارژ حساب سایت‌های مختلف، پرداخت‌های بین‌المللی و بسیاری از خدمات آنلاین استفاده می‌شوند.</p>
+            <p>اگر در انتخاب نوع ووچر تردید دارید، تیم پشتیبانی ووچینو⁰¹ با افتخار شما را راهنمایی خواهد کرد.</p>
+            
+            <h3>🛡 چرا ووچینو⁰¹؟</h3>
+            <ul>
+                <li>✔ خرید و فروش سریع و آسان</li>
+                <li>✔ کارمزد رقابتی و منصفانه</li>
+                <li>✔ محیط امن و شفاف</li>
+                <li>✔ پشتیبانی پاسخگو</li>
+                <li>✔ مناسب برای کاربران تازه‌کار و حرفه‌ای</li>
+            </ul>
+            <p style="text-align:center;color:var(--neon-blue);font-weight:700;margin-top:20px;">ووچینو⁰¹؛ جایی که خرید و فروش ووچر، ساده، مطمئن و لذت‌بخش است. ❤️</p>
+        </div>
+    </div>
+</div>
+
+<!-- FAQ Modal -->
+<div class="modal-overlay" id="faqModal">
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal('faqModal')"><i class="fas fa-times"></i></button>
+        <h2 class="modal-title"><i class="fas fa-question-circle"></i> سوالات متداول | ووچینو⁰¹</h2>
+        <div class="modal-content">
+            <p style="color:var(--text-secondary);margin-bottom:20px;">قبل از ارسال پیام به پشتیبانی، لطفاً این بخش را مطالعه کنید. در بیشتر مواقع پاسخ سؤال شما همین‌جاست. ❤️</p>
+            
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">💳 واریز انجام دادم ولی کیف پولم هنوز شارژ نشده <i class="fas fa-chevron-down"></i></button>
+                <div class="faq-a"><div class="faq-a-inner">ابتدا نگران نباشید. 😊 اگر پرداخت را به‌درستی انجام داده‌اید، سیستم در حال بررسی تراکنش شماست. لطفاً از ارسال پیام‌های پشت سر هم یا ثبت چندباره درخواست خودداری کنید؛ این کار باعث افزایش زمان بررسی می‌شود. در صورت نیاز، کد پیگیری پرداخت را برای بخش مالی ارسال کنید.</div></div>
             </div>
             
-            <!-- Slider Navigation -->
-            <div class="swiper-pagination hero-pagination"></div>
-            <div class="swiper-button-next hero-next">
-                <i class="fas fa-chevron-left"></i>
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">🧾 کد پیگیری را ثبت کردم اما هنوز تأیید نشده <i class="fas fa-chevron-down"></i></button>
+                <div class="faq-a"><div class="faq-a-inner">گاهی به دلیل حجم بالای تراکنش‌ها یا بررسی‌های امنیتی، تأیید سفارش کمی زمان‌بر می‌شود. تا پایان بررسی، لطفاً از ثبت مجدد همان کد یا ارسال چندباره پیام خودداری کنید.</div></div>
             </div>
-            <div class="swiper-button-prev hero-prev">
-                <i class="fas fa-chevron-right"></i>
+            
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">🎁 ووچر را شارژ کردم اما موجودی سایت مقصد اضافه نشد <i class="fas fa-chevron-down"></i></button>
+                <div class="faq-a"><div class="faq-a-inner">ابتدا از صحیح بودن کد ووچر و اطلاعات واردشده اطمینان حاصل کنید. اگر از صحت اطلاعات مطمئن هستید: ۱) وارد بخش «گزارش سفارش‌ها» در ربات شوید. ۲) کد پیگیری سفارش را دریافت کنید. ۳) کد پیگیری را برای پشتیبانی همان سایتی که ووچر را در آن شارژ کرده‌اید ارسال نمایید.</div></div>
             </div>
-        </div>
-    </section>
-
-    <!-- Live Matches Section -->
-    <section class="section live-matches-section" id="live-matches">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <div class="section-title-wrapper">
-                    <span class="live-badge pulse-animation">
-                        <span class="live-dot"></span>
-                        LIVE
-                    </span>
-                    <h2 class="section-title">
-                        <i class="fas fa-futbol neon-icon"></i>
-                        مسابقات زنده
-                    </h2>
-                </div>
-                <p class="section-subtitle">نتایج زنده و آمار لحظه‌ای بازی‌های در حال انجام</p>
+            
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">⏳ چرا سفارش من کمی دیر انجام شده است؟ <i class="fas fa-chevron-down"></i></button>
+                <div class="faq-a"><div class="faq-a-inner">گاهی به علت بررسی‌های امنیتی، شلوغی شبکه یا افزایش تعداد سفارش‌ها، زمان انجام سفارش ممکن است بیشتر از حالت عادی شود. از ارسال پیام‌های مکرر خودداری کنید؛ تمامی سفارش‌ها به ترتیب ثبت بررسی می‌شوند.</div></div>
             </div>
-
-            <!-- Live Matches Stats Bar -->
-            <div class="live-stats-bar" data-aos="fade-up" data-aos-delay="100">
-                <div class="stat-item">
-                    <i class="fas fa-tv"></i>
-                    <span id="liveCount">--</span> بازی زنده
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-futbol"></i>
-                    <span id="goalCount">--</span> گل امروز
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-red-card"></i>
-                    <span id="cardCount">--</span> کارت قرمز
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-sync-alt"></i>
-                    به‌روزرسانی خودکار
-                    <span class="refresh-timer" id="refreshTimer">60s</span>
-                </div>
+            
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">❌ مبلغ را اشتباه واریز کردم <i class="fas fa-chevron-down"></i></button>
+                <div class="faq-a"><div class="faq-a-inner">در صورت مغایرت مبلغ، سفارش قابل انجام نیست. طبق قوانین مجموعه، تا دو مرتبه امکان اصلاح وجود دارد. لطفاً پیش از ثبت سفارش، مبلغ را با دقت بررسی کنید.</div></div>
             </div>
-
-            <!-- Live Matches Grid -->
-            <div class="matches-grid" id="liveMatchesGrid">
-                <!-- Loading State -->
-                <div class="loading-container">
-                    <div class="loader-spinner"></div>
-                    <p>در حال دریافت اطلاعات مسابقات زنده...</p>
-                </div>
+            
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">👤 آیا می‌توانم با کارت شخص دیگری پرداخت کنم؟ <i class="fas fa-chevron-down"></i></button>
+                <div class="faq-a"><div class="faq-a-inner">خیر، برای حفظ امنیت حساب‌ها و جلوگیری از سوءاستفاده‌های مالی، توصیه می‌شود پرداخت فقط از حسابی انجام شود که متعلق به صاحب حساب کاربری باشد.</div></div>
             </div>
-
-            <!-- Match Detail Modal (Hidden by default) -->
-            <div class="match-detail-modal" id="matchDetailModal">
-                <div class="modal-content glass-card">
-                    <button class="modal-close" onclick="closeMatchModal()">
-                        <i class="fas fa-times"></i>
-                    </button>
-                    <div class="modal-body" id="matchModalBody">
-                        <!-- Dynamic content will be injected here -->
-                    </div>
-                </div>
+            
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">🔐 چگونه از فیشینگ و کلاهبرداری جلوگیری کنم؟ <i class="fas fa-chevron-down"></i></button>
+                <div class="faq-a"><div class="faq-a-inner">فقط از ربات و راه‌های ارتباطی رسمی ووچینو⁰¹ استفاده کنید. اطلاعات حساب، رمزها و کدهای خود را در اختیار هیچ شخص یا ربات دیگری قرار ندهید.</div></div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">📞 چه زمانی باید به پشتیبانی پیام بدهم؟ <i class="fas fa-chevron-down"></i></button>
+                <div class="faq-a"><div class="faq-a-inner">اگر پاسخ سؤال خود را در این بخش پیدا نکردید: 💰 مشکلات مربوط به پرداخت، واریز، برداشت و تراکنش‌ها: بخش مالی | ⚙️ مشکلات مربوط به ربات، خطاهای فنی، باگ‌ها: بخش فنی | 🌹 برای رسیدگی سریع‌تر، لطفاً هنگام ارسال پیام، کد پیگیری یا شناسه سفارش خود را نیز ارسال کنید.</div></div>
+            </div>
+            
+            <div class="bonus-banner" style="margin-top:20px;">
+                <p style="color:var(--neon-green);font-weight:700;">از همراهی و اعتماد شما به ووچینو⁰¹ سپاسگزاریم. ❤️</p>
+                <a href="https://t.me/ali_bh0101" target="_blank" class="btn btn-telegram" style="margin-top:10px;"><i class="fab fa-telegram-plane"></i> ارتباط با پشتیبانی</a>
             </div>
         </div>
-    </section>
+    </div>
+</div>
 
-    <!-- Today's Matches Section -->
-    <section class="section today-matches-section" id="today-matches">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 class="section-title">
-                    <i class="fas fa-calendar-day neon-icon"></i>
-                    مسابقات امروز
-                </h2>
-                <p class="section-subtitle">همه بازی‌های امروز با آمار و احتمال‌ها</p>
-            </div>
-
-            <!-- League Filter Tabs -->
-            <div class="filter-tabs" data-aos="fade-up" data-aos-delay="100">
-                <button class="filter-tab active" data-league="all">همه</button>
-                <button class="filter-tab" data-league="iran">لیگ ایران</button>
-                <button class="filter-tab" data-league="england">لیگ برتر</button>
-                <button class="filter-tab" data-league="spain">لالیگا</button>
-                <button class="filter-tab" data-league="germany">بوندسلیگا</button>
-                <button class="filter-tab" data-league="italy">سری A</button>
-                <button class="filter-tab" data-league="champions">لیگ قهرمانان</button>
-            </div>
-
-            <!-- Today Matches Grid -->
-            <div class="matches-grid" id="todayMatchesGrid">
-                <div class="loading-container">
-                    <div class="loader-spinner"></div>
-                    <p>در حال دریافت مسابقات امروز...</p>
-                </div>
-            </div>
+<!-- Match Detail Modal -->
+<div class="modal-overlay" id="matchModal">
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal('matchModal')"><i class="fas fa-times"></i></button>
+        <div id="matchDetailContent">
+            <div class="loading"><div class="spinner"></div>در حال دریافت جزئیات...</div>
         </div>
-    </section>
+    </div>
+</div>
 
-    <!-- Tomorrow's Matches Section -->
-    <section class="section tomorrow-matches-section" id="tomorrow-matches">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 class="section-title">
-                    <i class="fas fa-calendar-plus neon-icon"></i>
-                    مسابقات فردا
-                </h2>
-                <p class="section-subtitle">برنامه بازی‌های فردا را از حالا ببینید</p>
-            </div>
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+// ============================================
+// VOCHINO⁰¹ - COMPLETE JAVASCRIPT
+// 7-Layer API Fallback System
+// ============================================
 
-            <div class="matches-grid" id="tomorrowMatchesGrid">
-                <div class="loading-container">
-                    <div class="loader-spinner"></div>
-                    <p>در حال دریافت مسابقات فردا...</p>
-                </div>
-            </div>
-        </div>
-    </section>
+// === CONFIG ===
+const CONFIG = {
+    TELEGRAM_BOT: 'https://t.me/Vochino_bh01_bot',
+    TELEGRAM_SUPPORT: 'https://t.me/ali_bh0101',
+    API_FOOTBALL_KEY: localStorage.getItem('AF_KEY') || '',
+    FOOTBALL_DATA_KEY: localStorage.getItem('FD_KEY') || '',
+    LEAGUES: {
+        'PL': { id: 39, fd: 'PL', name: 'لیگ برتر انگلیس', flag: '🇬🇧' },
+        'PD': { id: 140, fd: 'PD', name: 'لالیگا', flag: '🇪🇸' },
+        'BL1': { id: 78, fd: 'BL1', name: 'بوندسلیگا', flag: '🇩🇪' },
+        'SA': { id: 135, fd: 'SA', name: 'سری آ', flag: '🇮🇹' },
+        'FL1': { id: 61, fd: 'FL1', name: 'لیگ ۱ فرانسه', flag: '🇫🇷' },
+        'CL': { id: 2, fd: 'CL', name: 'لیگ قهرمانان', flag: '🏆' },
+        'ELC': { id: 3, fd: 'ELC', name: 'لیگ اروپا', flag: '🇪🇺' },
+        'PGPL': { id: 235, fd: null, name: 'لیگ ایران', flag: '🇮🇷' },
+        'DED': { id: 88, fd: 'DED', name: 'اردیویسه', flag: '🇳🇱' },
+        'PPL': { id: 94, fd: 'PPL', name: 'لیگ پرتغال', flag: '🇵🇹' }
+    },
+    RETRY_INTERVALS: [30000, 60000, 90000, 120000, 170000, 120000, 180000]
+};
 
-    <!-- League Standings Section -->
-    <section class="section leagues-section" id="leagues">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 class="section-title">
-                    <i class="fas fa-trophy neon-icon"></i>
-                    جدول لیگ‌ها
-                </h2>
-                <p class="section-subtitle">جداول رده‌بندی لیگ‌های معتبر فوتبال</p>
-            </div>
+// === CACHE ===
+const Cache = {
+    set(k, d, ttl = 1800000) {
+        try { localStorage.setItem('vc_' + k, JSON.stringify({ d, e: Date.now() + ttl })); } catch(e) {}
+    },
+    get(k) {
+        try {
+            const i = JSON.parse(localStorage.getItem('vc_' + k));
+            if (!i || Date.now() > i.e) return null;
+            return i.d;
+        } catch(e) { return null; }
+    }
+};
 
-            <!-- League Selector -->
-            <div class="league-selector-wrapper" data-aos="fade-up" data-aos-delay="100">
-                <div class="league-selector">
-                    <button class="league-btn active" data-league-id="39">
-                        <img src="https://media.api-sports.io/football/leagues/39.png" alt="Premier League">
-                        <span>لیگ برتر انگلیس</span>
-                    </button>
-                    <button class="league-btn" data-league-id="140">
-                        <img src="https://media.api-sports.io/football/leagues/140.png" alt="La Liga">
-                        <span>لالیگا</span>
-                    </button>
-                    <button class="league-btn" data-league-id="78">
-                        <img src="https://media.api-sports.io/football/leagues/78.png" alt="Bundesliga">
-                        <span>بوندسلیگا</span>
-                    </button>
-                    <button class="league-btn" data-league-id="135">
-                        <img src="https://media.api-sports.io/football/leagues/135.png" alt="Serie A">
-                        <span>سری A</span>
-                    </button>
-                    <button class="league-btn" data-league-id="2">
-                        <img src="https://media.api-sports.io/football/leagues/2.png" alt="Champions League">
-                        <span>لیگ قهرمانان</span>
-                    </button>
-                    <button class="league-btn" data-league-id="235">
-                        <img src="https://media.api-sports.io/football/leagues/235.png" alt="Iran League">
-                        <span>لیگ ایران</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- League Table -->
-            <div class="league-table-container glass-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="table-header">
-                    <h3 id="currentLeagueTitle">لیگ برتر انگلیس</h3>
-                    <span class="season-badge" id="currentSeason">2025-2026</span>
-                </div>
-                <div class="table-wrapper">
-                    <table class="league-table" id="leagueTable">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>تیم</th>
-                                <th>بازی</th>
-                                <th>برد</th>
-                                <th>مساوی</th>
-                                <th>باخت</th>
-                                <th>گل زده</th>
-                                <th>گل خورده</th>
-                                <th>تفاضل</th>
-                                <th>امتیاز</th>
-                            </tr>
-                        </thead>
-                        <tbody id="leagueTableBody">
-                            <tr>
-                                <td colspan="10">
-                                    <div class="loading-container">
-                                        <div class="loader-spinner"></div>
-                                        <p>در حال دریافت جدول...</p>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Football News Section -->
-    <section class="section news-section" id="news">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 class="section-title">
-                    <i class="fas fa-newspaper neon-icon"></i>
-                    اخبار فوتبال
-                </h2>
-                <p class="section-subtitle">جدیدترین اخبار و رویدادهای دنیای فوتبال</p>
-            </div>
-
-            <!-- News Category Tabs -->
-            <div class="news-tabs" data-aos="fade-up" data-aos-delay="100">
-                <button class="news-tab active" data-category="all">همه اخبار‌ها</button>
-                <button class="news-tab" data-category="iran">ایران</button>
-                <button class="news-tab" data-category="europe">اروپا</button>
-                <button class="news-tab" data-category="transfer">نقل و انتقالات</button>
-            </div>
-
-            <!-- News Grid -->
-            <div class="news-grid" id="newsGrid">
-                <div class="loading-container">
-                    <div class="loader-spinner"></div>
-                    <p>در حال دریافت اخبار...</p>
-                </div>
-            </div>
-
-            <!-- Load More Button -->
-            <div class="load-more-wrapper" data-aos="fade-up">
-                <button class="btn btn-load-more" id="loadMoreNews">
-                    <i class="fas fa-sync-alt"></i>
-                    بارگذاری بیشتر
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Trust Section -->
-    <section class="section trust-section" id="trust">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 class="section-title">
-                    <i class="fas fa-shield-alt neon-icon"></i>
-                    اعتمادگاه ووچینو
-                </h2>
-                <p class="section-subtitle">آمار و اطلاعات اعتماد کاربران به ووچینو</p>
-            </div>
-
-            <!-- Trust Stats -->
-            <div class="trust-stats-grid" data-aos="fade-up" data-aos-delay="100">
-                <div class="trust-stat-card glass-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="stat-number" data-count="15420">0</div>
-                    <div class="stat-label">کاربر فعال</div>
-                </div>
-                <div class="trust-stat-card glass-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <div class="stat-number" data-count="89450">0</div>
-                    <div class="stat-label">سفارش موفق</div>
-                </div>
-                <div class="trust-stat-card glass-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div class="stat-number" data-count="4.9" data-decimal="true">0</div>
-                    <div class="stat-label">امتیاز کاربران</div>
-                </div>
-                <div class="trust-stat-card glass-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-headset"></i>
-                    </div>
-                    <div class="stat-number" data-count="24" data-suffix="/7">0</div>
-                    <div class="stat-label">پشتیبانی</div>
-                </div>
-            </div>
-
-            <!-- Latest Transactions (to be connected to API) -->
-            <div class="latest-transactions glass-card" data-aos="fade-up" data-aos-delay="200">
-                <h3 class="subsection-title">
-                    <i class="fas fa-list-ul"></i>
-                    آخرین تراکنش‌ها
-                </h3>
-                <div class="transactions-list" id="transactionsList">
-                    <div class="transaction-item">
-                        <div class="transaction-info">
-                            <span class="user-avatar">👤</span>
-                            <div>
-                                <span class="user-id">کاربر ****1234</span>
-                                <span class="transaction-type">خرید ووچر</span>
-                            </div>
-                        </div>
-                        <div class="transaction-details">
-                            <span class="amount">۵۰ دلار</span>
-                            <span class="status success"><i class="fas fa-check"></i> موفق</span>
-                            <span class="time">۲ دقیقه پیش</span>
-                        </div>
-                    </div>
-                    <div class="transaction-item">
-                        <div class="transaction-info">
-                            <span class="user-avatar">👤</span>
-                            <div>
-                                <span class="user-id">کاربر ****5678</span>
-                                <span class="transaction-type">شارژ DerbyBet</span>
-                            </div>
-                        </div>
-                        <div class="transaction-details">
-                            <span class="amount">۱۰۰ دلار</span>
-                            <span class="status success"><i class="fas fa-check"></i> موفق</span>
-                            <span class="time">۵ دقیقه پیش</span>
-                        </div>
-                    </div>
-                    <div class="transaction-item">
-                        <div class="transaction-info">
-                            <span class="user-avatar">👤</span>
-                            <div>
-                                <span class="user-id">کاربر ****9012</span>
-                                <span class="transaction-type">شارژ 1xBet</span>
-                            </div>
-                        </div>
-                        <div class="transaction-details">
-                            <span class="amount">۲۰۰ دلار</span>
-                            <span class="status success"><i class="fas fa-check"></i> موفق</span>
-                            <span class="time">۸ دقیقه پیش</span>
-                        </div>
-                    </div>
-                    <div class="transaction-item">
-                        <div class="transaction-info">
-                            <span class="user-avatar">👤</span>
-                            <div>
-                                <span class="user-id">کاربر ****3456</span>
-                                <span class="transaction-type">خرید ووچر پرمیوم</span>
-                            </div>
-                        </div>
-                        <div class="transaction-details">
-                            <span class="amount">۱۵۰ دلار</span>
-                            <span class="status success"><i class="fas fa-check"></i> موفق</span>
-                            <span class="time">۱۲ دقیقه پیش</span>
-                        </div>
-                    </div>
-                </div>
-                <p class="api-note">
-                    <i class="fas fa-info-circle"></i>
-                    این بخش بعداً به API ربات تلگرام متصل خواهد شد.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Rules Section -->
-    <section class="section rules-section" id="rules">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 class="section-title">
-                    <i class="fas fa-gavel neon-icon"></i>
-                    قوانین و مقررات
-                </h2>
-                <p class="section-subtitle">لطفاً قبل از استفاده از خدمات، قوانین را مطالعه فرمایید</p>
-            </div>
-
-            <div class="rules-container glass-card" data-aos="fade-up" data-aos-delay="100">
-                <!-- Rules Accordion -->
-                <div class="rules-accordion">
-                    <!-- Rule 1 -->
-                    <div class="rule-item">
-                        <button class="rule-header" onclick="toggleRule(this)">
-                            <span class="rule-number">۱</span>
-                            <span class="rule-title">قوانین عمومی</span>
-                            <i class="fas fa-chevron-down rule-icon"></i>
-                        </button>
-                        <div class="rule-content">
-                            <div class="rule-body">
-                                <ul>
-                                    <li><i class="fas fa-check-circle"></i> استفاده از خدمات ووچینو به منزله پذیرش تمامی قوانین و مقررات سایت است.</li>
-                                    <li><i class="fas fa-check-circle"></i> تمامی کاربران باید بالای ۱۸ سال سن داشته باشند.</li>
-                                    <li><i class="fas fa-check-circle"></i> اطلاعات کاربری باید صحیح و به‌روز باشد.</li>
-                                    <li><i class="fas fa-check-circle"></i> هر کاربر تنها مجاز به داشتن یک حساب کاربری است.</li>
-                                    <li><i class="fas fa-check-circle"></i> استفاده از نام‌های کاربری نامناسب ممنوع است.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Rule 2 -->
-                    <div class="rule-item">
-                        <button class="rule-header" onclick="toggleRule(this)">
-                            <span class="rule-number">۲</span>
-                            <span class="rule-title">قوانین خرید ووچر</span>
-                            <i class="fas fa-chevron-down rule-icon"></i>
-                        </button>
-                        <div class="rule-content">
-                            <div class="rule-body">
-                                <ul>
-                                    <li><i class="fas fa-check-circle"></i> حداقل مبلغ خرید ووچر ۱۰ دلار (یا معادل ریالی آن) است.</li>
-                                    <li><i class="fas fa-check-circle"></i> حداکثر مبلغ خرید در روز ۱۰,۰۰۰ دلار است.</li>
-                                    <li><i class="fas fa-check-circle"></i> ووچرها پس از پرداخت موفق، به صورت خودکار ارسال می‌شوند.</li>
-                                    <li><i class="fas fa-check-circle"></i> زمان تحویل ووچر حداکثر ۵ دقیقه پس از تأیید پرداخت است.</li>
-                                    <li><i class="fas fa-check-circle"></i> در صورت عدم دریافت ووچر، با پشتیبانی تماس بگیرید.</li>
-                                    <li><i class="fas fa-check-circle"></i> ووچرها قابل بازگشت یا تبدیل به وجه نقد نیستند.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Rule 3 -->
-                    <div class="rule-item">
-                        <button class="rule-header" onclick="toggleRule(this)">
-                            <span class="rule-number">۳</span>
-                            <span class="rule-title">قوانین شارژ حساب</span>
-                            <i class="fas fa-chevron-down rule-icon"></i>
-                        </button>
-                        <div class="rule-content">
-                            <div class="rule-body">
-                                <ul>
-                                    <li><i class="fas fa-check-circle"></i> شارژ حساب‌های DerbyBet, TakBet, 1xBet با بهترین نرخ انجام می‌شود.</li>
-                                    <li><i class="fas fa-check-circle"></i> قبل از شارژ، از صحت نام کاربری اطمینان حاصل کنید.</li>
-                                    <li><i class="fas fa-check-circle"></i> در صورت اشتباه در نام کاربری، ووچینو مسئولیتی ندارد.</li>
-                                    <li><i class="fas fa-check-circle"></i> زمان شارژ حساب حداکثر ۳۰ دقیقه است.</li>
-                                    <li><i class="fas fa-check-circle"></i> شارژ در ساعات پیک ممکن است کمی بیشتر طول بکشد.</li>
-                                    <li><i class="fas fa-check-circle"></i> حداقل مبلغ شارژ ۱۰ دلار است.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Rule 4 -->
-                    <div class="rule-item">
-                        <button class="rule-header" onclick="toggleRule(this)">
-                            <span class="rule-number">۴</span>
-                            <span class="rule-title">قوانین پرداخت</span>
-                            <i class="fas fa-chevron-down rule-icon"></i>
-                        </button>
-                        <div class="rule-content">
-                            <div class="rule-body">
-                                <ul>
-                                    <li><i class="fas fa-check-circle"></i> پرداخت‌ها از طریق درگاه‌های امن بانکی انجام می‌شود.</li>
-                                    <li><i class="fas fa-check-circle"></i> پرداخت با ارزهای دیجیتال (ترون، تون) نیز پشتیبانی می‌شود.</li>
-                                    <li><i class="fas fa-check-circle"></i> در صورت عدم تأیید پرداخت، وجه به حساب شما بازگشت داده می‌شود.</li>
-                                    <li><i class="fas fa-check-circle"></i> زمان بازگشت وجه ۲۴ تا ۷۲ ساعت کاری است.</li>
-                                    <li><i class="fas fa-check-circle"></i> کارمزد تراکنش‌ها به صورت شفاف نمایش داده می‌شود.</li>
-                                    <li><i class="fas fa-check-circle"></i> اطلاعات کارت بانکی شما نزد ووچینو ذخیره نمی‌شود.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Rule 5 -->
-                    <div class="rule-item">
-                        <button class="rule-header" onclick="toggleRule(this)">
-                            <span class="rule-number">۵</span>
-                            <span class="rule-title">قوانین پشتیبانی</span>
-                            <i class="fas fa-chevron-down rule-icon"></i>
-                        </button>
-                        <div class="rule-content">
-                            <div class="rule-body">
-                                <ul>
-                                    <li><i class="fas fa-check-circle"></i> پشتیبانی ۲۴ ساعته و ۷ روز هفته در دسترس است.</li>
-                                    <li><i class="fas fa-check-circle"></i> زمان پاسخگویی حداکثر ۱۵ دقیقه است.</li>
-                                    <li><i class="fas fa-check-circle"></i> در ساعات پیک ممکن است زمان پاسخگویی بیشتر شود.</li>
-                                    <li><i class="fas fa-check-circle"></i> برای ارتباط با پشتیبانی از ربات تلگرام استفاده کنید.</li>
-                                    <li><i class="fas fa-check-circle"></i> از ارسال پیام‌های تکراری خودداری کنید.</li>
-                                    <li><i class="fas fa-check-circle"></i> پشتیبانی به زبان‌های فارسی و انگلیسی ارائه می‌شود.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Rule 6 -->
-                    <div class="rule-item">
-                        <button class="rule-header" onclick="toggleRule(this)">
-                            <span class="rule-number">۶</span>
-                            <span class="rule-title">قوانین حریم خصوصی</span>
-                            <i class="fas fa-chevron-down rule-icon"></i>
-                        </button>
-                        <div class="rule-content">
-                            <div class="rule-body">
-                                <ul>
-                                    <li><i class="fas fa-check-circle"></i> اطلاعات شخصی کاربران نزد ووچینو محرمانه است.</li>
-                                    <li><i class="fas fa-check-circle"></i> اطلاعات شما به هیچ شخص ثالثی فروخته یا اجاره داده نمی‌شود.</li>
-                                    <li><i class="fas fa-check-circle"></i> از اطلاعات شما تنها برای بهبود خدمات استفاده می‌شود.</li>
-                                    <li><i class="fas fa-check-circle"></i> تمامی اطلاعات با استفاده از رمزنگاری SSL محافظت می‌شود.</li>
-                                    <li><i class="fas fa-check-circle"></i> شما حق دارید اطلاعات خود را حذف کنید.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Rule 7 -->
-                    <div class="rule-item">
-                        <button class="rule-header" onclick="toggleRule(this)">
-                            <span class="rule-number">۷</span>
-                            <span class="rule-title">مسئولیت‌ها</span>
-                            <i class="fas fa-chevron-down rule-icon"></i>
-                        </button>
-                        <div class="rule-content">
-                            <div class="rule-body">
-                                <ul>
-                                    <li><i class="fas fa-check-circle"></i> ووچینو تنها مسئول تحویل صحیح ووچر و شارژ حساب است.</li>
-                                    <li><i class="fas fa-check-circle"></i> نحوه استفاده از ووچر بر عهده کاربر است.</li>
-                                    <li><i class="fas fa-check-circle"></i> ووچینو مسئولیتی در قبال نتایج شرط‌بندی ندارد.</li>
-                                    <li><i class="fas fa-check-circle"></i> تغییرات قیمت ارز بر عهده کاربر است.</li>
-                                    <li><i class="fas fa-check-circle"></i> قطع شدن سرویس‌های بانکی خارج از کنترل ووچینو است.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Rule 8 -->
-                    <div class="rule-item">
-                        <button class="rule-header" onclick="toggleRule(this)">
-                            <span class="rule-number">۸</span>
-                            <span class="rule-title">تغییرات قوانین</span>
-                            <i class="fas fa-chevron-down rule-icon"></i>
-                        </button>
-                        <div class="rule-content">
-                            <div class="rule-body">
-                                <ul>
-                                    <li><i class="fas fa-check-circle"></i> ووچینو حق تغییر قوانین را برای خود محفوظ می‌دارد.</li>
-                                    <li><i class="fas fa-check-circle"></i> تغییرات از طریق سایت و ربات اطلاع‌رسانی می‌شود.</li>
-                                    <li><i class="fas fa-check-circle"></i> ادامه استفاده از خدمات به منزله پذیرش قوانین جدید است.</li>
-                                    <li><i class="fas fa-check-circle"></i> آخرین به‌روزرسانی قوانین: مرداد ۱۴۰۵</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Training Section -->
-    <section class="section training-section" id="training">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 class="section-title">
-                    <i class="fas fa-graduation-cap neon-icon"></i>
-                    آموزش
-                </h2>
-                <p class="section-subtitle">راهنمای کامل استفاده از انواع ووچرها و ارزهای دیجیتال</p>
-            </div>
-
-            <div class="training-grid" id="trainingGrid">
-                <!-- Training Card 1: Voucher -->
-                <div class="training-card glass-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="training-card-header">
-                        <div class="training-icon">
-                            <i class="fas fa-ticket-alt"></i>
-                        </div>
-                        <h3>یوووچر</h3>
-                        <p class="training-tag">Voucher</p>
-                    </div>
-                    <div class="training-card-body">
-                        <p class="training-description">
-                            ووچر یک کد دیجیتالی است که به جای پول نقد در سایت‌های شرط‌بندی استفاده می‌شود.
-                        </p>
-                        <div class="training-steps">
-                            <h4><i class="fas fa-list-ol"></i> مراحل استفاده:</h4>
-                            <ol>
-                                <li>از ربات تلگرام ووچر خریداری کنید</li>
-                                <li>کد ووچر را دریافت کنید</li>
-                                <li>وارد حساب کاربری سایت مورد نظر شوید</li>
-                                <li>به بخش «واریز» بروید</li>
-                                <li>گزینه «ووچر» را انتخاب کنید</li>
-                                <li>کد ووچر را وارد کرده و تأیید کنید</li>
-                            </ol>
-                        </div>
-                        <div class="training-tips">
-                            <h4><i class="fas fa-lightbulb"></i> نکات مهم:</h4>
-                            <ul>
-                                <li>هر ووچر فقط یک بار قابل استفاده است</li>
-                                <li>قبل از وارد کردن کد، از صحت سایت مطمئن شوید</li>
-                                <li>ووچر تاریخ انقضا دارد</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <button class="btn btn-training-detail" onclick="openTrainingModal('voucher')">
-                        <i class="fas fa-eye"></i> مشاهده کامل
-                    </button>
-                </div>
-
-                <!-- Training Card 2: Hot Voucher -->
-                <div class="training-card glass-card" data-aos="fade-up" data-aos-delay="150">
-                    <div class="training-card-header">
-                        <div class="training-icon hot">
-                            <i class="fas fa-fire"></i>
-                        </div>
-                        <h3>هات ووچر</h3>
-                        <p class="training-tag">Hot Voucher</p>
-                    </div>
-                    <div class="training-card-body">
-                        <p class="training-description">
-                            هات ووچر نسخه پیشرفته‌تری از ووچر است با سرعت تحویل بالاتر و نرخ بهتر.
-                        </p>
-                        <div class="training-steps">
-                            <h4><i class="fas fa-list-ol"></i> ویژگی‌ها:</h4>
-                            <ol>
-                                <li>تحویل آنی (کمتر از ۱ دقیقه)</li>
-                                <li>نرخ تبدیل بهتر از ووچر معمولی</li>
-                                <li>پشتیبانی از سایت‌های بیشتر</li>
-                                <li>بدون محدودیت مبلغ</li>
-                            </ol>
-                        </div>
-                        <div class="training-tips">
-                            <h4><i class="fas fa-lightbulb"></i> مزایا:</h4>
-                            <ul>
-                                <li>سرعت بالاتر در شارژ حساب</li>
-                                <li>امتیاز وفاداری بیشتر</li>
-                                <li>تخفیف‌های ویژه برای کاربران Hot</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <button class="btn btn-training-detail" onclick="openTrainingModal('hot-voucher')">
-                        <i class="fas fa-eye"></i> مشاهده کامل
-                    </button>
-                </div>
-
-                <!-- Training Card 3: Premium Voucher -->
-                <div class="training-card glass-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="training-card-header">
-                        <div class="training-icon premium">
-                            <i class="fas fa-crown"></i>
-                        </div>
-                        <h3>پریمیوم ووچر</h3>
-                        <p class="training-tag">Premium Voucher</p>
-                    </div>
-                    <div class="training-card-body">
-                        <p class="training-description">
-                            پریمیوم ووچر برای کاربران ویژه با امکانات بیشتر و تخفیف‌های اختصاصی.
-                        </p>
-                        <div class="training-steps">
-                            <h4><i class="fas fa-list-ol"></i> مزایای پریمیوم:</h4>
-                            <ol>
-                                <li>اولویت در پشتیبانی</li>
-                                <li>کارمزد کمتر از ووچر معمولی</li>
-                                <li>دسترسی به جشنواره‌های ویژه</li>
-                                <li>بونوس ۱۰٪ در خریدهای بالای ۱۰۰۰ دلار</li>
-                            </ol>
-                        </div>
-                        <div class="training-tips">
-                            <h4><i class="fas fa-lightbulb"></i> نحوه ارتقا:</h4>
-                            <ul>
-                                <li>خرید مجموع بالای ۵۰۰۰ دلار</li>
-                                <li>یا عضویت ماهانه پریمیوم</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <button class="btn btn-training-detail" onclick="openTrainingModal('premium-voucher')">
-                        <i class="fas fa-eye"></i> مشاهده کامل
-                    </button>
-                </div>
-
-                <!-- Training Card 4: PS Voucher -->
-                <div class="training-card glass-card" data-aos="fade-up" data-aos-delay="250">
-                    <div class="training-card-header">
-                        <div class="training-icon ps">
-                            <i class="fab fa-playstation"></i>
-                        </div>
-                        <h3>PS Voucher</h3>
-                        <p class="training-tag">PlayStation</p>
-                    </div>
-                    <div class="training-card-body">
-                        <p class="training-description">
-                            ووچر مخصوص پلی‌استیشن برای خرید بازی، اشتراک PS Plus و آیتم‌های درون بازی.
-                        </p>
-                        <div class="training-steps">
-                            <h4><i class="fas fa-list-ol"></i> نحوه استفاده:</h4>
-                            <ol>
-                                <li>PS Voucher را از ربات خریداری کنید</li>
-                                <li>وارد حساب PSN خود شوید</li>
-                                <li>به PlayStation Store بروید</li>
-                                <li>گزینه «Redeem Codes» را انتخاب کنید</li>
-                                <li>کد ۱۲ رقمی را وارد کنید</li>
-                                <li>مبلغ به حساب شما اضافه می‌شود</li>
-                            </ol>
-                        </div>
-                        <div class="training-tips">
-                            <h4><i class="fas fa-lightbulb"></i> نکات:</h4>
-                            <ul>
-                                <li>ریجن ووچر باید با ریجن حساب شما یکی باشد</li>
-                                <li>کدها به حروف بزرگ و کوچک حساس نیستند</li>
-                                <li>از کد در مکان امن نگهداری کنید</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <button class="btn btn-training-detail" onclick="openTrainingModal('ps-voucher')">
-                        <i class="fas fa-eye"></i> مشاهده کامل
-                    </button>
-                </div>
-
-                <!-- Training Card 5: Tron (TRX) -->
-                <div class="training-card glass-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="training-card-header">
-                        <div class="training-icon tron">
-                            <i class="fab fa-bitcoin"></i>
-                        </div>
-                        <h3>ترون</h3>
-                        <p class="training-tag">TRX - Tron</p>
-                    </div>
-                    <div class="training-card-body">
-                        <p class="training-description">
-                            ترون یک ارز دیجیتال محبوب با کارمزد پایین و سرعت بالا برای انتقال وجه.
-                        </p>
-                        <div class="training-steps">
-                            <h4><i class="fas fa-list-ol"></i> پرداخت با ترون:</h4>
-                            <ol>
-                                <li>در ربات، گزینه «پرداخت با ترون» را انتخاب کنید</li>
-                                <li>آدرس کیف پول ترون ووچینو را دریافت کنید</li>
-                                <li>از کیف پول خود ترون ارسال کنید</li>
-                                <li>شبکه TRC-20 را حتماً انتخاب کنید</li>
-                                <li>پس از تأیید، ووچر ارسال می‌شود</li>
-                            </ol>
-                        </div>
-                        <div class="training-tips">
-                            <h4><i class="fas fa-lightbulb"></i> نکات مهم:</h4>
-                            <ul>
-                                <li>حتماً از شبکه TRC-20 استفاده کنید</li>
-                                <li>حداقل کارمزد شبکه ۱ TRX است</li>
-                                <li>تأیید تراکنش ۱ تا ۳ دقیقه طول می‌کشد</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <button class="btn btn-training-detail" onclick="openTrainingModal('tron')">
-                        <i class="fas fa-eye"></i> مشاهده کامل
-                    </button>
-                </div>
-
-                <!-- Training Card 6: Toncoin (TON) -->
-                <div class="training-card glass-card" data-aos="fade-up" data-aos-delay="350">
-                    <div class="training-card-header">
-                        <div class="training-icon ton">
-                            <i class="fas fa-gem"></i>
-                        </div>
-                        <h3>تون</h3>
-                        <p class="training-tag">TON - Toncoin</p>
-                    </div>
-                    <div class="training-card-body">
-                        <p class="training-description">
-                            تون کوین ارز دیجیتال رسمی تلگرام با سرعت بسیار بالا و کارمزد ناچیز.
-                        </p>
-                        <div class="training-steps">
-                            <h4><i class="fas fa-list-ol"></i> پرداخت با TON:</h4>
-                            <ol>
-                                <li>در ربات، گزینه «پرداخت با TON» را انتخاب کنید</li>
-                                <li>آدرس کیف پول TON ووچینو را دریافت کنید</li>
-                                <li>از کیف پول Tonkeeper یا Wallet in Telegram استفاده کنید</li>
-                                <li>TON را به آدرس اعلام شده ارسال کنید</li>
-                                <li>پس از تأیید، ووچر تحویل داده می‌شود</li>
-                            </ol>
-                        </div>
-                        <div class="training-tips">
-                            <h4><i class="fas fa-lightbulb"></i> مزایای TON:</h4>
-                            <ul>
-                                <li>کارمزد تقریباً صفر</li>
-                                <li>تأیید در چند ثانیه</li>
-                                <li>ادغام کامل با تلگرام</li>
-                                <li>امنیت بسیار بالا</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <button class="btn btn-training-detail" onclick="openTrainingModal('ton')">
-                        <i class="fas fa-eye"></i> مشاهده کامل
-                    </button>
-                </div>
-            </div>
-
-            <!-- Training Modal -->
-            <div class="training-modal" id="trainingModal">
-                <div class="modal-content glass-card training-modal-content">
-                    <button class="modal-close" onclick="closeTrainingModal()">
-                        <i class="fas fa-times"></i>
-                    </button>
-                    <div class="training-modal-body" id="trainingModalBody">
-                        <!-- Dynamic content -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="section faq-section" id="faq">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 class="section-title">
-                    <i class="fas fa-question-circle neon-icon"></i>
-                    سوالات متداول
-                </h2>
-                <p class="section-subtitle">پاسخ به رایج‌ترین سوالات کاربران</p>
-            </div>
-
-            <!-- FAQ Search -->
-            <div class="faq-search" data-aos="fade-up" data-aos-delay="100">
-                <div class="search-wrapper">
-                    <i class="fas fa-search search-icon"></i>
-                    <input type="text" id="faqSearch" placeholder="جستجو در سوالات..." class="search-input">
-                    <button class="search-btn" onclick="searchFAQ()">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- FAQ Categories -->
-            <div class="faq-categories" data-aos="fade-up" data-aos-delay="150">
-                <button class="faq-cat-btn active" data-category="all">همه</button>
-                <button class="faq-cat-btn" data-category="general">عمومی</button>
-                <button class="faq-cat-btn" data-category="payment">پرداخت</button>
-                <button class="faq-cat-btn" data-category="voucher">ووچر</button>
-                <button class="faq-cat-btn" data-category="support">پشتیبانی</button>
-                <button class="faq-cat-btn" data-category="crypto">رمزارز</button>
-            </div>
-
-            <!-- FAQ Accordion -->
-            <div class="faq-container" data-aos="fade-up" data-aos-delay="200">
-                <!-- FAQ 1 -->
-                <div class="faq-item" data-category="general">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span class="faq-q-text">ووچینو چیست؟</span>
-                        <i class="fas fa-chevron-down faq-icon"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>
-                            ووچینو (Vochino) یک پلتفرم حرفه‌ای برای خرید انواع ووچر، شارژ حساب‌های شرط‌بندی (DerbyBet, TakBet, 1xBet) و ارائه اطلاعات فوتبال است. ما با ارائه کارمزد رقابتی، تحویل سریع و پشتیبانی ۲۴ ساعته، بهترین تجربه را برای کاربران فراهم می‌کنیم.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- FAQ 2 -->
-                <div class="faq-item" data-category="general">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span class="faq-q-text">چگونه می‌توانم از ووچینو خرید کنم؟</span>
-                        <i class="fas fa-chevron-down faq-icon"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>
-                            برای خرید کافیست وارد ربات تلگرام Vochino شوید، نوع ووچر یا شارژ مورد نظر را انتخاب کنید، مبلغ را تعیین کرده و پرداخت را انجام دهید. ووچر یا شارژ به صورت خودکار تحویل داده می‌شود.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- FAQ 3 -->
-                <div class="faq-item" data-category="payment">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span class="faq-q-text">روش‌های پرداخت چیست؟</span>
-                        <i class="fas fa-chevron-down faq-icon"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>
-                            ما روش‌های پرداخت متنوعی ارائه می‌دهیم:
-                        </p>
-                        <ul>
-                            <li>درگاه بانکی (تمامی بانک‌های ایران)</li>
-                            <li>ترون (TRX) - شبکه TRC20</li>
-                            <li>تون کوین (TON)</li>
-                            <li>کارت به کارت</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- FAQ 4 -->
-                <div class="faq-item" data-category="payment">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span class="faq-q-text">حداقل و حداکثر مبلغ خرید چقدر است؟</span>
-                        <i class="fas fa-chevron-down faq-icon"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>
-                            حداقل مبلغ خرید ۱۰ دلار (یا معادل ریالی آن) است. حداکثر مبلغ خرید در روز ۱۰,۰۰۰ دلار می‌باشد. برای مبالغ بیشتر، با پشتیبانی هماهنگ کنید.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- FAQ 5 -->
-                <div class="faq-item" data-category="voucher">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span class="faq-q-text">وچر چقدر طول می‌کشد تا تحویل داده شود؟</span>
-                        <i class="fas fa-chevron-down faq-icon"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>
-                            پس از تأیید پرداخت، ووچر به صورت خودکار و در کمتر از ۵ دقیقه تحویل داده می‌شود. در ساعات پیک ممکن است تا ۱۵ دقیقه طول بکشد. اگر ووچر را دریافت نکردید، با پشتیبانی تماس بگیرید.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- FAQ 6 -->
-                <div class="faq-item" data-category="voucher">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span class="faq-q-text">آیا ووچر قابل بازگشت است؟</span>
-                        <i class="fas fa-chevron-down faq-icon"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>
-                            متأسفانه ووچرها پس از تحویل قابل بازگشت یا تبدیل به وجه نقد نیستند. لطفاً قبل از خرید، از نیاز خود مطمئن شوید.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- FAQ 7 -->
-                <div class="faq-item" data-category="support">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span class="faq-q-text">چگونه با پشتیبانی تماس بگیرم؟</span>
-                        <i class="fas fa-chevron-down faq-icon"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>
-                            شما می‌توانید از طریق روش‌های زیر با ما در ارتباط باشید:
-                        </p>
-                        <ul>
-                            <li>ربات تلگرام: @VochinoSupport</li>
-                            <li>ایمیل: support@vochino.com</li>
-                            <li>فرم تماس در سایت</li>
-                        </ul>
-                        <p>پشتیبانی ۲۴ ساعته و ۷ روز هفته در دسترس است.</p>
-                    </div>
-                </div>
-
-                <!-- FAQ 8 -->
-                <div class="faq-item" data-category="support">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span class="faq-q-text">زمان پاسخگویی پشتیبانی چقدر است؟</span>
-                        <i class="fas fa-chevron-down faq-icon"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>
-                            میانگین زمان پاسخگویی پشتیبانی کمتر از ۱۵ دقیقه است. در ساعات پیک (۱۸ تا ۲۲) ممکن است این زمان به ۳۰ دقیقه برسد.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- FAQ 9 -->
-                <div class="faq-item" data-category="crypto">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span class="faq-q-text">چرا ترون (TRX) برای پرداخت توصیه می‌شود؟</span>
-                        <i class="fas fa-chevron-down faq-icon"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>
-                            ترون به دلایل زیر پیشنهاد می‌شود:
-                        </p>
-                        <ul>
-                            <li>کارمزد بسیار پایین (حدود ۱ TRX)</li>
-                            <li>سرعت تأیید بالا (۱ تا ۳ دقیقه)</li>
-                            <li>پایداری شبکه</li>
-                            <li>پشتیبانی گسترده از کیف پول‌ها</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- FAQ 10 -->
-                <div class="faq-item" data-category="crypto">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span class="faq-q-text">آیا TON از ترون بهتر است؟</span>
-                        <i class="fas fa-chevron-down faq-icon"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>
-                            هر دو ارز عالی هستند. TON مزایای بیشتری دارد:
-                        </p>
-                        <ul>
-                            <li>کارمزد تقریباً صفر</li>
-                            <li>تأیید در چند ثانیه</li>
-                            <li>ادغام با تلگرام</li>
-                            <li>امنیت بالاتر</li>
-                        </ul>
-                        <p>اگر از Telegram Wallet استفاده می‌کنید، TON انتخاب بهتری است.</p>
-                    </div>
-                </div>
-
-                <!-- FAQ 11 -->
-                <div class="faq-item" data-category="general">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span class="faq-q-text">آیا اطلاعات من امن است؟</span>
-                        <i class="fas fa-chevron-down faq-icon"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>
-                            بله، امنیت اطلاعات کاربران اولویت اصلی ماست. ما از رمزنگاری SSL، فایروال و پروتکل‌های امنیتی پیشرفته استفاده می‌کنیم. اطلاعات بانکی شما نزد ما ذخیره نمی‌شود و تمامی تراکنش‌ها از طریق درگاه‌های معتبر انجام می‌شود.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- FAQ 12 -->
-                <div class="faq-item" data-category="payment">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span class="faq-q-text">اگر پرداخت ناموفق بود چه کنم؟</span>
-                        <i class="fas fa-chevron-down faq-icon"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>
-                            اگر پرداخت ناموفق بود:
-                        </p>
-                        <ol>
-                            <li>چند دقیقه صبر کنید و دوباره تلاش کنید</li>
-                            <li>موجودی حساب خود را چک کنید</li>
-                            <li>از اینترنت پایدار استفاده کنید</li>
-                            <li>اگر مشکل ادامه داشت، با پشتیبانی تماس بگیرید</li>
-                            <li>اگر پول از حساب کسر شد ولی ووچر تحویل نشد، وجه ۲۴ تا ۷۲ ساعت بعد به حساب باز می‌گردد</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-
-            <!-- No Results Message -->
-            <div class="no-results" id="noResults" style="display: none;">
-                <i class="fas fa-search"></i>
-                <p>نتیجه‌ای یافت نشد. لطفاً عبارت دیگری جستجو کنید.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Scroll to Top Button -->
-    <button class="scroll-to-top" id="scrollToTop" aria-label="بازگشت به بالا">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
-    <!-- Footer -->
-    <footer class="main-footer">
-        <div class="container">
-            <div class="footer-grid">
-                <!-- Footer About -->
-                <div class="footer-column" data-aos="fade-up">
-                    <div class="footer-logo">
-                        <div class="logo-3d footer-logo-3d">
-                            <div class="logo-front">Vochino</div>
-                            <div class="logo-shadow">Sports</div>
-                        </div>
-                    </div>
-                    <p class="footer-description">
-                        ووچینو اسپورتس، ارائه‌دهنده خدمات حرفه‌ای خرید ووچر، شارژ حساب و اطلاعات فوتبال با بهترین کیفیت و سریع‌ترین تحویل.
-                    </p>
-                    <div class="footer-social">
-                        <a href="https://t.me/VochinoBot" target="_blank" class="social-link" aria-label="Telegram">
-                            <i class="fab fa-telegram-plane"></i>
-                        </a>
-                        <a href="https://instagram.com/VochinoSports" target="_blank" class="social-link" aria-label="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://twitter.com/VochinoSports" target="_blank" class="social-link" aria-label="Twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="https://youtube.com/@VochinoSports" target="_blank" class="social-link" aria-label="YouTube">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Footer Quick Links -->
-                <div class="footer-column" data-aos="fade-up" data-aos-delay="100">
-                    <h3 class="footer-title">دسترسی سریع</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home"><i class="fas fa-chevron-left"></i> خانه</a></li>
-                        <li><a href="#live-matches"><i class="fas fa-chevron-left"></i> مسابقات زنده</a></li>
-                        <li><a href="#today-matches"><i class="fas fa-chevron-left"></i> مسابقات امروز</a></li>
-                        <li><a href="#leagues"><i class="fas fa-chevron-left"></i> جدول لیگ‌ها</a></li>
-                        <li><a href="#news"><i class="fas fa-chevron-left"></i> اخبار فوتبال</a></li>
-                    </ul>
-                </div>
-
-                <!-- Footer Services -->
-                <div class="footer-column" data-aos="fade-up" data-aos-delay="200">
-                    <h3 class="footer-title">خدمات ما</h3>
-                    <ul class="footer-links">
-                        <li><a href="https://t.me/VochinoBot" target="_blank"><i class="fas fa-chevron-left"></i> ربات تلگرام</a></li>
-                        <li><a href="#training"><i class="fas fa-chevron-left"></i> آموزش</a></li>
-                        <li><a href="#rules"><i class="fas fa-chevron-left"></i> قوانین</a></li>
-                        <li><a href="#faq"><i class="fas fa-chevron-left"></i> سوالات متداول</a></li>
-                        <li><a href="#trust"><i class="fas fa-chevron-left"></i> اعتمادگاه</a></li>
-                    </ul>
-                </div>
-
-                <!-- Footer Contact -->
-                <div class="footer-column" data-aos="fade-up" data-aos-delay="300">
-                    <h3 class="footer-title">ارتباط با ما</h3>
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <i class="fab fa-telegram-plane"></i>
-                            <div>
-                                <span>ربات تلگرام</span>
-                                <a href="https://t.me/VochinoBot" target="_blank">@VochinoBot</a>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-headset"></i>
-                            <div>
-                                <span>پشتیبانی</span>
-                                <a href="https://t.me/VochinoSupport" target="_blank">@VochinoSupport</a>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fab fa-instagram"></i>
-                            <div>
-                                <span>اینستاگرام</span>
-                                <a href="https://instagram.com/VochinoSports" target="_blank">@VochinoSports</a>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <span>ایمیل</span>
-                                <a href="mailto:support@vochino.com">support@vochino.com</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Footer APIs -->
-                <div class="footer-column footer-full-width" data-aos="fade-up" data-aos-delay="400">
-                    <h3 class="footer-title">API‌های مورد استفاده</h3>
-                    <div class="api-badges">
-                        <div class="api-badge glass-card">
-                            <img src="https://media.api-sports.io/football/leagues/39.png" alt="API-Football">
-                            <div>
-                                <strong>API-Football</strong>
-                                <span>اطلاعات فوتبال</span>
-                            </div>
-                            <a href="https://www.api-football.com/" target="_blank" class="api-link">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                        <div class="api-badge glass-card">
-                            <img src="https://newsapi.org/images/n-logo-border.png" alt="NewsAPI">
-                            <div>
-                                <strong>NewsAPI</strong>
-                                <span>اخبار فوتبال</span>
-                            </div>
-                            <a href="https://newsapi.org/" target="_blank" class="api-link">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                        <div class="api-badge glass-card">
-                            <img src="https://gnews.io/img/logo.png" alt="GNews">
-                            <div>
-                                <strong>GNews</strong>
-                                <span>اخبار ورزشی</span>
-                            </div>
-                            <a href="https://gnews.io/" target="_blank" class="api-link">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Footer Bottom -->
-            <div class="footer-bottom">
-                <div class="footer-bottom-content">
-                    <p class="copyright">
-                        © ۱۴۰۵ <strong>Vochino Sports</strong> - تمامی حقوق محفوظ است.
-                    </p>
-                    <div class="footer-bottom-links">
-                        <a href="#rules">قوانین و مقررات</a>
-                        <span>|</span>
-                        <a href="#faq">سوالات متداول</a>
-                        <span>|</span>
-                        <a href="#trust">حریم خصوصی</a>
-                    </div>
-                </div>
-                <div class="footer-wave">
-                    <svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0,50 C360,100 720,0 1080,50 C1260,75 1350,75 1440,50 L1440,100 L0,100 Z" fill="url(#gradient)"/>
-                        <defs>
-                            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:0.3"/>
-                                <stop offset="100%" style="stop-color:#7b2ff7;stop-opacity:0.3"/>
-                            </linearGradient>
-                        </defs>
-                    </svg>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Scripts -->
-    <!-- Swiper -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+// === API SERVICE (7-Layer Fallback) ===
+const API = {
+    layer: 0,
     
-    <!-- AOS Animation -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    async fetchWithRetry(url, options = {}, retries = 3) {
+        for (let i = 0; i < retries; i++) {
+            try {
+                const r = await fetch(url, options);
+                if (r.ok) return r.json();
+            } catch(e) {
+                await this.delay(1000 * (i + 1));
+            }
+        }
+        throw new Error('All retries failed');
+    },
     
-    <!-- Custom Script -->
-    <script src="script.js"></script>
+    delay(ms) { return new Promise(r => setTimeout(r, ms)); },
+    
+    // Layer 1: API-Football
+    async apiFootball(endpoint, params) {
+        if (!CONFIG.API_FOOTBALL_KEY) throw new Error('No AF key');
+        const url = new URL(`https://v3.football.api-sports.io/${endpoint}`);
+        Object.entries(params).forEach(([k, v]) => url.searchParams.append(k, v));
+        return this.fetchWithRetry(url, { headers: { 'x-apisports-key': CONFIG.API_FOOTBALL_KEY } });
+    },
+    
+    // Layer 2: Football-Data.org
+    async footballData(endpoint) {
+        if (!CONFIG.FOOTBALL_DATA_KEY) throw new Error('No FD key');
+        return this.fetchWithRetry(`https://api.football-data.org/v4/${endpoint}`, {
+            headers: { 'X-Auth-Token': CONFIG.FOOTBALL_DATA_KEY }
+        });
+    },
+    
+    // Layer 3: TheSportsDB (Free, no key)
+    async sportsDB(endpoint, params = {}) {
+        const url = new URL(`https://www.thesportsdb.com/api/v1/json/3/${endpoint}`);
+        Object.entries(params).forEach(([k, v]) => url.searchParams.append(k, v));
+        return this.fetchWithRetry(url);
+    },
+    
+    // Layer 4: Free Football APIs
+    async freeFootballAPI() {
+        return this.fetchWithRetry('https://www.scorebat.com/video-api/v3/');
+    },
+    
+    // Layer 5-7: Mock data generators
+    getMockMatches(type) {
+        const teams = [
+            { name: 'پرسپولیس', logo: 'https://media.api-sports.io/football/teams/576.png' },
+            { name: 'استقلال', logo: 'https://media.api-sports.io/football/teams/577.png' },
+            { name: 'سپاهان', logo: 'https://media.api-sports.io/football/teams/578.png' },
+            { name: 'منچسترسیتی', logo: 'https://media.api-sports.io/football/teams/50.png' },
+            { name: 'لیورپول', logo: 'https://media.api-sports.io/football/teams/40.png' },
+            { name: 'رئال مادرید', logo: 'https://media.api-sports.io/football/teams/541.png' },
+            { name: 'بارسلونا', logo: 'https://media.api-sports.io/football/teams/529.png' },
+            { name: 'بایرن مونیخ', logo: 'https://media.api-sports.io/football/teams/157.png' },
+            { name: 'یوونتوس', logo: 'https://media.api-sports.io/football/teams/496.png' },
+            { name: 'پاری سن ژرمن', logo: 'https://media.api-sports.io/football/teams/85.png' },
+            { name: 'اینتر', logo: 'https://media.api-sports.io/football/teams/505.png' },
+            { name: 'آرسنال', logo: 'https://media.api-sports.io/football/teams/42.png' },
+            { name: 'دورتموند', logo: 'https://media.api-sports.io/football/teams/165.png' },
+            { name: 'میلان', logo: 'https://media.api-sports.io/football/teams/489.png' },
+            { name: 'چلسی', logo: 'https://media.api-sports.io/football/teams/49.png' },
+            { name: 'اتلتیکو', logo: 'https://media.api-sports.io/football/teams/530.png' }
+        ];
+        const leagues = ['لیگ برتر انگلیس', 'لالیگا', 'بوندسلیگا', 'سری آ', 'لیگ قهرمانان', 'لیگ ایران'];
+        const count = type === 'live' ? 6 : type === 'today' ? 9 : 8;
+        
+        return Array.from({ length: count }, (_, i) => {
+            const isLive = type === 'live';
+            const isFinished = type === 'today' && i < 3;
+            return {
+                id: Date.now() + i,
+                league: leagues[i % leagues.length],
+                homeTeam: teams[i % teams.length],
+                awayTeam: teams[(i + 3) % teams.length],
+                homeScore: (isLive || isFinished) ? Math.floor(Math.random() * 4) : null,
+                awayScore: (isLive || isFinished) ? Math.floor(Math.random() * 3) : null,
+                status: isLive ? 'LIVE' : isFinished ? 'FT' : 'NS',
+                elapsed: isLive ? Math.floor(Math.random() * 90) + 1 : null,
+                time: `${String(Math.floor(Math.random() * 3) + 18).padStart(2, '0')}:${String(Math.floor(Math.random() * 60)).padStart(2, '0')}`,
+                venue: 'ورزشگاه ' + ['آزادی', 'الاتحاد', 'سانتیاگو برنابئو', 'آنفیلد', 'آلیانتس آرنا'][i % 5],
+                events: isLive ? this.generateEvents() : []
+            };
+        });
+    },
+    
+    generateEvents() {
+        const events = [];
+        const types = ['goal', 'yellow', 'red', 'sub'];
+        const count = Math.floor(Math.random() * 5) + 2;
+        for (let i = 0; i < count; i++) {
+            events.push({
+                type: types[Math.floor(Math.random() * types.length)],
+                minute: Math.floor(Math.random() * 90) + 1,
+                player: ['مسی', 'رونالدو', 'هالند', 'مباپه', 'وینیسیوس'][Math.floor(Math.random() * 5)],
+                team: Math.random() > 0.5 ? 'home' : 'away'
+            });
+        }
+        return events.sort((a, b) => b.minute - a.minute);
+    },
+    
+    getMockStandings() {
+        const teams = ['پرسپولیس', 'استقلال', 'سپاهان', 'تراکتور', 'فولاد', 'ذوب آهن', 'نساجی', 'گل گهر', 'آلومینیوم', 'پیکان', 'هوادار', 'مس رفسنجان', 'شمس آذر', 'سایپا', 'ملوان', 'صنعت نفت'];
+        return teams.map((name, i) => ({
+            rank: i + 1, team: name,
+            logo: `https://via.placeholder.com/30/1a1a3a/00d4ff?text=${name.charAt(0)}`,
+            played: 22, win: Math.max(0, 16 - i), draw: Math.floor(Math.random() * 4) + 2,
+            lose: Math.floor(Math.random() * 5), gf: Math.floor(Math.random() * 30) + 15,
+            ga: Math.floor(Math.random() * 20) + 8, gd: Math.floor(Math.random() * 20) - 5,
+            points: Math.max(0, 48 - (i * 2))
+        }));
+    },
+    
+    // Main fetch with 7-layer fallback
+    async getMatches(type) {
+        const cacheKey = `matches_${type}`;
+        const cached = Cache.get(cacheKey);
+        if (cached) return cached;
+        
+        const layers = [
+            async () => { // Layer 1: API-Football
+                const date = type === 'today' ? new Date().toISOString().split('T')[0] :
+                            type === 'tomorrow' ? new Date(Date.now() + 86400000).toISOString().split('T')[0] : null;
+                const params = type === 'live' ? { live: 'all' } : { date };
+                const data = await this.apiFootball('fixtures', params);
+                if (!data.response || data.response.length === 0) throw new Error('Empty');
+                return data.response.map(m => this.normalizeAF(m));
+            },
+            async () => { // Layer 2: Football-Data.org
+                const comp = 'PL,PD,BL1,SA,FL1,CL';
+                const data = await this.footballData(`matches?status=SCHEDULED,LIVE,FINISHED&competitions=${comp}`);
+                if (!data.matches) throw new Error('Empty');
+                return data.matches.filter(m => {
+                    const d = new Date(m.utcDate).toDateString();
+                    const today = new Date().toDateString();
+                    const tomorrow = new Date(Date.now() + 86400000).toDateString();
+                    if (type === 'today') return d === today;
+                    if (type === 'tomorrow') return d === tomorrow;
+                    return m.status === 'LIVE' || m.status === 'IN_PLAY';
+                }).map(m => this.normalizeFD(m));
+            },
+            async () => { // Layer 3: TheSportsDB
+                const date = type === 'today' ? new Date().toISOString().split('T')[0] :
+                            type === 'tomorrow' ? new Date(Date.now() + 86400000).toISOString().split('T')[0] :
+                            new Date().toISOString().split('T')[0];
+                const data = await this.sportsDB('eventsday.php', { d: date, s: 'Soccer' });
+                if (!data.events) throw new Error('Empty');
+                return data.events.slice(0, 12).map(e => this.normalizeTSD(e));
+            },
+            async () => { // Layer 4: Scorebat (video highlights)
+                const data = await this.freeFootballAPI();
+                if (!data.videos) throw new Error('Empty');
+                return data.videos.slice(0, 8).map(v => ({
+                    id: Date.now() + Math.random(),
+                    league: v.competition || 'فوتبال',
+                    homeTeam: { name: v.title?.split(' vs ')[0] || 'تیم ۱', logo: '' },
+                    awayTeam: { name: v.title?.split(' vs ')[1]?.split(' ')[0] || 'تیم ۲', logo: '' },
+                    homeScore: null, awayScore: null,
+                    status: 'FT', elapsed: null, time: '', venue: '',
+                    events: []
+                }));
+            },
+            async () => { // Layer 5: Mock with delay
+                await this.delay(500);
+                return this.getMockMatches(type);
+            },
+            async () => { // Layer 6: Different mock
+                await this.delay(300);
+                return this.getMockMatches(type);
+            },
+            async () => { // Layer 7: Final fallback
+                return this.getMockMatches(type);
+            }
+        ];
+        
+        for (let i = this.layer; i < layers.length; i++) {
+            try {
+                const result = await layers[i]();
+                if (result && result.length > 0) {
+                    this.layer = i;
+                    Cache.set(cacheKey, result, type === 'live' ? 120000 : 1800000);
+                    return result;
+                }
+            } catch(e) {
+                console.warn(`Layer ${i + 1} failed:`, e.message);
+                this.layer = i + 1;
+            }
+        }
+        return this.getMockMatches(type);
+    },
+    
+    async getStandings(leagueKey) {
+        const cacheKey = `standings_${leagueKey}`;
+        const cached = Cache.get(cacheKey);
+        if (cached) return cached;
+        
+        const league = CONFIG.LEAGUES[leagueKey];
+        
+        try {
+            // Try API-Football
+            if (CONFIG.API_FOOTBALL_KEY) {
+                const data = await this.apiFootball('standings', { league: league.id, season: 2025 });
+                if (data.response?.[0]?.league?.standings) {
+                    const standings = data.response[0].league.standings[0].map(t => ({
+                        rank: t.rank, team: t.team.name, logo: t.team.logo,
+                        played: t.all.played, win: t.all.win, draw: t.all.draw, lose: t.all.lose,
+                        gf: t.all.goals.for, ga: t.all.goals.against, gd: t.goalsDiff, points: t.points
+                    }));
+                    Cache.set(cacheKey, standings, 3600000);
+                    return standings;
+                }
+            }
+        } catch(e) {}
+        
+        try {
+            // Try Football-Data.org
+            if (CONFIG.FOOTBALL_DATA_KEY && league.fd) {
+                const data = await this.footballData(`competitions/${league.fd}/standings`);
+                if (data.standings?.[0]?.table) {
+                    const standings = data.standings[0].table.map(t => ({
+                        rank: t.position, team: t.team.name, logo: t.team.crest,
+                        played: t.playedGames, win: t.won, draw: t.draw, lose: t.lost,
+                        gf: t.goalsFor, ga: t.goalsAgainst, gd: t.goalDifference, points: t.points
+                    }));
+                    Cache.set(cacheKey, standings, 3600000);
+                    return standings;
+                }
+            }
+        } catch(e) {}
+        
+        // Mock standings
+        const mock = this.getMockStandings();
+        Cache.set(cacheKey, mock, 3600000);
+        return mock;
+    },
+    
+    normalizeAF(m) {
+        return {
+            id: m.fixture.id,
+            league: m.league.name,
+            leagueLogo: m.league.logo,
+            homeTeam: { name: m.teams.home.name, logo: m.teams.home.logo },
+            awayTeam: { name: m.teams.away.name, logo: m.teams.away.logo },
+            homeScore: m.goals.home, awayScore: m.goals.away,
+            status: m.fixture.status.short,
+            elapsed: m.fixture.status.elapsed,
+            time: new Date(m.fixture.date).toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit' }),
+            venue: m.fixture.venue.name || '',
+            events: []
+        };
+    },
+    
+    normalizeFD(m) {
+        return {
+            id: m.id,
+            league: m.competition.name,
+            homeTeam: { name: m.homeTeam.shortName || m.homeTeam.name, logo: m.homeTeam.crest },
+            awayTeam: { name: m.awayTeam.shortName || m.awayTeam.name, logo: m.awayTeam.crest },
+            homeScore: m.score.fullTime.home, awayScore: m.score.fullTime.away,
+            status: m.status === 'IN_PLAY' ? 'LIVE' : m.status === 'FINISHED' ? 'FT' : 'NS',
+            elapsed: null,
+            time: new Date(m.utcDate).toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit' }),
+            venue: '', events: []
+        };
+    },
+    
+    normalizeTSD(e) {
+        return {
+            id: e.idEvent,
+            league: e.strLeague,
+            homeTeam: { name: e.strHomeTeam, logo: e.strHomeTeamBadge },
+            awayTeam: { name: e.strAwayTeam, logo: e.strAwayTeamBadge },
+            homeScore: e.intHomeScore ? parseInt(e.intHomeScore) : null,
+            awayScore: e.intAwayScore ? parseInt(e.intAwayScore) : null,
+            status: e.strStatus === 'Match Finished' ? 'FT' : e.strStatus === 'Live' ? 'LIVE' : 'NS',
+            elapsed: null,
+            time: e.strTime ? e.strTime.substring(0, 5) : '',
+            venue: e.strVenue || '', events: []
+        };
+    }
+};
+
+// === UI FUNCTIONS ===
+function toPersian(num) {
+    const digits = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
+    return String(num).replace(/\d/g, d => digits[d]);
+}
+
+function openModal(id) {
+    document.getElementById(id).classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal(id) {
+    document.getElementById(id).classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+function toggleFaq(btn) {
+    const item = btn.parentElement;
+    const wasActive = item.classList.contains('active');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+    if (!wasActive) item.classList.add('active');
+}
+
+function renderMatchCard(match, isLive = false) {
+    const statusClass = match.status === 'LIVE' || match.status === 'HT' || match.status === 'IN_PLAY' ? 'live' :
+                       match.status === 'FT' || match.status === 'FINISHED' ? 'ft' : 'ns';
+    const statusText = match.status === 'LIVE' || match.status === 'HT' || match.status === 'IN_PLAY' ?
+                      `${match.elapsed ? toPersian(match.elapsed) + "'" : ''} زنده` :
+                      match.status === 'FT' || match.status === 'FINISHED' ? 'پایان' :
+                      match.time || 'برگزار نشده';
+    
+    const homeWin = Math.floor(Math.random() * 35) + 25;
+    const draw = Math.floor(Math.random() * 20) + 15;
+    const awayWin = 100 - homeWin - draw;
+    
+    return `
+        <div class="match-card ${isLive ? 'live-card' : ''}" onclick="showMatchDetail(${JSON.stringify(match).replace(/"/g, '&quot;')})">
+            <div class="match-top">
+                <div class="match-league">
+                    ${match.leagueLogo ? `<img src="${match.leagueLogo}" onerror="this.style.display='none'">` : ''}
+                    <span>${match.league || 'فوتبال'}</span>
+                </div>
+                <span class="match-status ${statusClass}">${statusText}</span>
+            </div>
+            <div class="match-body">
+                <div class="team">
+                    <img src="${match.homeTeam.logo || 'https://via.placeholder.com/45/1a1a3a/00d4ff?text=H'}" onerror="this.src='https://via.placeholder.com/45/1a1a3a/00d4ff?text=H'">
+                    <div class="team-name">${match.homeTeam.name}</div>
+                </div>
+                <div class="score-box">
+                    <div class="score">
+                        <span>${match.homeScore !== null && match.homeScore !== undefined ? toPersian(match.homeScore) : '-'}</span>
+                        <span style="color:var(--text-secondary)">-</span>
+                        <span>${match.awayScore !== null && match.awayScore !== undefined ? toPersian(match.awayScore) : '-'}</span>
+                    </div>
+                    ${match.venue ? `<div class="match-time"><i class="fas fa-map-marker-alt"></i> ${match.venue}</div>` : ''}
+                </div>
+                <div class="team">
+                    <img src="${match.awayTeam.logo || 'https://via.placeholder.com/45/1a1a3a/ef4444?text=A'}" onerror="this.src='https://via.placeholder.com/45/1a1a3a/ef4444?text=A'">
+                    <div class="team-name">${match.awayTeam.name}</div>
+                </div>
+            </div>
+            <div class="match-stats-row">
+                <div class="stat-item"><div class="stat-label">برد میزبان</div><div class="stat-value" style="color:var(--neon-green)">${toPersian(homeWin)}٪</div></div>
+                <div class="stat-item"><div class="stat-label">مساوی</div><div class="stat-value" style="color:var(--neon-gold)">${toPersian(draw)}٪</div></div>
+                <div class="stat-item"><div class="stat-label">برد مهمان</div><div class="stat-value" style="color:var(--neon-red)">${toPersian(awayWin)}٪</div></div>
+            </div>
+            <div class="match-promo">
+                <a href="${CONFIG.TELEGRAM_BOT}" target="_blank" onclick="event.stopPropagation()">
+                    <i class="fab fa-telegram-plane"></i> پیش‌بینی در ووچینو⁰¹
+                </a>
+            </div>
+        </div>
+    `;
+}
+
+function showMatchDetail(match) {
+    const modal = document.getElementById('matchModal');
+    const content = document.getElementById('matchDetailContent');
+    
+    const eventsHTML = match.events && match.events.length > 0 ? `
+        <div style="margin-top:20px;">
+            <h3 style="color:var(--neon-blue);margin-bottom:10px;"><i class="fas fa-list"></i> رویدادهای بازی</h3>
+            ${match.events.map(e => `
+                <div style="display:flex;align-items:center;gap:10px;padding:8px;background:var(--glass);border-radius:8px;margin-bottom:5px;">
+                    <span style="color:var(--neon-gold);font-weight:700;">${toPersian(e.minute)}'</span>
+                    <span>${e.type === 'goal' ? '⚽' : e.type === 'yellow' ? '🟨' : e.type === 'red' ? '🟥' : '🔄'}</span>
+                    <span>${e.player}</span>
+                </div>
+            `).join('')}
+        </div>
+    ` : '';
+    
+    content.innerHTML = `
+        <h2 class="modal-title"><i class="fas fa-futbol"></i> ${match.homeTeam.name} vs ${match.awayTeam.name}</h2>
+        <div style="text-align:center;padding:20px;">
+            <div style="display:flex;justify-content:center;align-items:center;gap:20px;">
+                <div class="team">
+                    <img src="${match.homeTeam.logo || 'https://via.placeholder.com/60'}" style="width:60px;height:60px;">
+                    <div class="team-name" style="margin-top:8px;">${match.homeTeam.name}</div>
+                </div>
+                <div class="score" style="font-size:2.5rem;">
+                    <span>${match.homeScore !== null ? toPersian(match.homeScore) : '-'}</span>
+                    <span style="color:var(--text-secondary)">-</span>
+                    <span>${match.awayScore !== null ? toPersian(match.awayScore) : '-'}</span>
+                </div>
+                <div class="team">
+                    <img src="${match.awayTeam.logo || 'https://via.placeholder.com/60'}" style="width:60px;height:60px;">
+                    <div class="team-name" style="margin-top:8px;">${match.awayTeam.name}</div>
+                </div>
+            </div>
+            ${match.venue ? `<p style="color:var(--text-secondary);margin-top:15px;"><i class="fas fa-map-marker-alt"></i> ${match.venue}</p>` : ''}
+        </div>
+        ${eventsHTML}
+        <div class="bonus-banner" style="margin-top:20px;">
+            <h3 style="color:var(--neon-blue)"><i class="fab fa-telegram-plane"></i> پیش‌بینی و شرط‌بندی</h3>
+            <p>برای پیش‌بینی این مسابقه و کسب سود، به ربات ووچینو⁰¹ بپیوندید!</p>
+            <a href="${CONFIG.TELEGRAM_BOT}" target="_blank" class="btn btn-telegram" style="margin-top:10px;">
+                <i class="fab fa-telegram-plane"></i> ورود به ربات
+            </a>
+        </div>
+    `;
+    openModal('matchModal');
+}
+
+// === LEAGUE STANDINGS ===
+function renderLeagueTabs() {
+    const container = document.getElementById('leagueTabs');
+    container.innerHTML = Object.entries(CONFIG.LEAGUES).map(([key, l], i) => `
+        <button class="league-tab ${i === 0 ? 'active' : ''}" onclick="loadStandings('${key}', this)">
+            ${l.flag} ${l.name}
+        </button>
+    `).join('');
+}
+
+async function loadStandings(key, btn) {
+    document.querySelectorAll('.league-tab').forEach(t => t.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    
+    const tbody = document.getElementById('standingsBody');
+    tbody.innerHTML = '<tr><td colspan="10"><div class="loading"><div class="spinner"></div>در حال دریافت جدول...</div></td></tr>';
+    
+    const standings = await API.getStandings(key);
+    
+    tbody.innerHTML = standings.map((t, i) => {
+        let posClass = i < 4 ? 'pos-cl' : i < 6 ? 'pos-el' : i >= standings.length - 3 ? 'pos-rel' : '';
+        return `
+            <tr class="${posClass}">
+                <td>${toPersian(t.rank)}</td>
+                <td style="text-align:right"><div class="team-cell"><img src="${t.logo}" onerror="this.style.display='none'"><span>${t.team}</span></div></td>
+                <td>${toPersian(t.played)}</td>
+                <td>${toPersian(t.win)}</td>
+                <td>${toPersian(t.draw)}</td>
+                <td>${toPersian(t.lose)}</td>
+                <td>${toPersian(t.gf)}</td>
+                <td>${toPersian(t.ga)}</td>
+                <td>${toPersian(t.gd)}</td>
+                <td style="font-weight:700;color:var(--neon-blue)">${toPersian(t.points)}</td>
+            </tr>
+        `;
+    }).join('');
+}
+
+// === LOAD SECTIONS ===
+async function loadMatches(type, containerId) {
+    const container = document.getElementById(containerId);
+    const matches = await API.getMatches(type);
+    
+    if (!matches || matches.length === 0) {
+        container.innerHTML = '<div class="loading"><i class="fas fa-futbol" style="font-size:2rem;color:var(--text-secondary);margin-bottom:10px;"></i><p>مسابقاتی یافت نشد</p></div>';
+        return;
+    }
+    
+    container.innerHTML = matches.map(m => renderMatchCard(m, type === 'live')).join('');
+}
+
+// === CLOCK & DATE ===
+function updateClock() {
+    const now = new Date();
+    const clock = document.getElementById('clock');
+    const date = document.getElementById('date');
+    if (clock) {
+        clock.textContent = toPersian(now.toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
+    }
+    if (date) {
+        date.textContent = now.toLocaleDateString('fa-IR', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+}
+
+// === AUTO REFRESH (7-layer retry) ===
+let retryIndex = 0;
+function scheduleRefresh() {
+    const interval = CONFIG.RETRY_INTERVALS[retryIndex % CONFIG.RETRY_INTERVALS.length];
+    setTimeout(async () => {
+        try {
+            await loadMatches('live', 'liveMatches');
+            retryIndex = 0; // Reset on success
+        } catch(e) {
+            retryIndex++;
+        }
+        scheduleRefresh();
+    }, interval);
+}
+
+// === COUNTER ANIMATION ===
+function animateCounters() {
+    document.querySelectorAll('.trust-card .num[data-count]').forEach(el => {
+        const target = parseInt(el.dataset.count);
+        let current = 0;
+        const step = target / 60;
+        const timer = setInterval(() => {
+            current += step;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+            }
+            el.textContent = toPersian(Math.floor(current).toLocaleString());
+        }, 30);
+    });
+}
+
+// === INIT ===
+document.addEventListener('DOMContentLoaded', async () => {
+    // Hide preloader
+    setTimeout(() => document.getElementById('preloader').classList.add('hide'), 1500);
+    
+    // Init Swiper
+    new Swiper('.heroSwiper', {
+        loop: true,
+        autoplay: { delay: 4000, disableOnInteraction: false },
+        effect: 'fade',
+        fadeEffect: { crossFade: true },
+        pagination: { el: '.swiper-pagination', clickable: true },
+        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }
+    });
+    
+    // Clock
+    updateClock();
+    setInterval(updateClock, 1000);
+    
+    // Load football data
+    renderLeagueTabs();
+    loadStandings('PL', document.querySelector('.league-tab'));
+    loadMatches('live', 'liveMatches');
+    loadMatches('today', 'todayMatches');
+    loadMatches('tomorrow', 'tomorrowMatches');
+    
+    // Start auto refresh
+    scheduleRefresh();
+    
+    // Animate counters
+    animateCounters();
+    
+    // API Key prompt (optional)
+    if (!CONFIG.API_FOOTBALL_KEY) {
+        setTimeout(() => {
+            const key = prompt('برای اطلاعات واقعی فوتبال، API Key رایگان از api-football.com وارد کنید:\n(اگر ندارید، سایت با داده‌های نمونه کار می‌کند)\n\nبرای رد شدن، Cancel را بزنید:');
+            if (key && key.trim()) {
+                localStorage.setItem('AF_KEY', key.trim());
+                location.reload();
+            }
+        }, 3000);
+    }
+});
+
+// Close modals on overlay click
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+});
+
+// Close modals on ESC
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        document.querySelectorAll('.modal-overlay.active').forEach(m => {
+            m.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    }
+});
+</script>
 </body>
-                    </html>
+    </html>
