@@ -61,7 +61,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .quick-btn:hover{transform:translateY(-3px);border-color:var(--blue);box-shadow:0 8px 25px rgba(0,212,255,.2)}
 .quick-btn i{font-size:1.5rem}.quick-btn span{font-size:.75rem;font-weight:600}
 /* Crypto Prices */
-.crypto-bar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:25px}
+.crypto-bar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:20px auto 25px}
 .crypto-item{display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--glass);border:1px solid var(--gb);border-radius:12px;transition:.3s;min-width:140px}
 .crypto-item:hover{border-color:var(--blue);transform:translateY(-2px)}
 .crypto-icon{font-size:1.3rem}
@@ -197,7 +197,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 </div><div class="swiper-pagination"></div><div class="swiper-button-next"></div><div class="swiper-button-prev"></div></div></section>
 
 <!-- ===== منوی اصلی با ۵ آیتم ===== -->
-<section class="section" style="padding-top:15px;padding-bottom:15px"><div class="container">
+<section class="section" style="padding-top:15px;padding-bottom:5px"><div class="container">
 <div class="quick-actions">
 <div class="quick-btn" onclick="openModal('trainingModal')"><i class="fas fa-graduation-cap" style="color:var(--blue)"></i><span>آموزش</span></div>
 <div class="quick-btn" onclick="openModal('rulesModal')"><i class="fas fa-gavel" style="color:var(--purple)"></i><span>قوانین</span></div>
@@ -205,14 +205,16 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 <div class="quick-btn" onclick="openModal('faqModal')"><i class="fas fa-question-circle" style="color:var(--gold)"></i><span>سوالات</span></div>
 <div class="quick-btn" onclick="window.open('https://t.me/ali_bh0101','_blank')"><i class="fas fa-headset" style="color:var(--green)"></i><span>پشتیبانی</span></div>
 </div>
-
-<!-- ===== قیمت‌های ارز (TON, TRX, USDT) ===== -->
-<div class="crypto-bar" id="cryptoBar">
-<div class="crypto-item"><span class="crypto-icon">💵</span><div class="crypto-info"><span class="crypto-name">تتر (USDT)</span><span class="crypto-price" id="priceUSDT">--</span><span class="crypto-change" id="changeUSDT"></span></div></div>
-<div class="crypto-item"><span class="crypto-icon">🟢</span><div class="crypto-info"><span class="crypto-name">ترون (TRX)</span><span class="crypto-price" id="priceTRX">--</span><span class="crypto-change" id="changeTRX"></span></div></div>
-<div class="crypto-item"><span class="crypto-icon">🔵</span><div class="crypto-info"><span class="crypto-name">تون کوین (TON)</span><span class="crypto-price" id="priceTON">--</span><span class="crypto-change" id="changeTON"></span></div></div>
-</div>
 </div></section>
+
+<!-- ===== قیمت‌های ارز (TON, TRX, USDT) - دقیقاً اونجایی که گفتی ===== -->
+<div class="container">
+<div class="crypto-bar" id="cryptoBar">
+<div class="crypto-item"><span class="crypto-icon">🔵</span><div class="crypto-info"><span class="crypto-name">تون کوین (TON)</span><span class="crypto-price" id="priceTON">--</span><span class="crypto-change" id="changeTON"></span></div></div>
+<div class="crypto-item"><span class="crypto-icon">🟢</span><div class="crypto-info"><span class="crypto-name">ترون (TRX)</span><span class="crypto-price" id="priceTRX">--</span><span class="crypto-change" id="changeTRX"></span></div></div>
+<div class="crypto-item"><span class="crypto-icon">💵</span><div class="crypto-info"><span class="crypto-name">تتر (USDT)</span><span class="crypto-price" id="priceUSDT">--</span><span class="crypto-change" id="changeUSDT"></span></div></div>
+</div>
+</div>
 
 <section class="section" id="liveSection"><div class="container"><div class="section-header"><div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:6px"><span class="live-badge"><span class="live-dot"></span>LIVE</span><h2 class="section-title"><i class="fas fa-futbol"></i> مسابقات زنده</h2></div><p class="section-sub">نتایج زنده، گل‌ها، کارت‌ها و تعویض‌ها</p></div><div class="matches-grid" id="liveMatches"><div class="loading"><div class="spinner"></div>در حال دریافت...</div></div></div></section>
 
@@ -336,4 +338,4 @@ document.querySelectorAll('.modal-overlay').forEach(o=>{o.addEventListener('clic
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.querySelectorAll('.modal-overlay.active').forEach(m=>{m.classList.remove('active');document.body.style.overflow=''})}});
 </script>
 </body>
-  </html>
+                                                      </html>
