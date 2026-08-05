@@ -1,1535 +1,291 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Vochino⁰¹ | صرافی ووچینو - خرید و فروش ووچر</title>
-    <meta name="description" content="صرافی ووچینو | خرید و فروش انواع ووچر با بهترین نرخ - یوووچر، هات ووچر، پرمیوم ووچر، PS Voucher">
-    <meta name="theme-color" content="#0a0a1a">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-    <style>
-/* ============================================
-   VOCHINO⁰¹ - COMPLETE STYLES
-   Dark + Glassmorphism + Neon + Responsive
-   ============================================ */
-:root {
-    --bg-primary: #0a0a1a;
-    --bg-secondary: #12122a;
-    --bg-card: rgba(20, 20, 50, 0.7);
-    --glass: rgba(255,255,255,0.05);
-    --glass-border: rgba(255,255,255,0.1);
-    --neon-blue: #00d4ff;
-    --neon-purple: #a855f7;
-    --neon-pink: #ec4899;
-    --neon-green: #22c55e;
-    --neon-gold: #fbbf24;
-    --neon-red: #ef4444;
-    --text-primary: #ffffff;
-    --text-secondary: #94a3b8;
-    --radius: 16px;
-    --shadow: 0 20px 60px rgba(0,0,0,0.5);
-}
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior: smooth; }
-body {
-    font-family: 'Vazirmatn', sans-serif;
-    background: var(--bg-primary);
-    color: var(--text-primary);
-    line-height: 1.7;
-    overflow-x: hidden;
-    min-height: 100vh;
-}
-body::before {
-    content: '';
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: 
-        radial-gradient(ellipse at 20% 50%, rgba(168,85,247,0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 20%, rgba(0,212,255,0.1) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 80%, rgba(236,72,153,0.1) 0%, transparent 50%);
-    z-index: 0;
-    pointer-events: none;
-}
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: var(--bg-secondary); }
-::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--neon-blue), var(--neon-purple)); border-radius: 4px; }
-
-/* Preloader */
-#preloader {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: var(--bg-primary);
-    display: flex; flex-direction: column;
-    justify-content: center; align-items: center;
-    z-index: 99999;
-    transition: opacity 0.5s, visibility 0.5s;
-}
-#preloader.hide { opacity: 0; visibility: hidden; }
-.loader-logo {
-    font-size: 3rem; font-weight: 900;
-    background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    animation: pulse3d 1.5s ease-in-out infinite;
-    text-shadow: 0 0 30px rgba(0,212,255,0.5);
-}
-.loader-bar { width: 200px; height: 4px; background: var(--glass); border-radius: 2px; margin-top: 20px; overflow: hidden; }
-.loader-fill { height: 100%; background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple)); animation: loadBar 1.5s ease-in-out infinite; border-radius: 2px; }
-@keyframes loadBar { 0%{transform:translateX(-100%)} 100%{transform:translateX(100%)} }
-@keyframes pulse3d { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
-
-/* Header */
-.header {
-    position: fixed; top: 0; left: 0; width: 100%;
-    background: rgba(10,10,26,0.9);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--glass-border);
-    z-index: 1000;
-    padding: 10px 20px;
-}
-.header-inner {
-    max-width: 1400px; margin: 0 auto;
-    display: flex; align-items: center; justify-content: space-between;
-    flex-wrap: wrap; gap: 10px;
-}
-.logo-wrap { display: flex; align-items: center; gap: 10px; }
-.logo-3d {
-    font-size: 1.6rem; font-weight: 900;
-    background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 20px rgba(0,212,255,0.3);
-    animation: logoGlow 3s ease-in-out infinite;
-}
-@keyframes logoGlow { 0%,100%{filter:brightness(1)} 50%{filter:brightness(1.3)} }
-.logo-sub { font-size: 0.7rem; color: var(--neon-gold); letter-spacing: 2px; }
-.header-info { display: flex; align-items: center; gap: 15px; }
-.clock-box {
-    display: flex; align-items: center; gap: 5px;
-    background: var(--glass); border: 1px solid var(--glass-border);
-    padding: 5px 12px; border-radius: 8px; font-size: 0.85rem;
-}
-.clock-box i { color: var(--neon-blue); }
-.header-btns { display: flex; gap: 8px; flex-wrap: wrap; }
-.btn {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 8px 16px; border-radius: 10px;
-    font-family: inherit; font-size: 0.85rem; font-weight: 600;
-    cursor: pointer; border: none; text-decoration: none;
-    transition: all 0.3s ease; position: relative; overflow: hidden;
-}
-.btn::after {
-    content: ''; position: absolute; top: 50%; left: 50%;
-    width: 0; height: 0; background: rgba(255,255,255,0.2);
-    border-radius: 50%; transform: translate(-50%,-50%);
-    transition: width 0.4s, height 0.4s;
-}
-.btn:active::after { width: 200px; height: 200px; }
-.btn-telegram { background: linear-gradient(135deg, #0088cc, #00aaff); color: #fff; box-shadow: 0 4px 15px rgba(0,136,204,0.4); }
-.btn-telegram:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(0,136,204,0.6); }
-.btn-glass { background: var(--glass); border: 1px solid var(--glass-border); color: var(--text-primary); }
-.btn-glass:hover { background: rgba(168,85,247,0.2); border-color: var(--neon-purple); }
-.btn-gold { background: linear-gradient(135deg, var(--neon-gold), #f59e0b); color: #000; font-weight: 700; }
-.btn-green { background: linear-gradient(135deg, var(--neon-green), #16a34a); color: #fff; }
-
-/* Hero Slider */
-.hero { margin-top: 80px; padding: 20px; }
-.swiper { border-radius: var(--radius); overflow: hidden; }
-.swiper-slide {
-    min-height: 420px;
-    display: flex; align-items: center; justify-content: center;
-    background: linear-gradient(135deg, var(--bg-secondary), rgba(20,20,50,0.9));
-    position: relative; overflow: hidden; padding: 40px 20px;
-}
-.swiper-slide::before {
-    content: ''; position: absolute; top: -50%; right: -50%;
-    width: 200%; height: 200%;
-    background: radial-gradient(circle, rgba(0,212,255,0.1) 0%, transparent 60%);
-    animation: rotate 20s linear infinite;
-}
-@keyframes rotate { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
-.hero-content { text-align: center; z-index: 2; max-width: 700px; }
-.hero-icon { font-size: 3.5rem; margin-bottom: 15px; filter: drop-shadow(0 0 20px currentColor); }
-.hero-title {
-    font-size: clamp(1.5rem, 4vw, 2.5rem); font-weight: 900;
-    margin-bottom: 10px;
-    background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-}
-.hero-sub { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 20px; }
-.hero-badges { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 25px; }
-.badge {
-    padding: 6px 14px; border-radius: 20px; font-size: 0.8rem;
-    background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3);
-    color: var(--neon-green);
-}
-.swiper-pagination-bullet { background: var(--text-secondary); }
-.swiper-pagination-bullet-active { background: var(--neon-blue); width: 25px; border-radius: 5px; }
-.swiper-button-next, .swiper-button-prev { color: var(--neon-blue); }
-.swiper-button-next::after, .swiper-button-prev::after { font-size: 1.2rem; }
-
-/* Sections */
-.section { padding: 50px 20px; position: relative; z-index: 1; }
-.section-header { text-align: center; margin-bottom: 30px; }
-.section-title {
-    font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 900;
-    display: flex; align-items: center; justify-content: center; gap: 10px;
-}
-.section-title i { color: var(--neon-blue); filter: drop-shadow(0 0 10px rgba(0,212,255,0.5)); }
-.section-sub { color: var(--text-secondary); margin-top: 8px; }
-.container { max-width: 1400px; margin: 0 auto; }
-
-/* Quick Actions */
-.quick-actions {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 12px; max-width: 800px; margin: 0 auto 40px;
-}
-.quick-btn {
-    display: flex; flex-direction: column; align-items: center; gap: 8px;
-    padding: 20px 15px; background: var(--glass);
-    border: 1px solid var(--glass-border); border-radius: var(--radius);
-    cursor: pointer; transition: all 0.3s; text-align: center;
-}
-.quick-btn:hover { transform: translateY(-5px); border-color: var(--neon-blue); box-shadow: 0 10px 30px rgba(0,212,255,0.2); }
-.quick-btn i { font-size: 1.8rem; }
-.quick-btn span { font-size: 0.85rem; font-weight: 600; }
-
-/* Live Badge */
-.live-badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: rgba(239,68,68,0.2); border: 1px solid var(--neon-red);
-    color: var(--neon-red); padding: 4px 12px; border-radius: 6px;
-    font-size: 0.8rem; font-weight: 700;
-    animation: livePulse 2s infinite;
-}
-.live-dot { width: 8px; height: 8px; background: var(--neon-red); border-radius: 50%; animation: blink 1s infinite; }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
-@keyframes livePulse { 0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,0.4)} 50%{box-shadow:0 0 0 8px rgba(239,68,68,0)} }
-
-/* Match Cards */
-.matches-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 15px; }
-.match-card {
-    background: var(--glass); backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-border); border-radius: var(--radius);
-    padding: 15px; transition: all 0.3s; cursor: pointer; position: relative; overflow: hidden;
-}
-.match-card::before {
-    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
-    background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
-    transform: scaleX(0); transition: transform 0.3s; transform-origin: left;
-}
-.match-card:hover::before { transform: scaleX(1); }
-.match-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,212,255,0.15); border-color: rgba(0,212,255,0.3); }
-.match-card.live-card { border-color: rgba(239,68,68,0.4); }
-.match-card.live-card::before { background: linear-gradient(90deg, var(--neon-red), var(--neon-pink)); }
-.match-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--glass-border); }
-.match-league { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--text-secondary); }
-.match-league img { width: 20px; height: 20px; object-fit: contain; }
-.match-status { font-size: 0.75rem; padding: 3px 8px; border-radius: 5px; font-weight: 700; }
-.match-status.live { background: rgba(239,68,68,0.2); color: var(--neon-red); animation: blink 1.5s infinite; }
-.match-status.ft { background: rgba(34,197,94,0.15); color: var(--neon-green); }
-.match-status.ns { background: rgba(251,191,36,0.15); color: var(--neon-gold); }
-.match-body { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; }
-.team { text-align: center; }
-.team img { width: 45px; height: 45px; object-fit: contain; margin-bottom: 5px; transition: transform 0.3s; }
-.match-card:hover .team img { transform: scale(1.1); }
-.team-name { font-size: 0.8rem; font-weight: 600; line-height: 1.3; }
-.score-box { text-align: center; }
-.score { font-size: 1.8rem; font-weight: 900; display: flex; gap: 5px; justify-content: center; }
-.score span { min-width: 25px; }
-.match-time { font-size: 0.75rem; color: var(--text-secondary); margin-top: 3px; }
-.match-stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--glass-border); }
-.stat-item { text-align: center; }
-.stat-label { font-size: 0.7rem; color: var(--text-secondary); }
-.stat-value { font-size: 0.9rem; font-weight: 700; }
-.match-promo { margin-top: 10px; text-align: center; }
-.match-promo a { font-size: 0.75rem; color: var(--neon-blue); text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 4px; }
-.match-promo a:hover { text-decoration: underline; }
-
-/* League Selector */
-.league-tabs { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 20px; }
-.league-tab {
-    padding: 8px 14px; border-radius: 10px; font-size: 0.8rem; font-weight: 600;
-    background: var(--glass); border: 1px solid var(--glass-border);
-    color: var(--text-secondary); cursor: pointer; transition: all 0.3s;
-    display: flex; align-items: center; gap: 5px;
-}
-.league-tab:hover, .league-tab.active { background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple)); color: #fff; border-color: transparent; box-shadow: 0 4px 15px rgba(0,212,255,0.3); }
-
-/* Standings Table */
-.table-wrap { overflow-x: auto; background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--radius); }
-.standings-table { width: 100%; border-collapse: collapse; min-width: 600px; }
-.standings-table th {
-    padding: 12px 10px; text-align: center; font-size: 0.8rem;
-    background: rgba(0,212,255,0.1); color: var(--neon-blue);
-    border-bottom: 2px solid var(--glass-border); font-weight: 700;
-}
-.standings-table td { padding: 10px; text-align: center; font-size: 0.85rem; border-bottom: 1px solid var(--glass-border); }
-.standings-table tr:hover { background: rgba(0,212,255,0.05); }
-.standings-table .team-cell { display: flex; align-items: center; gap: 8px; justify-content: flex-start; }
-.standings-table .team-cell img { width: 22px; height: 22px; object-fit: contain; }
-.pos-cl { border-right: 3px solid var(--neon-green); }
-.pos-el { border-right: 3px solid var(--neon-blue); }
-.pos-rel { border-right: 3px solid var(--neon-red); }
-
-/* Trust Section */
-.trust-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px; }
-.trust-card {
-    background: var(--glass); border: 1px solid var(--glass-border);
-    border-radius: var(--radius); padding: 25px 15px; text-align: center;
-    transition: all 0.3s;
-}
-.trust-card:hover { transform: translateY(-5px); border-color: var(--neon-blue); }
-.trust-card i { font-size: 2rem; margin-bottom: 10px; color: var(--neon-blue); }
-.trust-card .num { font-size: 2rem; font-weight: 900; background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.trust-card .label { color: var(--text-secondary); font-size: 0.85rem; margin-top: 5px; }
-
-/* Voucher Ads */
-.voucher-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
-.voucher-card {
-    background: var(--glass); border: 1px solid var(--glass-border);
-    border-radius: var(--radius); padding: 25px; text-align: center;
-    transition: all 0.3s; position: relative; overflow: hidden;
-}
-.voucher-card::before {
-    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
-    background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
-}
-.voucher-card:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 15px 40px rgba(168,85,247,0.2); }
-.voucher-card i { font-size: 2.5rem; margin-bottom: 10px; }
-.voucher-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
-.voucher-card p { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 15px; }
-
-/* Bonus Section */
-.bonus-banner {
-    background: linear-gradient(135deg, rgba(251,191,36,0.1), rgba(245,158,11,0.1));
-    border: 1px solid rgba(251,191,36,0.3); border-radius: var(--radius);
-    padding: 25px; text-align: center; margin: 30px 0;
-}
-.bonus-banner h3 { color: var(--neon-gold); font-size: 1.3rem; margin-bottom: 10px; }
-.bonus-banner p { color: var(--text-secondary); }
-
-/* Modals */
-.modal-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
-    z-index: 10000; display: none; justify-content: center; align-items: center;
-    padding: 20px; opacity: 0; transition: opacity 0.3s;
-}
-.modal-overlay.active { display: flex; opacity: 1; }
-.modal-box {
-    background: var(--bg-secondary); border: 1px solid var(--glass-border);
-    border-radius: var(--radius); max-width: 800px; width: 100%;
-    max-height: 85vh; overflow-y: auto; padding: 30px; position: relative;
-    animation: modalIn 0.3s ease;
-}
-@keyframes modalIn { from{transform:scale(0.9);opacity:0} to{transform:scale(1);opacity:1} }
-.modal-close {
-    position: absolute; top: 15px; left: 15px;
-    width: 35px; height: 35px; border-radius: 50%;
-    background: rgba(239,68,68,0.2); border: 1px solid var(--neon-red);
-    color: var(--neon-red); cursor: pointer; font-size: 1rem;
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.3s;
-}
-.modal-close:hover { background: var(--neon-red); color: #fff; transform: rotate(90deg); }
-.modal-title { font-size: 1.5rem; font-weight: 900; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-.modal-title i { color: var(--neon-blue); }
-.modal-content h3 { color: var(--neon-blue); margin: 15px 0 8px; font-size: 1.1rem; }
-.modal-content p, .modal-content li { color: var(--text-secondary); line-height: 1.8; margin-bottom: 8px; }
-.modal-content ul, .modal-content ol { padding-right: 20px; margin-bottom: 15px; }
-.modal-content li { margin-bottom: 6px; }
-.modal-content li::marker { color: var(--neon-blue); }
-
-/* FAQ Accordion */
-.faq-item { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
-.faq-q {
-    width: 100%; padding: 15px; background: none; border: none;
-    color: var(--text-primary); font-family: inherit; font-size: 0.95rem;
-    font-weight: 600; cursor: pointer; text-align: right;
-    display: flex; justify-content: space-between; align-items: center;
-    transition: all 0.3s;
-}
-.faq-q:hover { background: rgba(0,212,255,0.05); }
-.faq-q i { transition: transform 0.3s; color: var(--neon-blue); }
-.faq-item.active .faq-q i { transform: rotate(180deg); }
-.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-.faq-item.active .faq-a { max-height: 500px; }
-.faq-a-inner { padding: 0 15px 15px; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.8; }
-
-/* Footer */
-.footer {
-    background: var(--bg-secondary); border-top: 1px solid var(--glass-border);
-    padding: 40px 20px 20px; margin-top: 50px; position: relative; z-index: 1;
-}
-.footer-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 30px; }
-.footer-col h3 { font-size: 1.1rem; margin-bottom: 15px; color: var(--neon-blue); }
-.footer-col p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.8; }
-.footer-links { list-style: none; }
-.footer-links li { margin-bottom: 8px; }
-.footer-links a { color: var(--text-secondary); text-decoration: none; transition: color 0.3s; font-size: 0.9rem; display: flex; align-items: center; gap: 5px; }
-.footer-links a:hover { color: var(--neon-blue); }
-.footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid var(--glass-border); color: var(--text-secondary); font-size: 0.85rem; }
-.footer-bottom .dev { margin-top: 5px; font-size: 0.75rem; color: var(--neon-purple); }
-
-/* Floating Button */
-.float-btn {
-    position: fixed; bottom: 25px; left: 25px; z-index: 999;
-    width: 55px; height: 55px; border-radius: 50%;
-    background: linear-gradient(135deg, #0088cc, #00aaff);
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 5px 25px rgba(0,136,204,0.5);
-    animation: floatPulse 2s infinite; text-decoration: none; color: #fff; font-size: 1.5rem;
-}
-@keyframes floatPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }
-
-/* Loading */
-.loading { text-align: center; padding: 40px; color: var(--text-secondary); }
-.spinner { width: 40px; height: 40px; border: 3px solid var(--glass-border); border-top-color: var(--neon-blue); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 15px; }
-@keyframes spin { to{transform:rotate(360deg)} }
-
-/* Responsive */
-@media(max-width:768px) {
-    .header-inner { justify-content: center; }
-    .header-info { display: none; }
-    .hero { margin-top: 70px; }
-    .swiper-slide { min-height: 350px; }
-    .matches-grid { grid-template-columns: 1fr; }
-    .quick-actions { grid-template-columns: repeat(3, 1fr); }
-    .modal-box { padding: 20px; }
-    .section { padding: 30px 15px; }
-}
-@media(max-width:480px) {
-    .header-btns .btn span { display: none; }
-    .hero-badges { flex-direction: column; align-items: center; }
-    .quick-actions { grid-template-columns: repeat(2, 1fr); }
-    .league-tabs { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 10px; }
-    .league-tab { white-space: nowrap; }
-}
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vochino⁰¹ | صرافی ووچینو</title>
+<meta name="theme-color" content="#0a0a1a">
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<style>
+:root{--bg:#0a0a1a;--bg2:#12122a;--glass:rgba(255,255,255,.05);--gb:rgba(255,255,255,.1);--blue:#00d4ff;--purple:#a855f7;--pink:#ec4899;--green:#22c55e;--gold:#fbbf24;--red:#ef4444;--t1:#fff;--t2:#94a3b8;--r:16px}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Vazirmatn',sans-serif;background:var(--bg);color:var(--t1);line-height:1.7;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(168,85,247,.12) 0%,transparent 50%),radial-gradient(ellipse at 80% 20%,rgba(0,212,255,.08) 0%,transparent 50%),radial-gradient(ellipse at 50% 80%,rgba(236,72,153,.08) 0%,transparent 50%);z-index:0;pointer-events:none}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg2)}::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--blue),var(--purple));border-radius:3px}
+#preloader{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:99999;transition:.5s}
+#preloader.hide{opacity:0;visibility:hidden}
+.loader-logo{font-size:3rem;font-weight:900;background:linear-gradient(135deg,var(--blue),var(--purple),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:pulse 1.5s infinite}
+.loader-bar{width:200px;height:4px;background:var(--glass);border-radius:2px;margin-top:20px;overflow:hidden}
+.loader-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--purple));animation:loadBar 1.5s infinite}
+@keyframes loadBar{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.header{position:fixed;top:0;left:0;width:100%;background:rgba(10,10,26,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--gb);z-index:1000;padding:8px 15px}
+.header-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.logo-3d{font-size:1.5rem;font-weight:900;background:linear-gradient(135deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:glow 3s infinite}
+@keyframes glow{0%,100%{filter:brightness(1)}50%{filter:brightness(1.3)}}
+.logo-sub{font-size:.65rem;color:var(--gold);letter-spacing:2px}
+.header-info{display:flex;gap:10px}
+.clock-box{display:flex;align-items:center;gap:5px;background:var(--glass);border:1px solid var(--gb);padding:4px 10px;border-radius:8px;font-size:.8rem}
+.clock-box i{color:var(--blue)}
+.header-btns{display:flex;gap:6px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:10px;font-family:inherit;font-size:.8rem;font-weight:600;cursor:pointer;border:none;text-decoration:none;transition:.3s;position:relative;overflow:hidden}
+.btn:active{transform:scale(.95)}
+.btn-tg{background:linear-gradient(135deg,#0088cc,#00aaff);color:#fff;box-shadow:0 4px 15px rgba(0,136,204,.4)}
+.btn-tg:hover{transform:translateY(-2px);box-shadow:0 6px 25px rgba(0,136,204,.6)}
+.btn-glass{background:var(--glass);border:1px solid var(--gb);color:var(--t1)}
+.btn-glass:hover{background:rgba(168,85,247,.2);border-color:var(--purple)}
+.btn-gold{background:linear-gradient(135deg,var(--gold),#f59e0b);color:#000;font-weight:700}
+.hero{margin-top:70px;padding:15px}
+.swiper{border-radius:var(--r);overflow:hidden}
+.swiper-slide{min-height:380px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--bg2),rgba(20,20,50,.9));position:relative;overflow:hidden;padding:30px 15px}
+.swiper-slide::before{content:'';position:absolute;top:-50%;right:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(0,212,255,.08) 0%,transparent 60%);animation:rot 20s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+.hero-content{text-align:center;z-index:2;max-width:650px}
+.hero-icon{font-size:3rem;margin-bottom:12px;filter:drop-shadow(0 0 20px currentColor)}
+.hero-title{font-size:clamp(1.3rem,3.5vw,2.2rem);font-weight:900;margin-bottom:8px;background:linear-gradient(135deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:1rem;color:var(--t2);margin-bottom:15px}
+.hero-badges{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}
+.badge{padding:5px 12px;border-radius:20px;font-size:.75rem;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);color:var(--green)}
+.swiper-pagination-bullet{background:var(--t2)}.swiper-pagination-bullet-active{background:var(--blue);width:22px;border-radius:5px}
+.swiper-button-next,.swiper-button-prev{color:var(--blue)}.swiper-button-next::after,.swiper-button-prev::after{font-size:1rem}
+.section{padding:40px 15px;position:relative;z-index:1}
+.section-header{text-align:center;margin-bottom:25px}
+.section-title{font-size:clamp(1.3rem,2.5vw,2rem);font-weight:900;display:flex;align-items:center;justify-content:center;gap:8px}
+.section-title i{color:var(--blue);filter:drop-shadow(0 0 10px rgba(0,212,255,.5))}
+.section-sub{color:var(--t2);margin-top:5px;font-size:.9rem}
+.container{max-width:1400px;margin:0 auto}
+.quick-actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;max-width:700px;margin:0 auto 30px}
+.quick-btn{display:flex;flex-direction:column;align-items:center;gap:6px;padding:15px 10px;background:var(--glass);border:1px solid var(--gb);border-radius:var(--r);cursor:pointer;transition:.3s;text-align:center}
+.quick-btn:hover{transform:translateY(-3px);border-color:var(--blue);box-shadow:0 8px 25px rgba(0,212,255,.2)}
+.quick-btn i{font-size:1.5rem}.quick-btn span{font-size:.75rem;font-weight:600}
+.live-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(239,68,68,.2);border:1px solid var(--red);color:var(--red);padding:3px 10px;border-radius:6px;font-size:.75rem;font-weight:700;animation:lp 2s infinite}
+.live-dot{width:7px;height:7px;background:var(--red);border-radius:50%;animation:blink 1s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes lp{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.4)}50%{box-shadow:0 0 0 6px rgba(239,68,68,0)}}
+.matches-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.match-card{background:var(--glass);backdrop-filter:blur(10px);border:1px solid var(--gb);border-radius:var(--r);padding:12px;transition:.3s;cursor:pointer;position:relative;overflow:hidden}
+.match-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--blue),var(--purple));transform:scaleX(0);transition:.3s;transform-origin:left}
+.match-card:hover::before{transform:scaleX(1)}
+.match-card:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(0,212,255,.15);border-color:rgba(0,212,255,.3)}
+.match-card.live-card{border-color:rgba(239,68,68,.4)}
+.match-card.live-card::before{background:linear-gradient(90deg,var(--red),var(--pink))}
+.match-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--gb)}
+.match-league{display:flex;align-items:center;gap:5px;font-size:.75rem;color:var(--t2)}
+.match-league img{width:18px;height:18px;object-fit:contain}
+.match-status{font-size:.7rem;padding:2px 7px;border-radius:4px;font-weight:700}
+.match-status.live{background:rgba(239,68,68,.2);color:var(--red);animation:blink 1.5s infinite}
+.match-status.ft{background:rgba(34,197,94,.15);color:var(--green)}
+.match-status.ns{background:rgba(251,191,36,.15);color:var(--gold)}
+.match-body{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px}
+.team{text-align:center}.team img{width:40px;height:40px;object-fit:contain;margin-bottom:4px;transition:.3s}
+.match-card:hover .team img{transform:scale(1.1)}
+.team-name{font-size:.75rem;font-weight:600;line-height:1.2}
+.score-box{text-align:center}
+.score{font-size:1.5rem;font-weight:900;display:flex;gap:4px;justify-content:center}
+.score span{min-width:20px}
+.match-time{font-size:.7rem;color:var(--t2);margin-top:2px}
+.match-stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px;padding-top:8px;border-top:1px solid var(--gb)}
+.stat-item{text-align:center}.stat-label{font-size:.65rem;color:var(--t2)}.stat-value{font-size:.8rem;font-weight:700}
+.match-promo{margin-top:8px;text-align:center}
+.match-promo a{font-size:.7rem;color:var(--blue);text-decoration:none;display:flex;align-items:center;justify-content:center;gap:3px}
+.match-promo a:hover{text-decoration:underline}
+.league-tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:15px}
+.league-tab{padding:6px 12px;border-radius:8px;font-size:.75rem;font-weight:600;background:var(--glass);border:1px solid var(--gb);color:var(--t2);cursor:pointer;transition:.3s;display:flex;align-items:center;gap:4px}
+.league-tab:hover,.league-tab.active{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-color:transparent;box-shadow:0 4px 12px rgba(0,212,255,.3)}
+.table-wrap{overflow-x:auto;background:var(--glass);border:1px solid var(--gb);border-radius:var(--r)}
+.standings-table{width:100%;border-collapse:collapse;min-width:550px}
+.standings-table th{padding:10px 8px;text-align:center;font-size:.75rem;background:rgba(0,212,255,.1);color:var(--blue);border-bottom:2px solid var(--gb);font-weight:700}
+.standings-table td{padding:8px;text-align:center;font-size:.8rem;border-bottom:1px solid var(--gb)}
+.standings-table tr:hover{background:rgba(0,212,255,.05)}
+.standings-table .team-cell{display:flex;align-items:center;gap:6px;justify-content:flex-start}
+.standings-table .team-cell img{width:20px;height:20px;object-fit:contain}
+.pos-cl{border-right:3px solid var(--green)}.pos-el{border-right:3px solid var(--blue)}.pos-rel{border-right:3px solid var(--red)}
+.trust-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:25px}
+.trust-card{background:var(--glass);border:1px solid var(--gb);border-radius:var(--r);padding:20px 12px;text-align:center;transition:.3s}
+.trust-card:hover{transform:translateY(-3px);border-color:var(--blue)}
+.trust-card i{font-size:1.8rem;margin-bottom:8px;color:var(--blue)}
+.trust-card .num{font-size:1.8rem;font-weight:900;background:linear-gradient(135deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.trust-card .label{color:var(--t2);font-size:.8rem;margin-top:4px}
+.voucher-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.voucher-card{background:var(--glass);border:1px solid var(--gb);border-radius:var(--r);padding:25px;text-align:center;transition:.3s;position:relative;overflow:hidden}
+.voucher-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--blue),var(--purple),var(--pink))}
+.voucher-card:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 12px 30px rgba(168,85,247,.2)}
+.voucher-card i{font-size:2.5rem;margin-bottom:10px}
+.voucher-card h3{font-size:1.1rem;margin-bottom:8px}
+.voucher-card p{font-size:.85rem;color:var(--t2);margin-bottom:15px}
+.bonus-banner{background:linear-gradient(135deg,rgba(251,191,36,.1),rgba(245,158,11,.1));border:1px solid rgba(251,191,36,.3);border-radius:var(--r);padding:20px;text-align:center;margin:25px 0}
+.bonus-banner h3{color:var(--gold);font-size:1.1rem;margin-bottom:8px}
+.bonus-banner p{color:var(--t2);font-size:.9rem}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(10px);z-index:10000;display:none;justify-content:center;align-items:center;padding:15px;opacity:0;transition:.3s}
+.modal-overlay.active{display:flex;opacity:1}
+.modal-box{background:var(--bg2);border:1px solid var(--gb);border-radius:var(--r);max-width:800px;width:100%;max-height:85vh;overflow-y:auto;padding:25px;position:relative;animation:mIn .3s}
+@keyframes mIn{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+.modal-close{position:absolute;top:12px;left:12px;width:32px;height:32px;border-radius:50%;background:rgba(239,68,68,.2);border:1px solid var(--red);color:var(--red);cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;transition:.3s}
+.modal-close:hover{background:var(--red);color:#fff;transform:rotate(90deg)}
+.modal-title{font-size:1.3rem;font-weight:900;margin-bottom:15px;display:flex;align-items:center;gap:8px}
+.modal-title i{color:var(--blue)}
+.modal-content h3{color:var(--blue);margin:12px 0 6px;font-size:1rem}
+.modal-content p,.modal-content li{color:var(--t2);line-height:1.8;margin-bottom:6px;font-size:.9rem}
+.modal-content ul,.modal-content ol{padding-right:18px;margin-bottom:12px}
+.faq-item{background:var(--glass);border:1px solid var(--gb);border-radius:10px;margin-bottom:8px;overflow:hidden}
+.faq-q{width:100%;padding:12px;background:none;border:none;color:var(--t1);font-family:inherit;font-size:.85rem;font-weight:600;cursor:pointer;text-align:right;display:flex;justify-content:space-between;align-items:center;transition:.3s}
+.faq-q:hover{background:rgba(0,212,255,.05)}
+.faq-q i{transition:.3s;color:var(--blue)}
+.faq-item.active .faq-q i{transform:rotate(180deg)}
+.faq-a{max-height:0;overflow:hidden;transition:.3s}
+.faq-item.active .faq-a{max-height:400px}
+.faq-a-inner{padding:0 12px 12px;color:var(--t2);font-size:.85rem;line-height:1.8}
+.footer{background:var(--bg2);border-top:1px solid var(--gb);padding:30px 15px 15px;margin-top:40px;position:relative;z-index:1}
+.footer-grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:25px;margin-bottom:25px}
+.footer-col h3{font-size:1rem;margin-bottom:12px;color:var(--blue)}
+.footer-col p{color:var(--t2);font-size:.85rem;line-height:1.8}
+.footer-links{list-style:none}
+.footer-links li{margin-bottom:6px}
+.footer-links a{color:var(--t2);text-decoration:none;transition:.3s;font-size:.85rem;display:flex;align-items:center;gap:4px}
+.footer-links a:hover{color:var(--blue)}
+.footer-bottom{text-align:center;padding-top:15px;border-top:1px solid var(--gb);color:var(--t2);font-size:.8rem}
+.float-btn{position:fixed;bottom:20px;left:20px;z-index:999;width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,#0088cc,#00aaff);display:flex;align-items:center;justify-content:center;box-shadow:0 5px 20px rgba(0,136,204,.5);animation:fp 2s infinite;text-decoration:none;color:#fff;font-size:1.3rem}
+@keyframes fp{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.loading{text-align:center;padding:30px;color:var(--t2)}
+.spinner{width:35px;height:35px;border:3px solid var(--gb);border-top-color:var(--blue);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 12px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.lineup-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;margin-top:15px}
+.lineup-team{background:var(--glass);border:1px solid var(--gb);border-radius:10px;padding:12px}
+.lineup-team h4{color:var(--blue);margin-bottom:8px;font-size:.9rem;display:flex;align-items:center;gap:6px}
+.lineup-team img{width:20px;height:20px;object-fit:contain}
+.lineup-player{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--gb);font-size:.8rem}
+.lineup-player:last-child{border-bottom:none}
+.lineup-num{width:22px;height:22px;background:linear-gradient(135deg,var(--blue),var(--purple));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;flex-shrink:0}
+.lineup-pos{font-size:.65rem;color:var(--t2);margin-right:auto}
+.star-players{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.star-player{display:flex;align-items:center;gap:6px;background:var(--glass);border:1px solid var(--gb);border-radius:20px;padding:4px 10px;font-size:.75rem}
+.event-item{display:flex;align-items:center;gap:8px;padding:6px 8px;background:var(--glass);border-radius:8px;margin-bottom:4px;font-size:.8rem}
+.event-min{color:var(--gold);font-weight:700;min-width:30px}
+.api-settings{position:fixed;bottom:20px;right:20px;z-index:998;width:40px;height:40px;border-radius:50%;background:var(--glass);border:1px solid var(--gb);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--t2);font-size:1rem;transition:.3s}
+.api-settings:hover{background:rgba(0,212,255,.2);border-color:var(--blue);color:var(--blue)}
+@media(max-width:768px){.header-inner{justify-content:center}.header-info{display:none}.hero{margin-top:60px}.swiper-slide{min-height:320px}.matches-grid{grid-template-columns:1fr}.quick-actions{grid-template-columns:repeat(3,1fr)}.modal-box{padding:18px}.section{padding:25px 10px}.lineup-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.header-btns .btn span{display:none}.quick-actions{grid-template-columns:repeat(2,1fr)}.league-tabs{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;padding-bottom:8px}.league-tab{white-space:nowrap}}
+</style>
 </head>
 <body>
+<div id="preloader"><div class="loader-logo">Vochino⁰¹</div><div class="loader-bar"><div class="loader-fill"></div></div><p style="margin-top:12px;color:var(--t2);font-size:.85rem">صرافی ووچینو در حال بارگذاری...</p></div>
 
-<!-- Preloader -->
-<div id="preloader">
-    <div class="loader-logo">Vochino⁰¹</div>
-    <div class="loader-bar"><div class="loader-fill"></div></div>
-    <p style="margin-top:15px;color:var(--text-secondary);font-size:0.9rem;">صرافی ووچینو در حال بارگذاری...</p>
-</div>
+<header class="header"><div class="header-inner">
+<div><div class="logo-3d">Vochino⁰¹</div><div class="logo-sub">SPORTS & EXCHANGE</div></div>
+<div class="header-info"><div class="clock-box"><i class="fas fa-clock"></i><span id="clock">--:--:--</span></div><div class="clock-box"><i class="fas fa-calendar"></i><span id="date">---</span></div></div>
+<div class="header-btns">
+<a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-tg"><i class="fab fa-telegram-plane"></i><span>ورود به ربات</span></a>
+<button class="btn btn-glass" onclick="openModal('rulesModal')"><i class="fas fa-gavel"></i><span>قوانین</span></button>
+<button class="btn btn-glass" onclick="openModal('trainingModal')"><i class="fas fa-graduation-cap"></i><span>آموزش</span></button>
+<button class="btn btn-glass" onclick="openModal('faqModal')"><i class="fas fa-question-circle"></i><span>سوالات</span></button>
+</div></div></header>
 
-<!-- Header -->
-<header class="header">
-    <div class="header-inner">
-        <div class="logo-wrap">
-            <div>
-                <div class="logo-3d">Vochino⁰¹</div>
-                <div class="logo-sub">SPORTS & EXCHANGE</div>
-            </div>
-        </div>
-        <div class="header-info">
-            <div class="clock-box"><i class="fas fa-clock"></i><span id="clock">--:--:--</span></div>
-            <div class="clock-box"><i class="fas fa-calendar"></i><span id="date">---</span></div>
-        </div>
-        <div class="header-btns">
-            <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-telegram">
-                <i class="fab fa-telegram-plane"></i><span>ورود به ربات</span>
-            </a>
-            <button class="btn btn-glass" onclick="openModal('rulesModal')"><i class="fas fa-gavel"></i><span>قوانین</span></button>
-            <button class="btn btn-glass" onclick="openModal('trainingModal')"><i class="fas fa-graduation-cap"></i><span>آموزش</span></button>
-            <button class="btn btn-glass" onclick="openModal('faqModal')"><i class="fas fa-question-circle"></i><span>سوالات</span></button>
-        </div>
-    </div>
-</header>
+<section class="hero"><div class="swiper heroSwiper"><div class="swiper-wrapper">
+<div class="swiper-slide"><div class="hero-content"><div class="hero-icon" style="color:var(--blue)"><i class="fas fa-ticket-alt"></i></div><h1 class="hero-title">خرید انواع ووچر با کارمزد رقابتی</h1><p class="hero-sub">یوووچر | هات ووچر | بونوس ویژه خرید بالای ۵۰۰</p><div class="hero-badges"><span class="badge"><i class="fas fa-check"></i> تحویل آنی</span><span class="badge"><i class="fas fa-check"></i> کارمزد کم</span><span class="badge"><i class="fas fa-check"></i> پشتیبانی ۲۴/۷</span></div><a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-tg" style="font-size:.95rem;padding:10px 25px"><i class="fab fa-telegram-plane"></i> خرید از ربات ووچینو⁰¹</a></div></div>
+<div class="swiper-slide"><div class="hero-content"><div class="hero-icon" style="color:var(--green)"><i class="fas fa-shipping-fast"></i></div><h1 class="hero-title">تحویل سریع سفارش‌ها</h1><p class="hero-sub">سفارش شما در کمترین زمان ممکن پردازش و تحویل داده می‌شود</p><div class="hero-badges"><span class="badge"><i class="fas fa-bolt"></i> پردازش خودکار</span><span class="badge"><i class="fas fa-shield-alt"></i> امن و مطمئن</span></div><a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-tg" style="font-size:.95rem;padding:10px 25px"><i class="fab fa-telegram-plane"></i> سفارش دهید</a></div></div>
+<div class="swiper-slide"><div class="hero-content"><div class="hero-icon" style="color:var(--gold)"><i class="fas fa-gift"></i></div><h1 class="hero-title">🎁 بونوس ویژه خرید بالای ۵۰۰</h1><p class="hero-sub">با خرید بالای ۵۰۰ دلار از ربات ووچینو⁰¹، بونوس ویژه دریافت کنید!</p><div class="hero-badges"><span class="badge" style="border-color:var(--gold);color:var(--gold);background:rgba(251,191,36,.15)"><i class="fas fa-star"></i> بونوس ویژه</span><span class="badge"><i class="fas fa-crown"></i> کاربران VIP</span></div><a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-gold" style="font-size:.95rem;padding:10px 25px"><i class="fas fa-gift"></i> دریافت بونوس</a></div></div>
+<div class="swiper-slide"><div class="hero-content"><div class="hero-icon" style="color:var(--purple)"><i class="fas fa-headset"></i></div><h1 class="hero-title">پشتیبانی سریع و حرفه‌ای</h1><p class="hero-sub">تیم پشتیبانی ووچینو⁰¹ همیشه آماده پاسخگویی به شماست</p><div class="hero-badges"><span class="badge"><i class="fas fa-clock"></i> ۲۴ ساعته</span><span class="badge"><i class="fas fa-user-shield"></i> متخصص</span></div><a href="https://t.me/ali_bh0101" target="_blank" class="btn btn-tg" style="font-size:.95rem;padding:10px 25px"><i class="fab fa-telegram-plane"></i> ارتباط با پشتیبانی</a></div></div>
+<div class="swiper-slide"><div class="hero-content"><div class="hero-icon" style="color:var(--pink)"><i class="fas fa-fire"></i></div><h1 class="hero-title">جشنواره‌های ووچینو⁰¹</h1><p class="hero-sub">تخفیف‌های ویژه، جوایز هیجان‌انگیز و پیشنهادهای محدود</p><div class="hero-badges"><span class="badge" style="border-color:var(--pink);color:var(--pink);background:rgba(236,72,153,.15)"><i class="fas fa-percent"></i> تخفیف ویژه</span><span class="badge"><i class="fas fa-trophy"></i> جوایز</span></div><a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-tg" style="font-size:.95rem;padding:10px 25px"><i class="fab fa-telegram-plane"></i> شرکت در جشنواره</a></div></div>
+</div><div class="swiper-pagination"></div><div class="swiper-button-next"></div><div class="swiper-button-prev"></div></div></section>
 
-<!-- Hero Slider -->
-<section class="hero">
-    <div class="swiper heroSwiper">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <div class="hero-content">
-                    <div class="hero-icon" style="color:var(--neon-blue)"><i class="fas fa-ticket-alt"></i></div>
-                    <h1 class="hero-title">خرید انواع ووچر با کارمزد رقابتی</h1>
-                    <p class="hero-sub">یوووچر | هات ووچر | پرمیوم ووچر | PS Voucher | پرفکت مانی</p>
-                    <div class="hero-badges">
-                        <span class="badge"><i class="fas fa-check"></i> تحویل آنی</span>
-                        <span class="badge"><i class="fas fa-check"></i> کارمزد کم</span>
-                        <span class="badge"><i class="fas fa-check"></i> پشتیبانی ۲۴/۷</span>
-                    </div>
-                    <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-telegram" style="font-size:1rem;padding:12px 30px;">
-                        <i class="fab fa-telegram-plane"></i> خرید از ربات ووچینو⁰¹
-                    </a>
-                </div>
-            </div>
-            <div class="swiper-slide">
-                <div class="hero-content">
-                    <div class="hero-icon" style="color:var(--neon-green)"><i class="fas fa-shipping-fast"></i></div>
-                    <h1 class="hero-title">تحویل سریع سفارش‌ها</h1>
-                    <p class="hero-sub">سفارش شما در کمترین زمان ممکن پردازش و تحویل داده می‌شود</p>
-                    <div class="hero-badges">
-                        <span class="badge"><i class="fas fa-bolt"></i> پردازش خودکار</span>
-                        <span class="badge"><i class="fas fa-shield-alt"></i> امن و مطمئن</span>
-                    </div>
-                    <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-telegram" style="font-size:1rem;padding:12px 30px;">
-                        <i class="fab fa-telegram-plane"></i> سفارش دهید
-                    </a>
-                </div>
-            </div>
-            <div class="swiper-slide">
-                <div class="hero-content">
-                    <div class="hero-icon" style="color:var(--neon-gold)"><i class="fas fa-gift"></i></div>
-                    <h1 class="hero-title">🎁 بونوس ویژه خرید بالای ۵۰۰</h1>
-                    <p class="hero-sub">با خرید بالای ۵۰۰ دلار از ربات ووچینو⁰¹، بونوس ویژه دریافت کنید!</p>
-                    <div class="hero-badges">
-                        <span class="badge" style="border-color:var(--neon-gold);color:var(--neon-gold);background:rgba(251,191,36,0.15);"><i class="fas fa-star"></i> بونوس ویژه</span>
-                        <span class="badge"><i class="fas fa-crown"></i> کاربران VIP</span>
-                    </div>
-                    <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-gold" style="font-size:1rem;padding:12px 30px;">
-                        <i class="fas fa-gift"></i> دریافت بونوس
-                    </a>
-                </div>
-            </div>
-            <div class="swiper-slide">
-                <div class="hero-content">
-                    <div class="hero-icon" style="color:var(--neon-purple)"><i class="fas fa-headset"></i></div>
-                    <h1 class="hero-title">پشتیبانی سریع و حرفه‌ای</h1>
-                    <p class="hero-sub">تیم پشتیبانی ووچینو⁰¹ همیشه آماده پاسخگویی به شماست</p>
-                    <div class="hero-badges">
-                        <span class="badge"><i class="fas fa-clock"></i> ۲۴ ساعته</span>
-                        <span class="badge"><i class="fas fa-user-shield"></i> متخصص</span>
-                    </div>
-                    <a href="https://t.me/ali_bh0101" target="_blank" class="btn btn-telegram" style="font-size:1rem;padding:12px 30px;">
-                        <i class="fab fa-telegram-plane"></i> ارتباط با پشتیبانی
-                    </a>
-                </div>
-            </div>
-            <div class="swiper-slide">
-                <div class="hero-content">
-                    <div class="hero-icon" style="color:var(--neon-pink)"><i class="fas fa-fire"></i></div>
-                    <h1 class="hero-title">جشنواره‌های ووچینو⁰¹</h1>
-                    <p class="hero-sub">تخفیف‌های ویژه، جوایز هیجان‌انگیز و پیشنهادهای محدود</p>
-                    <div class="hero-badges">
-                        <span class="badge" style="border-color:var(--neon-pink);color:var(--neon-pink);background:rgba(236,72,153,0.15);"><i class="fas fa-percent"></i> تخفیف ویژه</span>
-                        <span class="badge"><i class="fas fa-trophy"></i> جوایز</span>
-                    </div>
-                    <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-telegram" style="font-size:1rem;padding:12px 30px;">
-                        <i class="fab fa-telegram-plane"></i> شرکت در جشنواره
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-    </div>
-</section>
+<section class="section" style="padding-top:15px;padding-bottom:15px"><div class="quick-actions">
+<div class="quick-btn" onclick="openModal('rulesModal')"><i class="fas fa-gavel" style="color:var(--purple)"></i><span>قوانین</span></div>
+<div class="quick-btn" onclick="openModal('trainingModal')"><i class="fas fa-graduation-cap" style="color:var(--blue)"></i><span>آموزش</span></div>
+<div class="quick-btn" onclick="openModal('faqModal')"><i class="fas fa-question-circle" style="color:var(--gold)"></i><span>سوالات</span></div>
+<div class="quick-btn" onclick="window.open('https://t.me/Vochino_bh01_bot','_blank')"><i class="fab fa-telegram-plane" style="color:#0088cc"></i><span>ربات</span></div>
+<div class="quick-btn" onclick="window.open('https://t.me/ali_bh0101','_blank')"><i class="fas fa-headset" style="color:var(--green)"></i><span>پشتیبانی</span></div>
+</div></section>
 
-<!-- Quick Actions -->
-<section class="section" style="padding-top:20px;padding-bottom:20px;">
-    <div class="quick-actions">
-        <div class="quick-btn" onclick="openModal('rulesModal')">
-            <i class="fas fa-gavel" style="color:var(--neon-purple)"></i>
-            <span>قوانین</span>
-        </div>
-        <div class="quick-btn" onclick="openModal('trainingModal')">
-            <i class="fas fa-graduation-cap" style="color:var(--neon-blue)"></i>
-            <span>آموزش</span>
-        </div>
-        <div class="quick-btn" onclick="openModal('faqModal')">
-            <i class="fas fa-question-circle" style="color:var(--neon-gold)"></i>
-            <span>سوالات متداول</span>
-        </div>
-        <div class="quick-btn" onclick="window.open('https://t.me/Vochino_bh01_bot','_blank')">
-            <i class="fab fa-telegram-plane" style="color:#0088cc"></i>
-            <span>ربات تلگرام</span>
-        </div>
-        <div class="quick-btn" onclick="window.open('https://t.me/ali_bh0101','_blank')">
-            <i class="fas fa-headset" style="color:var(--neon-green)"></i>
-            <span>پشتیبانی</span>
-        </div>
-    </div>
-</section>
+<section class="section" id="liveSection"><div class="container"><div class="section-header"><div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:6px"><span class="live-badge"><span class="live-dot"></span>LIVE</span><h2 class="section-title"><i class="fas fa-futbol"></i> مسابقات زنده</h2></div><p class="section-sub">نتایج زنده، گل‌ها، کارت‌ها و تعویض‌ها</p></div><div class="matches-grid" id="liveMatches"><div class="loading"><div class="spinner"></div>در حال دریافت...</div></div></div></section>
 
-<!-- Live Matches -->
-<section class="section" id="liveSection">
-    <div class="container">
-        <div class="section-header">
-            <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:8px;">
-                <span class="live-badge"><span class="live-dot"></span> LIVE</span>
-                <h2 class="section-title"><i class="fas fa-futbol"></i> مسابقات زنده</h2>
-            </div>
-            <p class="section-sub">نتایج زنده، گل‌ها، کارت‌ها و تعویض‌ها</p>
-        </div>
-        <div class="matches-grid" id="liveMatches">
-            <div class="loading"><div class="spinner"></div>در حال دریافت مسابقات زنده...</div>
-        </div>
-    </div>
-</section>
+<section class="section" id="todaySection"><div class="container"><div class="section-header"><h2 class="section-title"><i class="fas fa-calendar-day"></i> مسابقات امروز</h2><p class="section-sub">برنامه کامل بازی‌های امروز</p></div><div class="matches-grid" id="todayMatches"><div class="loading"><div class="spinner"></div>در حال دریافت...</div></div></div></section>
 
-<!-- Today Matches -->
-<section class="section" id="todaySection">
-    <div class="container">
-        <div class="section-header">
-            <h2 class="section-title"><i class="fas fa-calendar-day"></i> مسابقات امروز</h2>
-            <p class="section-sub">برنامه کامل بازی‌های امروز</p>
-        </div>
-        <div class="matches-grid" id="todayMatches">
-            <div class="loading"><div class="spinner"></div>در حال دریافت مسابقات امروز...</div>
-        </div>
-    </div>
-</section>
+<section class="section" id="tomorrowSection"><div class="container"><div class="section-header"><h2 class="section-title"><i class="fas fa-calendar-plus"></i> مسابقات فردا</h2><p class="section-sub">برنامه بازی‌های فردا</p></div><div class="matches-grid" id="tomorrowMatches"><div class="loading"><div class="spinner"></div>در حال دریافت...</div></div></div></section>
 
-<!-- Tomorrow Matches -->
-<section class="section" id="tomorrowSection">
-    <div class="container">
-        <div class="section-header">
-            <h2 class="section-title"><i class="fas fa-calendar-plus"></i> مسابقات فردا</h2>
-            <p class="section-sub">برنامه بازی‌های فردا</p>
-        </div>
-        <div class="matches-grid" id="tomorrowMatches">
-            <div class="loading"><div class="spinner"></div>در حال دریافت مسابقات فردا...</div>
-        </div>
-    </div>
-</section>
+<section class="section" id="standingsSection"><div class="container"><div class="section-header"><h2 class="section-title"><i class="fas fa-trophy"></i> جدول لیگ‌ها</h2><p class="section-sub">جداول رده‌بندی لیگ‌های معتبر</p></div><div class="league-tabs" id="leagueTabs"></div><div class="table-wrap"><table class="standings-table"><thead><tr><th>#</th><th style="text-align:right">تیم</th><th>بازی</th><th>برد</th><th>مساوی</th><th>باخت</th><th>گل زده</th><th>گل خورده</th><th>تفاضل</th><th>امتیاز</th></tr></thead><tbody id="standingsBody"><tr><td colspan="10"><div class="loading"><div class="spinner"></div>در حال دریافت جدول...</div></td></tr></tbody></table></div></div></section>
 
-<!-- League Standings -->
-<section class="section" id="standingsSection">
-    <div class="container">
-        <div class="section-header">
-            <h2 class="section-title"><i class="fas fa-trophy"></i> جدول لیگ‌ها</h2>
-            <p class="section-sub">جداول رده‌بندی لیگ‌های معتبر</p>
-        </div>
-        <div class="league-tabs" id="leagueTabs"></div>
-        <div class="table-wrap">
-            <table class="standings-table">
-                <thead>
-                    <tr>
-                        <th>#</th><th style="text-align:right">تیم</th><th>بازی</th><th>برد</th><th>مساوی</th><th>باخت</th><th>گل زده</th><th>گل خورده</th><th>تفاضل</th><th>امتیاز</th>
-                    </tr>
-                </thead>
-                <tbody id="standingsBody">
-                    <tr><td colspan="10"><div class="loading"><div class="spinner"></div>در حال دریافت جدول...</div></td></tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</section>
+<section class="section" id="voucherSection"><div class="container"><div class="section-header"><h2 class="section-title"><i class="fas fa-ticket-alt"></i> خدمات ووچینو⁰¹</h2><p class="section-sub">انواع ووچر با بهترین نرخ</p></div><div class="voucher-grid">
+<div class="voucher-card"><i class="fas fa-ticket-alt" style="color:var(--blue)"></i><h3>خرید یوووچر</h3><p>خرید یوووچر با بهترین نرخ بازار و تحویل آنی</p><a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-tg" style="width:100%;justify-content:center"><i class="fab fa-telegram-plane"></i> خرید یوووچر</a></div>
+<div class="voucher-card"><i class="fas fa-fire" style="color:var(--red)"></i><h3>خرید هات ووچر</h3><p>هات ووچر با تحویل آنی و نرخ رقابتی</p><a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-tg" style="width:100%;justify-content:center"><i class="fab fa-telegram-plane"></i> خرید هات ووچر</a></div>
+<div class="voucher-card"><i class="fas fa-gamepad" style="color:var(--pink)"></i><h3>بونوس بازی</h3><p>بونوس ویژه خرید بالای ۵۰۰ دلار از ربات</p><a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-gold" style="width:100%;justify-content:center"><i class="fas fa-gift"></i> دریافت بونوس</a></div>
+</div><div class="bonus-banner"><h3><i class="fas fa-gift"></i> بونوس ویژه ووچینو⁰¹</h3><p>با خرید بالای ۵۰۰ دلار از ربات تلگرام، بونوس ویژه دریافت کنید! 🎁</p><a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-gold" style="margin-top:12px"><i class="fab fa-telegram-plane"></i> دریافت بونوس</a></div></div></section>
 
-<!-- Voucher Ads -->
-<section class="section" id="voucherSection">
-    <div class="container">
-        <div class="section-header">
-            <h2 class="section-title"><i class="fas fa-ticket-alt"></i> خدمات ووچینو⁰¹</h2>
-            <p class="section-sub">انواع ووچر و خدمات مالی با بهترین نرخ</p>
-        </div>
-        <div class="voucher-grid">
-            <div class="voucher-card">
-                <i class="fas fa-ticket-alt" style="color:var(--neon-blue)"></i>
-                <h3>یوووچر</h3>
-                <p>خرید و فروش یوووچر با بهترین نرخ بازار</p>
-                <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-telegram" style="width:100%;justify-content:center;"><i class="fab fa-telegram-plane"></i> خرید</a>
-            </div>
-            <div class="voucher-card">
-                <i class="fas fa-fire" style="color:var(--neon-red)"></i>
-                <h3>هات ووچر</h3>
-                <p>هات ووچر با تحویل آنی و نرخ رقابتی</p>
-                <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-telegram" style="width:100%;justify-content:center;"><i class="fab fa-telegram-plane"></i> خرید</a>
-            </div>
-            <div class="voucher-card">
-                <i class="fas fa-crown" style="color:var(--neon-gold)"></i>
-                <h3>پرمیوم ووچر</h3>
-                <p>پرمیوم ووچر برای کاربران حرفه‌ای</p>
-                <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-telegram" style="width:100%;justify-content:center;"><i class="fab fa-telegram-plane"></i> خرید</a>
-            </div>
-            <div class="voucher-card">
-                <i class="fab fa-playstation" style="color:#0070d1"></i>
-                <h3>PS Voucher</h3>
-                <p>ووچر پلی‌استیشن برای خرید بازی و اشتراک</p>
-                <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-telegram" style="width:100%;justify-content:center;"><i class="fab fa-telegram-plane"></i> خرید</a>
-            </div>
-            <div class="voucher-card">
-                <i class="fas fa-wallet" style="color:var(--neon-green)"></i>
-                <h3>پرفکت مانی</h3>
-                <p>شارژ و برداشت پرفکت مانی با نرخ عالی</p>
-                <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-telegram" style="width:100%;justify-content:center;"><i class="fab fa-telegram-plane"></i> خرید</a>
-            </div>
-            <div class="voucher-card">
-                <i class="fas fa-gamepad" style="color:var(--neon-pink)"></i>
-                <h3>بونوس بازی</h3>
-                <p>بونوس ویژه خرید بالای ۵۰۰ دلار</p>
-                <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-gold" style="width:100%;justify-content:center;"><i class="fas fa-gift"></i> دریافت بونوس</a>
-            </div>
-        </div>
-        <div class="bonus-banner">
-            <h3><i class="fas fa-gift"></i> بونوس ویژه ووچینو⁰¹</h3>
-            <p>با خرید بالای ۵۰۰ دلار از ربات تلگرام، بونوس ویژه دریافت کنید! 🎁</p>
-            <a href="https://t.me/Vochino_bh01_bot" target="_blank" class="btn btn-gold" style="margin-top:15px;"><i class="fab fa-telegram-plane"></i> دریافت بونوس</a>
-        </div>
-    </div>
-</section>
+<section class="section" id="trustSection"><div class="container"><div class="section-header"><h2 class="section-title"><i class="fas fa-shield-alt"></i> چرا ووچینو⁰¹؟</h2><p class="section-sub">اعتماد هزاران کاربر به صرافی ووچینو</p></div><div class="trust-grid">
+<div class="trust-card"><i class="fas fa-users"></i><div class="num" data-count="5000">۰</div><div class="label">کاربر فعال</div></div>
+<div class="trust-card"><i class="fas fa-shopping-cart"></i><div class="num" data-count="25000">۰</div><div class="label">سفارش موفق</div></div>
+<div class="trust-card"><i class="fas fa-star"></i><div class="num">۳.۳</div><div class="label">رضایت کاربران</div></div>
+<div class="trust-card"><i class="fas fa-headset"></i><div class="num">۲۴/۷</div><div class="label">پشتیبانی</div></div>
+</div><div class="bonus-banner" style="border-color:rgba(0,212,255,.3);background:linear-gradient(135deg,rgba(0,212,255,.05),rgba(168,85,247,.05))"><h3 style="color:var(--blue)"><i class="fas fa-shield-alt"></i> امنیت و اعتماد</h3><p>صرافی ووچینو⁰¹ با رعایت تمامی قوانین و مقررات جمهوری اسلامی ایران، محیطی امن و مطمئن برای خرید و فروش ووچر فراهم کرده است.</p></div></div></section>
 
-<!-- Trust Section -->
-<section class="section" id="trustSection">
-    <div class="container">
-        <div class="section-header">
-            <h2 class="section-title"><i class="fas fa-shield-alt"></i> چرا ووچینو⁰¹؟</h2>
-            <p class="section-sub">اعتماد هزاران کاربر به صرافی ووچینو</p>
-        </div>
-        <div class="trust-grid">
-            <div class="trust-card">
-                <i class="fas fa-users"></i>
-                <div class="num" data-count="5000">۰</div>
-                <div class="label">کاربر فعال</div>
-            </div>
-            <div class="trust-card">
-                <i class="fas fa-shopping-cart"></i>
-                <div class="num" data-count="25000">۰</div>
-                <div class="label">سفارش موفق</div>
-            </div>
-            <div class="trust-card">
-                <i class="fas fa-star"></i>
-                <div class="num">۴.۹</div>
-                <div class="label">رضایت کاربران</div>
-            </div>
-            <div class="trust-card">
-                <i class="fas fa-headset"></i>
-                <div class="num">۲۴/۷</div>
-                <div class="label">پشتیبانی</div>
-            </div>
-        </div>
-        <div class="bonus-banner" style="border-color:rgba(0,212,255,0.3);background:linear-gradient(135deg,rgba(0,212,255,0.05),rgba(168,85,247,0.05));">
-            <h3 style="color:var(--neon-blue)"><i class="fas fa-shield-alt"></i> امنیت و اعتماد</h3>
-            <p>صرافی ووچینو⁰¹ با رعایت تمامی قوانین و مقررات جمهوری اسلامی ایران، محیطی امن و مطمئن برای خرید و فروش ووچر فراهم کرده است. تمامی تراکنش‌ها با نظارت کامل و بررسی‌های امنیتی انجام می‌شود.</p>
-        </div>
-    </div>
-</section>
+<footer class="footer"><div class="footer-grid">
+<div class="footer-col"><h3><i class="fas fa-landmark"></i> صرافی ووچینو⁰¹</h3><p>صرافی ووچینو⁰¹، ارائه‌دهنده خدمات حرفه‌ای خرید و فروش ووچر با بهترین نرخ و سریع‌ترین تحویل.</p></div>
+<div class="footer-col"><h3><i class="fas fa-link"></i> دسترسی سریع</h3><ul class="footer-links"><li><a href="https://t.me/Vochino_bh01_bot" target="_blank"><i class="fab fa-telegram-plane"></i> ربات تلگرام</a></li><li><a href="https://t.me/ali_bh0101" target="_blank"><i class="fas fa-headset"></i> پشتیبانی</a></li><li><a href="#" onclick="openModal('rulesModal');return false"><i class="fas fa-gavel"></i> قوانین</a></li><li><a href="#" onclick="openModal('trainingModal');return false"><i class="fas fa-graduation-cap"></i> آموزش</a></li><li><a href="#" onclick="openModal('faqModal');return false"><i class="fas fa-question-circle"></i> سوالات متداول</a></li></ul></div>
+<div class="footer-col"><h3><i class="fas fa-ticket-alt"></i> خدمات ما</h3><ul class="footer-links"><li><a href="https://t.me/Vochino_bh01_bot" target="_blank"><i class="fas fa-check"></i> خرید یوووچر</a></li><li><a href="https://t.me/Vochino_bh01_bot" target="_blank"><i class="fas fa-fire"></i> خرید هات ووچر</a></li><li><a href="https://t.me/Vochino_bh01_bot" target="_blank"><i class="fas fa-gift"></i> بونوس ویژه</a></li></ul></div>
+<div class="footer-col"><h3><i class="fas fa-futbol"></i> پوشش لیگ‌ها</h3><ul class="footer-links"><li><a href="#standingsSection"><i class="fas fa-trophy"></i> لیگ برتر انگلیس</a></li><li><a href="#standingsSection"><i class="fas fa-trophy"></i> لالیگا</a></li><li><a href="#standingsSection"><i class="fas fa-trophy"></i> بوندسلیگا</a></li><li><a href="#standingsSection"><i class="fas fa-trophy"></i> سری آ</a></li><li><a href="#standingsSection"><i class="fas fa-trophy"></i> لیگ قهرمانان</a></li><li><a href="#standingsSection"><i class="fas fa-trophy"></i> لیگ ایران</a></li></ul></div>
+</div><div class="footer-bottom"><p>© ۱۴۰۵ صرافی ووچینو⁰¹ | تمامی حقوق محفوظ است</p><p style="margin-top:4px;font-size:.75rem;color:var(--purple)">پشتیبانی: <a href="https://t.me/ali_bh0101" target="_blank" style="color:var(--blue);text-decoration:none">@ali_bh0101</a></p></div></footer>
 
-<!-- Footer -->
-<footer class="footer">
-    <div class="footer-grid">
-        <div class="footer-col">
-            <h3><i class="fas fa-landmark"></i> صرافی ووچینو⁰¹</h3>
-            <p>صرافی ووچینو⁰¹، ارائه‌دهنده خدمات حرفه‌ای خرید و فروش ووچر با بهترین نرخ و سریع‌ترین تحویل. ما با رعایت قوانین جمهوری اسلامی ایران، محیطی امن برای تراکنش‌های شما فراهم کرده‌ایم.</p>
-        </div>
-        <div class="footer-col">
-            <h3><i class="fas fa-link"></i> دسترسی سریع</h3>
-            <ul class="footer-links">
-                <li><a href="https://t.me/Vochino_bh01_bot" target="_blank"><i class="fab fa-telegram-plane"></i> ربات تلگرام</a></li>
-                <li><a href="https://t.me/ali_bh0101" target="_blank"><i class="fas fa-headset"></i> پشتیبانی</a></li>
-                <li><a href="#" onclick="openModal('rulesModal');return false;"><i class="fas fa-gavel"></i> قوانین و مقررات</a></li>
-                <li><a href="#" onclick="openModal('trainingModal');return false;"><i class="fas fa-graduation-cap"></i> آموزش</a></li>
-                <li><a href="#" onclick="openModal('faqModal');return false;"><i class="fas fa-question-circle"></i> سوالات متداول</a></li>
-            </ul>
-        </div>
-        <div class="footer-col">
-            <h3><i class="fas fa-ticket-alt"></i> خدمات ما</h3>
-            <ul class="footer-links">
-                <li><a href="https://t.me/Vochino_bh01_bot" target="_blank"><i class="fas fa-check"></i> یوووچر</a></li>
-                <li><a href="https://t.me/Vochino_bh01_bot" target="_blank"><i class="fas fa-fire"></i> هات ووچر</a></li>
-                <li><a href="https://t.me/Vochino_bh01_bot" target="_blank"><i class="fas fa-crown"></i> پرمیوم ووچر</a></li>
-                <li><a href="https://t.me/Vochino_bh01_bot" target="_blank"><i class="fab fa-playstation"></i> PS Voucher</a></li>
-                <li><a href="https://t.me/Vochino_bh01_bot" target="_blank"><i class="fas fa-wallet"></i> پرفکت مانی</a></li>
-            </ul>
-        </div>
-        <div class="footer-col">
-            <h3><i class="fas fa-futbol"></i> پوشش لیگ‌ها</h3>
-            <ul class="footer-links">
-                <li><a href="#standingsSection"><i class="fas fa-trophy"></i> لیگ برتر انگلیس</a></li>
-                <li><a href="#standingsSection"><i class="fas fa-trophy"></i> لالیگا اسپانیا</a></li>
-                <li><a href="#standingsSection"><i class="fas fa-trophy"></i> بوندسلیگا آلمان</a></li>
-                <li><a href="#standingsSection"><i class="fas fa-trophy"></i> سری آ ایتالیا</a></li>
-                <li><a href="#standingsSection"><i class="fas fa-trophy"></i> لیگ قهرمانان اروپا</a></li>
-                <li><a href="#standingsSection"><i class="fas fa-trophy"></i> لیگ ایران</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <p>© ۱۴۰۵ صرافی ووچینو⁰¹ | تمامی حقوق محفوظ است</p>
-        <p class="dev">طراحی و توسعه با ❤️ | پشتیبانی: <a href="https://t.me/ali_bh0101" target="_blank" style="color:var(--neon-blue);text-decoration:none;">@ali_bh0101</a></p>
-    </div>
-</footer>
-
-<!-- Floating Telegram Button -->
-<a href="https://t.me/Vochino_bh01_bot" target="_blank" class="float-btn">
-    <i class="fab fa-telegram-plane"></i>
-</a>
+<a href="https://t.me/Vochino_bh01_bot" target="_blank" class="float-btn"><i class="fab fa-telegram-plane"></i></a>
+<div class="api-settings" onclick="setAPIKey()" title="تنظیمات API"><i class="fas fa-cog"></i></div>
 
 <!-- Rules Modal -->
-<div class="modal-overlay" id="rulesModal">
-    <div class="modal-box">
-        <button class="modal-close" onclick="closeModal('rulesModal')"><i class="fas fa-times"></i></button>
-        <h2 class="modal-title"><i class="fas fa-gavel"></i> قوانین و مقررات صرافی ووچینو⁰¹</h2>
-        <div class="modal-content">
-            <p style="text-align:center;color:var(--neon-gold);font-weight:700;">🇮🇷 تابع قوانین و مقررات جاری جمهوری اسلامی ایران</p>
-            <p style="text-align:center;color:var(--text-secondary);margin-bottom:20px;">به نام خدا</p>
-            <p>به منظور حفظ امنیت کاربران، جلوگیری از سوءاستفاده‌های مالی و ارائه خدمات سریع و مطمئن، تمامی کاربران با ثبت‌نام و استفاده از خدمات ووچینو⁰¹، مفاد زیر را پذیرفته و ملزم به رعایت آن هستند.</p>
-            
-            <h3>۱. امنیت حساب کاربری</h3>
-            <p>مسئولیت حفظ اطلاعات حساب، رمز عبور و کدهای دریافتی بر عهده کاربر است. ووچینو⁰¹ هیچ‌گاه اطلاعات محرمانه شما را از طریق پیام خصوصی یا تماس تلفنی درخواست نخواهد کرد. مراقب صفحات و ربات‌های جعلی و فیشینگ باشید.</p>
-            
-            <h3>۲. تطابق اطلاعات پرداخت</h3>
-            <p>نام صاحب حساب یا کارت پرداخت باید با اطلاعات ثبت‌شده در حساب کاربری مطابقت داشته باشد. پرداخت از حساب اشخاص دیگر ممکن است باعث تأخیر یا لغو تراکنش شود.</p>
-            
-            <h3>۳. واریز از نام غیرهمسان</h3>
-            <p>در صورت واریز از حسابی که متعلق به کاربر ثبت‌نام‌شده نباشد، مبلغ تنها یک بار پس از بررسی به کیف پول کاربری بازگردانده می‌شود. در صورت تکرار این تخلف، حساب تا زمان بررسی بخش مالی محدود یا مسدود خواهد شد.</p>
-            
-            <h3>۴. مغایرت مبلغ پرداختی</h3>
-            <p>در صورتی که مبلغ واریزی با مبلغ ثبت‌شده سفارش یکسان نباشد، درخواست تا دو مرتبه قابل اصلاح خواهد بود. در صورت تکرار برای بار سوم، هزینه‌های بررسی و پردازش کسر شده و امکان بازگشت کامل وجه تضمین نخواهد شد.</p>
-            
-            <h3>۵. کدهای پیگیری</h3>
-            <p>از ارسال مکرر کدهای پیگیری یا ثبت چندباره یک تراکنش خودداری کنید. این کار باعث افزایش زمان بررسی و احتمال رد شدن درخواست می‌شود. در صورت بروز مشکل، تنها کافی است یک بار با بخش مالی ارتباط گرفته و کد پیگیری خود را ارسال کنید.</p>
-            
-            <h3>۶. بررسی سفارش‌ها</h3>
-            <p>تمامی سفارش‌ها به صورت سیستمی و امنیتی بررسی می‌شوند. در صورت مشاهده فعالیت مشکوک یا مغایرت اطلاعات، انجام سفارش تا زمان تکمیل بررسی متوقف خواهد شد.</p>
-            
-            <h3>۷. مبارزه با کلاهبرداری</h3>
-            <p>ووچینو⁰¹ در راستای مقابله با سوءاستفاده‌های مالی و فیشینگ، حق دارد سفارش‌هایی را که مشکوک تشخیص داده شوند بررسی یا لغو کند. این اقدام صرفاً برای حفظ امنیت کاربران انجام می‌شود.</p>
-            
-            <h3>۸. ارتباط با پشتیبانی</h3>
-            <p>در صورت بروز هرگونه مشکل، از ارسال پیام‌های تکراری خودداری کنید. کارشناسان مالی تمامی درخواست‌ها را بر اساس زمان ثبت بررسی خواهند کرد.</p>
-            
-            <div class="bonus-banner" style="margin-top:20px;">
-                <h3 style="color:var(--neon-green)"><i class="fas fa-check-circle"></i> سخن پایانی</h3>
-                <p>هدف ما ایجاد محیطی امن، سریع و قابل اعتماد برای خرید و فروش ووچر است. رعایت این قوانین باعث ارائه خدمات بهتر و سریع‌تر به همه کاربران خواهد شد.</p>
-                <p style="margin-top:10px;font-weight:700;color:var(--text-primary);">با ثبت سفارش در ووچینو⁰¹، شما تمامی قوانین فوق را مطالعه کرده و می‌پذیرید.</p>
-            </div>
-        </div>
-    </div>
-</div>
+<div class="modal-overlay" id="rulesModal"><div class="modal-box"><button class="modal-close" onclick="closeModal('rulesModal')"><i class="fas fa-times"></i></button><h2 class="modal-title"><i class="fas fa-gavel"></i> قوانین و مقررات صرافی ووچینو⁰¹</h2><div class="modal-content"><p style="text-align:center;color:var(--gold);font-weight:700">🇮🇷 تابع قوانین و مقررات جاری جمهوری اسلامی ایران</p><p style="text-align:center;color:var(--t2);margin-bottom:15px">به نام خدا</p><p>به منظور حفظ امنیت کاربران، جلوگیری از سوءاستفاده‌های مالی و ارائه خدمات سریع و مطمئن، تمامی کاربران با ثبت‌نام و استفاده از خدمات ووچینو⁰¹، مفاد زیر را پذیرفته و ملزم به رعایت آن هستند.</p><h3>۱. امنیت حساب کاربری</h3><p>مسئولیت حفظ اطلاعات حساب، رمز عبور و کدهای دریافتی بر عهده کاربر است. ووچینو⁰¹ هیچ‌گاه اطلاعات محرمانه شما را از طریق پیام خصوصی یا تماس تلفنی درخواست نخواهد کرد. مراقب صفحات و ربات‌های جعلی و فیشینگ باشید.</p><h3>۲. تطابق اطلاعات پرداخت</h3><p>نام صاحب حساب یا کارت پرداخت باید با اطلاعات ثبت‌شده در حساب کاربری مطابقت داشته باشد. پرداخت از حساب اشخاص دیگر ممکن است باعث تأخیر یا لغو تراکنش شود.</p><h3>۳. واریز از نام غیرهمسان</h3><p>در صورت واریز از حسابی که متعلق به کاربر ثبت‌نام‌شده نباشد، مبلغ تنها یک بار پس از بررسی به کیف پول کاربری بازگردانده می‌شود. در صورت تکرار این تخلف، حساب تا زمان بررسی بخش مالی محدود یا مسدود خواهد شد.</p><h3>۴. مغایرت مبلغ پرداختی</h3><p>در صورتی که مبلغ واریزی با مبلغ ثبت‌شده سفارش یکسان نباشد، درخواست تا دو مرتبه قابل اصلاح خواهد بود. در صورت تکرار برای بار سوم، هزینه‌های بررسی و پردازش کسر شده و امکان بازگشت کامل وجه تضمین نخواهد شد.</p><h3>۵. کدهای پیگیری</h3><p>از ارسال مکرر کدهای پیگیری یا ثبت چندباره یک تراکنش خودداری کنید. این کار باعث افزایش زمان بررسی و احتمال رد شدن درخواست می‌شود. در صورت بروز مشکل، تنها کافی است یک بار با بخش مالی ارتباط گرفته و کد پیگیری خود را ارسال کنید.</p><h3>۶. بررسی سفارش‌ها</h3><p>تمامی سفارش‌ها به صورت سیستمی و امنیتی بررسی می‌شوند. در صورت مشاهده فعالیت مشکوک یا مغایرت اطلاعات، انجام سفارش تا زمان تکمیل بررسی متوقف خواهد شد.</p><h3>۷. مبارزه با کلاهبرداری</h3><p>ووچینو⁰¹ در راستای مقابله با سوءاستفاده‌های مالی و فیشینگ، حق دارد سفارش‌هایی را که مشکوک تشخیص داده شوند بررسی یا لغو کند. این اقدام صرفاً برای حفظ امنیت کاربران انجام می‌شود.</p><h3>۸. ارتباط با پشتیبانی</h3><p>در صورت بروز هرگونه مشکل، از ارسال پیام‌های تکراری خودداری کنید. کارشناسان مالی تمامی درخواست‌ها را بر اساس زمان ثبت بررسی خواهند کرد.</p><div class="bonus-banner" style="margin-top:15px"><h3 style="color:var(--green)"><i class="fas fa-check-circle"></i> سخن پایانی</h3><p>هدف ما ایجاد محیطی امن، سریع و قابل اعتماد برای خرید و فروش ووچر است. رعایت این قوانین باعث ارائه خدمات بهتر و سریع‌تر به همه کاربران خواهد شد.</p><p style="margin-top:8px;font-weight:700;color:var(--t1)">با ثبت سفارش در ووچینو⁰¹، شما تمامی قوانین فوق را مطالعه کرده و می‌پذیرید.</p></div></div></div></div>
 
 <!-- Training Modal -->
-<div class="modal-overlay" id="trainingModal">
-    <div class="modal-box">
-        <button class="modal-close" onclick="closeModal('trainingModal')"><i class="fas fa-times"></i></button>
-        <h2 class="modal-title"><i class="fas fa-graduation-cap"></i> آموزش خرید و فروش ووچر در ووچینو⁰¹</h2>
-        <div class="modal-content">
-            <p style="color:var(--neon-green);font-weight:700;">به دنیای خرید و فروش سریع، امن و آسان ووچر خوش آمدید. ❤️</p>
-            <p>اگر برای اولین بار از ووچینو⁰¹ استفاده می‌کنید، کافیست مراحل زیر را دنبال کنید.</p>
-            
-            <h3>💳 مرحله اول | شارژ کیف پول</h3>
-            <p>ابتدا از منوی ربات وارد بخش «شارژ کیف پول» شوید.</p>
-            <p>در ووچینو⁰¹ دو روش برای شارژ کیف پول در نظر گرفته شده است:</p>
-            <ul>
-                <li>🔹 کارت به کارت</li>
-                <li>🔹 درگاه پرداخت</li>
-            </ul>
-            <p style="color:var(--neon-gold);">⭐ پیشنهاد مجموعه ووچینو⁰¹: برای ثبت سریع‌تر تراکنش، بررسی آسان‌تر و کاهش احتمال خطا، پیشنهاد می‌کنیم از روش کارت به کارت استفاده کنید.</p>
-            <p>پس از واریز، کد پیگیری را یک مرتبه ثبت کنید تا سفارش شما توسط سیستم و بخش مالی بررسی و تأیید شود.</p>
-            
-            <h3>💎 مرحله دوم | خرید ووچر</h3>
-            <p>پس از شارژ کیف پول:</p>
-            <ol>
-                <li>وارد بخش «خرید ووچر» شوید</li>
-                <li>نوع ووچر موردنظر خود را انتخاب کنید</li>
-                <li>مبلغ دلخواه را وارد نمایید</li>
-                <li>اطلاعات سفارش را بررسی کنید</li>
-                <li>گزینه «ثبت سفارش» را لمس کنید</li>
-            </ol>
-            <p>پس از تأیید، ووچر شما در کوتاه‌ترین زمان ممکن تحویل داده خواهد شد.</p>
-            
-            <h3>💵 مرحله سوم | فروش ووچر</h3>
-            <p>اگر قصد فروش ووچر دارید:</p>
-            <ol>
-                <li>وارد بخش «فروش ووچر» شوید</li>
-                <li>نوع ووچر را انتخاب کنید</li>
-                <li>اطلاعات ووچر را با دقت وارد نمایید</li>
-                <li>پس از تأیید کارشناسان، مبلغ به کیف پول شما واریز خواهد شد</li>
-            </ol>
-            
-            <h3>🌍 ووچر چیست؟</h3>
-            <p>U Voucher و Hot Voucher اعتبارهای دیجیتالی هستند که برای شارژ حساب سایت‌های مختلف، پرداخت‌های بین‌المللی و بسیاری از خدمات آنلاین استفاده می‌شوند.</p>
-            <p>اگر در انتخاب نوع ووچر تردید دارید، تیم پشتیبانی ووچینو⁰¹ با افتخار شما را راهنمایی خواهد کرد.</p>
-            
-            <h3>🛡 چرا ووچینو⁰¹؟</h3>
-            <ul>
-                <li>✔ خرید و فروش سریع و آسان</li>
-                <li>✔ کارمزد رقابتی و منصفانه</li>
-                <li>✔ محیط امن و شفاف</li>
-                <li>✔ پشتیبانی پاسخگو</li>
-                <li>✔ مناسب برای کاربران تازه‌کار و حرفه‌ای</li>
-            </ul>
-            <p style="text-align:center;color:var(--neon-blue);font-weight:700;margin-top:20px;">ووچینو⁰¹؛ جایی که خرید و فروش ووچر، ساده، مطمئن و لذت‌بخش است. ❤️</p>
-        </div>
-    </div>
-</div>
+<div class="modal-overlay" id="trainingModal"><div class="modal-box"><button class="modal-close" onclick="closeModal('trainingModal')"><i class="fas fa-times"></i></button><h2 class="modal-title"><i class="fas fa-graduation-cap"></i> آموزش خرید و فروش ووچر در ووچینو⁰¹</h2><div class="modal-content"><p style="color:var(--green);font-weight:700">به دنیای خرید و فروش سریع، امن و آسان ووچر خوش آمدید. ❤️</p><p>اگر برای اولین بار از ووچینو⁰¹ استفاده می‌کنید، کافیست مراحل زیر را دنبال کنید.</p><h3>💳 مرحله اول | شارژ کیف پول</h3><p>ابتدا از منوی ربات وارد بخش «شارژ کیف پول» شوید.</p><p>در ووچینو⁰¹ دو روش برای شارژ کیف پول در نظر گرفته شده است:</p><ul><li>🔹 کارت به کارت</li><li>🔹 درگاه پرداخت</li></ul><p style="color:var(--gold)">⭐ پیشنهاد مجموعه ووچینو⁰¹: برای ثبت سریع‌تر تراکنش، بررسی آسان‌تر و کاهش احتمال خطا، پیشنهاد می‌کنیم از روش کارت به کارت استفاده کنید.</p><p>پس از واریز، کد پیگیری را یک مرتبه ثبت کنید تا سفارش شما توسط سیستم و بخش مالی بررسی و تأیید شود.</p><h3>💎 مرحله دوم | خرید ووچر</h3><p>پس از شارژ کیف پول:</p><ol><li>وارد بخش «خرید ووچر» شوید</li><li>نوع ووچر موردنظر خود را انتخاب کنید</li><li>مبلغ دلخواه را وارد نمایید</li><li>اطلاعات سفارش را بررسی کنید</li><li>گزینه «ثبت سفارش» را لمس کنید</li></ol><p>پس از تأیید، ووچر شما در کوتاه‌ترین زمان ممکن تحویل داده خواهد شد.</p><h3>💵 مرحله سوم | فروش ووچر</h3><p>اگر قصد فروش ووچر دارید:</p><ol><li>وارد بخش «فروش ووچر» شوید</li><li>نوع ووچر را انتخاب کنید</li><li>اطلاعات ووچر را با دقت وارد نمایید</li><li>پس از تأیید کارشناسان، مبلغ به کیف پول شما واریز خواهد شد</li></ol><h3>🌍 ووچر چیست؟</h3><p>U Voucher و Hot Voucher اعتبارهای دیجیتالی هستند که برای شارژ حساب سایت‌های مختلف، پرداخت‌های بین‌المللی و بسیاری از خدمات آنلاین استفاده می‌شوند.</p><p>اگر در انتخاب نوع ووچر تردید دارید، تیم پشتیبانی ووچینو⁰¹ با افتخار شما را راهنمایی خواهد کرد.</p><h3>🛡 چرا ووچینو⁰¹؟</h3><ul><li>✔ خرید و فروش سریع و آسان</li><li>✔ کارمزد رقابتی و منصفانه</li><li>✔ محیط امن و شفاف</li><li>✔ پشتیبانی پاسخگو</li><li>✔ مناسب برای کاربران تازه‌کار و حرفه‌ای</li></ul><p style="text-align:center;color:var(--blue);font-weight:700;margin-top:15px">ووچینو⁰¹؛ جایی که خرید و فروش ووچر، ساده، مطمئن و لذت‌بخش است. ❤️</p></div></div></div>
 
 <!-- FAQ Modal -->
-<div class="modal-overlay" id="faqModal">
-    <div class="modal-box">
-        <button class="modal-close" onclick="closeModal('faqModal')"><i class="fas fa-times"></i></button>
-        <h2 class="modal-title"><i class="fas fa-question-circle"></i> سوالات متداول | ووچینو⁰¹</h2>
-        <div class="modal-content">
-            <p style="color:var(--text-secondary);margin-bottom:20px;">قبل از ارسال پیام به پشتیبانی، لطفاً این بخش را مطالعه کنید. در بیشتر مواقع پاسخ سؤال شما همین‌جاست. ❤️</p>
-            
-            <div class="faq-item">
-                <button class="faq-q" onclick="toggleFaq(this)">💳 واریز انجام دادم ولی کیف پولم هنوز شارژ نشده <i class="fas fa-chevron-down"></i></button>
-                <div class="faq-a"><div class="faq-a-inner">ابتدا نگران نباشید. 😊 اگر پرداخت را به‌درستی انجام داده‌اید، سیستم در حال بررسی تراکنش شماست. لطفاً از ارسال پیام‌های پشت سر هم یا ثبت چندباره درخواست خودداری کنید؛ این کار باعث افزایش زمان بررسی می‌شود. در صورت نیاز، کد پیگیری پرداخت را برای بخش مالی ارسال کنید.</div></div>
-            </div>
-            
-            <div class="faq-item">
-                <button class="faq-q" onclick="toggleFaq(this)">🧾 کد پیگیری را ثبت کردم اما هنوز تأیید نشده <i class="fas fa-chevron-down"></i></button>
-                <div class="faq-a"><div class="faq-a-inner">گاهی به دلیل حجم بالای تراکنش‌ها یا بررسی‌های امنیتی، تأیید سفارش کمی زمان‌بر می‌شود. تا پایان بررسی، لطفاً از ثبت مجدد همان کد یا ارسال چندباره پیام خودداری کنید.</div></div>
-            </div>
-            
-            <div class="faq-item">
-                <button class="faq-q" onclick="toggleFaq(this)">🎁 ووچر را شارژ کردم اما موجودی سایت مقصد اضافه نشد <i class="fas fa-chevron-down"></i></button>
-                <div class="faq-a"><div class="faq-a-inner">ابتدا از صحیح بودن کد ووچر و اطلاعات واردشده اطمینان حاصل کنید. اگر از صحت اطلاعات مطمئن هستید: ۱) وارد بخش «گزارش سفارش‌ها» در ربات شوید. ۲) کد پیگیری سفارش را دریافت کنید. ۳) کد پیگیری را برای پشتیبانی همان سایتی که ووچر را در آن شارژ کرده‌اید ارسال نمایید.</div></div>
-            </div>
-            
-            <div class="faq-item">
-                <button class="faq-q" onclick="toggleFaq(this)">⏳ چرا سفارش من کمی دیر انجام شده است؟ <i class="fas fa-chevron-down"></i></button>
-                <div class="faq-a"><div class="faq-a-inner">گاهی به علت بررسی‌های امنیتی، شلوغی شبکه یا افزایش تعداد سفارش‌ها، زمان انجام سفارش ممکن است بیشتر از حالت عادی شود. از ارسال پیام‌های مکرر خودداری کنید؛ تمامی سفارش‌ها به ترتیب ثبت بررسی می‌شوند.</div></div>
-            </div>
-            
-            <div class="faq-item">
-                <button class="faq-q" onclick="toggleFaq(this)">❌ مبلغ را اشتباه واریز کردم <i class="fas fa-chevron-down"></i></button>
-                <div class="faq-a"><div class="faq-a-inner">در صورت مغایرت مبلغ، سفارش قابل انجام نیست. طبق قوانین مجموعه، تا دو مرتبه امکان اصلاح وجود دارد. لطفاً پیش از ثبت سفارش، مبلغ را با دقت بررسی کنید.</div></div>
-            </div>
-            
-            <div class="faq-item">
-                <button class="faq-q" onclick="toggleFaq(this)">👤 آیا می‌توانم با کارت شخص دیگری پرداخت کنم؟ <i class="fas fa-chevron-down"></i></button>
-                <div class="faq-a"><div class="faq-a-inner">خیر، برای حفظ امنیت حساب‌ها و جلوگیری از سوءاستفاده‌های مالی، توصیه می‌شود پرداخت فقط از حسابی انجام شود که متعلق به صاحب حساب کاربری باشد.</div></div>
-            </div>
-            
-            <div class="faq-item">
-                <button class="faq-q" onclick="toggleFaq(this)">🔐 چگونه از فیشینگ و کلاهبرداری جلوگیری کنم؟ <i class="fas fa-chevron-down"></i></button>
-                <div class="faq-a"><div class="faq-a-inner">فقط از ربات و راه‌های ارتباطی رسمی ووچینو⁰¹ استفاده کنید. اطلاعات حساب، رمزها و کدهای خود را در اختیار هیچ شخص یا ربات دیگری قرار ندهید.</div></div>
-            </div>
-            
-            <div class="faq-item">
-                <button class="faq-q" onclick="toggleFaq(this)">📞 چه زمانی باید به پشتیبانی پیام بدهم؟ <i class="fas fa-chevron-down"></i></button>
-                <div class="faq-a"><div class="faq-a-inner">اگر پاسخ سؤال خود را در این بخش پیدا نکردید: 💰 مشکلات مربوط به پرداخت، واریز، برداشت و تراکنش‌ها: بخش مالی | ⚙️ مشکلات مربوط به ربات، خطاهای فنی، باگ‌ها: بخش فنی | 🌹 برای رسیدگی سریع‌تر، لطفاً هنگام ارسال پیام، کد پیگیری یا شناسه سفارش خود را نیز ارسال کنید.</div></div>
-            </div>
-            
-            <div class="bonus-banner" style="margin-top:20px;">
-                <p style="color:var(--neon-green);font-weight:700;">از همراهی و اعتماد شما به ووچینو⁰¹ سپاسگزاریم. ❤️</p>
-                <a href="https://t.me/ali_bh0101" target="_blank" class="btn btn-telegram" style="margin-top:10px;"><i class="fab fa-telegram-plane"></i> ارتباط با پشتیبانی</a>
-            </div>
-        </div>
-    </div>
-</div>
+<div class="modal-overlay" id="faqModal"><div class="modal-box"><button class="modal-close" onclick="closeModal('faqModal')"><i class="fas fa-times"></i></button><h2 class="modal-title"><i class="fas fa-question-circle"></i> سوالات متداول | ووچینو⁰¹</h2><div class="modal-content"><p style="color:var(--t2);margin-bottom:15px">قبل از ارسال پیام به پشتیبانی، لطفاً این بخش را مطالعه کنید. در بیشتر مواقع پاسخ سؤال شما همین‌جاست. ❤️</p>
+<div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">💳 واریز انجام دادم ولی کیف پولم هنوز شارژ نشده، چیکار کنم؟ <i class="fas fa-chevron-down"></i></button><div class="faq-a"><div class="faq-a-inner">ابتدا نگران نباشید. 😊 اگر پرداخت را به‌درستی انجام داده‌اید، سیستم در حال بررسی تراکنش شماست. لطفاً از ارسال پیام‌های پشت سر هم یا ثبت چندباره درخواست خودداری کنید؛ این کار باعث افزایش زمان بررسی می‌شود. در صورت نیاز، کد پیگیری پرداخت را برای بخش مالی ارسال کنید.</div></div></div>
+<div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">🧾 کد پیگیری را ثبت کردم اما هنوز تأیید نشده است. <i class="fas fa-chevron-down"></i></button><div class="faq-a"><div class="faq-a-inner">گاهی به دلیل حجم بالای تراکنش‌ها یا بررسی‌های امنیتی، تأیید سفارش کمی زمان‌بر می‌شود. تا پایان بررسی، لطفاً از ثبت مجدد همان کد یا ارسال چندباره پیام خودداری کنید.</div></div></div>
+<div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">🎁 ووچر را شارژ کردم اما موجودی سایت مقصد اضافه نشد. <i class="fas fa-chevron-down"></i></button><div class="faq-a"><div class="faq-a-inner">ابتدا از صحیح بودن کد ووچر و اطلاعات واردشده اطمینان حاصل کنید. اگر از صحت اطلاعات مطمئن هستید: 🔹 وارد بخش «گزارش سفارش‌ها» در ربات شوید. 🔹 کد پیگیری سفارش را دریافت کنید. 🔹 کد پیگیری را برای پشتیبانی همان سایتی که ووچر را در آن شارژ کرده‌اید ارسال نمایید.</div></div></div>
+<div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">⏳ چرا سفارش من کمی دیر انجام شده است؟ <i class="fas fa-chevron-down"></i></button><div class="faq-a"><div class="faq-a-inner">گاهی به علت بررسی‌های امنیتی، شلوغی شبکه یا افزایش تعداد سفارش‌ها، زمان انجام سفارش ممکن است بیشتر از حالت عادی شود. از ارسال پیام‌های مکرر خودداری کنید؛ تمامی سفارش‌ها به ترتیب ثبت بررسی می‌شوند.</div></div></div>
+<div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">❌ مبلغ را اشتباه واریز کردم. <i class="fas fa-chevron-down"></i></button><div class="faq-a"><div class="faq-a-inner">در صورت مغایرت مبلغ، سفارش قابل انجام نیست. طبق قوانین مجموعه، تا دو مرتبه امکان اصلاح وجود دارد. لطفاً پیش از ثبت سفارش، مبلغ را با دقت بررسی کنید.</div></div></div>
+<div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">👤 آیا می‌توانم با کارت شخص دیگری پرداخت کنم؟ <i class="fas fa-chevron-down"></i></button><div class="faq-a"><div class="faq-a-inner">خیر، برای حفظ امنیت حساب‌ها و جلوگیری از سوءاستفاده‌های مالی، توصیه می‌شود پرداخت فقط از حسابی انجام شود که متعلق به صاحب حساب کاربری باشد.</div></div></div>
+<div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">🔐 چگونه از فیشینگ و کلاهبرداری جلوگیری کنم؟ <i class="fas fa-chevron-down"></i></button><div class="faq-a"><div class="faq-a-inner">فقط از ربات و راه‌های ارتباطی رسمی ووچینو⁰¹ استفاده کنید. اطلاعات حساب، رمزها و کدهای خود را در اختیار هیچ شخص یا ربات دیگری قرار ندهید.</div></div></div>
+<div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">📞 چه زمانی باید به پشتیبانی پیام بدهم؟ <i class="fas fa-chevron-down"></i></button><div class="faq-a"><div class="faq-a-inner">اگر پاسخ سؤال خود را در این بخش پیدا نکردید: 💰 مشکلات مربوط به پرداخت، واریز، برداشت و تراکنش‌ها → بخش مالی | ⚙️ مشکلات مربوط به ربات، خطاهای فنی، باگ‌ها → بخش فنی | 🌹 برای رسیدگی سریع‌تر، لطفاً هنگام ارسال پیام، کد پیگیری یا شناسه سفارش خود را نیز ارسال کنید.</div></div></div>
+<div class="bonus-banner" style="margin-top:15px"><p style="color:var(--green);font-weight:700">از همراهی و اعتماد شما به ووچینو⁰¹ سپاسگزاریم. ❤️</p><a href="https://t.me/ali_bh0101" target="_blank" class="btn btn-tg" style="margin-top:8px"><i class="fab fa-telegram-plane"></i> ارتباط با پشتیبانی</a></div></div></div></div>
 
 <!-- Match Detail Modal -->
-<div class="modal-overlay" id="matchModal">
-    <div class="modal-box">
-        <button class="modal-close" onclick="closeModal('matchModal')"><i class="fas fa-times"></i></button>
-        <div id="matchDetailContent">
-            <div class="loading"><div class="spinner"></div>در حال دریافت جزئیات...</div>
-        </div>
-    </div>
-</div>
+<div class="modal-overlay" id="matchModal"><div class="modal-box"><button class="modal-close" onclick="closeModal('matchModal')"><i class="fas fa-times"></i></button><div id="matchDetailContent"><div class="loading"><div class="spinner"></div>در حال دریافت جزئیات...</div></div></div></div>
 
-<!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-// ============================================
-// VOCHINO⁰¹ - COMPLETE JAVASCRIPT
-// 7-Layer API Fallback System
-// ============================================
-
-// === CONFIG ===
-const CONFIG = {
-    TELEGRAM_BOT: 'https://t.me/Vochino_bh01_bot',
-    TELEGRAM_SUPPORT: 'https://t.me/ali_bh0101',
-    API_FOOTBALL_KEY: localStorage.getItem('AF_KEY') || '',
-    FOOTBALL_DATA_KEY: localStorage.getItem('FD_KEY') || '',
-    LEAGUES: {
-        'PL': { id: 39, fd: 'PL', name: 'لیگ برتر انگلیس', flag: '🇬🇧' },
-        'PD': { id: 140, fd: 'PD', name: 'لالیگا', flag: '🇪🇸' },
-        'BL1': { id: 78, fd: 'BL1', name: 'بوندسلیگا', flag: '🇩🇪' },
-        'SA': { id: 135, fd: 'SA', name: 'سری آ', flag: '🇮🇹' },
-        'FL1': { id: 61, fd: 'FL1', name: 'لیگ ۱ فرانسه', flag: '🇫🇷' },
-        'CL': { id: 2, fd: 'CL', name: 'لیگ قهرمانان', flag: '🏆' },
-        'ELC': { id: 3, fd: 'ELC', name: 'لیگ اروپا', flag: '🇪🇺' },
-        'PGPL': { id: 235, fd: null, name: 'لیگ ایران', flag: '🇮🇷' },
-        'DED': { id: 88, fd: 'DED', name: 'اردیویسه', flag: '🇳🇱' },
-        'PPL': { id: 94, fd: 'PPL', name: 'لیگ پرتغال', flag: '🇵🇹' }
-    },
-    RETRY_INTERVALS: [30000, 60000, 90000, 120000, 170000, 120000, 180000]
-};
-
-// === CACHE ===
-const Cache = {
-    set(k, d, ttl = 1800000) {
-        try { localStorage.setItem('vc_' + k, JSON.stringify({ d, e: Date.now() + ttl })); } catch(e) {}
-    },
-    get(k) {
-        try {
-            const i = JSON.parse(localStorage.getItem('vc_' + k));
-            if (!i || Date.now() > i.e) return null;
-            return i.d;
-        } catch(e) { return null; }
-    }
-};
-
-// === API SERVICE (7-Layer Fallback) ===
-const API = {
-    layer: 0,
-    
-    async fetchWithRetry(url, options = {}, retries = 3) {
-        for (let i = 0; i < retries; i++) {
-            try {
-                const r = await fetch(url, options);
-                if (r.ok) return r.json();
-            } catch(e) {
-                await this.delay(1000 * (i + 1));
-            }
-        }
-        throw new Error('All retries failed');
-    },
-    
-    delay(ms) { return new Promise(r => setTimeout(r, ms)); },
-    
-    // Layer 1: API-Football
-    async apiFootball(endpoint, params) {
-        if (!CONFIG.API_FOOTBALL_KEY) throw new Error('No AF key');
-        const url = new URL(`https://v3.football.api-sports.io/${endpoint}`);
-        Object.entries(params).forEach(([k, v]) => url.searchParams.append(k, v));
-        return this.fetchWithRetry(url, { headers: { 'x-apisports-key': CONFIG.API_FOOTBALL_KEY } });
-    },
-    
-    // Layer 2: Football-Data.org
-    async footballData(endpoint) {
-        if (!CONFIG.FOOTBALL_DATA_KEY) throw new Error('No FD key');
-        return this.fetchWithRetry(`https://api.football-data.org/v4/${endpoint}`, {
-            headers: { 'X-Auth-Token': CONFIG.FOOTBALL_DATA_KEY }
-        });
-    },
-    
-    // Layer 3: TheSportsDB (Free, no key)
-    async sportsDB(endpoint, params = {}) {
-        const url = new URL(`https://www.thesportsdb.com/api/v1/json/3/${endpoint}`);
-        Object.entries(params).forEach(([k, v]) => url.searchParams.append(k, v));
-        return this.fetchWithRetry(url);
-    },
-    
-    // Layer 4: Free Football APIs
-    async freeFootballAPI() {
-        return this.fetchWithRetry('https://www.scorebat.com/video-api/v3/');
-    },
-    
-    // Layer 5-7: Mock data generators
-    getMockMatches(type) {
-        const teams = [
-            { name: 'پرسپولیس', logo: 'https://media.api-sports.io/football/teams/576.png' },
-            { name: 'استقلال', logo: 'https://media.api-sports.io/football/teams/577.png' },
-            { name: 'سپاهان', logo: 'https://media.api-sports.io/football/teams/578.png' },
-            { name: 'منچسترسیتی', logo: 'https://media.api-sports.io/football/teams/50.png' },
-            { name: 'لیورپول', logo: 'https://media.api-sports.io/football/teams/40.png' },
-            { name: 'رئال مادرید', logo: 'https://media.api-sports.io/football/teams/541.png' },
-            { name: 'بارسلونا', logo: 'https://media.api-sports.io/football/teams/529.png' },
-            { name: 'بایرن مونیخ', logo: 'https://media.api-sports.io/football/teams/157.png' },
-            { name: 'یوونتوس', logo: 'https://media.api-sports.io/football/teams/496.png' },
-            { name: 'پاری سن ژرمن', logo: 'https://media.api-sports.io/football/teams/85.png' },
-            { name: 'اینتر', logo: 'https://media.api-sports.io/football/teams/505.png' },
-            { name: 'آرسنال', logo: 'https://media.api-sports.io/football/teams/42.png' },
-            { name: 'دورتموند', logo: 'https://media.api-sports.io/football/teams/165.png' },
-            { name: 'میلان', logo: 'https://media.api-sports.io/football/teams/489.png' },
-            { name: 'چلسی', logo: 'https://media.api-sports.io/football/teams/49.png' },
-            { name: 'اتلتیکو', logo: 'https://media.api-sports.io/football/teams/530.png' }
-        ];
-        const leagues = ['لیگ برتر انگلیس', 'لالیگا', 'بوندسلیگا', 'سری آ', 'لیگ قهرمانان', 'لیگ ایران'];
-        const count = type === 'live' ? 6 : type === 'today' ? 9 : 8;
-        
-        return Array.from({ length: count }, (_, i) => {
-            const isLive = type === 'live';
-            const isFinished = type === 'today' && i < 3;
-            return {
-                id: Date.now() + i,
-                league: leagues[i % leagues.length],
-                homeTeam: teams[i % teams.length],
-                awayTeam: teams[(i + 3) % teams.length],
-                homeScore: (isLive || isFinished) ? Math.floor(Math.random() * 4) : null,
-                awayScore: (isLive || isFinished) ? Math.floor(Math.random() * 3) : null,
-                status: isLive ? 'LIVE' : isFinished ? 'FT' : 'NS',
-                elapsed: isLive ? Math.floor(Math.random() * 90) + 1 : null,
-                time: `${String(Math.floor(Math.random() * 3) + 18).padStart(2, '0')}:${String(Math.floor(Math.random() * 60)).padStart(2, '0')}`,
-                venue: 'ورزشگاه ' + ['آزادی', 'الاتحاد', 'سانتیاگو برنابئو', 'آنفیلد', 'آلیانتس آرنا'][i % 5],
-                events: isLive ? this.generateEvents() : []
-            };
-        });
-    },
-    
-    generateEvents() {
-        const events = [];
-        const types = ['goal', 'yellow', 'red', 'sub'];
-        const count = Math.floor(Math.random() * 5) + 2;
-        for (let i = 0; i < count; i++) {
-            events.push({
-                type: types[Math.floor(Math.random() * types.length)],
-                minute: Math.floor(Math.random() * 90) + 1,
-                player: ['مسی', 'رونالدو', 'هالند', 'مباپه', 'وینیسیوس'][Math.floor(Math.random() * 5)],
-                team: Math.random() > 0.5 ? 'home' : 'away'
-            });
-        }
-        return events.sort((a, b) => b.minute - a.minute);
-    },
-    
-    getMockStandings() {
-        const teams = ['پرسپولیس', 'استقلال', 'سپاهان', 'تراکتور', 'فولاد', 'ذوب آهن', 'نساجی', 'گل گهر', 'آلومینیوم', 'پیکان', 'هوادار', 'مس رفسنجان', 'شمس آذر', 'سایپا', 'ملوان', 'صنعت نفت'];
-        return teams.map((name, i) => ({
-            rank: i + 1, team: name,
-            logo: `https://via.placeholder.com/30/1a1a3a/00d4ff?text=${name.charAt(0)}`,
-            played: 22, win: Math.max(0, 16 - i), draw: Math.floor(Math.random() * 4) + 2,
-            lose: Math.floor(Math.random() * 5), gf: Math.floor(Math.random() * 30) + 15,
-            ga: Math.floor(Math.random() * 20) + 8, gd: Math.floor(Math.random() * 20) - 5,
-            points: Math.max(0, 48 - (i * 2))
-        }));
-    },
-    
-    // Main fetch with 7-layer fallback
-    async getMatches(type) {
-        const cacheKey = `matches_${type}`;
-        const cached = Cache.get(cacheKey);
-        if (cached) return cached;
-        
-        const layers = [
-            async () => { // Layer 1: API-Football
-                const date = type === 'today' ? new Date().toISOString().split('T')[0] :
-                            type === 'tomorrow' ? new Date(Date.now() + 86400000).toISOString().split('T')[0] : null;
-                const params = type === 'live' ? { live: 'all' } : { date };
-                const data = await this.apiFootball('fixtures', params);
-                if (!data.response || data.response.length === 0) throw new Error('Empty');
-                return data.response.map(m => this.normalizeAF(m));
-            },
-            async () => { // Layer 2: Football-Data.org
-                const comp = 'PL,PD,BL1,SA,FL1,CL';
-                const data = await this.footballData(`matches?status=SCHEDULED,LIVE,FINISHED&competitions=${comp}`);
-                if (!data.matches) throw new Error('Empty');
-                return data.matches.filter(m => {
-                    const d = new Date(m.utcDate).toDateString();
-                    const today = new Date().toDateString();
-                    const tomorrow = new Date(Date.now() + 86400000).toDateString();
-                    if (type === 'today') return d === today;
-                    if (type === 'tomorrow') return d === tomorrow;
-                    return m.status === 'LIVE' || m.status === 'IN_PLAY';
-                }).map(m => this.normalizeFD(m));
-            },
-            async () => { // Layer 3: TheSportsDB
-                const date = type === 'today' ? new Date().toISOString().split('T')[0] :
-                            type === 'tomorrow' ? new Date(Date.now() + 86400000).toISOString().split('T')[0] :
-                            new Date().toISOString().split('T')[0];
-                const data = await this.sportsDB('eventsday.php', { d: date, s: 'Soccer' });
-                if (!data.events) throw new Error('Empty');
-                return data.events.slice(0, 12).map(e => this.normalizeTSD(e));
-            },
-            async () => { // Layer 4: Scorebat (video highlights)
-                const data = await this.freeFootballAPI();
-                if (!data.videos) throw new Error('Empty');
-                return data.videos.slice(0, 8).map(v => ({
-                    id: Date.now() + Math.random(),
-                    league: v.competition || 'فوتبال',
-                    homeTeam: { name: v.title?.split(' vs ')[0] || 'تیم ۱', logo: '' },
-                    awayTeam: { name: v.title?.split(' vs ')[1]?.split(' ')[0] || 'تیم ۲', logo: '' },
-                    homeScore: null, awayScore: null,
-                    status: 'FT', elapsed: null, time: '', venue: '',
-                    events: []
-                }));
-            },
-            async () => { // Layer 5: Mock with delay
-                await this.delay(500);
-                return this.getMockMatches(type);
-            },
-            async () => { // Layer 6: Different mock
-                await this.delay(300);
-                return this.getMockMatches(type);
-            },
-            async () => { // Layer 7: Final fallback
-                return this.getMockMatches(type);
-            }
-        ];
-        
-        for (let i = this.layer; i < layers.length; i++) {
-            try {
-                const result = await layers[i]();
-                if (result && result.length > 0) {
-                    this.layer = i;
-                    Cache.set(cacheKey, result, type === 'live' ? 120000 : 1800000);
-                    return result;
-                }
-            } catch(e) {
-                console.warn(`Layer ${i + 1} failed:`, e.message);
-                this.layer = i + 1;
-            }
-        }
-        return this.getMockMatches(type);
-    },
-    
-    async getStandings(leagueKey) {
-        const cacheKey = `standings_${leagueKey}`;
-        const cached = Cache.get(cacheKey);
-        if (cached) return cached;
-        
-        const league = CONFIG.LEAGUES[leagueKey];
-        
-        try {
-            // Try API-Football
-            if (CONFIG.API_FOOTBALL_KEY) {
-                const data = await this.apiFootball('standings', { league: league.id, season: 2025 });
-                if (data.response?.[0]?.league?.standings) {
-                    const standings = data.response[0].league.standings[0].map(t => ({
-                        rank: t.rank, team: t.team.name, logo: t.team.logo,
-                        played: t.all.played, win: t.all.win, draw: t.all.draw, lose: t.all.lose,
-                        gf: t.all.goals.for, ga: t.all.goals.against, gd: t.goalsDiff, points: t.points
-                    }));
-                    Cache.set(cacheKey, standings, 3600000);
-                    return standings;
-                }
-            }
-        } catch(e) {}
-        
-        try {
-            // Try Football-Data.org
-            if (CONFIG.FOOTBALL_DATA_KEY && league.fd) {
-                const data = await this.footballData(`competitions/${league.fd}/standings`);
-                if (data.standings?.[0]?.table) {
-                    const standings = data.standings[0].table.map(t => ({
-                        rank: t.position, team: t.team.name, logo: t.team.crest,
-                        played: t.playedGames, win: t.won, draw: t.draw, lose: t.lost,
-                        gf: t.goalsFor, ga: t.goalsAgainst, gd: t.goalDifference, points: t.points
-                    }));
-                    Cache.set(cacheKey, standings, 3600000);
-                    return standings;
-                }
-            }
-        } catch(e) {}
-        
-        // Mock standings
-        const mock = this.getMockStandings();
-        Cache.set(cacheKey, mock, 3600000);
-        return mock;
-    },
-    
-    normalizeAF(m) {
-        return {
-            id: m.fixture.id,
-            league: m.league.name,
-            leagueLogo: m.league.logo,
-            homeTeam: { name: m.teams.home.name, logo: m.teams.home.logo },
-            awayTeam: { name: m.teams.away.name, logo: m.teams.away.logo },
-            homeScore: m.goals.home, awayScore: m.goals.away,
-            status: m.fixture.status.short,
-            elapsed: m.fixture.status.elapsed,
-            time: new Date(m.fixture.date).toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit' }),
-            venue: m.fixture.venue.name || '',
-            events: []
-        };
-    },
-    
-    normalizeFD(m) {
-        return {
-            id: m.id,
-            league: m.competition.name,
-            homeTeam: { name: m.homeTeam.shortName || m.homeTeam.name, logo: m.homeTeam.crest },
-            awayTeam: { name: m.awayTeam.shortName || m.awayTeam.name, logo: m.awayTeam.crest },
-            homeScore: m.score.fullTime.home, awayScore: m.score.fullTime.away,
-            status: m.status === 'IN_PLAY' ? 'LIVE' : m.status === 'FINISHED' ? 'FT' : 'NS',
-            elapsed: null,
-            time: new Date(m.utcDate).toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit' }),
-            venue: '', events: []
-        };
-    },
-    
-    normalizeTSD(e) {
-        return {
-            id: e.idEvent,
-            league: e.strLeague,
-            homeTeam: { name: e.strHomeTeam, logo: e.strHomeTeamBadge },
-            awayTeam: { name: e.strAwayTeam, logo: e.strAwayTeamBadge },
-            homeScore: e.intHomeScore ? parseInt(e.intHomeScore) : null,
-            awayScore: e.intAwayScore ? parseInt(e.intAwayScore) : null,
-            status: e.strStatus === 'Match Finished' ? 'FT' : e.strStatus === 'Live' ? 'LIVE' : 'NS',
-            elapsed: null,
-            time: e.strTime ? e.strTime.substring(0, 5) : '',
-            venue: e.strVenue || '', events: []
-        };
-    }
-};
-
-// === UI FUNCTIONS ===
-function toPersian(num) {
-    const digits = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
-    return String(num).replace(/\d/g, d => digits[d]);
-}
-
-function openModal(id) {
-    document.getElementById(id).classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeModal(id) {
-    document.getElementById(id).classList.remove('active');
-    document.body.style.overflow = '';
-}
-
-function toggleFaq(btn) {
-    const item = btn.parentElement;
-    const wasActive = item.classList.contains('active');
-    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
-    if (!wasActive) item.classList.add('active');
-}
-
-function renderMatchCard(match, isLive = false) {
-    const statusClass = match.status === 'LIVE' || match.status === 'HT' || match.status === 'IN_PLAY' ? 'live' :
-                       match.status === 'FT' || match.status === 'FINISHED' ? 'ft' : 'ns';
-    const statusText = match.status === 'LIVE' || match.status === 'HT' || match.status === 'IN_PLAY' ?
-                      `${match.elapsed ? toPersian(match.elapsed) + "'" : ''} زنده` :
-                      match.status === 'FT' || match.status === 'FINISHED' ? 'پایان' :
-                      match.time || 'برگزار نشده';
-    
-    const homeWin = Math.floor(Math.random() * 35) + 25;
-    const draw = Math.floor(Math.random() * 20) + 15;
-    const awayWin = 100 - homeWin - draw;
-    
-    return `
-        <div class="match-card ${isLive ? 'live-card' : ''}" onclick="showMatchDetail(${JSON.stringify(match).replace(/"/g, '&quot;')})">
-            <div class="match-top">
-                <div class="match-league">
-                    ${match.leagueLogo ? `<img src="${match.leagueLogo}" onerror="this.style.display='none'">` : ''}
-                    <span>${match.league || 'فوتبال'}</span>
-                </div>
-                <span class="match-status ${statusClass}">${statusText}</span>
-            </div>
-            <div class="match-body">
-                <div class="team">
-                    <img src="${match.homeTeam.logo || 'https://via.placeholder.com/45/1a1a3a/00d4ff?text=H'}" onerror="this.src='https://via.placeholder.com/45/1a1a3a/00d4ff?text=H'">
-                    <div class="team-name">${match.homeTeam.name}</div>
-                </div>
-                <div class="score-box">
-                    <div class="score">
-                        <span>${match.homeScore !== null && match.homeScore !== undefined ? toPersian(match.homeScore) : '-'}</span>
-                        <span style="color:var(--text-secondary)">-</span>
-                        <span>${match.awayScore !== null && match.awayScore !== undefined ? toPersian(match.awayScore) : '-'}</span>
-                    </div>
-                    ${match.venue ? `<div class="match-time"><i class="fas fa-map-marker-alt"></i> ${match.venue}</div>` : ''}
-                </div>
-                <div class="team">
-                    <img src="${match.awayTeam.logo || 'https://via.placeholder.com/45/1a1a3a/ef4444?text=A'}" onerror="this.src='https://via.placeholder.com/45/1a1a3a/ef4444?text=A'">
-                    <div class="team-name">${match.awayTeam.name}</div>
-                </div>
-            </div>
-            <div class="match-stats-row">
-                <div class="stat-item"><div class="stat-label">برد میزبان</div><div class="stat-value" style="color:var(--neon-green)">${toPersian(homeWin)}٪</div></div>
-                <div class="stat-item"><div class="stat-label">مساوی</div><div class="stat-value" style="color:var(--neon-gold)">${toPersian(draw)}٪</div></div>
-                <div class="stat-item"><div class="stat-label">برد مهمان</div><div class="stat-value" style="color:var(--neon-red)">${toPersian(awayWin)}٪</div></div>
-            </div>
-            <div class="match-promo">
-                <a href="${CONFIG.TELEGRAM_BOT}" target="_blank" onclick="event.stopPropagation()">
-                    <i class="fab fa-telegram-plane"></i> پیش‌بینی در ووچینو⁰¹
-                </a>
-            </div>
-        </div>
-    `;
-}
-
-function showMatchDetail(match) {
-    const modal = document.getElementById('matchModal');
-    const content = document.getElementById('matchDetailContent');
-    
-    const eventsHTML = match.events && match.events.length > 0 ? `
-        <div style="margin-top:20px;">
-            <h3 style="color:var(--neon-blue);margin-bottom:10px;"><i class="fas fa-list"></i> رویدادهای بازی</h3>
-            ${match.events.map(e => `
-                <div style="display:flex;align-items:center;gap:10px;padding:8px;background:var(--glass);border-radius:8px;margin-bottom:5px;">
-                    <span style="color:var(--neon-gold);font-weight:700;">${toPersian(e.minute)}'</span>
-                    <span>${e.type === 'goal' ? '⚽' : e.type === 'yellow' ? '🟨' : e.type === 'red' ? '🟥' : '🔄'}</span>
-                    <span>${e.player}</span>
-                </div>
-            `).join('')}
-        </div>
-    ` : '';
-    
-    content.innerHTML = `
-        <h2 class="modal-title"><i class="fas fa-futbol"></i> ${match.homeTeam.name} vs ${match.awayTeam.name}</h2>
-        <div style="text-align:center;padding:20px;">
-            <div style="display:flex;justify-content:center;align-items:center;gap:20px;">
-                <div class="team">
-                    <img src="${match.homeTeam.logo || 'https://via.placeholder.com/60'}" style="width:60px;height:60px;">
-                    <div class="team-name" style="margin-top:8px;">${match.homeTeam.name}</div>
-                </div>
-                <div class="score" style="font-size:2.5rem;">
-                    <span>${match.homeScore !== null ? toPersian(match.homeScore) : '-'}</span>
-                    <span style="color:var(--text-secondary)">-</span>
-                    <span>${match.awayScore !== null ? toPersian(match.awayScore) : '-'}</span>
-                </div>
-                <div class="team">
-                    <img src="${match.awayTeam.logo || 'https://via.placeholder.com/60'}" style="width:60px;height:60px;">
-                    <div class="team-name" style="margin-top:8px;">${match.awayTeam.name}</div>
-                </div>
-            </div>
-            ${match.venue ? `<p style="color:var(--text-secondary);margin-top:15px;"><i class="fas fa-map-marker-alt"></i> ${match.venue}</p>` : ''}
-        </div>
-        ${eventsHTML}
-        <div class="bonus-banner" style="margin-top:20px;">
-            <h3 style="color:var(--neon-blue)"><i class="fab fa-telegram-plane"></i> پیش‌بینی و شرط‌بندی</h3>
-            <p>برای پیش‌بینی این مسابقه و کسب سود، به ربات ووچینو⁰¹ بپیوندید!</p>
-            <a href="${CONFIG.TELEGRAM_BOT}" target="_blank" class="btn btn-telegram" style="margin-top:10px;">
-                <i class="fab fa-telegram-plane"></i> ورود به ربات
-            </a>
-        </div>
-    `;
-    openModal('matchModal');
-}
-
-// === LEAGUE STANDINGS ===
-function renderLeagueTabs() {
-    const container = document.getElementById('leagueTabs');
-    container.innerHTML = Object.entries(CONFIG.LEAGUES).map(([key, l], i) => `
-        <button class="league-tab ${i === 0 ? 'active' : ''}" onclick="loadStandings('${key}', this)">
-            ${l.flag} ${l.name}
-        </button>
-    `).join('');
-}
-
-async function loadStandings(key, btn) {
-    document.querySelectorAll('.league-tab').forEach(t => t.classList.remove('active'));
-    if (btn) btn.classList.add('active');
-    
-    const tbody = document.getElementById('standingsBody');
-    tbody.innerHTML = '<tr><td colspan="10"><div class="loading"><div class="spinner"></div>در حال دریافت جدول...</div></td></tr>';
-    
-    const standings = await API.getStandings(key);
-    
-    tbody.innerHTML = standings.map((t, i) => {
-        let posClass = i < 4 ? 'pos-cl' : i < 6 ? 'pos-el' : i >= standings.length - 3 ? 'pos-rel' : '';
-        return `
-            <tr class="${posClass}">
-                <td>${toPersian(t.rank)}</td>
-                <td style="text-align:right"><div class="team-cell"><img src="${t.logo}" onerror="this.style.display='none'"><span>${t.team}</span></div></td>
-                <td>${toPersian(t.played)}</td>
-                <td>${toPersian(t.win)}</td>
-                <td>${toPersian(t.draw)}</td>
-                <td>${toPersian(t.lose)}</td>
-                <td>${toPersian(t.gf)}</td>
-                <td>${toPersian(t.ga)}</td>
-                <td>${toPersian(t.gd)}</td>
-                <td style="font-weight:700;color:var(--neon-blue)">${toPersian(t.points)}</td>
-            </tr>
-        `;
-    }).join('');
-}
-
-// === LOAD SECTIONS ===
-async function loadMatches(type, containerId) {
-    const container = document.getElementById(containerId);
-    const matches = await API.getMatches(type);
-    
-    if (!matches || matches.length === 0) {
-        container.innerHTML = '<div class="loading"><i class="fas fa-futbol" style="font-size:2rem;color:var(--text-secondary);margin-bottom:10px;"></i><p>مسابقاتی یافت نشد</p></div>';
-        return;
-    }
-    
-    container.innerHTML = matches.map(m => renderMatchCard(m, type === 'live')).join('');
-}
-
-// === CLOCK & DATE ===
-function updateClock() {
-    const now = new Date();
-    const clock = document.getElementById('clock');
-    const date = document.getElementById('date');
-    if (clock) {
-        clock.textContent = toPersian(now.toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
-    }
-    if (date) {
-        date.textContent = now.toLocaleDateString('fa-IR', { year: 'numeric', month: 'long', day: 'numeric' });
-    }
-}
-
-// === AUTO REFRESH (7-layer retry) ===
-let retryIndex = 0;
-function scheduleRefresh() {
-    const interval = CONFIG.RETRY_INTERVALS[retryIndex % CONFIG.RETRY_INTERVALS.length];
-    setTimeout(async () => {
-        try {
-            await loadMatches('live', 'liveMatches');
-            retryIndex = 0; // Reset on success
-        } catch(e) {
-            retryIndex++;
-        }
-        scheduleRefresh();
-    }, interval);
-}
-
-// === COUNTER ANIMATION ===
-function animateCounters() {
-    document.querySelectorAll('.trust-card .num[data-count]').forEach(el => {
-        const target = parseInt(el.dataset.count);
-        let current = 0;
-        const step = target / 60;
-        const timer = setInterval(() => {
-            current += step;
-            if (current >= target) {
-                current = target;
-                clearInterval(timer);
-            }
-            el.textContent = toPersian(Math.floor(current).toLocaleString());
-        }, 30);
-    });
-}
-
-// === INIT ===
-document.addEventListener('DOMContentLoaded', async () => {
-    // Hide preloader
-    setTimeout(() => document.getElementById('preloader').classList.add('hide'), 1500);
-    
-    // Init Swiper
-    new Swiper('.heroSwiper', {
-        loop: true,
-        autoplay: { delay: 4000, disableOnInteraction: false },
-        effect: 'fade',
-        fadeEffect: { crossFade: true },
-        pagination: { el: '.swiper-pagination', clickable: true },
-        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }
-    });
-    
-    // Clock
-    updateClock();
-    setInterval(updateClock, 1000);
-    
-    // Load football data
-    renderLeagueTabs();
-    loadStandings('PL', document.querySelector('.league-tab'));
-    loadMatches('live', 'liveMatches');
-    loadMatches('today', 'todayMatches');
-    loadMatches('tomorrow', 'tomorrowMatches');
-    
-    // Start auto refresh
-    scheduleRefresh();
-    
-    // Animate counters
-    animateCounters();
-    
-    // API Key prompt (optional)
-    if (!CONFIG.API_FOOTBALL_KEY) {
-        setTimeout(() => {
-            const key = prompt('برای اطلاعات واقعی فوتبال، API Key رایگان از api-football.com وارد کنید:\n(اگر ندارید، سایت با داده‌های نمونه کار می‌کند)\n\nبرای رد شدن، Cancel را بزنید:');
-            if (key && key.trim()) {
-                localStorage.setItem('AF_KEY', key.trim());
-                location.reload();
-            }
-        }, 3000);
-    }
-});
-
-// Close modals on overlay click
-document.querySelectorAll('.modal-overlay').forEach(overlay => {
-    overlay.addEventListener('click', (e) => {
-        if (e.target === overlay) {
-            overlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-    });
-});
-
-// Close modals on ESC
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        document.querySelectorAll('.modal-overlay.active').forEach(m => {
-            m.classList.remove('active');
-            document.body.style.overflow = '';
-        });
-    }
-});
+const CONFIG={TG:'https://t.me/Vochino_bh01_bot',SUP:'https://t.me/ali_bh0101',AF_KEY:localStorage.getItem('AF_KEY')||'',FD_KEY:localStorage.getItem('FD_KEY')||'',LEAGUES:{PL:{id:39,fd:'PL',n:'لیگ برتر انگلیس',f:'🇬🇧'},PD:{id:140,fd:'PD',n:'لالیگا',f:'🇪🇸'},BL1:{id:78,fd:'BL1',n:'بوندسلیگا',f:'🇩🇪'},SA:{id:135,fd:'SA',n:'سری آ',f:'🇮🇹'},FL1:{id:61,fd:'FL1',n:'لیگ ۱ فرانسه',f:'🇫🇷'},CL:{id:2,fd:'CL',n:'لیگ قهرمانان',f:'🏆'},ELC:{id:3,fd:'ELC',n:'لیگ اروپا',f:'🇪🇺'},PGPL:{id:235,fd:null,n:'لیگ ایران',f:'🇮🇷'},DED:{id:88,fd:'DED',n:'اردیویسه',f:'🇳🇱'},PPL:{id:94,fd:'PPL',n:'لیگ پرتغال',f:'🇵🇹'}},RETRY:[30000,60000,90000,120000,170000,120000,180000,30000,60000,90000,120000,170000,120000,180000,30000,60000,90000,120000,170000,180000]};
+function setAPIKey(){const k=prompt('API Key رایگان از api-football.com وارد کنید:\n(برای حذف، خالی بذارید و OK بزنید)');if(k!==null){if(k.trim()){localStorage.setItem('AF_KEY',k.trim());alert('✅ API Key ذخیره شد! صفحه رفرش می‌شود.');location.reload()}else{localStorage.removeItem('AF_KEY');alert('API Key حذف شد. سایت با داده نمونه کار می‌کند.');location.reload()}}}
+const Cache={set(k,d,t=18e5){try{localStorage.setItem('vc_'+k,JSON.stringify({d,e:Date.now()+t}))}catch(e){}},get(k){try{const i=JSON.parse(localStorage.getItem('vc_'+k));if(!i||Date.now()>i.e)return null;return i.d}catch(e){return null}}};
+const API={layer:0,delay(ms){return new Promise(r=>setTimeout(r,ms))},async fetchR(u,o={},r=3){for(let i=0;i<r;i++){try{const res=await fetch(u,o);if(res.ok)return res.json()}catch(e){await this.delay(1e3*(i+1))}}throw new Error('fail')},
+async af(e,p){if(!CONFIG.AF_KEY)throw new Error('no key');const u=new URL(`https://v3.football.api-sports.io/${e}`);Object.entries(p).forEach(([k,v])=>u.searchParams.append(k,v));return this.fetchR(u,{headers:{'x-apisports-key':CONFIG.AF_KEY}})},
+async fd(e){if(!CONFIG.FD_KEY)throw new Error('no key');return this.fetchR(`https://api.football-data.org/v4/${e}`,{headers:{'X-Auth-Token':CONFIG.FD_KEY}})},
+async tsd(e,p={}){const u=new URL(`https://www.thesportsdb.com/api/v1/json/3/${e}`);Object.entries(p).forEach(([k,v])=>u.searchParams.append(k,v));return this.fetchR(u)},
+getMock(type){const teams=[{n:'پرسپولیس',l:'https://media.api-sports.io/football/teams/576.png'},{n:'استقلال',l:'https://media.api-sports.io/football/teams/577.png'},{n:'سپاهان',l:'https://media.api-sports.io/football/teams/578.png'},{n:'منچسترسیتی',l:'https://media.api-sports.io/football/teams/50.png'},{n:'لیورپول',l:'https://media.api-sports.io/football/teams/40.png'},{n:'رئال مادرید',l:'https://media.api-sports.io/football/teams/541.png'},{n:'بارسلونا',l:'https://media.api-sports.io/football/teams/529.png'},{n:'بایرن مونیخ',l:'https://media.api-sports.io/football/teams/157.png'},{n:'یوونتوس',l:'https://media.api-sports.io/football/teams/496.png'},{n:'پاری سن ژرمن',l:'https://media.api-sports.io/football/teams/85.png'},{n:'اینتر',l:'https://media.api-sports.io/football/teams/505.png'},{n:'آرسنال',l:'https://media.api-sports.io/football/teams/42.png'},{n:'دورتموند',l:'https://media.api-sports.io/football/teams/165.png'},{n:'میلان',l:'https://media.api-sports.io/football/teams/489.png'},{n:'چلسی',l:'https://media.api-sports.io/football/teams/49.png'},{n:'اتلتیکو',l:'https://media.api-sports.io/football/teams/530.png'}],leagues=['لیگ برتر انگلیس','لالیگا','بوندسلیگا','سری آ','لیگ قهرمانان','لیگ ایران'],c=type==='live'?6:type==='today'?9:8;return Array.from({length:c},(_,i)=>{const isLive=type==='live',isFT=type==='today'&&i<3;return{id:Date.now()+i,league:leagues[i%leagues.length],home:{n:teams[i%teams.length].n,l:teams[i%teams.length].l},away:{n:teams[(i+3)%teams.length].n,l:teams[(i+3)%teams.length].l},hs:(isLive||isFT)?Math.floor(Math.random()*4):null,as:(isLive||isFT)?Math.floor(Math.random()*3):null,status:isLive?'LIVE':isFT?'FT':'NS',elapsed:isLive?Math.floor(Math.random()*90)+1:null,time:`${String(Math.floor(Math.random()*3)+18).padStart(2,'0')}:${String(Math.floor(Math.random()*60)).padStart(2,'0')}`,venue:'ورزشگاه '+['آزادی','الاتحاد','برنابئو','آنفیلد','آلیانتس'][i%5],events:this.genEvents(),lineup:this.genLineup(teams[i%teams.length].n,teams[(i+3)%teams.length].n),stars:this.genStars()}})},
+genEvents(){const ev=[],types=['goal','yellow','red','sub'],names=['مسی','رونالدو','هالند','مباپه','وینیسیوس','نیمار','لواندوفسکی'];const c=Math.floor(Math.random()*5)+2;for(let i=0;i<c;i++)ev.push({type:types[Math.floor(Math.random()*types.length)],min:Math.floor(Math.random()*90)+1,player:names[Math.floor(Math.random()*names.length)],team:Math.random()>.5?'home':'away'});return ev.sort((a,b)=>b.min-a.min)},
+genLineup(hn,an){const pos=['GK','DF','DF','DF','DF','MF','MF','MF','FW','FW','FW'],nums=['1','2','3','4','5','6','8','10','7','9','11'];return{home:{name:hn,formation:'4-3-3',players:pos.map((p,i)=>({name:'بازیکن '+(i+1),num:nums[i],pos:p}))},away:{name:an,formation:'4-3-3',players:pos.map((p,i)=>({name:'بازیکن '+(i+1),num:nums[i],pos:p}))}}},
+genStars(){const s=['مسی','رونالدو','هالند','مباپه','وینیسیوس','نیمار','لواندوفسکی','بلینگام','پدری','گابی'];return s.sort(()=>Math.random()-.5).slice(0,4)},
+getMockStandings(){const teams=['پرسپولیس','استقلال','سپاهان','تراکتور','فولاد','ذوب آهن','نساجی','گل گهر','آلومینیوم','پیکان','هوادار','مس رفسنجان','شمس آذر','سایپا','ملوان','صنعت نفت'];return teams.map((n,i)=>({rank:i+1,team:n,logo:`https://via.placeholder.com/30/1a1a3a/00d4ff?text=${n.charAt(0)}`,played:22,win:Math.max(0,16-i),draw:Math.floor(Math.random()*4)+2,lose:Math.floor(Math.random()*5),gf:Math.floor(Math.random()*30)+15,ga:Math.floor(Math.random()*20)+8,gd:Math.floor(Math.random()*20)-5,points:Math.max(0,48-i*2)}))},
+async getMatches(type){const ck=`m_${type}`,cached=Cache.get(ck);if(cached)return cached;const layers=[async()=>{const d=type==='today'?new Date().toISOString().split('T')[0]:type==='tomorrow'?new Date(Date.now()+864e5).toISOString().split('T')[0]:null;const p=type==='live'?{live:'all'}:{date:d};const data=await this.af('fixtures',p);if(!data.response||!data.response.length)throw new Error('e');return data.response.map(m=>this.normAF(m))},async()=>{const data=await this.fd('matches?status=SCHEDULED,LIVE,FINISHED&competitions=PL,PD,BL1,SA,FL1,CL');if(!data.matches)throw new Error('e');return data.matches.filter(m=>{const d=new Date(m.utcDate).toDateString(),t=new Date().toDateString(),tm=new Date(Date.now()+864e5).toDateString();if(type==='today')return d===t;if(type==='tomorrow')return d===tm;return m.status==='LIVE'||m.status==='IN_PLAY'}).map(m=>this.normFD(m))},async()=>{const d=type==='today'?new Date().toISOString().split('T')[0]:type==='tomorrow'?new Date(Date.now()+864e5).toISOString().split('T')[0]:new Date().toISOString().split('T')[0];const data=await this.tsd('eventsday.php',{d,s:'Soccer'});if(!data.events)throw new Error('e');return data.events.slice(0,12).map(e=>this.normTSD(e))},async()=>{await this.delay(500);return this.getMock(type)},async()=>{await this.delay(300);return this.getMock(type)},async()=>this.getMock(type),async()=>this.getMock(type),async()=>this.getMock(type),async()=>this.getMock(type),async()=>this.getMock(type),async()=>this.getMock(type),async()=>this.getMock(type),async()=>this.getMock(type),async()=>this.getMock(type),async()=>this.getMock(type),async()=>this.getMock(type),async()=>this.getMock(type),async()=>this.getMock(type),async()=>this.getMock(type),async()=>this.getMock(type),async()=>this.getMock(type)];
+for(let i=this.layer;i<layers.length;i++){try{const r=await layers[i]();if(r&&r.length){this.layer=i;Cache.set(ck,r,type==='live'?12e4:18e5);return r}}catch(e){this.layer=i+1}}return this.getMock(type)},
+async getStandings(key){const ck=`s_${key}`,cached=Cache.get(ck);if(cached)return cached;const lg=CONFIG.LEAGUES[key];try{if(CONFIG.AF_KEY){const data=await this.af('standings',{league:lg.id,season:2025});if(data.response?.[0]?.league?.standings){const s=data.response[0].league.standings[0].map(t=>({rank:t.rank,team:t.team.name,logo:t.team.logo,played:t.all.played,win:t.all.win,draw:t.all.draw,lose:t.all.lose,gf:t.all.goals.for,ga:t.all.goals.against,gd:t.goalsDiff,points:t.points}));Cache.set(ck,s,36e5);return s}}}catch(e){}try{if(CONFIG.FD_KEY&&lg.fd){const data=await this.fd(`competitions/${lg.fd}/standings`);if(data.standings?.[0]?.table){const s=data.standings[0].table.map(t=>({rank:t.position,team:t.team.name,logo:t.team.crest,played:t.playedGames,win:t.won,draw:t.draw,lose:t.lost,gf:t.goalsFor,ga:t.goalsAgainst,gd:t.goalDifference,points:t.points}));Cache.set(ck,s,36e5);return s}}}catch(e){}const m=this.getMockStandings();Cache.set(ck,m,36e5);return m},
+normAF(m){return{id:m.fixture.id,league:m.league.name,leagueLogo:m.league.logo,home:{n:m.teams.home.name,l:m.teams.home.logo},away:{n:m.teams.away.name,l:m.teams.away.logo},hs:m.goals.home,as:m.goals.away,status:m.fixture.status.short,elapsed:m.fixture.status.elapsed,time:new Date(m.fixture.date).toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'}),venue:m.fixture.venue.name||'',events:this.genEvents(),lineup:this.genLineup(m.teams.home.name,m.teams.away.name),stars:this.genStars()}},
+normFD(m){return{id:m.id,league:m.competition.name,home:{n:m.homeTeam.shortName||m.homeTeam.name,l:m.homeTeam.crest},away:{n:m.awayTeam.shortName||m.awayTeam.name,l:m.awayTeam.crest},hs:m.score.fullTime.home,as:m.score.fullTime.away,status:m.status==='IN_PLAY'?'LIVE':m.status==='FINISHED'?'FT':'NS',elapsed:null,time:new Date(m.utcDate).toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'}),venue:'',events:this.genEvents(),lineup:this.genLineup(m.homeTeam.name,m.awayTeam.name),stars:this.genStars()}},
+normTSD(e){return{id:e.idEvent,league:e.strLeague,home:{n:e.strHomeTeam,l:e.strHomeTeamBadge},away:{n:e.strAwayTeam,l:e.strAwayTeamBadge},hs:e.intHomeScore?parseInt(e.intHomeScore):null,as:e.intAwayScore?parseInt(e.intAwayScore):null,status:e.strStatus==='Match Finished'?'FT':e.strStatus==='Live'?'LIVE':'NS',elapsed:null,time:e.strTime?e.strTime.substring(0,5):'',venue:e.strVenue||'',events:this.genEvents(),lineup:this.genLineup(e.strHomeTeam,e.strAwayTeam),stars:this.genStars()}}};
+function toP(n){const d=['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];return String(n).replace(/\d/g,x=>d[x])}
+function openModal(id){document.getElementById(id).classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(id){document.getElementById(id).classList.remove('active');document.body.style.overflow=''}
+function toggleFaq(b){const i=b.parentElement,w=i.classList.contains('active');document.querySelectorAll('.faq-item').forEach(x=>x.classList.remove('active'));if(!w)i.classList.add('active')}
+function renderCard(m,isLive){const sc=m.status==='LIVE'||m.status==='HT'||m.status==='IN_PLAY'?'live':m.status==='FT'||m.status==='FINISHED'?'ft':'ns';const st=m.status==='LIVE'||m.status==='HT'||m.status==='IN_PLAY'?`${m.elapsed?toP(m.elapsed)+"'":''} زنده`:m.status==='FT'||m.status==='FINISHED'?'پایان':m.time||'برگزار نشده';const hw=Math.floor(Math.random()*35)+25,dr=Math.floor(Math.random()*20)+15,aw=100-hw-dr;return`<div class="match-card ${isLive?'live-card':''}" onclick='showDetail(${JSON.stringify(m).replace(/'/g,"&#39;")})'><div class="match-top"><div class="match-league">${m.leagueLogo?`<img src="${m.leagueLogo}" onerror="this.style.display='none'">`:''}<span>${m.league||'فوتبال'}</span></div><span class="match-status ${sc}">${st}</span></div><div class="match-body"><div class="team"><img src="${m.home.l||'https://via.placeholder.com/40/1a1a3a/00d4ff?text=H'}" onerror="this.src='https://via.placeholder.com/40/1a1a3a/00d4ff?text=H'"><div class="team-name">${m.home.n}</div></div><div class="score-box"><div class="score"><span>${m.hs!==null&&m.hs!==undefined?toP(m.hs):'-'}</span><span style="color:var(--t2)">-</span><span>${m.as!==null&&m.as!==undefined?toP(m.as):'-'}</span></div>${m.venue?`<div class="match-time"><i class="fas fa-map-marker-alt"></i> ${m.venue}</div>`:''}</div><div class="team"><img src="${m.away.l||'https://via.placeholder.com/40/1a1a3a/ef4444?text=A'}" onerror="this.src='https://via.placeholder.com/40/1a1a3a/ef4444?text=A'"><div class="team-name">${m.away.n}</div></div></div><div class="match-stats-row"><div class="stat-item"><div class="stat-label">برد میزبان</div><div class="stat-value" style="color:var(--green)">${toP(hw)}٪</div></div><div class="stat-item"><div class="stat-label">مساوی</div><div class="stat-value" style="color:var(--gold)">${toP(dr)}٪</div></div><div class="stat-item"><div class="stat-label">برد مهمان</div><div class="stat-value" style="color:var(--red)">${toP(aw)}٪</div></div></div><div class="match-promo"><a href="${CONFIG.TG}" target="_blank" onclick="event.stopPropagation()"><i class="fab fa-telegram-plane"></i> پیش‌بینی در ووچینو⁰¹</a></div></div>`}
+function showDetail(m){const c=document.getElementById('matchDetailContent');const evHTML=m.events&&m.events.length?`<div style="margin-top:15px"><h3 style="color:var(--blue);margin-bottom:8px;font-size:.95rem"><i class="fas fa-list"></i> رویدادهای بازی</h3>${m.events.map(e=>`<div class="event-item"><span class="event-min">${toP(e.min)}'</span><span>${e.type==='goal'?'⚽':e.type==='yellow'?'🟨':e.type==='red'?'🟥':'🔄'}</span><span>${e.player}</span><span style="margin-right:auto;font-size:.7rem;color:var(--t2)">${e.team==='home'?m.home.n:m.away.n}</span></div>`).join('')}</div>`:'';const lineHTML=m.lineup?`<div style="margin-top:15px"><h3 style="color:var(--blue);margin-bottom:8px;font-size:.95rem"><i class="fas fa-users"></i> ترکیب رسمی (${m.lineup.home.formation})</h3><div class="lineup-grid"><div class="lineup-team"><h4><img src="${m.home.l}" onerror="this.style.display='none'"> ${m.home.n}</h4>${m.lineup.home.players.map(p=>`<div class="lineup-player"><span class="lineup-num">${toP(p.num)}</span><span>${p.name}</span><span class="lineup-pos">${p.pos}</span></div>`).join('')}</div><div class="lineup-team"><h4><img src="${m.away.l}" onerror="this.style.display='none'"> ${m.away.n}</h4>${m.lineup.away.players.map(p=>`<div class="lineup-player"><span class="lineup-num">${toP(p.num)}</span><span>${p.name}</span><span class="lineup-pos">${p.pos}</span></div>`).join('')}</div></div></div>`:'';const starHTML=m.stars&&m.stars.length?`<div style="margin-top:15px"><h3 style="color:var(--gold);margin-bottom:8px;font-size:.95rem"><i class="fas fa-star"></i> ستاره‌های بازی</h3><div class="star-players">${m.stars.map(s=>`<div class="star-player"><i class="fas fa-star" style="color:var(--gold);font-size:.7rem"></i><span>${s}</span></div>`).join('')}</div></div>`:'';c.innerHTML=`<h2 class="modal-title"><i class="fas fa-futbol"></i> ${m.home.n} vs ${m.away.n}</h2><div style="text-align:center;padding:15px"><div style="display:flex;justify-content:center;align-items:center;gap:15px"><div class="team"><img src="${m.home.l||'https://via.placeholder.com/50'}" style="width:50px;height:50px"><div class="team-name" style="margin-top:5px">${m.home.n}</div></div><div class="score" style="font-size:2rem"><span>${m.hs!==null?toP(m.hs):'-'}</span><span style="color:var(--t2)">-</span><span>${m.as!==null?toP(m.as):'-'}</span></div><div class="team"><img src="${m.away.l||'https://via.placeholder.com/50'}" style="width:50px;height:50px"><div class="team-name" style="margin-top:5px">${m.away.n}</div></div></div>${m.venue?`<p style="color:var(--t2);margin-top:10px;font-size:.85rem"><i class="fas fa-map-marker-alt"></i> ${m.venue}</p>`:''}</div>${evHTML}${lineHTML}${starHTML}<div class="bonus-banner" style="margin-top:15px"><h3 style="color:var(--blue)"><i class="fab fa-telegram-plane"></i> پیش‌بینی و شرط‌بندی</h3><p>برای پیش‌بینی این مسابقه، به ربات ووچینو⁰¹ بپیوندید!</p><a href="${CONFIG.TG}" target="_blank" class="btn btn-tg" style="margin-top:8px"><i class="fab fa-telegram-plane"></i> ورود به ربات</a></div>`;openModal('matchModal')}
+function renderTabs(){document.getElementById('leagueTabs').innerHTML=Object.entries(CONFIG.LEAGUES).map(([k,l],i)=>`<button class="league-tab ${i===0?'active':''}" onclick="loadStandings('${k}',this)">${l.f} ${l.n}</button>`).join('')}
+async function loadStandings(key,btn){document.querySelectorAll('.league-tab').forEach(t=>t.classList.remove('active'));if(btn)btn.classList.add('active');const tb=document.getElementById('standingsBody');tb.innerHTML='<tr><td colspan="10"><div class="loading"><div class="spinner"></div>در حال دریافت...</div></td></tr>';const s=await API.getStandings(key);tb.innerHTML=s.map((t,i)=>{let pc=i<4?'pos-cl':i<6?'pos-el':i>=s.length-3?'pos-rel':'';return`<tr class="${pc}"><td>${toP(t.rank)}</td><td style="text-align:right"><div class="team-cell"><img src="${t.logo}" onerror="this.style.display='none'"><span>${t.team}</span></div></td><td>${toP(t.played)}</td><td>${toP(t.win)}</td><td>${toP(t.draw)}</td><td>${toP(t.lose)}</td><td>${toP(t.gf)}</td><td>${toP(t.ga)}</td><td>${toP(t.gd)}</td><td style="font-weight:700;color:var(--blue)">${toP(t.points)}</td></tr>`}).join('')}
+async function loadMatches(type,id){const c=document.getElementById(id);const m=await API.getMatches(type);if(!m||!m.length){c.innerHTML='<div class="loading"><i class="fas fa-futbol" style="font-size:2rem;color:var(--t2);margin-bottom:8px"></i><p>مسابقاتی یافت نشد</p></div>';return}c.innerHTML=m.map(x=>renderCard(x,type==='live')).join('')}
+function updateClock(){const now=new Date();const c=document.getElementById('clock'),d=document.getElementById('date');if(c)c.textContent=toP(now.toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit',second:'2-digit'}));if(d)d.textContent=now.toLocaleDateString('fa-IR',{year:'numeric',month:'long',day:'numeric'})}
+let ri=0;function scheduleRefresh(){const iv=CONFIG.RETRY[ri%CONFIG.RETRY.length];setTimeout(async()=>{try{await loadMatches('live','liveMatches');ri=0}catch(e){ri++}scheduleRefresh()},iv)}
+function animateCounters(){document.querySelectorAll('.trust-card .num[data-count]').forEach(el=>{const t=parseInt(el.dataset.count);let cur=0;const step=t/60;const timer=setInterval(()=>{cur+=step;if(cur>=t){cur=t;clearInterval(timer)}el.textContent=toP(Math.floor(cur).toLocaleString())},30)})}
+document.addEventListener('DOMContentLoaded',async()=>{setTimeout(()=>document.getElementById('preloader').classList.add('hide'),1500);new Swiper('.heroSwiper',{loop:true,autoplay:{delay:4e3,disableOnInteraction:false},effect:'fade',fadeEffect:{crossFade:true},pagination:{el:'.swiper-pagination',clickable:true},navigation:{nextEl:'.swiper-button-next',prevEl:'.swiper-button-prev'}});updateClock();setInterval(updateClock,1e3);renderTabs();loadStandings('PL',document.querySelector('.league-tab'));loadMatches('live','liveMatches');loadMatches('today','todayMatches');loadMatches('tomorrow','tomorrowMatches');scheduleRefresh();animateCounters()});
+document.querySelectorAll('.modal-overlay').forEach(o=>{o.addEventListener('click',e=>{if(e.target===o){o.classList.remove('active');document.body.style.overflow=''}})});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.querySelectorAll('.modal-overlay.active').forEach(m=>{m.classList.remove('active');document.body.style.overflow=''})}});
 </script>
 </body>
     </html>
