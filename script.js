@@ -1,350 +1,310 @@
-'use strict';
+/* =========================================
+   VOCHINO⁰¹ Dashboard Script
+   Production Ready - Vanilla JS
+   ========================================= */
 
+// Initialize Telegram WebApp
 const tg = window.Telegram?.WebApp;
-if (tg) { tg.ready(); tg.expand(); }
-
-const API_BASE = window.VOCHINO_API_BASE || '/api';
-
-function getUserId() {
-  const path = window.location.pathname.split('/').filter(Boolean);
-  const fromPath = path[path.length - 1];
-  if (fromPath && /^\d+$/.test(fromPath)) return fromPath;
-  const params = new URLSearchParams(window.location.search);
-  if (params.get('id')) return params.get('id');
-  if (tg?.initDataUnsafe?.user?.id) return String(tg.initDataUnsafe.user.id);
-  return null;
+if (tg) {
+    tg.ready();
+    tg.expand();
 }
 
-const USER_ID = getUserId();
+/* --- Global State --- */
+const state = {
+    allConfigs: [
+        {
+            country: "Germany",
+            city: "Berlin",
+            flag: "🇩🇪",
+            protocol: "V2Ray",
+            link: "vless://eyJhZGQiOiIxMjMuNDUuNjcuODkiLCJhaWQiOiIwIiwiYWxnIjoibm9uZSIsImhvc3QiOiIiLCJpZCI6IjEyMzQ1Njc4LTkwYWItYzRkZS1mZzEyMzQ1Njc4OTBhYiIsInBhdGgiOiIvIiwicG9ydCI6IjQ0MyIsInBzeSI6Im5vbmUiLCJzY3kiOiJhdXRvIiwic25pIjoiIiwidGxzIjoiIiwidHlwZSI6Im5vbmUiLCJ2IjoiMiJ9",
+            status: "green"
+        },
+        {
+            country: "Japan",
+            city: "Tokyo",
+            flag: "🇯🇵",
+            protocol: "VLESS",
+            link: "vless://b128f6a7-7e3a-4a2b-9c0d-1e2f3a4b5c6d@45.67.89.10:443?security=auto&type=ws&host=example.com&path=/ws#Japan-Tokyo",
+            status: "yellow"
+        },
+        {
+            country: "USA",
+            city: "New York",
+            flag: "🇺🇸",
+            protocol: "Trojan",
+            link: "trojan://password@45.76.98.12:443?security=tls&sni=example.com#USA-New-York",
+            status: "purple"
+        },
+        {
+            country: "Singapore",
+            city: "Singapore",
+            flag: "🇸🇬",
+            protocol: "Shadowsocks",
+            link: "ss://YWVzLTI1Ni1nY206cGFzc3dvcmQ@45.76.98.13:443#Singapore",
+            status: "cyan"
+        },
+        {
+            country: "France",
+            city: "Paris",
+            flag: "🇫🇷",
+            protocol: "V2Ray",
+            link: "vless://eyJhZGQiOiI4OC45OS4xMC4xMSIsImFpZCI6IjAiLCJhbGciOiJub25lIiwiaG9zdCI6IiIsImlkIjoiOTg3NjU0MzItMTBhYi1jZGVmLWYxMjM0NTY3ODkwYWIiLCJwYXRoIjoiLyIsInBvcnQiOiI0NDMiLCJwc3kiOiJub25lIiwic2N5IjoiYXV0byIsInNuaSI6IiIsInRscyI6IiIsInR5cGUiOiJub25lIiwidiI6IjIifQ==",
+            status: "green"
+        }
+    ],
+    shownCount: 5,
+    ripples: true
+};
 
-const RING_CIRC = 2 * Math.PI * 60;
+/* --- DOM Elements --- */
+const elements = {
+    menuBtn: document.getElementById('menuBtn'),
+    sidebar: document.getElementById('sidebar'),
+    sidebarOverlay: document.getElementById('sidebarOverlay'),
+    marqueeText: document.getElementById('marqueeText'),
+    configList: document.getElementById('configList'),
+    showMoreBtn: document.getElementById('showMoreBtn'),
+    copyAllBtn: document.getElementById('copyAllBtn'),
+    qrModal: document.getElementById('qrModal'),
+};
 
-const SLOGANS = [
-  'خاص بودن انتخاب شماست | ووچینو⁰۱',
-  'امنیت پایدار، سرعت بی‌نهایت و بدون قطعی',
-  'پشتیبانی ویژه، کارمزد رقابتی و نرخ منصفانه'
+/* --- 1. Sidebar Toggle --- */
+function toggleSidebar(open) {
+    if (open) {
+        elements.sidebar.classList.add('open');
+        elements.sidebarOverlay.classList.add('open');
+    } else {
+        elements.sidebar.classList.remove('open');
+        elements.sidebarOverlay.classList.remove('open');
+    }
+}
+
+elements.menuBtn.addEventListener('click', () => toggleSidebar(true));
+elements.sidebarOverlay.addEventListener('click', () => toggleSidebar(false));
+
+/* --- 2. Marquee Text Rotation --- */
+const marqueeMessages = [
+    "خاص بودن انتخاب شماست | Vochino⁰¹",
+    "امنیت پایدار، انتخابی هوشمند.",
+    "سرعت تحویل بی‌نهایت",
+    "کارمزد رقابتی و نرخ منصفانه",
+    "پشتیبانی ویژه : 7/24"
 ];
+let marqueeIndex = 0;
+let isFading = false;
 
-function initMarquee() {
-  const el = document.getElementById('marqueeText');
-  if (!el) return;
-  let i = 0;
-  setInterval(() => {
-    el.classList.add('fade');
+function rotateMarquee() {
+    if (isFading) return;
+    isFading = true;
+    
+    // Fade out
+    elements.marqueeText.style.opacity = '0';
+    elements.marqueeText.style.transform = 'translateY(10px)';
+    
     setTimeout(() => {
-      i = (i + 1) % SLOGANS.length;
-      el.textContent = SLOGANS[i];
-      el.classList.remove('fade');
-    }, 600);
-  }, 8000);
+        marqueeIndex = (marqueeIndex + 1) % marqueeMessages.length;
+        elements.marqueeText.textContent = marqueeMessages[marqueeIndex];
+        
+        // Fade in
+        elements.marqueeText.style.opacity = '1';
+        elements.marqueeText.style.transform = 'translateY(0)';
+        isFading = false;
+    }, 500);
+}
+setInterval(rotateMarquee, 5000); // Change every 5 seconds
+
+/* --- 3. Ripple Effect --- */
+function createRipple(event) {
+    const button = event.currentTarget;
+    const circle = document.createElement('span');
+    const diameter = Math.max(button.clientWidth, button.clientHeight);
+    const radius = diameter / 2;
+    const rect = button.getBoundingClientRect();
+    
+    circle.style.width = circle.style.height = `${diameter}px`;
+    circle.style.left = `${event.clientX - rect.left - radius}px`;
+    circle.style.top = `${event.clientY - rect.top - radius}px`;
+    circle.classList.add('ripple');
+    
+    const existingRipple = button.querySelector('.ripple');
+    if (existingRipple) {
+        existingRipple.remove();
+    }
+    
+    button.appendChild(circle);
 }
 
-function initSidebar() {
-  const toggle = document.getElementById('menuToggle');
-  const sidebar = document.getElementById('sidebar');
-  const overlay = document.getElementById('sidebarOverlay');
-  if (!toggle || !sidebar || !overlay) return;
+document.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', createRipple);
+});
 
-  function open() {
-    sidebar.classList.add('open');
-    overlay.classList.add('show');
-  }
-  function close() {
-    sidebar.classList.remove('open');
-    overlay.classList.remove('show');
-  }
-  toggle.addEventListener('click', () => {
-    sidebar.classList.contains('open') ? close() : open();
-  });
-  overlay.addEventListener('click', close);
-
-  document.querySelectorAll('.nav-item').forEach(item => {
-    item.addEventListener('click', (e) => {
-      e.preventDefault();
-      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-      item.classList.add('active');
-      close();
-      const tab = item.dataset.tab;
-      const target = document.querySelector(`[data-section="${tab}"]`);
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+/* --- 4. Config Rendering --- */
+function renderConfigList(data) {
+    elements.configList.innerHTML = '';
+    const shownData = data.slice(0, state.shownCount);
+    
+    shownData.forEach(config => {
+        const item = document.createElement('div');
+        item.className = 'config-item';
+        item.innerHTML = `
+            <button class="copy-btn" onclick="copyConfig(this, '${config.link}')">کپی 📋</button>
+            <span class="flag">${config.flag}</span>
+            <span class="server-name">${config.country} - ${config.city}</span>
+            <span class="protocol ${config.protocol.toLowerCase()}">${config.protocol}</span>
+            <span class="config-link" title="${config.link}">${config.link.substring(0, 20)}...</span>
+            <button class="qr-btn" onclick="showQR('${config.link}')">📱</button>
+            <span class="status-dot ${config.status}"></span>
+        `;
+        elements.configList.appendChild(item);
     });
-  });
+    
+    // Hide "Show More" if all configs are shown
+    if (data.length <= state.shownCount) {
+        elements.showMoreBtn.style.display = 'none';
+    } else {
+        elements.showMoreBtn.style.display = 'block';
+    }
 }
 
-function showToast(msg) {
-  const toast = document.getElementById('toast');
-  if (!toast) return;
-  toast.textContent = msg;
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 2200);
-}
-
-function copyText(text) {
-  if (navigator.clipboard?.writeText) {
-    return navigator.clipboard.writeText(text);
-  }
-  const ta = document.createElement('textarea');
-  ta.value = text;
-  ta.style.position = 'fixed';
-  ta.style.opacity = '0';
-  document.body.appendChild(ta);
-  ta.select();
-  try { document.execCommand('copy'); } catch (e) {}
-  document.body.removeChild(ta);
-  return Promise.resolve();
-}
-
-function setRing(circleEl, percent) {
-  if (!circleEl) return;
-  const clamped = Math.max(0, Math.min(100, percent));
-  const offset = RING_CIRC - (clamped / 100) * RING_CIRC;
-  circleEl.style.strokeDasharray = RING_CIRC;
-  circleEl.style.strokeDashoffset = offset;
-}
-
-function formatBytes(bytes) {
-  if (!bytes || bytes <= 0) return '0 MB';
-  const gb = bytes / (1024 ** 3);
-  if (gb >= 1) return gb.toFixed(1) + ' GB';
-  const mb = bytes / (1024 ** 2);
-  return mb.toFixed(0) + ' MB';
-}
-
-function renderProfile(data) {
-  const nameEl = document.getElementById('profileName');
-  const idEl = document.getElementById('profileId');
-  const avatarEl = document.getElementById('avatarImg');
-  if (nameEl && data.name) nameEl.textContent = data.name;
-  if (idEl) idEl.textContent = data.userId || USER_ID || '--';
-  if (avatarEl && data.avatarUrl) avatarEl.src = data.avatarUrl;
-}
-
-function renderSubscription(data) {
-  const daysLeftEl = document.getElementById('daysLeft');
-  const daysTotalEl = document.getElementById('daysTotal');
-  const expireDateEl = document.getElementById('expireDate');
-  const ring = document.getElementById('ringDays');
-
-  const daysLeft = Math.max(0, data.daysLeft ?? 0);
-  const daysTotal = data.daysTotal ?? 0;
-
-  if (daysLeftEl) daysLeftEl.textContent = daysLeft;
-  if (daysTotalEl) daysTotalEl.textContent = daysTotal;
-  if (expireDateEl) expireDateEl.textContent = data.expireDate || '--';
-
-  const percent = daysTotal > 0 ? (daysLeft / daysTotal) * 100 : 0;
-  setRing(ring, percent);
-}
-
-function renderTraffic(data) {
-  const percentEl = document.getElementById('volumePercent');
-  const usedEl = document.getElementById('volumeUsed');
-  const totalEl = document.getElementById('volumeTotal');
-  const remainEl = document.getElementById('volumeRemain');
-  const ring = document.getElementById('ringVolume');
-
-  const usedBytes = data.usedBytes ?? 0;
-  const totalBytes = data.totalBytes ?? 0;
-  const percent = totalBytes > 0 ? Math.min(100, (usedBytes / totalBytes) * 100) : 0;
-  const remainBytes = Math.max(0, totalBytes - usedBytes);
-
-  if (percentEl) percentEl.textContent = Math.round(percent) + '%';
-  if (usedEl) usedEl.textContent = formatBytes(usedBytes);
-  if (totalEl) totalEl.textContent = formatBytes(totalBytes);
-  if (remainEl) remainEl.textContent = formatBytes(remainBytes);
-
-  setRing(ring, percent);
-}
-
-const FLAG_MAP = {
-  germany: '🇩🇪', japan: '🇯🇵', usa: '🇺🇸', us: '🇺🇸',
-  singapore: '🇸🇬', france: '🇫🇷', uk: '🇬🇧', netherlands: '🇳🇱',
-  turkey: '🇹🇷', uae: '🇦🇪', canada: '🇨🇦', default: '🌐'
-};
-
-const PROTO_DOT_COLOR = {
-  v2ray: '#ff2d75', vless: '#ffb020', trojan: '#a855f7',
-  shadowsocks: '#22d3ee', default: '#22d3ee'
-};
-
-function buildConfigRow(cfg, index) {
-  const row = document.createElement('div');
-  row.className = 'config-row';
-
-  const flag = FLAG_MAP[(cfg.flagKey || '').toLowerCase()] || FLAG_MAP.default;
-  const dotColor = PROTO_DOT_COLOR[(cfg.protocol || '').toLowerCase()] || PROTO_DOT_COLOR.default;
-
-  row.innerHTML = `
-    <button class="config-copy-btn" data-uri="${escapeHtml(cfg.uri || '')}" aria-label="کپی">
-      <svg viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
-    </button>
-    <span class="config-flag">${flag}</span>
-    <div>
-      <div class="config-name">${escapeHtml(cfg.name || 'کانفیگ')}</div>
-      <div class="config-uri">${escapeHtml(cfg.uri || '')}</div>
-    </div>
-    <span class="config-proto">${escapeHtml(cfg.protocol || '-')}</span>
-    <button class="config-qr-btn" data-uri="${escapeHtml(cfg.uri || '')}" data-name="${escapeHtml(cfg.name || '')}" aria-label="QR">
-      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-4v4M21 14v3M14 21h3M18 18h3v3"/></svg>
-    </button>
-    <span class="config-dot" style="color:${dotColor}"></span>
-  `;
-
-  const copyBtn = row.querySelector('.config-copy-btn');
-  copyBtn.addEventListener('click', (e) => {
-    ripple(copyBtn, e);
-    copyText(cfg.uri || '').then(() => showToast('کانفیگ کپی شد ✅'));
-  });
-
-  const qrBtn = row.querySelector('.config-qr-btn');
-  qrBtn.addEventListener('click', () => openQrModal(cfg.uri || '', cfg.name || ''));
-
-  return row;
-}
-
-function escapeHtml(str) {
-  const div = document.createElement('div');
-  div.textContent = str;
-  return div.innerHTML;
-}
-
-function ripple(el, event) {
-  const r = document.createElement('span');
-  r.className = 'ripple';
-  const rect = el.getBoundingClientRect();
-  const size = Math.max(rect.width, rect.height);
-  r.style.width = r.style.height = size + 'px';
-  r.style.left = (event.clientX - rect.left - size / 2) + 'px';
-  r.style.top = (event.clientY - rect.top - size / 2) + 'px';
-  el.appendChild(r);
-  setTimeout(() => r.remove(), 500);
-}
-
-let allConfigs = [];
-let showingAll = false;
-const INITIAL_COUNT = 5;
-
-function renderConfigs(configs) {
-  allConfigs = configs || [];
-  const list = document.getElementById('configList');
-  const showAllBtn = document.getElementById('showAllBtn');
-  if (!list) return;
-
-  list.innerHTML = '';
-  const visible = showingAll ? allConfigs : allConfigs.slice(0, INITIAL_COUNT);
-  visible.forEach((cfg, i) => list.appendChild(buildConfigRow(cfg, i)));
-
-  if (showAllBtn) {
-    showAllBtn.style.display = allConfigs.length > INITIAL_COUNT ? 'flex' : 'none';
-  }
-}
-
-function initShowAll() {
-  const btn = document.getElementById('showAllBtn');
-  if (!btn) return;
-  btn.addEventListener('click', () => {
-    showingAll = !showingAll;
-    btn.classList.toggle('open', showingAll);
-    btn.firstChild.textContent = showingAll ? 'نمایش کمتر ' : 'نمایش همه کانفیگ‌ها ';
-    renderConfigs(allConfigs);
-  });
-}
-
-function initCopyAll() {
-  const btn = document.getElementById('copyAllBtn');
-  if (!btn) return;
-  btn.addEventListener('click', () => {
-    const all = allConfigs.map(c => c.uri).filter(Boolean).join('\n');
-    if (!all) { showToast('کانفیگی برای کپی نیست'); return; }
-    copyText(all).then(() => showToast('همه کانفیگ‌ها کپی شد ✅'));
-  });
-}
-
-function openQrModal(text, label) {
-  const modal = document.getElementById('qrModal');
-  const canvas = document.getElementById('qrModalCanvas');
-  const labelEl = document.getElementById('qrModalLabel');
-  if (!modal || !canvas) return;
-
-  canvas.innerHTML = '';
-  const img = document.createElement('img');
-  img.width = 200;
-  img.height = 200;
-  img.style.borderRadius = '8px';
-  img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' + encodeURIComponent(text);
-  canvas.appendChild(img);
-
-  if (labelEl) labelEl.textContent = label || '';
-  modal.classList.add('open');
-}
-
-function initQrModal() {
-  const modal = document.getElementById('qrModal');
-  const closeBtn = document.getElementById('qrModalClose');
-  if (!modal || !closeBtn) return;
-  closeBtn.addEventListener('click', () => modal.classList.remove('open'));
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) modal.classList.remove('open');
-  });
-}
-
-function initInstallLinks(data) {
-  const map = {
-    dlAndroid: data.androidUrl,
-    dlIos: data.iosUrl,
-    dlWindows: data.windowsUrl
-  };
-  Object.entries(map).forEach(([id, url]) => {
-    const el = document.getElementById(id);
-    if (el && url) el.href = url;
-    if (el) el.addEventListener('click', function (e) {
-      if (!this.getAttribute('href') || this.getAttribute('href') === '#') e.preventDefault();
+function copyConfig(btn, link) {
+    navigator.clipboard.writeText(link).then(() => {
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '✓';
+        btn.style.color = 'green';
+        setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.style.color = '';
+        }, 1500);
     });
-  });
 }
 
-function sampleData() {
-  return {
-    profile: { name: 'کاربر ووچینو⁰۱', userId: USER_ID || '------', avatarUrl: '' },
-    subscription: { daysLeft: 0, daysTotal: 30, expireDate: '--' },
-    traffic: { usedBytes: 0, totalBytes: 5 * 1024 ** 3 },
-    configs: [],
-    downloads: { androidUrl: '', iosUrl: '', windowsUrl: '' }
-  };
+elements.showMoreBtn.addEventListener('click', () => {
+    state.shownCount = state.allConfigs.length;
+    renderConfigList(state.allConfigs);
+});
+
+elements.copyAllBtn.addEventListener('click', () => {
+    const allLinks = state.allConfigs.map(c => c.link).join('\n');
+    navigator.clipboard.writeText(allLinks).then(() => {
+        const originalText = elements.copyAllBtn.innerHTML;
+        elements.copyAllBtn.innerHTML = '✓ کپی شد!';
+        elements.copyAllBtn.style.color = 'green';
+        setTimeout(() => {
+            elements.copyAllBtn.innerHTML = originalText;
+            elements.copyAllBtn.style.color = '';
+        }, 1500);
+    });
+});
+
+/* --- 5. QR Modal --- */
+function showQR(link) {
+    const modal = elements.qrModal;
+    modal.classList.add('open');
+    // TODO: نیاز به تأیید (استفاده از کتابخانه QR واقعی مثل qrcode.js)
+    const qrDiv = modal.querySelector('.qr-code');
+    qrDiv.textContent = "QR";
+    qrDiv.title = link;
 }
 
-async function fetchDashboardData() {
-  if (!USER_ID) return sampleData();
-  try {
-    const res = await fetch(`${API_BASE}/sub-info/${USER_ID}`, { headers: { 'Accept': 'application/json' } });
-    if (!res.ok) throw new Error('bad status');
-    const json = await res.json();
-    return {
-      profile: json.profile || {},
-      subscription: json.subscription || {},
-      traffic: json.traffic || {},
-      configs: json.configs || [],
-      downloads: json.downloads || {}
+function closeQR() {
+    elements.qrModal.classList.remove('open');
+}
+
+document.querySelector('.close-btn').addEventListener('click', closeQR);
+elements.qrModal.addEventListener('click', (e) => {
+    if (e.target === elements.qrModal) closeQR();
+});
+
+/* --- 6. Progress Ring Animation --- */
+function animateProgressRing(ringElement, targetPercent) {
+    // Start from 0
+    ringElement.style.background = `conic-gradient(var(--neon-blue) 0% 0%, #222 0% 100%)`;
+    
+    let current = 0;
+    const interval = setInterval(() => {
+        current++;
+        if (current > targetPercent) {
+            clearInterval(interval);
+            return;
+        }
+        if (ringElement.classList.contains('ring-orange')) {
+            ringElement.style.background = `conic-gradient(#ffb300 0% ${current}%, #222 ${current}% 100%)`;
+        } else {
+            ringElement.style.background = `conic-gradient(var(--neon-blue) 0% ${current}%, #222 ${current}% 100%)`;
+        }
+    }, 15); // Fast animation to look smooth
+}
+
+/* --- 7. Dynamic Data Rendering (renderDashboard) --- */
+function renderDashboard(data) {
+    // Profile
+    document.getElementById('profileName').textContent = data.user.name || 'کارلن ووچینو⁰¹';
+    document.getElementById('profileUsername').textContent = data.user.username || 'نام کاربر';
+    document.getElementById('profileId').textContent = data.user.id || 'شناسه کاربر';
+    if (data.user.avatar) {
+        document.querySelector('.avatar').src = data.user.avatar;
+    }
+    
+    // Subscription Status
+    document.getElementById('daysLeft').textContent = data.subscription.daysLeft;
+    document.getElementById('totalDays').textContent = `${data.subscription.totalDays} روز`;
+    document.getElementById('expiryDate').textContent = `${data.subscription.expiryDate} تاریخ انقضا`;
+    const subPercent = (data.subscription.daysLeft / data.subscription.totalDays) * 100;
+    animateProgressRing(document.querySelector('.ring-orange'), subPercent);
+    
+    // Volume Status
+    document.getElementById('percentUsed').textContent = data.volume.percent + '%';
+    document.getElementById('totalUsed').textContent = `${data.volume.used} / ${data.volume.total} GB`;
+    document.getElementById('remainingTraffic').textContent = `${data.volume.remaining} GB ترافیک باقی‌مانده`;
+    animateProgressRing(document.querySelector('.ring-blue'), data.volume.percent);
+    
+    // Configs
+    state.allConfigs = data.configs;
+    state.shownCount = 5;
+    renderConfigList(state.allConfigs);
+    
+    // App Links
+    const appLinks = data.apps;
+    const appLinkElements = document.querySelectorAll('.app-list .app-link');
+    appLinkElements.forEach((el, index) => {
+        if (appLinks[index]) {
+            el.href = appLinks[index].url;
+            el.textContent = `${appLinks[index].name} علامتش ↗`;
+        }
+    });
+}
+
+/* --- Initial Load --- */
+document.addEventListener('DOMContentLoaded', () => {
+    // Placeholder Data (Simulating backend response)
+    const mockData = {
+        user: {
+            name: 'کارلن ووچینو⁰¹',
+            username: 'کاربر نمونه',
+            id: '123456789',
+            avatar: null
+        },
+        subscription: {
+            daysLeft: 76,
+            totalDays: 90,
+            expiryDate: '1403/07/20'
+        },
+        volume: {
+            percent: 65,
+            used: '65.2',
+            total: '100',
+            remaining: '34.8'
+        },
+        configs: state.allConfigs,
+        apps: [
+            { name: 'Happ', url: '#' }, // TODO: نیاز به تأیید (لینک مستقیم Happ.apk)
+            { name: 'Vitore', url: '#' }, // TODO: نیاز به تأیید (لینک مستقیم Vitore)
+            { name: 'VitoreX', url: '#' }, // TODO: نیاز به تأیید (لینک مستقیم VitoreX)
+            { name: 'Npester', url: '#' } // TODO: نیاز به تأیید (لینک مستقیم Npester)
+        ]
     };
-  } catch (err) {
-    console.warn('خطا در دریافت اطلاعات، نمایش داده نمونه', err);
-    return sampleData();
-  }
-}
-
-async function boot() {
-  initMarquee();
-  initSidebar();
-  initShowAll();
-  initCopyAll();
-  initQrModal();
-
-  const data = await fetchDashboardData();
-  renderProfile(data.profile);
-  renderSubscription(data.subscription);
-  renderTraffic(data.traffic);
-  renderConfigs(data.configs);
-  initInstallLinks(data.downloads);
-}
-
-document.addEventListener('DOMContentLoaded', boot);
+    
+    renderDashboard(mockData);
+});
