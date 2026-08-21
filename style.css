@@ -870,3 +870,28 @@ button {
         font-size: 0.6rem;
     }
   }
+/* === فیکس نهایی چیدمان موبایل === */
+@media (max-width: 600px) {
+    .status-cards {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 8px !important;
+    }
+    .bottom-cards {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 8px !important;
+    }
+    .circle-container {
+        width: 100px !important;
+        height: 100px !important;
+    }
+    .circle-progress::before {
+        width: 90px !important;
+        height: 90px !important;
+    }
+    .inner-content h1 {
+        font-size: 1.5rem !important;
+    }
+    .card {
+        padding: 8px !important;
+    }
+}
