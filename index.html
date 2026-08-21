@@ -1,245 +1,264 @@
-<!-- File: index.html -->
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Vochino⁰¹ | داشبورد</title>
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>VOCHINO⁰¹ | داشبورد</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
-
-<div class="bg-fx"></div>
-
-<div class="app">
-
-  <!-- تابلوی روان بالای صفحه -->
-  <div class="marquee-bar">
-    <span id="marqueeText" class="marquee-text">خاص بودن انتخاب شماست | ووچینو⁰¹</span>
-  </div>
-
-  <!-- دکمه منو موبایل -->
-  <button id="menuToggle" class="menu-toggle" aria-label="منو">
-    <span></span><span></span><span></span>
-  </button>
-
-  <div class="layout">
-
-    <!-- سایدبار -->
-    <aside id="sidebar" class="sidebar">
-      <div class="brand">
-        <span class="brand-name">VOCHINO<sup>01</sup></span>
-      </div>
-
-      <div class="badge-premium">
-        <svg viewBox="0 0 24 24" class="icon-crown"><path d="M2 19h20l-2-9-5 4-3-8-3 8-5-4-2 9z"/></svg>
-        PREMIUM USER
-      </div>
-
-      <nav class="nav-menu">
-        <a href="#" class="nav-item active" data-tab="dashboard">
-          <svg viewBox="0 0 24 24"><path d="M3 9.5 12 3l9 6.5V21a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1V9.5Z"/></svg>
-          داشبورد
-        </a>
-        <a href="#" class="nav-item" data-tab="subscription">
-          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
-          وضعیت اشتراک
-        </a>
-        <a href="#" class="nav-item" data-tab="traffic">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-          مصرف حجم
-        </a>
-        <a href="#" class="nav-item" data-tab="configs">
-          <svg viewBox="0 0 24 24"><path d="M6 3 3 6l3 3M18 3l3 3-3 3M9 21l-3-3 3-3M15 21l3-3-3-3"/></svg>
-          کانفیگ‌ها
-        </a>
-        <a href="#" class="nav-item" data-tab="guide">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 17v-1m0-3a2 2 0 1 0-2-2"/></svg>
-          راهنمای نصب
-        </a>
-        <a href="#" class="nav-item" data-tab="apps">
-          <svg viewBox="0 0 24 24"><rect x="4" y="3" width="7" height="7" rx="1"/><rect x="13" y="3" width="7" height="7" rx="1"/><rect x="4" y="14" width="7" height="7" rx="1"/><rect x="13" y="14" width="7" height="7" rx="1"/></svg>
-          اپلیکیشن‌ها
-        </a>
-        <a href="#" class="nav-item" data-tab="support">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 10a4 4 0 1 1 5 3.87V16"/><circle cx="12" cy="19" r=".6"/></svg>
-          پشتیبانی
-        </a>
-        <a href="#" class="nav-item" data-tab="faq">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1 .9-1 1.7v.3"/><circle cx="12" cy="17" r=".6"/></svg>
-          سوالات متداول
-        </a>
-      </nav>
-
-      <div class="sidebar-footer">
-        <div class="sidebar-footer-title">VOCHINO01</div>
-        <div class="sidebar-footer-sub">قدرتمند · خاص · متفاوت</div>
-        <div class="social-row">
-          <a href="#" class="social-ic"><svg viewBox="0 0 24 24"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7Z"/></svg></a>
-          <a href="#" class="social-ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
-          <a href="#" class="social-ic"><svg viewBox="0 0 24 24"><path d="M23 12a11 11 0 1 0-12.7 10.9v-7.7H7.9V12h2.4V9.8c0-2.4 1.4-3.7 3.6-3.7 1 0 2.1.2 2.1.2v2.3h-1.2c-1.2 0-1.6.7-1.6 1.5V12h2.7l-.4 3.2h-2.3v7.7A11 11 0 0 0 23 12Z"/></svg></a>
-          <a href="#" class="social-ic"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="4"/><path d="m10 9 5 3-5 3V9Z"/></svg></a>
+    <!-- 2.1 نوار روان بالای صفحه (Marquee) -->
+    <div class="topbar">
+        <button class="menu-btn" id="menuBtn">☰</button>
+        <div class="marquee-container">
+            <span id="marqueeText" class="marquee-text">خاص بودن انتخاب شماست | Vochino⁰¹</span>
         </div>
-      </div>
+    </div>
+
+    <!-- 2.2 سایدبار (منوی کناری راست) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2 class="logo">VOCHINO⁰¹</h2>
+            <div class="premium-badge">👑 PREMIUM USER</div>
+        </div>
+        <nav class="sidebar-menu">
+            <a href="#" class="active"><span class="icon">🏠</span> داشبورد</a>
+            <a href="#"><span class="icon">📅</span> وضعیت اشتراک</a>
+            <a href="#"><span class="icon">📊</span> مصرف حجم</a>
+            <a href="#"><span class="icon">🔗</span> کانفیگ‌ها</a>
+            <a href="#"><span class="icon">❓</span> راهنمای نصب</a>
+            <a href="#"><span class="icon">📱</span> اپلیکیشن‌ها</a>
+            <a href="#"><span class="icon">🎧</span> پشتیبانی</a>
+            <a href="#"><span class="icon">💬</span> سوالات متداول</a>
+        </nav>
+        <div class="sidebar-footer">
+            <h4>VOCHINO01</h4>
+            <p>قدرتمند · خاص · متفاوت</p>
+            <div class="social-icons">
+                <a href="#" class="social-icon">✈️</a>
+                <a href="#" class="social-icon">📷</a>
+                <a href="#" class="social-icon">▶️</a>
+                <a href="#" class="social-icon">🎮</a>
+            </div>
+        </div>
     </aside>
 
-    <div id="sidebarOverlay" class="sidebar-overlay"></div>
-
-    <!-- محتوای اصلی -->
-    <main class="main">
-
-      <!-- هدر / بنر -->
-      <section class="hero card">
-        <div class="hero-media">
-          <img src="assets/rose-banner.jpg" alt="Vochino" class="hero-img">
-          <div class="hero-shine"></div>
-        </div>
-        <div class="profile-card">
-          <div class="avatar-ring">
-            <img id="avatarImg" src="assets/avatar-default.png" alt="کاربر" class="avatar-img">
-          </div>
-          <div class="profile-name" id="profileName">کاران ووچینو⁰¹</div>
-          <div class="profile-row">
-            <span class="profile-label">نام کاربر</span>
-            <svg viewBox="0 0 24 24" class="profile-ic"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
-          </div>
-          <div class="profile-row">
-            <span class="profile-label" id="profileId">شناسه کاربر</span>
-            <svg viewBox="0 0 24 24" class="profile-ic"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 9h4M7 13h7"/></svg>
-          </div>
-          <div class="diamonds">
-            <span>💎</span><span>💎</span><span>💎</span><span>💎</span><span>💎</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- وضعیت اشتراک + حجم -->
-      <section class="stats-grid">
-        <div class="card stat-card">
-          <div class="stat-head">
-            <span class="stat-title stat-title--orange">وضعیت اشتراک</span>
-            <svg viewBox="0 0 24 24" class="stat-ic"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
-          </div>
-          <div class="ring-wrap">
-            <svg class="ring ring--orange" viewBox="0 0 140 140">
-              <circle class="ring-bg" cx="70" cy="70" r="60"></circle>
-              <circle id="ringDays" class="ring-fg" cx="70" cy="70" r="60"></circle>
-            </svg>
-            <div class="ring-sweep ring-sweep--orange"></div>
-            <div class="ring-center">
-              <span id="daysLeft" class="ring-value">--</span>
-              <span class="ring-unit">روز باقی مانده</span>
+    <!-- Main Content -->
+    <main class="dashboard-container">
+        <!-- 2.3 بنر اصلی + کارت پروفایل -->
+        <section class="banner-section">
+            <div class="banner">
+                <!-- TODO: 需要確認 (بنر اصلی گل رز فایل جدا ارسال می‌شود) -->
+                <div class="banner-bg" style="background-image: url('https://placehold.co/600x400/1a1a1a/ff1744?text=Rose+Image');"></div>
+                <div class="banner-shine"></div>
+                <!-- کارت پروفایل -->
+                <div class="profile-card">
+                    <div class="avatar-wrapper">
+                        <div class="avatar-ring"></div>
+                        <img src="https://placehold.co/100x100/222/ff1744?text=Avatar" alt="Avatar" class="avatar">
+                    </div>
+                    <h3 id="profileName">کارلن ووچینو⁰¹</h3>
+                    <div class="info-row">
+                        <span class="icon">👤</span>
+                        <span id="profileUsername">نام کاربر</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="icon">🪪</span>
+                        <span id="profileId">شناسه کاربر</span>
+                    </div>
+                    <div class="diamonds">
+                        <span>💎</span><span>💎</span><span>💎</span><span>💎</span><span>💎</span>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="stat-total"><span id="daysTotal">--</span> روز</div>
-          <div class="stat-foot">
-            <span>تاریخ انقضا: </span><span id="expireDate">--</span>
-          </div>
-        </div>
+        </section>
 
-        <div class="card stat-card">
-          <div class="stat-head">
-            <span class="stat-title stat-title--blue">وضعیت حجم</span>
-            <svg viewBox="0 0 24 24" class="stat-ic"><circle cx="12" cy="12" r="9"/><path d="M8 12a4 4 0 0 1 8 0"/><circle cx="12" cy="12" r="1.5"/></svg>
-          </div>
-          <div class="ring-wrap">
-            <svg class="ring ring--blue" viewBox="0 0 140 140">
-              <circle class="ring-bg" cx="70" cy="70" r="60"></circle>
-              <circle id="ringVolume" class="ring-fg" cx="70" cy="70" r="60"></circle>
-            </svg>
-            <div class="ring-sweep ring-sweep--blue"></div>
-            <div class="ring-center">
-              <span id="volumePercent" class="ring-value">--%</span>
-              <span class="ring-unit">مصرف شده</span>
+        <!-- 2.4 دو کارت وضعیت -->
+        <section class="status-cards">
+            <!-- وضعیت اشتراک -->
+            <div class="card status-card">
+                <div class="card-head">
+                    <h3 class="orange-text">وضعیت اشتراک</h3>
+                    <span class="icon">📅</span>
+                </div>
+                <div class="circle-container">
+                    <div class="radar-sweep orange-sweep"></div>
+                    <div class="circle-progress ring-orange">
+                        <div class="inner-content">
+                            <h1 id="daysLeft">76</h1>
+                            <span>روز</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="total-text" id="totalDays">90 روز</p>
+                <div class="pill-info" id="expiryDate">1403/07/20 تاریخ انقضا</div>
             </div>
-          </div>
-          <div class="stat-total"><span id="volumeUsed">--</span> / <span id="volumeTotal">--</span></div>
-          <div class="stat-foot">
-            <span>ترافیک باقی مانده: </span>
-            <span class="pill" id="volumeRemain">--</span>
-          </div>
-        </div>
-      </section>
 
-      <!-- کانفیگ‌ها -->
-      <section class="card configs-card">
-        <div class="configs-head">
-          <button class="copy-all-btn" id="copyAllBtn">
-            <svg viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
-            کپی همه کانفیگ‌ها
-          </button>
-          <h2 class="configs-title">کانفیگ‌های شما <span class="arrows">«</span></h2>
-        </div>
+            <!-- وضعیت حجم -->
+            <div class="card status-card">
+                <div class="card-head">
+                    <h3 class="blue-text">وضعیت حجم</h3>
+                    <span class="icon">📊</span>
+                </div>
+                <div class="circle-container">
+                    <div class="radar-sweep blue-sweep"></div>
+                    <div class="circle-progress ring-blue">
+                        <div class="inner-content">
+                            <h1 id="percentUsed">65%</h1>
+                            <span>مصرف شده</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="total-text" id="totalUsed">65.2 GB / 100 GB</p>
+                <div class="pill-info" id="remainingTraffic">34.8 GB ترافیک باقی‌مانده</div>
+            </div>
+        </section>
 
-        <div id="configList" class="config-list">
-          <!-- ردیف‌های کانفیگ به‌صورت داینامیک از script.js اینجا رندر می‌شوند -->
-        </div>
+        <!-- 2.5 بخش کانفیگ‌ها -->
+        <section class="card configs-section">
+            <div class="configs-header">
+                <h3>کانفیگ‌های شما</h3>
+                <button class="copy-all-btn" id="copyAllBtn">کپی همه‌ی کانفیگ‌ها 📋</button>
+            </div>
+            <div class="config-list" id="configList">
+                <!-- نمونه داینامیک (قابل جایگزینی با JS) -->
+                <div class="config-item">
+                    <button class="copy-btn" onclick="copyConfig(this)">کپی 📋</button>
+                    <span class="flag">🇩🇪</span>
+                    <span class="server-name">Germany - Berlin</span>
+                    <span class="protocol v2ray">V2Ray</span>
+                    <span class="config-link" title="vless://...">vless://eyJhZG...</span>
+                    <button class="qr-btn" onclick="showQR(this)">📱</button>
+                    <span class="status-dot green"></span>
+                </div>
+                <div class="config-item">
+                    <button class="copy-btn" onclick="copyConfig(this)">کپی 📋</button>
+                    <span class="flag">🇯🇵</span>
+                    <span class="server-name">Japan - Tokyo</span>
+                    <span class="protocol vless">VLESS</span>
+                    <span class="config-link" title="vless://...">vless://b128f6...</span>
+                    <button class="qr-btn" onclick="showQR(this)">📱</button>
+                    <span class="status-dot yellow"></span>
+                </div>
+                <div class="config-item">
+                    <button class="copy-btn" onclick="copyConfig(this)">کپی 📋</button>
+                    <span class="flag">🇺🇸</span>
+                    <span class="server-name">USA - New York</span>
+                    <span class="protocol trojan">Trojan</span>
+                    <span class="config-link" title="trojan://...">trojan://passw...</span>
+                    <button class="qr-btn" onclick="showQR(this)">📱</button>
+                    <span class="status-dot purple"></span>
+                </div>
+                <div class="config-item">
+                    <button class="copy-btn" onclick="copyConfig(this)">کپی 📋</button>
+                    <span class="flag">🇸🇬</span>
+                    <span class="server-name">Singapore</span>
+                    <span class="protocol shadowsocks">Shadowsocks</span>
+                    <span class="config-link" title="ss://...">ss://YWVzLT...</span>
+                    <button class="qr-btn" onclick="showQR(this)">📱</button>
+                    <span class="status-dot cyan"></span>
+                </div>
+                <div class="config-item">
+                    <button class="copy-btn" onclick="copyConfig(this)">کپی 📋</button>
+                    <span class="flag">🇫🇷</span>
+                    <span class="server-name">France - Paris</span>
+                    <span class="protocol v2ray">V2Ray</span>
+                    <span class="config-link" title="vless://...">vless://eyJhZG...</span>
+                    <button class="qr-btn" onclick="showQR(this)">📱</button>
+                    <span class="status-dot green"></span>
+                </div>
+            </div>
+            <button class="show-more-btn" id="showMoreBtn">نمایش همه‌ی کانفیگ‌ها ⌄</button>
+        </section>
 
-        <button id="showAllBtn" class="show-all-btn">
-          نمایش همه کانفیگ‌ها
-          <svg viewBox="0 0 24 24" class="chev"><path d="m6 9 6 6 6-6"/></svg>
-        </button>
-      </section>
+        <!-- 2.6 دو کارت پایینی -->
+        <section class="bottom-cards">
+            <!-- نصب آسان -->
+            <div class="card device-card">
+                <h3 class="pink-title">نصب آسان در همه دستگاه‌ها</h3>
+                <div class="device-row">
+                    <!-- TODO: 需要確認 (لینک‌های واقعی دانلود اپلیکیشن‌ها - Happ, Vitore, VitoreX, Npester) -->
+                    <div class="device-item">
+                        <div class="device-icon">🤖</div>
+                        <span>Android</span>
+                        <a href="#" class="btn-small">دانلود ›</a>
+                    </div>
+                    <div class="device-item">
+                        <div class="device-icon">🍎</div>
+                        <span>iOS (iPhone)</span>
+                        <a href="#" class="btn-small">دانلود ›</a>
+                    </div>
+                    <div class="device-item">
+                        <div class="device-icon">💻</div>
+                        <span>Windows</span>
+                        <a href="#" class="btn-small">دانلود ›</a>
+                    </div>
+                </div>
+                <!-- نصب مستقیم (دسترسی سریع) -->
+                <div class="app-direct-row">
+                    <h4>نصب مستقیم (Happ.apk، Vitore، VitoreX، Npester) <!-- TODO: 需要確認 (لینک‌های Happ.apk و ...) --></h4>
+                    <div class="app-list">
+                        <a href="#" class="app-link">Happ علامتش ↗</a>
+                        <a href="#" class="app-link">Vitore علامتش ↗</a>
+                        <a href="#" class="app-link">VitoreX علامتش ↗</a>
+                        <a href="#" class="app-link">Npester علامتش ↗</a>
+                    </div>
+                </div>
+            </div>
 
-      <!-- نصب آسان + چرا ووچینو -->
-      <section class="bottom-grid">
-        <div class="card install-card">
-          <h3 class="bottom-title bottom-title--pink">نصب آسان در همه دستگاه‌ها</h3>
-          <div class="install-row">
-            <a href="#" class="install-item" id="dlAndroid">
-              <svg viewBox="0 0 24 24" class="os-ic os-ic--android"><path d="M7 8h10v9a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2M6 8v6M18 8v6M9 21v1M15 21v1"/></svg>
-              <span>Android</span>
-              <em>دانلود ›</em>
-            </a>
-            <a href="#" class="install-item" id="dlIos">
-              <svg viewBox="0 0 24 24" class="os-ic os-ic--ios"><path d="M16.5 3c.1 1-.3 2-1 2.8-.7.8-1.8 1.4-2.8 1.3-.1-1 .4-2.1 1-2.8.7-.8 1.9-1.4 2.8-1.3ZM19.8 17.2c-.5 1.1-.7 1.6-1.4 2.6-.9 1.4-2.2 3.1-3.8 3.1-1.4 0-1.8-.9-3.7-.9s-2.4.9-3.7.9c-1.6 0-2.8-1.5-3.7-2.9C1.3 16.9.9 12.6 2.6 10.3c1.1-1.6 2.9-2.6 4.5-2.6 1.6 0 2.6 1 3.9 1s2.1-1 3.9-1c1.3 0 2.9.7 3.9 1.9-3.5 1.9-2.9 6.9.9 7.6Z"/></svg>
-              <span>iOS (iPhone)</span>
-              <em>دانلود ›</em>
-            </a>
-            <a href="#" class="install-item" id="dlWindows">
-              <svg viewBox="0 0 24 24" class="os-ic os-ic--win"><path d="M3 5.5 10.5 4.4V11H3V5.5ZM11.5 4.3 21 3v8h-9.5V4.3ZM3 12h7.5v6.6L3 17.5V12Zm8.5 0H21v8l-9.5-1.3V12Z"/></svg>
-              <span>Windows</span>
-              <em>دانلود ›</em>
-            </a>
-          </div>
-        </div>
+            <!-- چرا ووچینو -->
+            <div class="card why-card">
+                <h3 class="gold-title">چرا ووچینو؟</h3>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <div class="feat-icon">🛡️</div>
+                        <span>امنیت کامل</span>
+                        <div class="small-icon">🔒</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feat-icon">🥇</div>
+                        <span>تضمین کیفیت</span>
+                        <div class="small-icon">✅</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feat-icon">🚀</div>
+                        <span>تحویل سریع</span>
+                        <div class="small-icon">⚡</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feat-icon">٪</div>
+                        <span>کارمزد رقابتی</span>
+                        <div class="small-icon">💰</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feat-icon">🎧</div>
+                        <span>پشتیبانی ویژه</span>
+                        <div class="small-icon">💬</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <div class="card why-card">
-          <h3 class="bottom-title bottom-title--gold">چرا ووچینو؟</h3>
-          <div class="why-row">
-            <div class="why-item"><span class="why-ic why-ic--red">🛡️</span><small>امنیت کامل</small></div>
-            <div class="why-item"><span class="why-ic why-ic--gold">🥇</span><small>تضمین کیفیت</small></div>
-            <div class="why-item"><span class="why-ic why-ic--cyan">🚀</span><small>تحویل سریع</small></div>
-            <div class="why-item"><span class="why-ic why-ic--purple">%</span><small>کارمزد رقابتی</small></div>
-            <div class="why-item"><span class="why-ic why-ic--red2">🎧</span><small>پشتیبانی ویژه</small></div>
-          </div>
-        </div>
-      </section>
-
-      <footer class="app-footer">
-        <svg viewBox="0 0 24 24" class="footer-ic"><path d="m22 2-7 20-4-9-9-4 20-7Z"/></svg>
-        <span id="footerBotHandle">@Vochino_bh01_bot</span>
-      </footer>
-
+        <!-- 2.7 فوتر -->
+        <footer class="footer">
+            <span>✈️</span>
+            <a href="https://t.me/Vochino_bh01_bot">@Vochino_bh01_bot</a>
+        </footer>
     </main>
-  </div>
-</div>
 
-<!-- مودال QR -->
-<div id="qrModal" class="qr-modal">
-  <div class="qr-modal-inner">
-    <button id="qrModalClose" class="qr-modal-close">×</button>
-    <div id="qrModalCanvas" class="qr-modal-canvas"></div>
-    <div id="qrModalLabel" class="qr-modal-label"></div>
-  </div>
-</div>
+    <!-- مودال QR -->
+    <div class="qr-modal" id="qrModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeQR()">✖</button>
+            <h3>QR کانفیگ</h3>
+            <!-- TODO: 需要確認 (تولید QR واقعی از لینک) -->
+            <div class="qr-code">QR</div>
+        </div>
+    </div>
 
-<!-- Toast -->
-<div id="toast" class="toast"></div>
-
-<script src="script.js"></script>
 </body>
-            </html>
+              </html>
