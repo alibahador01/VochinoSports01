@@ -23,10 +23,10 @@
 }
 
 body {
+    overflow-x: hidden;
     background-color: var(--bg-color);
     background-image: var(--bg-gradient);
     color: var(--text-main);
-    overflow-x: hidden;
     min-height: 100vh;
 }
 
@@ -95,7 +95,8 @@ button {
 .sidebar {
     position: fixed;
     top: 0;
-    right: -280px;
+    right: 0;
+    transform: translateX(280px);
     width: 280px;
     height: 100vh;
     background: #0d0d12;
@@ -109,7 +110,7 @@ button {
 }
 
 .sidebar.open {
-    right: 0;
+    transform: translateX(0);
 }
 
 .sidebar-overlay {
