@@ -1,264 +1,651 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>VOCHINO⁰¹ | داشبورد</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src="script.js" defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vochino⁰¹ | داشبورد</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+/* ============ Design Tokens ============ */
+:root{
+  --bg-color:#0a0a0c;
+  --bg-gradient:radial-gradient(circle at 50% 0%, #2a0a12 0%, #0a0a0c 60%);
+  --card-bg:rgba(20,20,25,.7);
+  --border-color:rgba(255,23,68,.3);
+  --neon-red:#ff1744;
+  --neon-crimson:#ff4d6d;
+  --neon-gold:#ffd700;
+  --neon-blue:#00e5ff;
+  --neon-purple:#b388ff;
+  --text-main:#ffffff;
+  --text-secondary:#a0a0a0;
+  --font-family:'Vazirmatn',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:var(--font-family)}
+body{background-color:var(--bg-color);background-image:var(--bg-gradient);color:var(--text-main);overflow-x:hidden;min-height:100vh}
+a{text-decoration:none;color:inherit}
+button{background:none;border:none;color:inherit;cursor:pointer;font-family:var(--font-family)}
+
+/* ============ Topbar / Marquee ============ */
+.topbar{position:sticky;top:0;z-index:100;background:#000;border-bottom:2px solid var(--neon-red);padding:10px 15px;display:flex;align-items:center;gap:10px;box-shadow:0 4px 15px rgba(255,23,68,.2)}
+.menu-btn{font-size:1.5rem;color:var(--neon-red);line-height:1}
+.marquee-container{flex:1;text-align:center;overflow:hidden;height:24px;display:flex;align-items:center;justify-content:center}
+.marquee-text{font-size:.9rem;font-weight:bold;color:var(--neon-crimson);text-shadow:0 0 10px var(--neon-red);opacity:0;transform:translateY(10px);transition:opacity .5s ease, transform .5s ease}
+.marquee-text.show{opacity:1;transform:translateY(0)}
+.topbar-spacer{width:1.5rem}
+
+/* ============ Sidebar ============ */
+.sidebar{position:fixed;top:0;right:0;transform:translateX(280px);width:280px;height:100vh;background:#0d0d12;border-left:2px solid var(--neon-red);z-index:200;transition:transform .3s ease;padding:20px;display:flex;flex-direction:column;justify-content:space-between}
+.sidebar.open{transform:translateX(0)}
+.sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:150;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.sidebar-overlay.open{opacity:1;pointer-events:auto}
+.sidebar-header{text-align:center;margin-bottom:30px}
+.logo{font-size:1.8rem;color:var(--neon-crimson);text-shadow:0 0 15px var(--neon-red);margin-bottom:15px}
+.logo sup{font-size:1rem}
+.premium-badge{display:inline-block;background:linear-gradient(90deg,#d4af37,#ffd700);color:#000;font-weight:bold;padding:5px 15px;border-radius:20px;font-size:.8rem;box-shadow:0 0 10px rgba(255,215,0,.5)}
+.sidebar-menu{display:flex;flex-direction:column;gap:15px;flex:1;overflow-y:auto}
+.sidebar-menu a{display:flex;align-items:center;gap:15px;padding:12px 15px;border-radius:10px;color:var(--text-secondary);font-size:1rem;transition:all .3s ease}
+.sidebar-menu a.active,.sidebar-menu a:hover{background:rgba(255,23,68,.2);color:var(--text-main);border-right:3px solid var(--neon-red)}
+.sidebar-footer{text-align:center}
+.sidebar-footer h4{color:var(--neon-crimson);margin-bottom:5px}
+.sidebar-footer p{font-size:.8rem;color:var(--text-secondary);margin-bottom:15px}
+.social-icons{display:flex;justify-content:center;gap:10px}
+.social-icon{width:35px;height:35px;border-radius:50%;border:1px solid var(--neon-red);display:flex;align-items:center;justify-content:center;transition:.3s;font-size:1rem}
+.social-icon:hover{background:var(--neon-red);color:#fff}
+
+/* ============ Layout ============ */
+.dashboard-container{padding:15px;max-width:800px;margin:0 auto;padding-bottom:80px}
+.banner-section{margin-bottom:20px}
+.banner{position:relative;width:100%;border-radius:20px;overflow:hidden;border:2px solid var(--neon-red);box-shadow:0 0 20px rgba(255,23,68,.2);height:350px}
+.banner-bg{width:100%;height:100%;background-size:cover;background-position:center;position:absolute;inset:0;z-index:1;
+  background-image:radial-gradient(circle at 35% 40%, #4a0d18 0%, #1a0508 55%, #000 100%);}
+.banner-bg::before{content:'🌹';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:9rem;filter:drop-shadow(0 0 25px var(--neon-red)) saturate(1.4);opacity:.9}
+.banner-shine{position:absolute;top:-50%;left:-80%;width:40px;height:200%;background:rgba(255,255,255,.15);transform:rotate(35deg);z-index:2;animation:shine 6s infinite}
+@keyframes shine{0%{left:-80%}20%{left:120%}100%{left:120%}}
+
+.profile-card{position:absolute;top:15px;right:15px;z-index:3;background:rgba(0,0,0,.8);border:1px solid var(--neon-crimson);border-radius:15px;padding:15px;width:180px;text-align:center;backdrop-filter:blur(5px);box-shadow:0 0 15px rgba(255,23,68,.3)}
+.avatar-wrapper{position:relative;width:70px;height:70px;margin:0 auto 10px}
+.avatar-ring{position:absolute;top:-5px;right:-5px;width:80px;height:80px;border-radius:50%;border:2px solid var(--neon-red);border-top-color:transparent;animation:rotateRing 3s linear infinite}
+@keyframes rotateRing{to{transform:rotate(360deg)}}
+.avatar{width:70px;height:70px;border-radius:50%;object-fit:cover;display:flex;align-items:center;justify-content:center;background:#1a1a1f;font-size:1.6rem}
+.profile-card h3{font-size:.9rem;color:var(--neon-crimson);margin-bottom:10px}
+.info-row{display:flex;align-items:center;justify-content:center;gap:5px;font-size:.8rem;color:var(--text-secondary);margin-bottom:5px}
+.diamonds{margin-top:10px;font-size:.8rem;letter-spacing:2px}
+
+/* ============ Status Cards ============ */
+.status-cards{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:20px}
+.card{background:var(--card-bg);border:1px solid var(--border-color);border-radius:20px;padding:15px;backdrop-filter:blur(10px);position:relative;opacity:0;transform:translateY(30px);animation:slideUp .8s ease forwards}
+@keyframes slideUp{to{opacity:1;transform:translateY(0)}}
+.status-card:nth-child(1){animation-delay:.1s}
+.status-card:nth-child(2){animation-delay:.2s}
+.configs-section{animation-delay:.3s}
+.bottom-cards .card:nth-child(1){animation-delay:.4s}
+.bottom-cards .card:nth-child(2){animation-delay:.5s}
+.card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}
+.card-head h3{font-size:.95rem}
+.orange-text{color:#ffb300}
+.blue-text{color:var(--neon-blue)}
+
+.circle-container{position:relative;width:150px;height:150px;margin:0 auto}
+.circle-progress{width:100%;height:100%;border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center;background:#111}
+.circle-progress::before{content:'';position:absolute;width:140px;height:140px;border-radius:50%;background:#16161a;z-index:1}
+.inner-content{position:relative;z-index:2;text-align:center}
+.inner-content h1{font-size:2.5rem;color:#fff;text-shadow:0 0 10px var(--neon-red)}
+.inner-content span{font-size:.8rem;color:var(--text-secondary);display:block;margin-top:-5px}
+
+/* sweeping glow arc (progress stays static, only the glow highlight rotates) */
+.radar-sweep{position:absolute;inset:0;border-radius:50%;z-index:3;pointer-events:none;animation:radar 5s linear infinite;
+  -webkit-mask:radial-gradient(farthest-side, transparent calc(100% - 14px), #000 calc(100% - 13px));
+  mask:radial-gradient(farthest-side, transparent calc(100% - 14px), #000 calc(100% - 13px));}
+.orange-sweep{background:conic-gradient(from 0deg, transparent 0%, transparent 92%, #ffe082 96%, #ffb300 98%, transparent 100%)}
+.blue-sweep{background:conic-gradient(from 0deg, transparent 0%, transparent 92%, #e0fbff 96%, var(--neon-blue) 98%, transparent 100%)}
+@keyframes radar{to{transform:rotate(360deg)}}
+
+.total-text{text-align:center;font-size:.9rem;color:var(--text-main);margin-top:10px}
+.pill-info{background:rgba(255,255,255,.1);border-radius:20px;padding:5px 10px;text-align:center;font-size:.8rem;color:var(--text-secondary);margin-top:10px}
+
+/* ============ Configs Section ============ */
+.configs-section{margin-bottom:20px}
+.configs-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}
+.configs-header h3{font-size:1.1rem;color:var(--neon-red)}
+.copy-all-btn{background:rgba(255,23,68,.2);border:1px solid var(--neon-red);padding:5px 10px;border-radius:10px;font-size:.8rem;color:var(--neon-crimson);position:relative;overflow:hidden}
+.config-list{display:flex;flex-direction:column;gap:10px}
+.config-item{display:flex;align-items:center;gap:8px;padding:10px;border-radius:10px;background:rgba(0,0,0,.5);border:1px solid #222;font-size:.75rem;flex-wrap:wrap}
+.config-item.hidden-row{display:none}
+.copy-btn{position:relative;overflow:hidden;border:1px solid var(--neon-red);border-radius:5px;padding:3px 8px;color:var(--neon-crimson);font-size:.7rem}
+.flag{font-size:1.2rem}
+.server-name{flex:1;font-weight:bold;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px}
+.protocol{padding:3px 5px;border-radius:4px;font-size:.65rem;background:#333}
+.v2ray{background:#4a148c;color:#ea80fc}
+.vless{background:#b71c1c;color:#ffcdd2}
+.trojan{background:#1a237e;color:#9fa8da}
+.shadowsocks{background:#004d40;color:#80cbc4}
+.config-link{flex:2;color:var(--text-secondary);direction:ltr;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px;font-family:monospace}
+.qr-btn{border:1px solid #555;border-radius:5px;padding:3px 6px;color:#fff;font-size:.9rem}
+.status-dot{width:10px;height:10px;border-radius:50%;box-shadow:0 0 8px currentColor;flex-shrink:0}
+.green{background:#00e676;color:#00e676}
+.yellow{background:#ffea00;color:#ffea00}
+.purple{background:#d500f9;color:#d500f9}
+.cyan{background:#00e5ff;color:#00e5ff}
+.red-dot{background:#ff1744;color:#ff1744}
+.show-more-btn{width:100%;text-align:center;padding:10px;margin-top:10px;color:var(--neon-red);border-top:1px solid #222;font-size:.9rem;display:flex;align-items:center;justify-content:center;gap:6px}
+.show-more-btn .chev{transition:transform .3s ease}
+.show-more-btn.open .chev{transform:rotate(180deg)}
+
+/* ripple */
+.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.5);transform:scale(0);animation:ripple-anim .6s linear;pointer-events:none}
+@keyframes ripple-anim{to{transform:scale(4);opacity:0}}
+
+/* ============ Bottom Cards ============ */
+.bottom-cards{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:20px}
+.pink-title{color:var(--neon-crimson);margin-bottom:15px;text-align:center}
+.gold-title{color:var(--neon-gold);margin-bottom:15px;text-align:center}
+.device-row{display:flex;justify-content:space-around;text-align:center;margin-bottom:20px}
+.device-item{display:flex;flex-direction:column;align-items:center;gap:5px}
+.device-icon{font-size:2rem;background:rgba(255,255,255,.1);border-radius:10px;width:50px;height:50px;display:flex;align-items:center;justify-content:center}
+.device-item span{font-size:.8rem;color:var(--text-secondary)}
+.btn-small{background:var(--neon-crimson);color:#000;padding:3px 8px;border-radius:5px;font-size:.7rem;font-weight:bold}
+.feature-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.feature-item{display:flex;flex-direction:column;align-items:center;text-align:center;gap:5px}
+.feat-icon{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;background:rgba(255,255,255,.1);border:1px solid var(--neon-red)}
+.feature-item span{font-size:.7rem;color:var(--text-secondary)}
+
+/* ============ Footer ============ */
+.footer{text-align:center;padding:20px;border-top:1px solid #222;margin-top:20px;font-size:.9rem;color:var(--neon-crimson)}
+.footer a{color:var(--neon-crimson);text-decoration:underline}
+
+/* ============ QR Modal ============ */
+.qr-modal{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:300;display:none;align-items:center;justify-content:center}
+.qr-modal.open{display:flex}
+.modal-content{background:#111;padding:20px;border-radius:15px;text-align:center;border:1px solid var(--neon-red);position:relative}
+.close-btn{position:absolute;top:10px;left:10px;color:#fff;font-size:1.2rem}
+.qr-code{width:200px;height:200px;background:#fff;color:#000;display:flex;align-items:center;justify-content:center;margin:15px auto}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);background:#111;border:1px solid var(--neon-red);color:#fff;padding:10px 20px;border-radius:10px;font-size:.85rem;z-index:400;opacity:0;transition:.3s ease;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ============ Responsive (Mobile) ============ */
+@media (max-width:600px){
+  .banner{height:280px}
+  .banner-bg::before{font-size:6.5rem}
+  .profile-card{right:10px;top:10px;width:150px;padding:10px}
+  .avatar-wrapper{width:50px;height:50px}
+  .avatar{width:50px;height:50px}
+  .avatar-ring{width:60px;height:60px;top:-5px;right:-5px}
+  .profile-card h3{font-size:.8rem}
+  .info-row{font-size:.7rem}
+  .diamonds{font-size:.6rem}
+  .status-cards{grid-template-columns:1fr 1fr;gap:8px}
+  .circle-container{width:100px;height:100px}
+  .circle-progress::before{width:90px;height:90px}
+  .inner-content h1{font-size:1.5rem}
+  .card{padding:8px}
+  .server-name{max-width:60px}
+  .config-link{max-width:60px}
+  .config-item{font-size:.65rem;gap:4px}
+  .copy-btn{padding:2px 4px;font-size:.6rem}
+  .bottom-cards{grid-template-columns:1fr 1fr;gap:8px}
+  .feature-grid{gap:5px}
+  .feat-icon{width:35px;height:35px;font-size:1rem}
+  .feature-item span{font-size:.6rem}
+}
+</style>
 </head>
 <body>
-    <!-- 2.1 نوار روان بالای صفحه (Marquee) -->
-    <div class="topbar">
-        <button class="menu-btn" id="menuBtn">☰</button>
-        <div class="marquee-container">
-            <span id="marqueeText" class="marquee-text">خاص بودن انتخاب شماست | Vochino⁰¹</span>
+
+<!-- ============ Topbar ============ -->
+<div class="topbar">
+  <span class="topbar-spacer"></span>
+  <div class="marquee-container"><span class="marquee-text show" id="marqueeText"></span></div>
+  <button class="menu-btn" id="menuBtn">☰</button>
+</div>
+
+<!-- ============ Sidebar ============ -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<div class="sidebar" id="sidebar">
+  <div>
+    <div class="sidebar-header">
+      <div class="logo">VOCHINO<sup>01</sup></div>
+      <div class="premium-badge" id="premiumBadge">👑 PREMIUM USER</div>
+    </div>
+    <div class="sidebar-menu">
+      <a href="#dashboard" class="active">🏠 داشبورد</a>
+      <a href="#subscription">📅 وضعیت اشتراک</a>
+      <a href="#traffic">⏱️ مصرف حجم</a>
+      <a href="#configs">🔗 کانفیگ‌ها</a>
+      <a href="#install">📖 راهنمای نصب</a>
+      <a href="#apps">📱 اپلیکیشن‌ها</a>
+      <a href="#support" id="sidebarSupportLink">💬 پشتیبانی</a>
+      <a href="#faq">❓ سوالات متداول</a>
+    </div>
+  </div>
+  <div class="sidebar-footer">
+    <h4>VOCHINO01</h4>
+    <p>قدرتمند · خاص · متفاوت</p>
+    <div class="social-icons">
+      <a class="social-icon" id="socialTelegram" target="_blank">✈️</a>
+      <a class="social-icon" id="socialInstagram" target="_blank">📷</a>
+      <a class="social-icon" id="socialYoutube" target="_blank">▶️</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============ Main Dashboard ============ -->
+<div class="dashboard-container" id="dashboard">
+
+  <div class="banner-section">
+    <div class="banner">
+      <div class="banner-bg"><div class="banner-shine"></div></div>
+      <div class="profile-card">
+        <div class="avatar-wrapper">
+          <div class="avatar-ring"></div>
+          <div class="avatar" id="avatarBox">🕵️</div>
         </div>
+        <h3 id="usernameDisplay">—</h3>
+        <div class="info-row"><span>👤 نام کاربر</span></div>
+        <div class="info-row"><span id="userIdDisplay">🪪 شناسه کاربر</span></div>
+        <div class="diamonds" id="diamondsDisplay">💎💎💎💎💎</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="status-cards">
+    <div class="card status-card" id="subscriptionCard">
+      <div class="card-head"><h3 class="orange-text">وضعیت اشتراک</h3><span>📅</span></div>
+      <div class="circle-container">
+        <div class="circle-progress ring-orange" id="subRing">
+          <div class="radar-sweep orange-sweep"></div>
+          <div class="inner-content"><h1 id="subDaysLeft">—</h1><span>روز باقی مانده</span></div>
+        </div>
+      </div>
+      <div class="total-text">از <span id="subTotalDays">—</span> روز</div>
+      <div class="pill-info">تاریخ انقضا: <span id="subExpireDate">—</span></div>
     </div>
 
-    <!-- 2.2 سایدبار (منوی کناری راست) -->
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <h2 class="logo">VOCHINO⁰¹</h2>
-            <div class="premium-badge">👑 PREMIUM USER</div>
+    <div class="card status-card" id="trafficCard">
+      <div class="card-head"><h3 class="blue-text">وضعیت حجم</h3><span>👥</span></div>
+      <div class="circle-container">
+        <div class="circle-progress ring-blue" id="trafficRing">
+          <div class="radar-sweep blue-sweep"></div>
+          <div class="inner-content"><h1 id="trafficPercent">—</h1><span>مصرف شده</span></div>
         </div>
-        <nav class="sidebar-menu">
-            <a href="#" class="active"><span class="icon">🏠</span> داشبورد</a>
-            <a href="#"><span class="icon">📅</span> وضعیت اشتراک</a>
-            <a href="#"><span class="icon">📊</span> مصرف حجم</a>
-            <a href="#"><span class="icon">🔗</span> کانفیگ‌ها</a>
-            <a href="#"><span class="icon">❓</span> راهنمای نصب</a>
-            <a href="#"><span class="icon">📱</span> اپلیکیشن‌ها</a>
-            <a href="#"><span class="icon">🎧</span> پشتیبانی</a>
-            <a href="#"><span class="icon">💬</span> سوالات متداول</a>
-        </nav>
-        <div class="sidebar-footer">
-            <h4>VOCHINO01</h4>
-            <p>قدرتمند · خاص · متفاوت</p>
-            <div class="social-icons">
-                <a href="#" class="social-icon">✈️</a>
-                <a href="#" class="social-icon">📷</a>
-                <a href="#" class="social-icon">▶️</a>
-                <a href="#" class="social-icon">🎮</a>
-            </div>
-        </div>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="dashboard-container">
-        <!-- 2.3 بنر اصلی + کارت پروفایل -->
-        <section class="banner-section">
-            <div class="banner">
-                
-                <div class="banner-bg" style="background-image: url('assets/rose-banner.jpg');"></div>
-                <div class="banner-shine"></div>
-                <!-- کارت پروفایل -->
-                <div class="profile-card">
-                    <div class="avatar-wrapper">
-                        <div class="avatar-ring"></div>
-                        <img src="https://placehold.co/100x100/222/ff1744?text=Avatar" alt="Avatar" class="avatar">
-                    </div>
-                    <h3 id="profileName">کارلن ووچینو⁰¹</h3>
-                    <div class="info-row">
-                        <span class="icon">👤</span>
-                        <span id="profileUsername">نام کاربر</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="icon">🪪</span>
-                        <span id="profileId">شناسه کاربر</span>
-                    </div>
-                    <div class="diamonds">
-                        <span>💎</span><span>💎</span><span>💎</span><span>💎</span><span>💎</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 2.4 دو کارت وضعیت -->
-        <section class="status-cards">
-            <!-- وضعیت اشتراک -->
-            <div class="card status-card">
-                <div class="card-head">
-                    <h3 class="orange-text">وضعیت اشتراک</h3>
-                    <span class="icon">📅</span>
-                </div>
-                <div class="circle-container">
-                    <div class="radar-sweep orange-sweep"></div>
-                    <div class="circle-progress ring-orange">
-                        <div class="inner-content">
-                            <h1 id="daysLeft">76</h1>
-                            <span>روز</span>
-                        </div>
-                    </div>
-                </div>
-                <p class="total-text" id="totalDays">90 روز</p>
-                <div class="pill-info" id="expiryDate">1403/07/20 تاریخ انقضا</div>
-            </div>
-
-            <!-- وضعیت حجم -->
-            <div class="card status-card">
-                <div class="card-head">
-                    <h3 class="blue-text">وضعیت حجم</h3>
-                    <span class="icon">📊</span>
-                </div>
-                <div class="circle-container">
-                    <div class="radar-sweep blue-sweep"></div>
-                    <div class="circle-progress ring-blue">
-                        <div class="inner-content">
-                            <h1 id="percentUsed">65%</h1>
-                            <span>مصرف شده</span>
-                        </div>
-                    </div>
-                </div>
-                <p class="total-text" id="totalUsed">65.2 GB / 100 GB</p>
-                <div class="pill-info" id="remainingTraffic">34.8 GB ترافیک باقی‌مانده</div>
-            </div>
-        </section>
-
-        <!-- 2.5 بخش کانفیگ‌ها -->
-        <section class="card configs-section">
-            <div class="configs-header">
-                <h3>کانفیگ‌های شما</h3>
-                <button class="copy-all-btn" id="copyAllBtn">کپی همه‌ی کانفیگ‌ها 📋</button>
-            </div>
-            <div class="config-list" id="configList">
-                <!-- نمونه داینامیک (قابل جایگزینی با JS) -->
-                <div class="config-item">
-                    <button class="copy-btn" onclick="copyConfig(this)">کپی 📋</button>
-                    <span class="flag">🇩🇪</span>
-                    <span class="server-name">Germany - Berlin</span>
-                    <span class="protocol v2ray">V2Ray</span>
-                    <span class="config-link" title="vless://...">vless://eyJhZG...</span>
-                    <button class="qr-btn" onclick="showQR(this)">📱</button>
-                    <span class="status-dot green"></span>
-                </div>
-                <div class="config-item">
-                    <button class="copy-btn" onclick="copyConfig(this)">کپی 📋</button>
-                    <span class="flag">🇯🇵</span>
-                    <span class="server-name">Japan - Tokyo</span>
-                    <span class="protocol vless">VLESS</span>
-                    <span class="config-link" title="vless://...">vless://b128f6...</span>
-                    <button class="qr-btn" onclick="showQR(this)">📱</button>
-                    <span class="status-dot yellow"></span>
-                </div>
-                <div class="config-item">
-                    <button class="copy-btn" onclick="copyConfig(this)">کپی 📋</button>
-                    <span class="flag">🇺🇸</span>
-                    <span class="server-name">USA - New York</span>
-                    <span class="protocol trojan">Trojan</span>
-                    <span class="config-link" title="trojan://...">trojan://passw...</span>
-                    <button class="qr-btn" onclick="showQR(this)">📱</button>
-                    <span class="status-dot purple"></span>
-                </div>
-                <div class="config-item">
-                    <button class="copy-btn" onclick="copyConfig(this)">کپی 📋</button>
-                    <span class="flag">🇸🇬</span>
-                    <span class="server-name">Singapore</span>
-                    <span class="protocol shadowsocks">Shadowsocks</span>
-                    <span class="config-link" title="ss://...">ss://YWVzLT...</span>
-                    <button class="qr-btn" onclick="showQR(this)">📱</button>
-                    <span class="status-dot cyan"></span>
-                </div>
-                <div class="config-item">
-                    <button class="copy-btn" onclick="copyConfig(this)">کپی 📋</button>
-                    <span class="flag">🇫🇷</span>
-                    <span class="server-name">France - Paris</span>
-                    <span class="protocol v2ray">V2Ray</span>
-                    <span class="config-link" title="vless://...">vless://eyJhZG...</span>
-                    <button class="qr-btn" onclick="showQR(this)">📱</button>
-                    <span class="status-dot green"></span>
-                </div>
-            </div>
-            <button class="show-more-btn" id="showMoreBtn">نمایش همه‌ی کانفیگ‌ها ⌄</button>
-        </section>
-
-        <!-- 2.6 دو کارت پایینی -->
-        <section class="bottom-cards">
-            <!-- نصب آسان -->
-            <div class="card device-card">
-                <h3 class="pink-title">نصب آسان در همه دستگاه‌ها</h3>
-                <div class="device-row">
-                    <!-- TODO: 需要確認 (لینک‌های واقعی دانلود اپلیکیشن‌ها - Happ, Vitore, VitoreX, Npester) -->
-                    <div class="device-item">
-                        <div class="device-icon">🤖</div>
-                        <span>Android</span>
-                        <a href="#" class="btn-small">دانلود ›</a>
-                    </div>
-                    <div class="device-item">
-                        <div class="device-icon">🍎</div>
-                        <span>iOS (iPhone)</span>
-                        <a href="#" class="btn-small">دانلود ›</a>
-                    </div>
-                    <div class="device-item">
-                        <div class="device-icon">💻</div>
-                        <span>Windows</span>
-                        <a href="#" class="btn-small">دانلود ›</a>
-                    </div>
-                </div>
-                <!-- نصب مستقیم (دسترسی سریع) -->
-                <div class="app-direct-row">
-                    <h4>نصب مستقیم (Happ.apk، Vitore، VitoreX، Npester) <!-- TODO: 需要確認 (لینک‌های Happ.apk و ...) --></h4>
-                    <div class="app-list">
-                        <a href="#" class="app-link">Happ علامتش ↗</a>
-                        <a href="#" class="app-link">Vitore علامتش ↗</a>
-                        <a href="#" class="app-link">VitoreX علامتش ↗</a>
-                        <a href="#" class="app-link">Npester علامتش ↗</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- چرا ووچینو -->
-            <div class="card why-card">
-                <h3 class="gold-title">چرا ووچینو؟</h3>
-                <div class="feature-grid">
-                    <div class="feature-item">
-                        <div class="feat-icon">🛡️</div>
-                        <span>امنیت کامل</span>
-                        <div class="small-icon">🔒</div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feat-icon">🥇</div>
-                        <span>تضمین کیفیت</span>
-                        <div class="small-icon">✅</div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feat-icon">🚀</div>
-                        <span>تحویل سریع</span>
-                        <div class="small-icon">⚡</div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feat-icon">٪</div>
-                        <span>کارمزد رقابتی</span>
-                        <div class="small-icon">💰</div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feat-icon">🎧</div>
-                        <span>پشتیبانی ویژه</span>
-                        <div class="small-icon">💬</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 2.7 فوتر -->
-        <footer class="footer">
-            <span>✈️</span>
-            <a href="https://t.me/Vochino_bh01_bot">@Vochino_bh01_bot</a>
-        </footer>
-    </main>
-
-    <!-- مودال QR -->
-    <div class="qr-modal" id="qrModal">
-        <div class="modal-content">
-            <button class="close-btn" onclick="closeQR()">✖</button>
-            <h3>QR کانفیگ</h3>
-            <!-- TODO: 需要確認 (تولید QR واقعی از لینک) -->
-            <div class="qr-code">QR</div>
-        </div>
+      </div>
+      <div class="total-text"><span id="trafficUsed">—</span> / <span id="trafficTotal">—</span></div>
+      <div class="pill-info">ترافیک باقی‌مانده <span id="trafficRemaining">—</span></div>
     </div>
+  </div>
 
+  <div class="card configs-section" id="configs">
+    <div class="configs-header">
+      <button class="copy-all-btn" id="copyAllBtn">📋 کپی همه‌ی کانفیگ‌ها</button>
+      <h3>کانفیگ‌های شما</h3>
+    </div>
+    <div class="config-list" id="configList"></div>
+    <button class="show-more-btn" id="showMoreBtn">
+      <span class="chev">▾</span><span id="showMoreLabel">نمایش همه کانفیگ‌ها</span>
+    </button>
+  </div>
+
+  <div class="bottom-cards">
+    <div class="card" id="install">
+      <h3 class="pink-title">نصب آسان در همه دستگاه‌ها</h3>
+      <div class="device-row" id="deviceRow"></div>
+    </div>
+    <div class="card">
+      <h3 class="gold-title">چرا ووچینو؟</h3>
+      <div class="feature-grid" id="featureGrid"></div>
+    </div>
+  </div>
+
+  <div class="footer" id="support">
+    <a id="footerSupportLink" target="_blank">Vochino_bh01_bot@ ✈️</a>
+  </div>
+</div>
+
+<!-- ============ QR Modal ============ -->
+<div class="qr-modal" id="qrModal">
+  <div class="modal-content">
+    <button class="close-btn" id="qrCloseBtn">✕</button>
+    <h3 id="qrModalTitle">QR Code</h3>
+    <div class="qr-code" id="qrCodeBox"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   DATA LAYER
+   هیچ داده واقعی کاربر اینجا Hard-Code نشده — این فقط SAMPLE DATA
+   با ساختار نهایی است تا وقتی API/Backend ربات وصل شد، همین
+   renderDashboard(data) با دیتای واقعی صدا زده شود.
+   نکته: ZIP واقعی ربات هنوز ارسال نشده بود، پس ساختار پنل
+   (Marzban/Marzneshin/X-UI) حدس زده نشده — این Adapter آماده‌ی
+   اتصال است، نه یک حدس از دیتابیس واقعی.
+   ============================================================ */
+
+const ADAPTER_CONFIG = {
+  // بعداً اینجا آدرس API واسط (بک‌اند) قرار می‌گیرد
+  apiBaseUrl: null, // مثال: "https://api.vochino.example/user"
+  telegramBotUsername: "Vochino_bh01_bot",
+  telegramAdminUsername: "Vochino_bh01",
+  socialLinks: {
+    telegram: "https://t.me/Vochino_bh01_bot",
+    instagram: "#",
+    youtube: "#"
+  },
+  downloadLinks: {
+    android: "#",
+    ios: "#",
+    windows: "#"
+  }
+};
+
+// نمونه‌ی ساختار داده — دقیقا مطابق چیزی که در سند شما بندِ ۶ آمده
+const SAMPLE_DATA = {
+  user: {
+    username: "کاران ووچینو۰۱",
+    id: "VCH-000000",
+    avatar: null,
+    accountLevel: 5 // تعداد الماس
+  },
+  subscription: {
+    remainingDays: 76,
+    totalDays: 90,
+    expireDate: "1403/07/20",
+    status: "active"
+  },
+  traffic: {
+    used: 65.2,
+    total: 100,
+    remaining: 34.8,
+    unit: "GB",
+    percentage: 65
+  },
+  configs: [
+    { country: "Germany", city: "Berlin", flag: "🇩🇪", protocol: "V2Ray", protocolClass: "v2ray", url: "vmess://eyJhZGQiOiJkZS52b2NoaW5vLm5ldCIsInBvcnQiOiI0NDMifQ==", status: "online" },
+    { country: "Japan", city: "Tokyo", flag: "🇯🇵", protocol: "VLESS", protocolClass: "vless", url: "vless://b128f6a7-7e3a-4a2b-9c1d-000000000000@jp.vochino.net:443", status: "warn" },
+    { country: "USA", city: "New York", flag: "🇺🇸", protocol: "Trojan", protocolClass: "trojan", url: "trojan://password@45.76.98.12:443", status: "busy" },
+    { country: "Singapore", city: "Singapore", flag: "🇸🇬", protocol: "Shadowsocks", protocolClass: "shadowsocks", url: "ss://YWVzLTI1Ni1nY206c6Fzc3dvcmQ@sg.vochino.net:8388", status: "online" },
+    { country: "France", city: "Paris", flag: "🇫🇷", protocol: "V2Ray", protocolClass: "v2ray", url: "vmess://eyJhZGQiOiJmci52b2NoaW5vLm5ldCIsInBvcnQiOiI0NDMifQ==", status: "online" }
+  ],
+  install: [
+    { name: "Android", icon: "🤖", key: "android" },
+    { name: "iOS (iPhone)", icon: "🍎", key: "ios" },
+    { name: "Windows", icon: "🖥️", key: "windows" }
+  ],
+  whyUs: [
+    { icon: "🛡️", label: "امنیت کامل" },
+    { icon: "✅", label: "تضمین کیفیت" },
+    { icon: "🚀", label: "تحویل سریع" },
+    { icon: "%", label: "کارمزد رقابتی" },
+    { icon: "🎧", label: "پشتیبانی ویژه" }
+  ],
+  marquee: [
+    "خاص بودن انتخاب شماست | Vochino⁰¹",
+    "امنیت کامل | دقیق و بی‌نقص",
+    "انتخاب هوشمند | تحویل سریع",
+    "کارمزد رقابتی | نرخ منصفانه",
+    "بونوس جذاب | تجربه‌ای متفاوت",
+    "پشتیبانی ویژه | ۷ روز هفته، ۲۴ ساعته"
+  ]
+};
+
+const STATUS_MAP = {
+  online: { cls: "green", label: "آنلاین" },
+  warn:   { cls: "yellow", label: "هشدار" },
+  busy:   { cls: "purple", label: "شلوغ" },
+  cyan:   { cls: "cyan", label: "آنلاین" },
+  offline:{ cls: "red-dot", label: "آفلاین" }
+};
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+function renderDashboard(data){
+  // --- profile ---
+  document.getElementById("usernameDisplay").textContent = data.user.username || "—";
+  document.getElementById("userIdDisplay").textContent = "🪪 " + (data.user.id || "—");
+  document.getElementById("avatarBox").textContent = data.user.avatar ? "" : "🕵️";
+  if(data.user.avatar){
+    const box = document.getElementById("avatarBox");
+    box.style.backgroundImage = `url(${data.user.avatar})`;
+    box.style.backgroundSize = "cover";
+  }
+  document.getElementById("diamondsDisplay").textContent = "💎".repeat(Math.max(0, data.user.accountLevel||0));
+
+  // --- subscription ring ---
+  const subPct = Math.min(100, Math.round((data.subscription.remainingDays / data.subscription.totalDays) * 100));
+  document.getElementById("subRing").style.background =
+    `conic-gradient(#ffb300 0% ${subPct}%, #222 ${subPct}% 100%)`;
+  document.getElementById("subDaysLeft").textContent = data.subscription.remainingDays;
+  document.getElementById("subTotalDays").textContent = data.subscription.totalDays + " روز";
+  document.getElementById("subExpireDate").textContent = data.subscription.expireDate;
+
+  // --- traffic ring ---
+  const trafficPct = data.traffic.percentage;
+  document.getElementById("trafficRing").style.background =
+    `conic-gradient(var(--neon-blue) 0% ${trafficPct}%, #222 ${trafficPct}% 100%)`;
+  document.getElementById("trafficPercent").textContent = trafficPct + "%";
+  document.getElementById("trafficUsed").textContent = `${data.traffic.used} ${data.traffic.unit}`;
+  document.getElementById("trafficTotal").textContent = `${data.traffic.total} ${data.traffic.unit}`;
+  document.getElementById("trafficRemaining").textContent = `${data.traffic.remaining} ${data.traffic.unit}`;
+
+  // --- configs ---
+  const list = document.getElementById("configList");
+  list.innerHTML = "";
+  data.configs.forEach((cfg, i) => {
+    const st = STATUS_MAP[cfg.status] || STATUS_MAP.online;
+    const row = document.createElement("div");
+    row.className = "config-item" + (i >= 3 ? " hidden-row" : "");
+    row.dataset.index = i;
+    row.innerHTML = `
+      <button class="copy-btn" data-url="${escapeAttr(cfg.url)}">📋 کپی</button>
+      <span class="flag">${cfg.flag}</span>
+      <span class="server-name">${cfg.city} - ${cfg.country}</span>
+      <span class="protocol ${cfg.protocolClass}">${cfg.protocol}</span>
+      <span class="config-link" title="${escapeAttr(cfg.url)}">${cfg.url}</span>
+      <button class="qr-btn" data-url="${escapeAttr(cfg.url)}" data-label="${cfg.city} - ${cfg.country}">▦</button>
+      <span class="status-dot ${st.cls}" title="${st.label}"></span>
+    `;
+    list.appendChild(row);
+  });
+  attachConfigListeners(data.configs);
+
+  // --- install ---
+  const deviceRow = document.getElementById("deviceRow");
+  deviceRow.innerHTML = "";
+  data.install.forEach(item => {
+    const el = document.createElement("div");
+    el.className = "device-item";
+    el.innerHTML = `
+      <div class="device-icon">${item.icon}</div>
+      <span>${item.name}</span>
+      <a class="btn-small" href="${ADAPTER_CONFIG.downloadLinks[item.key] || "#"}" target="_blank">دانلود</a>
+    `;
+    deviceRow.appendChild(el);
+  });
+
+  // --- why us ---
+  const featureGrid = document.getElementById("featureGrid");
+  featureGrid.innerHTML = "";
+  data.whyUs.forEach(f => {
+    const el = document.createElement("div");
+    el.className = "feature-item";
+    el.innerHTML = `<div class="feat-icon">${f.icon}</div><span>${f.label}</span>`;
+    featureGrid.appendChild(el);
+  });
+
+  // --- social + support links ---
+  document.getElementById("socialTelegram").href = ADAPTER_CONFIG.socialLinks.telegram;
+  document.getElementById("socialInstagram").href = ADAPTER_CONFIG.socialLinks.instagram;
+  document.getElementById("socialYoutube").href = ADAPTER_CONFIG.socialLinks.youtube;
+  document.getElementById("footerSupportLink").href = ADAPTER_CONFIG.socialLinks.telegram;
+  document.getElementById("footerSupportLink").textContent = ADAPTER_CONFIG.telegramBotUsername + "@ ✈️";
+  document.getElementById("sidebarSupportLink").href = ADAPTER_CONFIG.socialLinks.telegram;
+
+  // --- marquee ---
+  startMarquee(data.marquee);
+}
+
+function escapeAttr(str){
+  return String(str).replace(/"/g,"&quot;");
+}
+
+/* ============================================================
+   CONFIG ROW INTERACTIONS
+   ============================================================ */
+function attachConfigListeners(configs){
+  document.querySelectorAll(".copy-btn").forEach(btn=>{
+    btn.addEventListener("click", (e)=>{
+      copyToClipboard(btn.dataset.url);
+      showToast("کانفیگ کپی شد ✅");
+      ripple(e, btn);
+    });
+  });
+  document.querySelectorAll(".qr-btn").forEach(btn=>{
+    btn.addEventListener("click", (e)=>{
+      openQrModal(btn.dataset.url, btn.dataset.label);
+    });
+  });
+}
+
+function copyToClipboard(text){
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).catch(()=>fallbackCopy(text));
+  } else {
+    fallbackCopy(text);
+  }
+}
+function fallbackCopy(text){
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.position="fixed"; ta.style.opacity="0";
+  document.body.appendChild(ta);
+  ta.select();
+  try{ document.execCommand("copy"); }catch(e){}
+  document.body.removeChild(ta);
+}
+
+document.getElementById("copyAllBtn").addEventListener("click", (e)=>{
+  const all = SAMPLE_DATA.configs.map(c=>c.url).join("\n");
+  copyToClipboard(all);
+  showToast("همه‌ی کانفیگ‌ها کپی شدند ✅");
+  ripple(e, e.currentTarget);
+});
+
+/* show / hide extra configs */
+const showMoreBtn = document.getElementById("showMoreBtn");
+showMoreBtn.addEventListener("click", ()=>{
+  const hiddenRows = document.querySelectorAll(".config-item.hidden-row");
+  const willOpen = showMoreBtn.classList.contains("open") ? false : true;
+  hiddenRows.forEach(r=> r.classList.toggle("hidden-row", !willOpen));
+  showMoreBtn.classList.toggle("open", willOpen);
+  document.getElementById("showMoreLabel").textContent = willOpen ? "بستن کانفیگ‌ها" : "نمایش همه کانفیگ‌ها";
+});
+
+/* ============================================================
+   QR MODAL
+   ============================================================ */
+const qrModal = document.getElementById("qrModal");
+const qrCodeBox = document.getElementById("qrCodeBox");
+function openQrModal(url, label){
+  document.getElementById("qrModalTitle").textContent = label || "QR Code";
+  qrCodeBox.innerHTML = "";
+  new QRCode(qrCodeBox, { text: url, width: 190, height: 190 });
+  qrModal.classList.add("open");
+}
+document.getElementById("qrCloseBtn").addEventListener("click", ()=> qrModal.classList.remove("open"));
+qrModal.addEventListener("click", (e)=>{ if(e.target===qrModal) qrModal.classList.remove("open"); });
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+let toastTimer;
+function showToast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=> t.classList.remove("show"), 1800);
+}
+
+/* ============================================================
+   RIPPLE
+   ============================================================ */
+function ripple(e, el){
+  const circle = document.createElement("span");
+  circle.className = "ripple";
+  const rect = el.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height);
+  circle.style.width = circle.style.height = size + "px";
+  circle.style.left = (e.clientX - rect.left - size/2) + "px";
+  circle.style.top = (e.clientY - rect.top - size/2) + "px";
+  el.style.position = "relative";
+  el.appendChild(circle);
+  setTimeout(()=> circle.remove(), 600);
+}
+
+/* ============================================================
+   MARQUEE (fade+slide, cycles every 6s)
+   ============================================================ */
+let marqueeIndex = 0, marqueeTimer;
+function startMarquee(messages){
+  clearInterval(marqueeTimer);
+  const el = document.getElementById("marqueeText");
+  marqueeIndex = 0;
+  el.textContent = messages[0];
+  el.classList.add("show");
+  marqueeTimer = setInterval(()=>{
+    el.classList.remove("show");
+    setTimeout(()=>{
+      marqueeIndex = (marqueeIndex + 1) % messages.length;
+      el.textContent = messages[marqueeIndex];
+      el.classList.add("show");
+    }, 500);
+  }, 6000);
+}
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+const sidebar = document.getElementById("sidebar");
+const overlay = document.getElementById("sidebarOverlay");
+document.getElementById("menuBtn").addEventListener("click", ()=>{
+  sidebar.classList.add("open");
+  overlay.classList.add("open");
+});
+overlay.addEventListener("click", ()=>{
+  sidebar.classList.remove("open");
+  overlay.classList.remove("open");
+});
+document.querySelectorAll(".sidebar-menu a").forEach(a=>{
+  a.addEventListener("click", ()=>{
+    sidebar.classList.remove("open");
+    overlay.classList.remove("open");
+  });
+});
+
+/* ============================================================
+   ADAPTER — بعداً اینجا به API واقعی وصل می‌شود
+   ============================================================ */
+async function loadDashboardData(){
+  if(ADAPTER_CONFIG.apiBaseUrl){
+    try{
+      const res = await fetch(ADAPTER_CONFIG.apiBaseUrl + "/me");
+      const data = await res.json();
+      renderDashboard(data);
+      return;
+    }catch(err){
+      console.error("خطا در دریافت داده از بک‌اند:", err);
+    }
+  }
+  // fallback به داده نمونه تا API وصل شود
+  renderDashboard(SAMPLE_DATA);
+}
+
+loadDashboardData();
+</script>
 </body>
-              </html>
+</html>
