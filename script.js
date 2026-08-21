@@ -1,4 +1,4 @@
-/* =========================================
+el.textContent = `${appLinks[index].name} علامتش ↗`;/* =========================================
    VOCHINO⁰¹ Dashboard Script
    Production Ready - Vanilla JS
    ========================================= */
@@ -271,7 +271,7 @@ function renderDashboard(data) {
     appLinkElements.forEach((el, index) => {
         if (appLinks[index]) {
             el.href = appLinks[index].url;
-            el.textContent = `${appLinks[index].name} علامتش ↗`;
+            el.textContent = `${appLinks[index].name} ↗`;
         }
     });
 }
