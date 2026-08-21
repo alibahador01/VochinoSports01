@@ -437,6 +437,8 @@ button {
     border-radius: 50%;
     z-index: 3;
     pointer-events: none;
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 14px), #000 calc(100% - 13px));
+    mask: radial-gradient(farthest-side, transparent calc(100% - 14px), #000 calc(100% - 13px));
 }
 
 .orange-sweep {
