@@ -41,7 +41,7 @@ button{background:none;border:none;color:inherit;cursor:pointer;font-family:var(
 
 /* Menu toggle */
 .menu-btn{
-  position:fixed;top:14px;right:14px;z-index:210;
+  position:relative;flex-shrink:0;
   width:38px;height:38px;border-radius:10px;
   background:#000;border:1px solid var(--red);
   display:none;flex-direction:column;justify-content:center;align-items:center;gap:4px;
@@ -149,9 +149,11 @@ button{background:none;border:none;color:inherit;cursor:pointer;font-family:var(
 }
 @keyframes ringSpin{to{box-shadow:0 0 12px rgba(255,34,85,.5), 0 0 0 2px rgba(255,34,85,.15)}}
 .avatar-img{width:100%;height:100%;object-fit:cover;border-radius:50%}
-.profile-username{color:var(--red2);font-weight:800;font-size:.92rem;margin-bottom:8px}
-.profile-row{display:flex;align-items:center;justify-content:center;gap:6px;color:var(--text-dim);font-size:.78rem;margin-bottom:5px}
-.pr-ic{opacity:.8}
+.profile-brand{color:var(--red2);font-weight:800;font-size:.88rem;margin-bottom:10px}
+.profile-brand sup{font-size:.65rem}
+.profile-row{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:.75rem;margin-bottom:6px}
+.pr-label{color:var(--text-dim)}
+.pr-value{color:#fff;font-weight:700}
 .diamonds{margin-top:8px;color:var(--red2);font-size:.85rem;letter-spacing:3px}
 
 /* Status cards */
@@ -174,14 +176,12 @@ button{background:none;border:none;color:inherit;cursor:pointer;font-family:var(
 .ring-sweep{
   position:absolute;inset:0;border-radius:50%;
   pointer-events:none;
+  -webkit-mask:radial-gradient(farthest-side, transparent calc(100% - 14px), #000 calc(100% - 13px));
+  mask:radial-gradient(farthest-side, transparent calc(100% - 14px), #000 calc(100% - 13px));
+  filter:blur(1.5px);
 }
-.ring-sweep::before{
-  content:'';position:absolute;top:0;left:50%;width:8px;height:8px;
-  margin-left:-4px;border-radius:50%;
-  box-shadow:0 0 10px 3px currentColor;
-}
-.ring-sweep--sub{color:#ff9500;animation:sweep 5s linear infinite}
-.ring-sweep--vol{color:#00d4ff;animation:sweep 5s linear infinite}
+.ring-sweep--sub{background:conic-gradient(from 0deg, transparent 0%, transparent 80%, #ffd27a 91%, #ff9500 97%, transparent 100%);animation:sweep 6s linear infinite}
+.ring-sweep--vol{background:conic-gradient(from 0deg, transparent 0%, transparent 80%, #7de8ff 91%, #00d4ff 97%, transparent 100%);animation:sweep 6s linear infinite}
 @keyframes sweep{to{transform:rotate(360deg)}}
 
 .ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
@@ -341,3 +341,13 @@ button{background:none;border:none;color:inherit;cursor:pointer;font-family:var(
   .install-row{gap:2px}
   .os-ic{width:38px;height:38px;font-size:1.05rem}
                  }
+
+.suggested-apps{margin-top:14px;border-top:1px solid rgba(255,255,255,.08);padding-top:12px}
+.sa-title{text-align:center;font-size:.75rem;color:var(--text-dim);margin-bottom:8px}
+.sa-row{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.sa-item{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.05);border:1px solid #2a2a2a;border-radius:10px;padding:6px 8px;font-size:.75rem}
+.sa-ic{font-size:1rem}
+.voucher-row{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:12px;border-top:1px solid rgba(255,255,255,.08);padding-top:10px}
+.voucher-item{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
+.voucher-ic{width:34px;height:34px;border-radius:10px;background:rgba(255,215,0,.08);border:1px solid var(--gold2);display:flex;align-items:center;justify-content:center;font-size:.95rem}
+.voucher-item small{font-size:.6rem;color:var(--text-dim)}
