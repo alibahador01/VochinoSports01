@@ -11,7 +11,7 @@ window.VOCHINO_CONFIG = {
     store: '#'
   },
 
-  SUPPORT_LINK: 'https://t.me/Vochino01',
+  SUPPORT_LINK: 'https://t.me/Vochino_bh01',
   BOT_LINK: 'https://t.me/Vochino_bh01_bot',
   BOT_HANDLE: '@Vochino_bh01_bot',
 
@@ -23,14 +23,27 @@ window.VOCHINO_CONFIG = {
 
   MARQUEE_MESSAGES: [
     'خاص بودن انتخاب شماست | Vochino⁰¹',
-    'امنیت کامل | دقیق و بی‌نقص',
-    'انتخاب هوشمند | تحویل سریع',
-    'کارمزد رقابتی | نرخ منصفانه',
-    'بونوس جذاب | تجربه‌ای متفاوت',
-    'پشتیبانی ویژه | ۷ روز هفته، ۲۴ ساعته'
+    'امنیت کامل، دقیق و بی‌نقص',
+    'هوشمند، تحویل سریع',
+    'کارمزد رقابتی، نرخ منصفانه',
+    'بونوس جذاب و سرگرمی',
+    'پشتیبانی ویژه ۷/۲۴'
   ],
   MARQUEE_INTERVAL_MS: 6000,
 
-  RING_ANIMATION_DURATION_MS: 5000,
-  CONFIGS_COLLAPSED_COUNT: 5
+  RING_ANIMATION_DURATION_MS: 6000,
+  CONFIGS_COLLAPSED_COUNT: 5,
+
+  SUGGESTED_APPS: [
+    { name: 'Happ', icon: '🟢', url: '#' },
+    { name: 'V2RayNG', icon: '🅥', url: '#' },
+    { name: 'V2RayX', icon: '🛡️', url: '#' },
+    { name: 'Npester', icon: '🅽', url: '#' }
+  ],
+  VOUCHER_TYPES: [
+    { name: 'U Voucher', icon: '💎' },
+    { name: 'Hot Voucher', icon: '🔥' },
+    { name: 'Premium Voucher', icon: '👑' },
+    { name: 'PS Voucher', icon: '🎮' }
+  ]
 };
