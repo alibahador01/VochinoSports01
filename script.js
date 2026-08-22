@@ -8,6 +8,7 @@ async function init() {
   try { window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.expand(); } catch (e) {}
 
   bindStaticLinks();
+  renderExtras();
   bindSidebar();
   bindMarquee();
   bindCopyAll();
@@ -247,7 +248,6 @@ function renderDashboard(data) {
 
   document.getElementById('profileUsername').textContent = data.user.username;
   document.getElementById('profileUserId').textContent = data.user.id;
-  document.getElementById('profileUserHash').textContent = data.user.hash;
   const avatarEl = document.getElementById('avatarImg');
   if (data.user.avatar) { avatarEl.src = data.user.avatar; avatarEl.style.display = 'block'; }
   else { avatarEl.style.display = 'none'; }
@@ -267,4 +267,20 @@ function renderDashboard(data) {
   setRing(document.getElementById('ringVol'), data.traffic.percentage);
 
   renderConfigs(data.configs || []);
+}
+
+function renderExtras() {
+  const cfg = window.VOCHINO_CONFIG;
+  const appsRow = document.getElementById('suggestedAppsRow');
+  if (appsRow && cfg.SUGGESTED_APPS) {
+    appsRow.innerHTML = cfg.SUGGESTED_APPS.map(a =>
+      '<a href="' + a.url + '" target="_blank" rel="noopener" class="sa-item"><span class="sa-ic">' + a.icon + '</span><span>' + a.name + '</span></a>'
+    ).join('');
+  }
+  const voucherRow = document.getElementById('voucherRow');
+  if (voucherRow && cfg.VOUCHER_TYPES) {
+    voucherRow.innerHTML = cfg.VOUCHER_TYPES.map(v =>
+      '<div class="voucher-item"><span class="voucher-ic">' + v.icon + '</span><small>' + v.name + '</small></div>'
+    ).join('');
+  }
 }
