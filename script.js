@@ -1,6 +1,20 @@
 // script.js
 document.addEventListener('DOMContentLoaded', init);
 
+(function bindPageLoader(){
+  const loader = document.getElementById('pageLoader');
+  if (!loader) return;
+  let hidden = false;
+  const hide = () => {
+    if (hidden) return;
+    hidden = true;
+    loader.classList.add('is-hidden');
+    setTimeout(() => loader.remove(), 550);
+  };
+  window.addEventListener('load', () => setTimeout(hide, 450), { once: true });
+  setTimeout(hide, 2200);
+})();
+
 const state = { data: null, expanded: false };
 
 async function init() {
@@ -277,7 +291,7 @@ function renderDashboard(data) {
   document.getElementById('profileUserId').textContent = data.user.id;
   const avatarEl = document.getElementById('avatarImg');
   if (data.user.avatar) { avatarEl.src = data.user.avatar; avatarEl.style.display = 'block'; }
-  else { avatarEl.style.display = 'none'; }
+  else { avatarEl.src = 'assets/avatar-default.png'; avatarEl.style.display = 'block'; }
 
   document.getElementById('remainingDays').textContent = data.subscription.remainingDays;
   document.getElementById('totalDays').textContent = data.subscription.totalDays;
