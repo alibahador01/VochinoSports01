@@ -1,299 +1,219 @@
-// script.js
-document.addEventListener('DOMContentLoaded', init);
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Vochino⁰¹ | داشبورد</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=3">
+</head>
+<body>
 
-const state = { data: null, expanded: false };
+<div class="topbar">
+  <button id="menuBtn" class="menu-btn" aria-label="menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="marquee-box">
+    <span id="marqueeText" class="marquee-text">خاص بودن انتخاب شماست | Vochino⁰¹</span>
+  </div>
+  <div class="topbar-deco"></div>
+</div>
 
-async function init() {
-  try { window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.ready(); } catch (e) {}
-  try { window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.expand(); } catch (e) {}
+<div class="shell">
+  <aside id="sidebar" class="sidebar">
+    <div class="brand">VOCHINO<sup>01</sup></div>
+    <div class="premium-badge">👑 PREMIUM USER</div>
 
-  bindStaticLinks();
-  renderExtras();
-  bindSidebar();
-  bindMarquee();
-  bindCopyAll();
-  bindShowAll();
-  bindQrModal();
-  bindRippleGlobal();
+    <nav class="menu">
+      <a href="#" class="menu-item active" data-tab="dashboard"><span class="mi-ic">⌂</span>داشبورد</a>
+      <a href="#" class="menu-item" data-tab="subscription"><span class="mi-ic">◷</span>وضعیت اشتراک</a>
+      <a href="#" class="menu-item" data-tab="traffic"><span class="mi-ic">◒</span>مصرف حجم</a>
+      <a href="#" class="menu-item" data-tab="configs"><span class="mi-ic">⛓</span>کانفیگ‌ها</a>
+      <a href="#" class="menu-item" data-tab="guide"><span class="mi-ic">▤</span>راهنمای نصب</a>
+      <a href="#" class="menu-item" data-tab="apps"><span class="mi-ic">▦</span>اپلیکیشن‌ها</a>
+      <a href="#" class="menu-item" data-tab="support"><span class="mi-ic">◉</span>پشتیبانی</a>
+      <a href="#" class="menu-item" data-tab="faq"><span class="mi-ic">?</span>سوالات متداول</a>
+    </nav>
 
-  state.data = await VochinoAdapter.fetchDashboardData();
-  renderDashboard(state.data);
-}
+    <div class="sidebar-foot">
+      <div class="sf-title">VOCHINO01</div>
+      <div class="sf-sub">قدرتمند · خاص · متفاوت</div>
+      <div class="sf-social">
+        <a href="#" id="socialTelegram" class="sf-ic sf-ic--tg">✈</a>
+        <a href="#" id="socialInstagram" class="sf-ic sf-ic--ig">◍</a>
+        <a href="#" id="socialYoutube" class="sf-ic sf-ic--yt">▶</a>
+        <a href="#" id="socialStore" class="sf-ic sf-ic--st">▷</a>
+      </div>
+    </div>
+  </aside>
 
-function bindStaticLinks() {
-  const cfg = window.VOCHINO_CONFIG;
-  const map = {
-    socialTelegram: cfg.SOCIAL_LINKS.telegram,
-    socialInstagram: cfg.SOCIAL_LINKS.instagram,
-    socialYoutube: cfg.SOCIAL_LINKS.youtube,
-    socialStore: cfg.SOCIAL_LINKS.store,
-    dlAndroid: cfg.DOWNLOAD_LINKS.android,
-    dlIos: cfg.DOWNLOAD_LINKS.ios,
-    dlWindows: cfg.DOWNLOAD_LINKS.windows
-  };
-  Object.keys(map).forEach(id => {
-    const el = document.getElementById(id);
-    if (el && map[id]) el.href = map[id];
-  });
-  const bot = document.getElementById('footerBot');
-  if (bot) { bot.href = cfg.BOT_LINK; bot.textContent = cfg.BOT_HANDLE; }
+  <div id="sidebarOverlay" class="sidebar-overlay"></div>
 
-  document.querySelectorAll('.menu-item[data-tab="support"]').forEach(el => {
-    el.addEventListener('click', (e) => { e.preventDefault(); window.open(cfg.SUPPORT_LINK, '_blank'); });
-  });
-}
+  <main class="main">
 
-function renderExtras() {
-  const cfg = window.VOCHINO_CONFIG;
+    <section class="hero card">
+      <div class="hero-img-wrap">
+        <img src="assets/rose-banner.jpg" alt="" class="hero-img">
+        <div class="hero-shine"></div>
+      </div>
 
-  const appsRow = document.getElementById('suggestedAppsRow');
-  if (appsRow && cfg.SUGGESTED_APPS) {
-    appsRow.innerHTML = cfg.SUGGESTED_APPS.map(a =>
-      '<a href="' + a.url + '" target="_blank" rel="noopener" class="sa-item"><span class="sa-ic">' + a.icon + '</span><span>' + a.name + '</span></a>'
-    ).join('');
-  }
+      <div class="profile-card">
+        <div class="profile-brand">Vochino<sup>01</sup> کاربران</div>
+        <div class="avatar-box">
+          <div class="avatar-crown">👑</div>
+          <div class="avatar-ring">
+            <img id="avatarImg" src="" alt="" class="avatar-img">
+          </div>
+        </div>
+        <div class="profile-row"><span class="pr-label">نام کاربر</span><span id="profileUsername" class="pr-value">{{username}}</span></div>
+        <div class="profile-row"><span class="pr-label">شناسه کاربر</span><span id="profileUserId" class="pr-value">{{user_id}}</span></div>
+        <div class="diamonds">
+          <span>💎</span><span>💎</span><span>💎</span><span>💎</span><span>💎</span>
+        </div>
+      </div>
+    </section>
 
-  const voucherRow = document.getElementById('voucherRow');
-  if (voucherRow && cfg.VOUCHER_TYPES) {
-    voucherRow.innerHTML = cfg.VOUCHER_TYPES.map(v =>
-      '<div class="voucher-item"><span class="voucher-ic">' + v.icon + '</span><small>' + v.name + '</small></div>'
-    ).join('');
-  }
-}
+    <section class="status-grid">
+      <div class="card status-card status-card--vol">
+        <div class="status-head">
+          <span class="status-title">وضعیت حجم</span>
+          <span class="status-head-ic">◈</span>
+        </div>
+        <div class="ring-wrap">
+          <svg class="ring" viewBox="0 0 160 160">
+            <defs>
+              <linearGradient id="gradVol" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#b537f2"/>
+                <stop offset="100%" stop-color="#00d4ff"/>
+              </linearGradient>
+            </defs>
+            <circle class="ring-bg" cx="80" cy="80" r="68"></circle>
+            <circle id="ringVol" class="ring-fg" cx="80" cy="80" r="68" stroke="url(#gradVol)"></circle>
+            <circle id="sweepVol" class="ring-sweep-arc ring-sweep-arc--vol" cx="80" cy="80" r="68"></circle>
+          </svg>
+          <div class="ring-center">
+            <span id="usagePercent" class="ring-value">--%</span>
+            <span class="ring-unit">مصرف شده</span>
+          </div>
+        </div>
+        <div class="status-total"><span id="usedTraffic">--</span> / <span id="totalTraffic">--</span></div>
+        <div class="status-divider"></div>
+        <div class="status-foot">ترافیک باقی‌مانده <span class="pill" id="remainingTraffic">--</span></div>
+      </div>
 
-function bindSidebar() {
-  const btn = document.getElementById('menuBtn');
-  const sidebar = document.getElementById('sidebar');
-  const overlay = document.getElementById('sidebarOverlay');
-  function toggle(open) {
-    sidebar.classList.toggle('open', open);
-    overlay.classList.toggle('open', open);
-  }
-  btn.addEventListener('click', () => toggle(!sidebar.classList.contains('open')));
-  overlay.addEventListener('click', () => toggle(false));
-  document.querySelectorAll('.menu-item').forEach(item => {
-    item.addEventListener('click', (e) => {
-      if (item.dataset.tab === 'support') return;
-      e.preventDefault();
-      document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
-      item.classList.add('active');
-      toggle(false);
-      const target = document.querySelector('[data-section="' + item.dataset.tab + '"]');
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  });
-}
+      <div class="card status-card status-card--sub">
+        <div class="status-head">
+          <span class="status-title">وضعیت اشتراک</span>
+          <span class="status-head-ic">▦</span>
+        </div>
+        <div class="ring-wrap">
+          <svg class="ring" viewBox="0 0 160 160">
+            <defs>
+              <linearGradient id="gradSub" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ff2d55"/>
+                <stop offset="100%" stop-color="#ff9500"/>
+              </linearGradient>
+            </defs>
+            <circle class="ring-bg" cx="80" cy="80" r="68"></circle>
+            <circle id="ringSub" class="ring-fg" cx="80" cy="80" r="68" stroke="url(#gradSub)"></circle>
+            <circle id="sweepSub" class="ring-sweep-arc ring-sweep-arc--sub" cx="80" cy="80" r="68"></circle>
+          </svg>
+          <div class="ring-center">
+            <span id="remainingDays" class="ring-value">--</span>
+            <span class="ring-unit">روز باقی مانده</span>
+          </div>
+        </div>
+        <div class="status-total"><span id="totalDays">--</span> روز</div>
+        <div class="status-divider"></div>
+        <div class="status-foot">تاریخ انقضا: <span id="expireDate">--</span></div>
+      </div>
+    </section>
 
-function bindMarquee() {
-  const el = document.getElementById('marqueeText');
-  const msgs = window.VOCHINO_CONFIG.MARQUEE_MESSAGES;
-  let i = 0;
-  setInterval(() => {
-    el.classList.add('fade');
-    setTimeout(() => {
-      i = (i + 1) % msgs.length;
-      el.textContent = msgs[i];
-      el.classList.remove('fade');
-    }, 500);
-  }, window.VOCHINO_CONFIG.MARQUEE_INTERVAL_MS);
-}
+    <section class="card configs-card">
+      <div class="configs-head">
+        <button id="copyAllBtn" class="copy-all-btn">
+          <span class="cab-ic">⧉</span>کپی همه کانفیگ‌ها
+        </button>
+        <h2 class="configs-title">« کانفیگ‌های شما</h2>
+      </div>
 
-function bindRippleGlobal() {
-  document.addEventListener('click', (e) => {
-    const btn = e.target.closest('button, .install-item, .qr-btn');
-    if (!btn) return;
-    const rect = btn.getBoundingClientRect();
-    const circle = document.createElement('span');
-    const size = Math.max(rect.width, rect.height);
-    circle.className = 'ripple';
-    circle.style.width = circle.style.height = size + 'px';
-    circle.style.left = (e.clientX - rect.left - size / 2) + 'px';
-    circle.style.top = (e.clientY - rect.top - size / 2) + 'px';
-    const prevPos = getComputedStyle(btn).position;
-    if (prevPos === 'static') btn.style.position = 'relative';
-    btn.style.overflow = btn.style.overflow || 'hidden';
-    btn.appendChild(circle);
-    setTimeout(() => circle.remove(), 650);
-  });
-}
+      <div id="configListWrap" class="config-list-wrap">
+        <div id="configList" class="config-list"></div>
+      </div>
 
-function copyText(text) {
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    return navigator.clipboard.writeText(text);
-  }
-  const ta = document.createElement('textarea');
-  ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
-  document.body.appendChild(ta); ta.select();
-  try { document.execCommand('copy'); } catch (e) {}
-  document.body.removeChild(ta);
-  return Promise.resolve();
-}
+      <button id="showAllBtn" class="show-all-btn">
+        <span id="showAllLabel">نمایش همه کانفیگ‌ها</span>
+        <span id="showAllChevron" class="sab-chev">⌄</span>
+      </button>
+    </section>
 
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  clearTimeout(t._timer);
-  t._timer = setTimeout(() => t.classList.remove('show'), 1800);
-}
+    <section class="card voucher-card">
+      <h3 class="voucher-title">محصولات ما</h3>
+      <div class="voucher-row" id="voucherRow"></div>
+    </section>
 
-function bindCopyAll() {
-  document.getElementById('copyAllBtn').addEventListener('click', function () {
-    if (!state.data || !state.data.configs.length) return;
-    const allLinks = state.data.configs.map(c => c.url).join('\n');
-    copyText(allLinks).then(() => {
-      this.classList.add('copied');
-      showToast('همه‌ی کانفیگ‌ها کپی شد');
-      setTimeout(() => this.classList.remove('copied'), 1500);
-    });
-  });
-}
+    <section class="bottom-stack">
+      <div class="card why-card">
+        <h3 class="bottom-title bottom-title--gold">چرا ووچینو⁰¹؟</h3>
+        <p class="why-sub">تجربه‌ای سریع، امن و بی‌دردسر از خرید و فروش ووچر</p>
+        <div class="why-row">
+          <div class="why-item"><span class="why-ic">🛡️</span><small>امنیت کامل</small></div>
+          <div class="why-item"><span class="why-ic">✅</span><small>تضمین کیفیت</small></div>
+          <div class="why-item"><span class="why-ic">🚀</span><small>تحویل سریع</small></div>
+          <div class="why-item"><span class="why-ic">%</span><small>کارمزد رقابتی</small></div>
+          <div class="why-item"><span class="why-ic">🎧</span><small>پشتیبانی ویژه</small></div>
+        </div>
+      </div>
 
-function bindShowAll() {
-  document.getElementById('showAllBtn').addEventListener('click', function () {
-    state.expanded = !state.expanded;
-    applyConfigVisibility();
-  });
-}
+      <div class="card install-card">
+        <h3 class="bottom-title bottom-title--pink">نصب آسان در همه دستگاه‌ها</h3>
+        <div class="install-row">
+          <a href="#" id="dlAndroid" class="install-item">
+            <span class="os-ic os-ic--android">🤖</span>
+            <span class="install-name">Android</span>
+            <span class="install-dl">نصب ‹</span>
+          </a>
+          <a href="#" id="dlIos" class="install-item">
+            <span class="os-ic os-ic--ios">🍎</span>
+            <span class="install-name">iOS (iPhone)</span>
+            <span class="install-dl">نصب ‹</span>
+          </a>
+          <a href="#" id="dlWindows" class="install-item">
+            <span class="os-ic os-ic--win">🖥️</span>
+            <span class="install-name">Windows</span>
+            <span class="install-dl">نصب ‹</span>
+          </a>
+        </div>
+        <div class="suggested-apps">
+          <div class="sa-title">برنامه‌های پیشنهادی</div>
+          <div class="sa-row" id="suggestedAppsRow"></div>
+        </div>
+      </div>
+    </section>
 
-function applyConfigVisibility() {
-  const wrap = document.getElementById('configListWrap');
-  const limit = window.VOCHINO_CONFIG.CONFIGS_COLLAPSED_COUNT;
-  const rows = document.querySelectorAll('.config-item');
-  const btn = document.getElementById('showAllBtn');
-  const label = document.getElementById('showAllLabel');
-  const chevron = document.getElementById('showAllChevron');
+    <footer class="app-footer">
+      <span class="footer-ic">✈</span>
+      <a id="footerBot" href="#" target="_blank" rel="noopener">@Vochino_bh01_bot</a>
+    </footer>
 
-  if (!state.data || state.data.configs.length <= limit) {
-    btn.style.display = 'none';
-    wrap.style.maxHeight = 'none';
-    return;
-  }
-  btn.style.display = 'flex';
+  </main>
+</div>
 
-  if (state.expanded) {
-    wrap.style.maxHeight = wrap.scrollHeight + 'px';
-    label.textContent = 'بستن کانفیگ‌ها';
-    chevron.classList.add('open');
-  } else {
-    let collapsedHeight = 0;
-    rows.forEach((row, idx) => { if (idx < limit) collapsedHeight += row.offsetHeight + 10; });
-    wrap.style.maxHeight = collapsedHeight + 'px';
-    label.textContent = 'نمایش همه کانفیگ‌ها';
-    chevron.classList.remove('open');
-  }
-}
+<div id="qrModal" class="qr-modal">
+  <div class="qr-modal-inner">
+    <button id="qrModalClose" class="qr-modal-close">×</button>
+    <div id="qrModalCanvas" class="qr-modal-canvas"></div>
+    <div id="qrModalLabel" class="qr-modal-label"></div>
+  </div>
+</div>
 
-function bindQrModal() {
-  const modal = document.getElementById('qrModal');
-  document.getElementById('qrModalClose').addEventListener('click', () => modal.classList.remove('open'));
-  modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('open'); });
-}
+<div id="toast" class="toast"></div>
 
-function openQr(url, label) {
-  const modal = document.getElementById('qrModal');
-  const canvas = document.getElementById('qrModalCanvas');
-  canvas.innerHTML = '';
-  const el = document.createElement('canvas');
-  canvas.appendChild(el);
-  try {
-    QRCode.toCanvas(el, url, { width: 210, margin: 1 }, function (err) {
-      if (err) canvas.innerHTML = '<span style="color:#000">QR</span>';
-    });
-  } catch (e) {
-    canvas.innerHTML = '<span style="color:#000">QR</span>';
-  }
-  document.getElementById('qrModalLabel').textContent = label || '';
-  modal.classList.add('open');
-}
-
-const RING_CIRCUMFERENCE = 2 * Math.PI * 68;
-
-function setRing(circleEl, percent) {
-  const clamped = Math.max(0, Math.min(100, percent));
-  const offset = RING_CIRCUMFERENCE - (clamped / 100) * RING_CIRCUMFERENCE;
-  requestAnimationFrame(() => { circleEl.style.strokeDashoffset = offset; });
-}
-
-function protocolClass(protocol) {
-  const p = (protocol || '').toLowerCase();
-  if (p.indexOf('v2ray') > -1) return 'proto-v2ray';
-  if (p.indexOf('vless') > -1) return 'proto-vless';
-  if (p.indexOf('trojan') > -1) return 'proto-trojan';
-  if (p.indexOf('shadowsocks') > -1) return 'proto-shadowsocks';
-  return 'proto-v2ray';
-}
-
-function truncateUrl(url, n) {
-  if (!url) return '';
-  return url.length > n ? url.slice(0, n) + '…' : url;
-}
-
-function renderConfigs(configs) {
-  const list = document.getElementById('configList');
-  list.innerHTML = '';
-  configs.forEach((c, idx) => {
-    const row = document.createElement('div');
-    row.className = 'config-item';
-    row.innerHTML =
-      '<button class="copy-row-btn" data-idx="' + idx + '">کپی</button>' +
-      '<span class="config-flag">' + (c.flag || '') + '</span>' +
-      '<span class="config-server">' + (c.country || '') + ' - ' + (c.city || '') + '</span>' +
-      '<span class="config-protocol ' + protocolClass(c.protocol) + '">' + (c.protocol || '') + '</span>' +
-      '<span class="config-url" title="' + (c.url || '') + '">' + truncateUrl(c.url, 22) + '</span>' +
-      '<button class="qr-btn" data-idx="' + idx + '">▦</button>' +
-      '<span class="status-dot ' + (c.status === 'online' ? 'online' : 'offline') + '"></span>';
-    list.appendChild(row);
-  });
-
-  list.querySelectorAll('.copy-row-btn').forEach(btn => {
-    btn.addEventListener('click', function () {
-      const c = state.data.configs[this.dataset.idx];
-      copyText(c.url).then(() => {
-        this.classList.add('copied');
-        const original = this.textContent;
-        this.textContent = '✓';
-        showToast('کانفیگ کپی شد');
-        setTimeout(() => { this.classList.remove('copied'); this.textContent = original; }, 1400);
-      });
-    });
-  });
-
-  list.querySelectorAll('.qr-btn').forEach(btn => {
-    btn.addEventListener('click', function () {
-      const c = state.data.configs[this.dataset.idx];
-      openQr(c.url, c.country + ' - ' + c.city);
-    });
-  });
-
-  state.expanded = false;
-  applyConfigVisibility();
-}
-
-function renderDashboard(data) {
-  state.data = data;
-
-  document.getElementById('profileUsername').textContent = data.user.username;
-  document.getElementById('profileUserId').textContent = data.user.id;
-  const avatarEl = document.getElementById('avatarImg');
-  if (data.user.avatar) { avatarEl.src = data.user.avatar; avatarEl.style.display = 'block'; }
-  else { avatarEl.style.display = 'none'; }
-
-  document.getElementById('remainingDays').textContent = data.subscription.remainingDays;
-  document.getElementById('totalDays').textContent = data.subscription.totalDays;
-  document.getElementById('expireDate').textContent = data.subscription.expireDate;
-  const subPercent = data.subscription.totalDays > 0
-    ? (data.subscription.remainingDays / data.subscription.totalDays) * 100
-    : 0;
-  setRing(document.getElementById('ringSub'), subPercent);
-
-  document.getElementById('usagePercent').textContent = data.traffic.percentage;
-  document.getElementById('usedTraffic').textContent = data.traffic.used;
-  document.getElementById('totalTraffic').textContent = data.traffic.total;
-  document.getElementById('remainingTraffic').textContent = data.traffic.remaining;
-  setRing(document.getElementById('ringVol'), data.traffic.percentage);
-
-  renderConfigs(data.configs || []);
-}
-
-window.addEventListener('resize', () => { if (state.data) applyConfigVisibility(); });
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<script src="config.js?v=3"></script>
+<script src="adapter.js?v=3"></script>
+<script src="script.js?v=3"></script>
+</body>
+  </html>
