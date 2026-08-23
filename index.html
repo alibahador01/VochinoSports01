@@ -9,7 +9,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css?v=3">
 </head>
+<style>html,body{background:#07070a}</style>
 <body>
+<div id="pageLoader" class="page-loader" aria-hidden="true">
+  <div class="loader-orb" aria-hidden="true">
+    <span class="loader-petal loader-petal--1"></span>
+    <span class="loader-petal loader-petal--2"></span>
+    <span class="loader-petal loader-petal--3"></span>
+    <span class="loader-petal loader-petal--4"></span>
+    <span class="loader-petal loader-petal--5"></span>
+    <span class="loader-core"></span>
+  </div>
+  <div class="loader-brand">VOCHINO<sup>01</sup></div>
+</div>
 
 <div class="topbar">
   <button id="menuBtn" class="menu-btn" aria-label="menu">
@@ -64,7 +76,12 @@
         <div class="avatar-box">
           <div class="avatar-crown">👑</div>
           <div class="avatar-ring">
-            <img id="avatarImg" src="" alt="" class="avatar-img">
+            <img id="avatarImg" src="assets/avatar-default.png" alt="" class="avatar-img">
+            <div class="avatar-fx">
+              <span class="avatar-eye avatar-eye--l"></span>
+              <span class="avatar-eye avatar-eye--r"></span>
+              <span class="avatar-mouth"></span>
+            </div>
           </div>
         </div>
         <div class="profile-row"><span class="pr-label">نام کاربر</span><span id="profileUsername" class="pr-value">{{username}}</span></div>
