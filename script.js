@@ -43,7 +43,24 @@ function bindStaticLinks() {
   });
 }
 
-/* ---------- Sidebar ---------- */
+function renderExtras() {
+  const cfg = window.VOCHINO_CONFIG;
+
+  const appsRow = document.getElementById('suggestedAppsRow');
+  if (appsRow && cfg.SUGGESTED_APPS) {
+    appsRow.innerHTML = cfg.SUGGESTED_APPS.map(a =>
+      '<a href="' + a.url + '" target="_blank" rel="noopener" class="sa-item"><span class="sa-ic">' + a.icon + '</span><span>' + a.name + '</span></a>'
+    ).join('');
+  }
+
+  const voucherRow = document.getElementById('voucherRow');
+  if (voucherRow && cfg.VOUCHER_TYPES) {
+    voucherRow.innerHTML = cfg.VOUCHER_TYPES.map(v =>
+      '<div class="voucher-item"><span class="voucher-ic">' + v.icon + '</span><small>' + v.name + '</small></div>'
+    ).join('');
+  }
+}
+
 function bindSidebar() {
   const btn = document.getElementById('menuBtn');
   const sidebar = document.getElementById('sidebar');
@@ -67,7 +84,6 @@ function bindSidebar() {
   });
 }
 
-/* ---------- Marquee ---------- */
 function bindMarquee() {
   const el = document.getElementById('marqueeText');
   const msgs = window.VOCHINO_CONFIG.MARQUEE_MESSAGES;
@@ -82,7 +98,6 @@ function bindMarquee() {
   }, window.VOCHINO_CONFIG.MARQUEE_INTERVAL_MS);
 }
 
-/* ---------- Ripple ---------- */
 function bindRippleGlobal() {
   document.addEventListener('click', (e) => {
     const btn = e.target.closest('button, .install-item, .qr-btn');
@@ -102,7 +117,6 @@ function bindRippleGlobal() {
   });
 }
 
-/* ---------- Copy helpers ---------- */
 function copyText(text) {
   if (navigator.clipboard && navigator.clipboard.writeText) {
     return navigator.clipboard.writeText(text);
@@ -139,22 +153,37 @@ function bindShowAll() {
   document.getElementById('showAllBtn').addEventListener('click', function () {
     state.expanded = !state.expanded;
     applyConfigVisibility();
-    document.getElementById('showAllChevron').classList.toggle('open', state.expanded);
-    this.childNodes[0].textContent = state.expanded ? 'بستن کانفیگ‌ها ' : 'نمایش همه کانفیگ‌ها ';
   });
 }
 
 function applyConfigVisibility() {
+  const wrap = document.getElementById('configListWrap');
   const limit = window.VOCHINO_CONFIG.CONFIGS_COLLAPSED_COUNT;
-  document.querySelectorAll('.config-item').forEach((row, idx) => {
-    row.classList.toggle('hidden-row', !state.expanded && idx >= limit);
-  });
+  const rows = document.querySelectorAll('.config-item');
   const btn = document.getElementById('showAllBtn');
-  if (state.data && state.data.configs.length <= limit) btn.style.display = 'none';
-  else btn.style.display = 'flex';
+  const label = document.getElementById('showAllLabel');
+  const chevron = document.getElementById('showAllChevron');
+
+  if (!state.data || state.data.configs.length <= limit) {
+    btn.style.display = 'none';
+    wrap.style.maxHeight = 'none';
+    return;
+  }
+  btn.style.display = 'flex';
+
+  if (state.expanded) {
+    wrap.style.maxHeight = wrap.scrollHeight + 'px';
+    label.textContent = 'بستن کانفیگ‌ها';
+    chevron.classList.add('open');
+  } else {
+    let collapsedHeight = 0;
+    rows.forEach((row, idx) => { if (idx < limit) collapsedHeight += row.offsetHeight + 10; });
+    wrap.style.maxHeight = collapsedHeight + 'px';
+    label.textContent = 'نمایش همه کانفیگ‌ها';
+    chevron.classList.remove('open');
+  }
 }
 
-/* ---------- QR Modal ---------- */
 function bindQrModal() {
   const modal = document.getElementById('qrModal');
   document.getElementById('qrModalClose').addEventListener('click', () => modal.classList.remove('open'));
@@ -178,7 +207,6 @@ function openQr(url, label) {
   modal.classList.add('open');
 }
 
-/* ---------- Ring animation ---------- */
 const RING_CIRCUMFERENCE = 2 * Math.PI * 68;
 
 function setRing(circleEl, percent) {
@@ -187,7 +215,6 @@ function setRing(circleEl, percent) {
   requestAnimationFrame(() => { circleEl.style.strokeDashoffset = offset; });
 }
 
-/* ---------- Config rows ---------- */
 function protocolClass(protocol) {
   const p = (protocol || '').toLowerCase();
   if (p.indexOf('v2ray') > -1) return 'proto-v2ray';
@@ -239,10 +266,10 @@ function renderConfigs(configs) {
     });
   });
 
+  state.expanded = false;
   applyConfigVisibility();
 }
 
-/* ---------- Main render ---------- */
 function renderDashboard(data) {
   state.data = data;
 
@@ -269,18 +296,4 @@ function renderDashboard(data) {
   renderConfigs(data.configs || []);
 }
 
-function renderExtras() {
-  const cfg = window.VOCHINO_CONFIG;
-  const appsRow = document.getElementById('suggestedAppsRow');
-  if (appsRow && cfg.SUGGESTED_APPS) {
-    appsRow.innerHTML = cfg.SUGGESTED_APPS.map(a =>
-      '<a href="' + a.url + '" target="_blank" rel="noopener" class="sa-item"><span class="sa-ic">' + a.icon + '</span><span>' + a.name + '</span></a>'
-    ).join('');
-  }
-  const voucherRow = document.getElementById('voucherRow');
-  if (voucherRow && cfg.VOUCHER_TYPES) {
-    voucherRow.innerHTML = cfg.VOUCHER_TYPES.map(v =>
-      '<div class="voucher-item"><span class="voucher-ic">' + v.icon + '</span><small>' + v.name + '</small></div>'
-    ).join('');
-  }
-}
+window.addEventListener('resize', () => { if (state.data) applyConfigVisibility(); });
