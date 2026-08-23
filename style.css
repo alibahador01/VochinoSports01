@@ -114,30 +114,54 @@ button{background:none;border:none;color:inherit;cursor:pointer;font-family:var(
   border-radius:22px;
   backdrop-filter:blur(10px);
   padding:16px;
-  opacity:0;transform:translateY(24px);
-  animation:cardIn .7s ease forwards;
 }
-@keyframes cardIn{to{opacity:1;transform:translateY(0)}}
-.hero{animation-delay:.05s}
-.status-grid .status-card:nth-child(1){animation-delay:.12s}
-.status-grid .status-card:nth-child(2){animation-delay:.18s}
-.configs-card{animation-delay:.24s}
-.voucher-card{animation-delay:.28s}
-.bottom-stack .card:nth-child(1){animation-delay:.32s}
-.bottom-stack .card:nth-child(2){animation-delay:.38s}
+
+/* صفحه‌بارگذاری جدید — جایگزین افکت ورود قبلی، بدون تغییر در طراحی اصلی */
+.page-loader{
+  position:fixed;inset:0;z-index:9999;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  background:#07070a;
+  pointer-events:all;
+  opacity:1;visibility:visible;
+  transition:opacity .45s ease,visibility .45s ease;
+}
+.page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+.loader-orb{
+  position:relative;width:86px;height:86px;border-radius:50%;
+  filter:drop-shadow(0 0 18px rgba(255,34,85,.28));
+  animation:loaderBreath 2.2s ease-in-out infinite;
+}
+.loader-petal{
+  position:absolute;left:50%;top:50%;width:22px;height:40px;
+  border:1px solid rgba(255,45,85,.8);
+  border-radius:70% 45% 70% 45%;
+  background:linear-gradient(145deg,rgba(255,45,85,.72),rgba(82,8,28,.2));
+  transform-origin:50% 100%;
+  box-shadow:0 0 10px rgba(255,45,85,.35) inset,0 0 10px rgba(255,45,85,.18);
+}
+.loader-petal--1{transform:translate(-50%,-100%) rotate(0deg)}
+.loader-petal--2{transform:translate(-50%,-100%) rotate(72deg)}
+.loader-petal--3{transform:translate(-50%,-100%) rotate(144deg)}
+.loader-petal--4{transform:translate(-50%,-100%) rotate(216deg)}
+.loader-petal--5{transform:translate(-50%,-100%) rotate(288deg)}
+.loader-core{
+  position:absolute;left:50%;top:50%;width:14px;height:14px;transform:translate(-50%,-50%);
+  border-radius:50%;background:#ffcf4a;
+  box-shadow:0 0 10px #ffcf4a,0 0 20px rgba(255,207,74,.35);
+  animation:loaderPulse 1.7s ease-in-out infinite;
+}
+.loader-brand{font-size:.78rem;font-weight:800;color:#ff4d6d;letter-spacing:.7px;text-shadow:0 0 10px rgba(255,45,85,.5)}
+.loader-brand sup{font-size:.52rem;color:#ffcf4a}
+@keyframes loaderBreath{0%,100%{transform:scale(.96)}50%{transform:scale(1.03)}}
+@keyframes loaderPulse{0%,100%{transform:translate(-50%,-50%) scale(.82);opacity:.8}50%{transform:translate(-50%,-50%) scale(1.08);opacity:1}}
+@media (prefers-reduced-motion:reduce){.page-loader,.loader-orb,.loader-core{animation:none}.page-loader{transition:none}}
 
 /* Hero */
 .hero{margin-bottom:16px;position:relative;padding:0;overflow:hidden;isolation:isolate}
 .hero-img-wrap{position:relative;width:100%;aspect-ratio:16/7.2;min-height:180px;overflow:hidden;border-radius:22px}
 .hero-img{width:100%;height:100%;object-fit:cover;display:block}
-.hero-shine{
-  position:absolute;top:-60%;left:-30%;width:26%;height:220%;
-  background:linear-gradient(120deg,transparent,rgba(255,255,255,.16),transparent);
-  transform:rotate(20deg);
-  animation:shine 6s ease-in-out infinite;
-  pointer-events:none;
-}
-@keyframes shine{0%{left:-30%}45%{left:120%}100%{left:120%}}
+.hero-shine{display:none}
+
 
 .profile-card{
   position:absolute;top:14px;right:14px;z-index:2;
@@ -158,7 +182,30 @@ button{background:none;border:none;color:inherit;cursor:pointer;font-family:var(
   overflow:hidden;background:#111;
   box-shadow:0 0 12px rgba(255,34,85,.5);
 }
-.avatar-img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:none}
+.avatar-img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
+.avatar-fx{position:absolute;inset:0;border-radius:50%;pointer-events:none;overflow:hidden}
+.avatar-eye{
+  position:absolute;top:33%;width:7%;height:5%;border-radius:50%;
+  background:radial-gradient(circle,#ff3b3b 0%,rgba(255,59,59,.9) 40%,transparent 75%);
+  filter:blur(.4px) drop-shadow(0 0 3px #ff2d55);
+  animation:eyeBlink 4.6s ease-in-out infinite;
+}
+.avatar-eye--l{left:37%}
+.avatar-eye--r{left:56%}
+@keyframes eyeBlink{
+  0%,82%,100%{opacity:.85;transform:scaleY(1)}
+  88%{opacity:.15;transform:scaleY(.15)}
+  93%{opacity:.85;transform:scaleY(1)}
+}
+.avatar-mouth{
+  position:absolute;top:60%;left:44%;width:12%;height:2.6%;border-radius:40%;
+  background:rgba(255,255,255,.55);
+  animation:mouthMove 3.2s ease-in-out infinite;
+}
+@keyframes mouthMove{
+  0%,100%{transform:scaleX(1) translateY(0);opacity:.5}
+  50%{transform:scaleX(1.12) translateY(.3px);opacity:.7}
+}
 .profile-row{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:.68rem;margin-bottom:5px}
 .pr-label{color:var(--text-dim);flex-shrink:0}
 .pr-value{color:#fff;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:95px}
@@ -183,13 +230,13 @@ button{background:none;border:none;color:inherit;cursor:pointer;font-family:var(
 }
 /* گلوی متحرک روی محیط حلقه — SVG واقعی، پایدار روی موبایل، بدون فلیکر */
 .ring-sweep-arc{
-  fill:none;stroke-width:12;stroke-linecap:round;
-  stroke-dasharray:26 401;
+  fill:none;stroke-linecap:round;
+  stroke-width:12;stroke-dasharray:26 401;
   transform-origin:80px 80px;
-  animation:sweepRotate 6s linear infinite;
+  animation:sweepRotate 4s linear infinite;
 }
-.ring-sweep-arc--sub{stroke:#ffd27a;filter:drop-shadow(0 0 8px #ff9500) drop-shadow(0 0 3px #fff)}
-.ring-sweep-arc--vol{stroke:#8fe9ff;filter:drop-shadow(0 0 8px #00d4ff) drop-shadow(0 0 3px #fff)}
+.ring-sweep-arc--sub{stroke:#ff9500;filter:drop-shadow(0 0 12px #ff9500)}
+.ring-sweep-arc--vol{stroke:#00d4ff;filter:drop-shadow(0 0 12px #00d4ff)}
 @keyframes sweepRotate{to{transform:rotate(360deg)}}
 
 .ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
