@@ -287,11 +287,10 @@ function renderConfigs(configs) {
 function renderDashboard(data) {
   state.data = data;
 
-  document.getElementById('profileUsername').textContent = data.user.username;
-  document.getElementById('profileUserId').textContent = data.user.id;
-  const avatarEl = document.getElementById('avatarImg');
-  if (data.user.avatar) { avatarEl.src = data.user.avatar; avatarEl.style.display = 'block'; }
-  else { avatarEl.src = 'assets/avatar-default.png'; avatarEl.style.display = 'block'; }
+  const nameEl = document.getElementById('profileUsername');
+  const idEl = document.getElementById('profileUserId');
+  if (nameEl) nameEl.textContent = data.user.username;
+  if (idEl) idEl.textContent = data.user.id;
 
   document.getElementById('remainingDays').textContent = data.subscription.remainingDays;
   document.getElementById('totalDays').textContent = data.subscription.totalDays;
