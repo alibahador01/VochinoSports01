@@ -1,219 +1,105 @@
-<!-- index.html -->
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Vochino⁰¹ | داشبورد</title>
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=3">
-</head>
-<style>html,body{background:#07070a}</style>
-<body>
-<div id="pageLoader" class="page-loader" aria-hidden="true">
-  <div class="loader-orb" aria-hidden="true">
-    <span class="loader-petal loader-petal--1"></span>
-    <span class="loader-petal loader-petal--2"></span>
-    <span class="loader-petal loader-petal--3"></span>
-    <span class="loader-petal loader-petal--4"></span>
-    <span class="loader-petal loader-petal--5"></span>
-    <span class="loader-core"></span>
-  </div>
-  <div class="loader-brand">VOCHINO<sup>01</sup></div>
-</div>
+// adapter.js
+// لایه‌ی اتصال داده — تنها جایی که باید موقع وصل کردن ربات واقعی تغییر کند.
+// اگر API واقعی در دسترس نباشد (یا خطا بدهد)، به‌صورت خودکار از داده‌ی نمونه استفاده می‌کند
+// تا صفحه هیچ‌وقت خالی/خراب نمایش داده نشود.
 
-<div class="topbar">
-  <button id="menuBtn" class="menu-btn" aria-label="menu">
-    <span></span><span></span><span></span>
-  </button>
-  <div class="marquee-box">
-    <span id="marqueeText" class="marquee-text">خاص بودن انتخاب شماست | Vochino⁰¹</span>
-  </div>
-  <div class="topbar-deco"></div>
-</div>
+const VochinoAdapter = (function () {
 
-<div class="shell">
-  <aside id="sidebar" class="sidebar">
-    <div class="brand">VOCHINO<sup>01</sup></div>
-    <div class="premium-badge">👑 PREMIUM USER</div>
+  function getTelegramUser() {
+    try {
+      const tg = window.Telegram && window.Telegram.WebApp;
+      if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) {
+        return tg.initDataUnsafe.user;
+      }
+    } catch (e) {}
+    return null;
+  }
 
-    <nav class="menu">
-      <a href="#" class="menu-item active" data-tab="dashboard"><span class="mi-ic">⌂</span>داشبورد</a>
-      <a href="#" class="menu-item" data-tab="subscription"><span class="mi-ic">◷</span>وضعیت اشتراک</a>
-      <a href="#" class="menu-item" data-tab="traffic"><span class="mi-ic">◒</span>مصرف حجم</a>
-      <a href="#" class="menu-item" data-tab="configs"><span class="mi-ic">⛓</span>کانفیگ‌ها</a>
-      <a href="#" class="menu-item" data-tab="guide"><span class="mi-ic">▤</span>راهنمای نصب</a>
-      <a href="#" class="menu-item" data-tab="apps"><span class="mi-ic">▦</span>اپلیکیشن‌ها</a>
-      <a href="#" class="menu-item" data-tab="support"><span class="mi-ic">◉</span>پشتیبانی</a>
-      <a href="#" class="menu-item" data-tab="faq"><span class="mi-ic">?</span>سوالات متداول</a>
-    </nav>
+  function getUserId() {
+    const tgUser = getTelegramUser();
+    if (tgUser && tgUser.id) return String(tgUser.id);
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('user_id')) return params.get('user_id');
+    return null;
+  }
 
-    <div class="sidebar-foot">
-      <div class="sf-title">VOCHINO01</div>
-      <div class="sf-sub">قدرتمند · خاص · متفاوت</div>
-      <div class="sf-social">
-        <a href="#" id="socialTelegram" class="sf-ic sf-ic--tg">✈</a>
-        <a href="#" id="socialInstagram" class="sf-ic sf-ic--ig">◍</a>
-        <a href="#" id="socialYoutube" class="sf-ic sf-ic--yt">▶</a>
-        <a href="#" id="socialStore" class="sf-ic sf-ic--st">▷</a>
-      </div>
-    </div>
-  </aside>
+  // داده‌ی نمونه — دقیقاً همان ساختاری که سند اتصال ربات مشخص کرده (بخش ۶)
+  function mockData() {
+    return {
+      user: {
+        username: 'کارلن ووچینو⁰¹',
+        id: '123456789',
+        hash: '—',
+        avatar: null
+      },
+      subscription: {
+        remainingDays: 76,
+        totalDays: 90,
+        expireDate: '1403/07/20',
+        status: 'active'
+      },
+      traffic: {
+        used: '65.2 GB',
+        total: '100 GB',
+        remaining: '34.8 GB',
+        percentage: 65
+      },
+      configs: [
+        { country: 'Germany', city: 'Berlin', flag: '🇩🇪', protocol: 'V2Ray', url: 'vless://eyJhZGQiOiIxMjMuNDUuNjcuODki...', status: 'online' },
+        { country: 'Japan', city: 'Tokyo', flag: '🇯🇵', protocol: 'VLESS', url: 'vless://b128f6a7-7e3a-4a2b-9c0d...', status: 'online' },
+        { country: 'USA', city: 'New York', flag: '🇺🇸', protocol: 'Trojan', url: 'trojan://password@45.76.98.12:443', status: 'online' },
+        { country: 'Singapore', city: 'Singapore', flag: '🇸🇬', protocol: 'Shadowsocks', url: 'ss://YWVzLTI1Ni1nY206cGFzc3dvcmQ...', status: 'online' },
+        { country: 'France', city: 'Paris', flag: '🇫🇷', protocol: 'V2Ray', url: 'vless://eyJhZGQiOiI4OC45OS4xMC4xMSi...', status: 'online' }
+      ]
+    };
+  }
 
-  <div id="sidebarOverlay" class="sidebar-overlay"></div>
+  async function fetchDashboardData() {
+    const cfg = window.VOCHINO_CONFIG;
+    const userId = getUserId();
 
-  <main class="main">
+    if (!cfg.API_BASE || !userId) {
+      return mockData();
+    }
 
-    <section class="hero-row">
-      <div class="hero-img-card card">
-        <div class="hero-img-wrap">
-          <img src="assets/rose-banner.jpg" alt="" class="hero-img">
-          <div class="hero-shine"></div>
-        </div>
-      </div>
+    try {
+      const res = await fetch(`${cfg.API_BASE}${cfg.API_ENDPOINT_DASHBOARD}/${userId}`, {
+        headers: { 'Accept': 'application/json' }
+      });
+      if (!res.ok) throw new Error('bad status ' + res.status);
+      const data = await res.json();
+      return normalizeData(data);
+    } catch (e) {
+      console.warn('VochinoAdapter: خطا در دریافت داده واقعی، استفاده از داده نمونه', e.message);
+      return mockData();
+    }
+  }
 
-    </section>
+  // تضمین می‌کند حتی اگر بک‌اند فیلدی را نفرستد، صفحه خطا ندهد
+  function normalizeData(raw) {
+    raw = raw || {};
+    return {
+      user: {
+        username: (raw.user && raw.user.username) || '—',
+        id: (raw.user && raw.user.id) || '—',
+        hash: (raw.user && raw.user.hash) || '—',
+        avatar: (raw.user && raw.user.avatar) || null
+      },
+      subscription: {
+        remainingDays: (raw.subscription && raw.subscription.remainingDays) ?? 0,
+        totalDays: (raw.subscription && raw.subscription.totalDays) ?? 0,
+        expireDate: (raw.subscription && raw.subscription.expireDate) || '—',
+        status: (raw.subscription && raw.subscription.status) || 'unknown'
+      },
+      traffic: {
+        used: (raw.traffic && raw.traffic.used) || '0 GB',
+        total: (raw.traffic && raw.traffic.total) || '0 GB',
+        remaining: (raw.traffic && raw.traffic.remaining) || '0 GB',
+        percentage: (raw.traffic && raw.traffic.percentage) ?? 0
+      },
+      configs: Array.isArray(raw.configs) ? raw.configs : []
+    };
+  }
 
-    <section class="status-grid">
-      <div class="card status-card status-card--vol">
-        <div class="status-head">
-          <span class="status-title">وضعیت حجم</span>
-          <span class="status-head-ic">◈</span>
-        </div>
-        <div class="ring-wrap">
-          <svg class="ring" viewBox="0 0 160 160">
-            <defs>
-              <linearGradient id="gradVol" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#b537f2"/>
-                <stop offset="100%" stop-color="#00d4ff"/>
-              </linearGradient>
-            </defs>
-            <circle class="ring-bg" cx="80" cy="80" r="68"></circle>
-            <circle id="ringVol" class="ring-fg" cx="80" cy="80" r="68" stroke="url(#gradVol)"></circle>
-            <circle id="sweepVol" class="ring-sweep-arc ring-sweep-arc--vol" cx="80" cy="80" r="68"></circle>
-          </svg>
-          <div class="ring-center">
-            <span id="usagePercent" class="ring-value">--%</span>
-            <span class="ring-unit">مصرف شده</span>
-          </div>
-        </div>
-        <div class="status-total"><span id="usedTraffic">--</span> / <span id="totalTraffic">--</span></div>
-        <div class="status-divider"></div>
-        <div class="status-foot">ترافیک باقی‌مانده <span class="pill" id="remainingTraffic">--</span></div>
-      </div>
-
-      <div class="card status-card status-card--sub">
-        <div class="status-head">
-          <span class="status-title">وضعیت اشتراک</span>
-          <span class="status-head-ic">▦</span>
-        </div>
-        <div class="ring-wrap">
-          <svg class="ring" viewBox="0 0 160 160">
-            <defs>
-              <linearGradient id="gradSub" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#ff2d55"/>
-                <stop offset="100%" stop-color="#ff9500"/>
-              </linearGradient>
-            </defs>
-            <circle class="ring-bg" cx="80" cy="80" r="68"></circle>
-            <circle id="ringSub" class="ring-fg" cx="80" cy="80" r="68" stroke="url(#gradSub)"></circle>
-            <circle id="sweepSub" class="ring-sweep-arc ring-sweep-arc--sub" cx="80" cy="80" r="68"></circle>
-          </svg>
-          <div class="ring-center">
-            <span id="remainingDays" class="ring-value">--</span>
-            <span class="ring-unit">روز باقی مانده</span>
-          </div>
-        </div>
-        <div class="status-total"><span id="totalDays">--</span> روز</div>
-        <div class="status-divider"></div>
-        <div class="status-foot">تاریخ انقضا: <span id="expireDate">--</span></div>
-      </div>
-    </section>
-
-    <section class="card configs-card">
-      <div class="configs-head">
-        <button id="copyAllBtn" class="copy-all-btn">
-          <span class="cab-ic">⧉</span>کپی همه کانفیگ‌ها
-        </button>
-        <h2 class="configs-title">« کانفیگ‌های شما</h2>
-      </div>
-
-      <div id="configListWrap" class="config-list-wrap">
-        <div id="configList" class="config-list"></div>
-      </div>
-
-      <button id="showAllBtn" class="show-all-btn">
-        <span id="showAllLabel">نمایش همه کانفیگ‌ها</span>
-        <span id="showAllChevron" class="sab-chev">⌄</span>
-      </button>
-    </section>
-
-    <section class="card voucher-card">
-      <h3 class="voucher-title">محصولات ما</h3>
-      <div class="voucher-row" id="voucherRow"></div>
-    </section>
-
-    <section class="bottom-stack">
-      <div class="card why-card">
-        <h3 class="bottom-title bottom-title--gold">چرا ووچینو⁰¹؟</h3>
-        <p class="why-sub">تجربه‌ای سریع، امن و بی‌دردسر از خرید و فروش ووچر</p>
-        <div class="why-row">
-          <div class="why-item"><span class="why-ic">🛡️</span><small>امنیت کامل</small></div>
-          <div class="why-item"><span class="why-ic">✅</span><small>تضمین کیفیت</small></div>
-          <div class="why-item"><span class="why-ic">🚀</span><small>تحویل سریع</small></div>
-          <div class="why-item"><span class="why-ic">%</span><small>کارمزد رقابتی</small></div>
-          <div class="why-item"><span class="why-ic">🎧</span><small>پشتیبانی ویژه</small></div>
-        </div>
-      </div>
-
-      <div class="card install-card">
-        <h3 class="bottom-title bottom-title--pink">نصب آسان در همه دستگاه‌ها</h3>
-        <div class="install-row">
-          <a href="#" id="dlAndroid" class="install-item">
-            <span class="os-ic os-ic--android">🤖</span>
-            <span class="install-name">Android</span>
-            <span class="install-dl">نصب ‹</span>
-          </a>
-          <a href="#" id="dlIos" class="install-item">
-            <span class="os-ic os-ic--ios">🍎</span>
-            <span class="install-name">iOS (iPhone)</span>
-            <span class="install-dl">نصب ‹</span>
-          </a>
-          <a href="#" id="dlWindows" class="install-item">
-            <span class="os-ic os-ic--win">🖥️</span>
-            <span class="install-name">Windows</span>
-            <span class="install-dl">نصب ‹</span>
-          </a>
-        </div>
-        <div class="suggested-apps">
-          <div class="sa-title">برنامه‌های پیشنهادی</div>
-          <div class="sa-row" id="suggestedAppsRow"></div>
-        </div>
-      </div>
-    </section>
-
-    <footer class="app-footer">
-      <span class="footer-ic">✈</span>
-      <a id="footerBot" href="#" target="_blank" rel="noopener">@Vochino_bh01_bot</a>
-    </footer>
-
-  </main>
-</div>
-
-<div id="qrModal" class="qr-modal">
-  <div class="qr-modal-inner">
-    <button id="qrModalClose" class="qr-modal-close">×</button>
-    <div id="qrModalCanvas" class="qr-modal-canvas"></div>
-    <div id="qrModalLabel" class="qr-modal-label"></div>
-  </div>
-</div>
-
-<div id="toast" class="toast"></div>
-
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
-<script src="config.js?v=4"></script>
-<script src="adapter.js?v=4"></script>
-<script src="script.js?v=4"></script>
-</body>
-  </html>
+  return { fetchDashboardData, getUserId, getTelegramUser };
+})();
