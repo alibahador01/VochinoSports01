@@ -7,13 +7,17 @@ window.VOCHINO_CONFIG = {
   SUPPORT_LINK: 'https://t.me/Vochino01',
   BOT_LINK: 'https://t.me/Vochino_bh01_bot',
   BOT_HANDLE: '@Vochino_bh01_bot',
-  DOWNLOAD_LINKS: { android: '#', ios: '#', windows: '#' },
+  DOWNLOAD_LINKS: {
+    android: 'https://play.google.com/store/apps/details?id=com.v2ray.ang',
+    ios: 'https://apps.apple.com/app/happ-proxy-utility/id6504287215',
+    windows: 'https://github.com/2dust/v2rayN/releases/latest'
+  },
 
   SUGGESTED_APPS: [
-    { name: 'Happ', icon: '🌑', url: '#' },
-    { name: 'V2RayNG', icon: '🅅', url: '#' },
-    { name: 'V2RayX', icon: '🛡️', url: '#' },
-    { name: 'Npester', icon: '🅽', url: '#' }
+    { name: 'Happ', icon: '🌑', url: 'https://apps.apple.com/app/happ-proxy-utility/id6504287215' },
+    { name: 'V2RayNG', icon: '🅅', url: 'https://play.google.com/store/apps/details?id=com.v2ray.ang' },
+    { name: 'V2RayX', icon: '🛡️', url: 'https://github.com/Cenmrev/V2RayX/releases/latest' },
+    { name: 'Npester', icon: '🅽', url: 'https://apps.apple.com/app/napsternetv/id1629465476' }
   ],
 
   VOUCHER_TYPES: [
