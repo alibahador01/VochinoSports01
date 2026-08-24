@@ -10,7 +10,7 @@ window.VOCHINO_CONFIG = {
   DOWNLOAD_LINKS: { android: '#', ios: '#', windows: '#' },
 
   SUGGESTED_APPS: [
-    { name: 'Happ', icon: '🟢', url: '#' },
+    { name: 'Happ', icon: '🌑', url: '#' },
     { name: 'V2RayNG', icon: '🅅', url: '#' },
     { name: 'V2RayX', icon: '🛡️', url: '#' },
     { name: 'Npester', icon: '🅽', url: '#' }
